@@ -575,7 +575,7 @@ footer{
     <div class="logo-mark">L67</div>
     <div>
       <div class="logo-text"><em>LABS</em>67</div>
-      <div class="logo-sub">Технологический концерн</div>
+      <div class="logo-sub" data-i18n="logo_sub">Технологический концерн</div>
     </div>
   </a>
   <div class="nav-links">
@@ -590,28 +590,20 @@ footer{
     <span class="online-txt">ONLINE</span>
     <!-- LANG SWITCHER -->
     <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('ru')">
-        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="4" fill="#fff"/><rect y="4" width="18" height="4" fill="#0039A6"/><rect y="8" width="18" height="4" fill="#D52B1E"/></svg>RU
-      </button>
-      <button class="lang-btn" onclick="setLang('by')">
-        <svg class="lang-flag" viewBox="0 0 18 12">
-          <rect width="18" height="4" fill="#fff"/>
-          <rect y="4" width="18" height="4" fill="#CF101A"/>
-          <rect y="8" width="18" height="4" fill="#fff"/>
-          <text x="9" y="9.5" text-anchor="middle" font-size="5" fill="white" font-family="serif">⚔</text>
-        </svg>BY
+      <button class="lang-btn active" onclick="setLang('by')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="4" fill="#fff"/><rect y="4" width="18" height="4" fill="#CF101A"/><rect y="8" width="18" height="4" fill="#fff"/><text x="9" y="9.5" text-anchor="middle" font-size="5" fill="white" font-family="serif">⚔</text></svg><span class="lang-code">BY</span>
       </button>
       <button class="lang-btn" onclick="setLang('en')">
-        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="12" fill="#012169"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#fff" stroke-width="2"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#C8102E" stroke-width="1"/><rect x="7" width="4" height="12" fill="#fff"/><rect y="4" width="18" height="4" fill="#fff"/><rect x="8" width="2" height="12" fill="#C8102E"/><rect y="5" width="18" height="2" fill="#C8102E"/></svg>EN
-      </button>
-      <button class="lang-btn" onclick="setLang('de')">
-        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="4" fill="#000"/><rect y="4" width="18" height="4" fill="#DD0000"/><rect y="8" width="18" height="4" fill="#FFCE00"/></svg>DE
-      </button>
-      <button class="lang-btn" onclick="setLang('fr')">
-        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="6" height="12" fill="#002395"/><rect x="6" width="6" height="12" fill="#fff"/><rect x="12" width="6" height="12" fill="#ED2939"/></svg>FR
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="12" fill="#012169"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#fff" stroke-width="2"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#C8102E" stroke-width="1"/><rect x="7" width="4" height="12" fill="#fff"/><rect y="4" width="18" height="4" fill="#fff"/><rect x="8" width="2" height="12" fill="#C8102E"/><rect y="5" width="18" height="2" fill="#C8102E"/></svg><span class="lang-code">EN</span>
       </button>
       <button class="lang-btn" onclick="setLang('pl')">
-        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="6" fill="#fff"/><rect y="6" width="18" height="6" fill="#DC143C"/></svg>PL
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="6" fill="#fff"/><rect y="6" width="18" height="6" fill="#DC143C"/></svg><span class="lang-code">PL</span>
+      </button>
+      <button class="lang-btn" onclick="setLang('fr')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="6" height="12" fill="#002395"/><rect x="6" width="6" height="12" fill="#fff"/><rect x="12" width="6" height="12" fill="#ED2939"/></svg><span class="lang-code">FR</span>
+      </button>
+      <button class="lang-btn" onclick="setLang('de')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="4" fill="#000"/><rect y="4" width="18" height="4" fill="#DD0000"/><rect y="8" width="18" height="4" fill="#FFCE00"/></svg><span class="lang-code">DE</span>
       </button>
     </div>
     <a href="#contact" class="nav-cta" data-i18n="nav_cta">Связаться</a>
@@ -633,10 +625,10 @@ footer{
     <a href="#contact" class="btn-outline" data-i18n="hero_btn2">Связаться с нами →</a>
   </div>
   <div class="hero-stats">
-    <div class="hs"><span class="hs-num">4</span><span class="hs-label">Направления</span></div>
-    <div class="hs"><span class="hs-num">67</span><span class="hs-label">Технологий</span></div>
-    <div class="hs"><span class="hs-num">AI</span><span class="hs-label">Везде</span></div>
-    <div class="hs"><span class="hs-num">∞</span><span class="hs-label">Масштаб</span></div>
+    <div class="hs"><span class="hs-num">4</span><span class="hs-label" data-i18n="stat_label1">Направления</span></div>
+    <div class="hs"><span class="hs-num">67</span><span class="hs-label" data-i18n="stat_label2">Технологий</span></div>
+    <div class="hs"><span class="hs-num">AI</span><span class="hs-label" data-i18n="stat_label3">Везде</span></div>
+    <div class="hs"><span class="hs-num">∞</span><span class="hs-label" data-i18n="stat_label4">Масштаб</span></div>
   </div>
 </section>
 
@@ -668,14 +660,14 @@ footer{
     <!-- DentalAI -->
     <a class="brand-card bc-gold" href="https://dental.labs67.com" target="_blank">
       <div class="brand-bg-label">DA</div>
-      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-gold"></div>Стоматология</div>
+      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-gold"></div><span data-i18n="dental_eyebrow">Стоматология</span></div>
       <div class="brand-name-lg">Dental<span class="gold">AI</span></div>
-      <div class="brand-tagline">Стоматология в радость</div>
-      <p class="brand-desc">Меняем отношение к стоматологии и лицевой хирургии. Умные клиники, AI-ассистент, забота — не страх.</p>
+      <div class="brand-tagline" data-i18n="dental_tagline">Стоматология в радость</div>
+      <p class="brand-desc" data-i18n="dental_desc">Меняем отношение к стоматологии и лицевой хирургии. Умные клиники, AI-ассистент, забота — не страх.</p>
       <div class="brand-tags">
-        <span class="btag">Клиники</span>
-        <span class="btag">AI-ассистент</span>
-        <span class="btag">Пациентский опыт</span>
+        <span class="btag" data-i18n="dental_tag1">Клиники</span>
+        <span class="btag" data-i18n="dental_tag2">AI-ассистент</span>
+        <span class="btag" data-i18n="dental_tag3">Пациентский опыт</span>
       </div>
       <div class="brand-arrow">↗</div>
     </a>
@@ -683,14 +675,14 @@ footer{
     <!-- Academi67 -->
     <a class="brand-card bc-green" href="https://academi.labs67.com" target="_blank">
       <div class="brand-bg-label">A67</div>
-      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-green"></div>Образование</div>
+      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-green"></div><span data-i18n="academi_eyebrow">Образование</span></div>
       <div class="brand-name-lg">Academi<span class="green">67</span></div>
-      <div class="brand-tagline">Институт клинических стандартов будущего</div>
-      <p class="brand-desc">Не просто курсы повышения квалификации — полная трансформация клинического мышления. Протоколы, технологии, стандарты концерна.</p>
+      <div class="brand-tagline" data-i18n="academi_tagline">Институт клинических стандартов будущего</div>
+      <p class="brand-desc" data-i18n="academi_desc">Не просто курсы повышения квалификации — полная трансформация клинического мышления. Протоколы, технологии, стандарты концерна.</p>
       <div class="brand-tags">
-        <span class="btag">Обучение</span>
-        <span class="btag">Сертификация</span>
-        <span class="btag">Стандарты</span>
+        <span class="btag" data-i18n="academi_tag1">Обучение</span>
+        <span class="btag" data-i18n="academi_tag2">Сертификация</span>
+        <span class="btag" data-i18n="academi_tag3">Стандарты</span>
       </div>
       <div class="brand-arrow">↗</div>
     </a>
@@ -698,14 +690,14 @@ footer{
     <!-- TradeAI -->
     <a class="brand-card bc-cyan" href="https://trade.labs67.com" target="_blank">
       <div class="brand-bg-label">TAI</div>
-      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-cyan"></div>Медтех</div>
+      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-cyan"></div><span data-i18n="trade_eyebrow">Медтех</span></div>
       <div class="brand-name-lg">Trade<span class="cyan">AI</span></div>
-      <div class="brand-tagline">Технологии для медицины</div>
-      <p class="brand-desc">Разработки концерна на открытом рынке. Решения для клиник, аптек, лабораторий — готовые к развёртыванию.</p>
+      <div class="brand-tagline" data-i18n="trade_tagline">Технологии для медицины</div>
+      <p class="brand-desc" data-i18n="trade_desc">Разработки концерна на открытом рынке. Решения для клиник, аптек, лабораторий — готовые к развёртыванию.</p>
       <div class="brand-tags">
-        <span class="btag">AI-решения</span>
-        <span class="btag">Оборудование</span>
-        <span class="btag">Интеграции</span>
+        <span class="btag" data-i18n="trade_tag1">AI-решения</span>
+        <span class="btag" data-i18n="trade_tag2">Оборудование</span>
+        <span class="btag" data-i18n="trade_tag3">Интеграции</span>
       </div>
       <div class="brand-arrow">↗</div>
     </a>
@@ -713,14 +705,14 @@ footer{
     <!-- Franchise67 -->
     <a class="brand-card bc-red" href="https://franchise.labs67.com" target="_blank">
       <div class="brand-bg-label">F67</div>
-      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-red"></div>Развитие</div>
+      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-red"></div><span data-i18n="franchise_eyebrow">Развитие</span></div>
       <div class="brand-name-lg">Franchise<span class="red">67</span></div>
-      <div class="brand-tagline">Центр роста концерна</div>
-      <p class="brand-desc">Масштабирование, модернизация, технологические решения для медицинских пространств. Создаём клиники будущего вместе с партнёрами.</p>
+      <div class="brand-tagline" data-i18n="franchise_tagline">Центр роста концерна</div>
+      <p class="brand-desc" data-i18n="franchise_desc">Масштабирование, модернизация, технологические решения для медицинских пространств. Создаём клиники будущего вместе с партнёрами.</p>
       <div class="brand-tags">
-        <span class="btag">Партнёрство</span>
-        <span class="btag">Масштаб</span>
-        <span class="btag">Технологии</span>
+        <span class="btag" data-i18n="franchise_tag1">Партнёрство</span>
+        <span class="btag" data-i18n="franchise_tag2">Масштаб</span>
+        <span class="btag" data-i18n="franchise_tag3">Технологии</span>
       </div>
       <div class="brand-arrow">↗</div>
     </a>
@@ -757,22 +749,22 @@ footer{
     </div>
 
     <div class="dental-content">
-      <div class="sec-tag">// DentalAI · Концерн LABS67</div>
-      <h2 class="sec-title">Стоматология<br>в <span class="ac">радость</span></h2>
-      <div class="dental-quote">«Мы меняем отношение к стоматологии и лицевой хирургии — навсегда.»</div>
-      <p style="font-size:0.9rem;line-height:1.9;color:var(--muted);margin-bottom:30px;">Пациент входит — система его узнаёт. Врач работает — AI ассистирует. Данные защищены. Клиника живёт как единый организм.</p>
+      <div class="sec-tag" data-i18n="dental_sec_tag">// DentalAI · Концерн LABS67</div>
+      <h2 class="sec-title"><span data-i18n="dental_h2_1">Стоматология</span><br>в <span class="ac" data-i18n="dental_h2_2">радость</span></h2>
+      <div class="dental-quote" data-i18n="dental_quote">«Мы меняем отношение к стоматологии и лицевой хирургии — навсегда.»</div>
+      <p style="font-size:0.9rem;line-height:1.9;color:var(--muted);margin-bottom:30px;" data-i18n="dental_p">Пациент входит — система его узнаёт. Врач работает — AI ассистирует. Данные защищены. Клиника живёт как единый организм.</p>
       <div class="features-list">
         <div class="feat">
           <div class="feat-icon">😌</div>
-          <div><div class="feat-title">Забота, не страх</div><div class="feat-desc">Умная среда снижает стресс пациента с момента входа. Узнали, встретили, подготовились.</div></div>
+          <div><div class="feat-title" data-i18n="feat1_title">Забота, не страх</div><div class="feat-desc" data-i18n="feat1_desc">Умная среда снижает стресс пациента с момента входа. Узнали, встретили, подготовились.</div></div>
         </div>
         <div class="feat">
           <div class="feat-icon">🤖</div>
-          <div><div class="feat-title">AI на каждом кресле</div><div class="feat-desc">Камера над креслом, голосовой протокол, анализ снимков. Врач фокусируется на пациенте.</div></div>
+          <div><div class="feat-title" data-i18n="feat2_title">AI на каждом кресле</div><div class="feat-desc" data-i18n="feat2_desc">Камера над креслом, голосовой протокол, анализ снимков. Врач фокусируется на пациенте.</div></div>
         </div>
         <div class="feat">
           <div class="feat-icon">🔒</div>
-          <div><div class="feat-title">Полная приватность</div><div class="feat-desc">Все данные — только локально. Никакого облака. Соответствие 152-ФЗ / GDPR.</div></div>
+          <div><div class="feat-title" data-i18n="feat3_title">Полная приватность</div><div class="feat-desc" data-i18n="feat3_desc">Все данные — только локально. Никакого облака. Соответствие 152-ФЗ / GDPR.</div></div>
         </div>
       </div>
     </div>
@@ -781,38 +773,38 @@ footer{
 
 <!-- ACADEMI67 -->
 <section class="academi-section" id="academi">
-  <div class="sec-tag">// Academi67 · Концерн LABS67</div>
-  <h2 class="sec-title">Институт клинических<br>стандартов <span class="ac">будущего</span></h2>
-  <p class="sec-lead">Не повышение квалификации — перезагрузка клинического мышления. Все врачи LABS67 проходят через Academi67 и адаптируются под протоколы концерна.</p>
+  <div class="sec-tag" data-i18n="academi_sec_tag">// Academi67 · Концерн LABS67</div>
+  <h2 class="sec-title"><span data-i18n="academi_h2_1">Институт клинических</span><br><span data-i18n="academi_h2_2">стандартов</span> <span class="ac" data-i18n="academi_h2_3">будущего</span></h2>
+  <p class="sec-lead" data-i18n="academi_lead">Не повышение квалификации — перезагрузка клинического мышления. Все врачи LABS67 проходят через Academi67 и адаптируются под протоколы концерна.</p>
 
   <div class="academi-grid">
     <div>
       <div class="academi-card">
-        <div class="ac-num">TRACK_01</div>
-        <div class="ac-title">Clinical Reboot Program</div>
-        <div class="ac-desc">Полная перезагрузка клинических протоколов. Новые стандарты работы с пациентом, документирования, ассистирования AI-системе.</div>
+        <div class="ac-num" data-i18n="track1_num">TRACK_01</div>
+        <div class="ac-title" data-i18n="track1_title">Clinical Reboot Program</div>
+        <div class="ac-desc" data-i18n="track1_desc">Полная перезагрузка клинических протоколов. Новые стандарты работы с пациентом, документирования, ассистирования AI-системе.</div>
       </div>
       <div class="academi-card">
-        <div class="ac-num">TRACK_02</div>
-        <div class="ac-title">AI Integration Certification</div>
-        <div class="ac-desc">Сертификация врачей и ассистентов по работе с AI-инструментами концерна. Практика на реальном оборудовании.</div>
+        <div class="ac-num" data-i18n="track2_num">TRACK_02</div>
+        <div class="ac-title" data-i18n="track2_title">AI Integration Certification</div>
+        <div class="ac-desc" data-i18n="track2_desc">Сертификация врачей и ассистентов по работе с AI-инструментами концерна. Практика на реальном оборудовании.</div>
       </div>
       <div class="academi-card">
-        <div class="ac-num">TRACK_03</div>
+        <div class="ac-num" data-i18n="track3_num">TRACK_03</div>
         <div class="ac-title">Research & Development Lab</div>
-        <div class="ac-desc">Исследовательское направление — клинические испытания, разработка новых протоколов, публикации в партнёрстве с научными институтами.</div>
+        <div class="ac-desc" data-i18n="track3_desc">Исследовательское направление — клинические испытания, разработка новых протоколов, публикации в партнёрстве с научными институтами.</div>
       </div>
     </div>
     <div class="academi-right">
       <div class="academi-statement">
-        <div class="as-label">// Наш стандарт</div>
-        <div class="as-text">Каждый специалист, работающий под брендом LABS67, прошёл через Academi67.</div>
-        <div class="as-sub">Это не просто курс. Это гарантия того, что пациент везде получает один и тот же уровень заботы — предсказуемый, технологичный, человеческий.</div>
+        <div class="as-label" data-i18n="as_label">// Наш стандарт</div>
+        <div class="as-text" data-i18n="as_text">Каждый специалист, работающий под брендом LABS67, прошёл через Academi67.</div>
+        <div class="as-sub" data-i18n="as_sub">Это не просто курс. Это гарантия того, что пациент везде получает один и тот же уровень заботы — предсказуемый, технологичный, человеческий.</div>
       </div>
       <div class="academi-card">
-        <div class="ac-num">CONTACT</div>
-        <div class="ac-title">Подать заявку</div>
-        <div class="ac-desc">Набор в программы — по заявке. Приоритет — партнёры и франчайзи концерна.</div>
+        <div class="ac-num" data-i18n="academi_contact_num">CONTACT</div>
+        <div class="ac-title" data-i18n="academi_contact_title">Подать заявку</div>
+        <div class="ac-desc" data-i18n="academi_contact_desc">Набор в программы — по заявке. Приоритет — партнёры и франчайзи концерна.</div>
         <div style="margin-top:16px;"><a href="mailto:academi@labs67.com" style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--green);letter-spacing:0.1em;text-decoration:none;">academi@labs67.com →</a></div>
       </div>
     </div>
@@ -821,50 +813,50 @@ footer{
 
 <!-- FRANCHISE67 -->
 <section class="franchise-section" id="franchise">
-  <div class="sec-tag">// Franchise67 · Концерн LABS67</div>
-  <h2 class="sec-title">Центр роста<br>и <span class="ac">масштабирования</span></h2>
+  <div class="sec-tag" data-i18n="franchise_sec_tag">// Franchise67 · Концерн LABS67</div>
+  <h2 class="sec-title"><span data-i18n="franchise_h2_1">Центр роста</span><br><span data-i18n="franchise_h2_2">и</span> <span class="ac" data-i18n="franchise_h2_3">масштабирования</span></h2>
 
   <div class="franchise-grid">
     <div class="franchise-left">
-      <p class="sec-lead">Franchise67 — инфраструктурное ядро концерна. Обеспечение, модернизация оборудования и разработка технологичных решений для медицинских пространств.</p>
+      <p class="sec-lead" data-i18n="franchise_lead">Franchise67 — инфраструктурное ядро концерна. Обеспечение, модернизация оборудования и разработка технологичных решений для медицинских пространств.</p>
 
       <div class="franchise-highlight">
         <div class="fh-corner"></div>
-        <div class="fh-label">// Мастер-партнёрство</div>
-        <div class="fh-title">Стать частью концерна в своём регионе</div>
-        <div class="fh-desc">Для тех, кто думает масштабно — мы открыты к стратегическому партнёрству с охватом города, региона или страны. Партнёр берёт на себя развитие сети, концерн обеспечивает технологии, стандарты и поддержку.</div>
+        <div class="fh-label" data-i18n="fh1_label">// Мастер-партнёрство</div>
+        <div class="fh-title" data-i18n="fh1_title">Стать частью концерна в своём регионе</div>
+        <div class="fh-desc" data-i18n="fh1_desc">Для тех, кто думает масштабно — мы открыты к стратегическому партнёрству с охватом города, региона или страны. Партнёр берёт на себя развитие сети, концерн обеспечивает технологии, стандарты и поддержку.</div>
       </div>
 
       <div class="franchise-highlight" style="border-color:rgba(255,77,109,0.15);">
         <div class="fh-corner" style="background:linear-gradient(135deg,transparent 50%,rgba(255,77,109,0.06) 50%);"></div>
-        <div class="fh-label" style="color:var(--red);">// Готовые решения</div>
-        <div class="fh-title">Клиника под ключ</div>
-        <div class="fh-desc">Стоматологии, клиники, аптеки и медицинские пространства — проектирование умной среды с нуля до запуска. Оборудование, AI, интерьер, стандарты.</div>
+        <div class="fh-label" style="color:var(--red);" data-i18n="fh2_label">// Готовые решения</div>
+        <div class="fh-title" data-i18n="fh2_title">Клиника под ключ</div>
+        <div class="fh-desc" data-i18n="fh2_desc">Стоматологии, клиники, аптеки и медицинские пространства — проектирование умной среды с нуля до запуска. Оборудование, AI, интерьер, стандарты.</div>
       </div>
     </div>
 
     <div class="franchise-right">
       <div class="fran-item">
         <span class="fran-num">01//</span>
-        <div><div class="fran-title">Технологическая база</div><div class="fran-desc">Полный стек: AI-ядро, умный дом, камеры, голосовые протоколы. Всё разработано и проверено внутри концерна.</div></div>
+        <div><div class="fran-title" data-i18n="fran1_title">Технологическая база</div><div class="fran-desc" data-i18n="fran1_desc">Полный стек: AI-ядро, умный дом, камеры, голосовые протоколы. Всё разработано и проверено внутри концерна.</div></div>
       </div>
       <div class="fran-item">
         <span class="fran-num">02//</span>
-        <div><div class="fran-title">Стандарты Academi67</div><div class="fran-desc">Персонал франчайзи проходит обучение и сертификацию. Единый уровень сервиса в каждой точке.</div></div>
+        <div><div class="fran-title" data-i18n="fran2_title">Стандарты Academi67</div><div class="fran-desc" data-i18n="fran2_desc">Персонал франчайзи проходит обучение и сертификацию. Единый уровень сервиса в каждой точке.</div></div>
       </div>
       <div class="fran-item">
         <span class="fran-num">03//</span>
-        <div><div class="fran-title">Поддержка и модернизация</div><div class="fran-desc">Непрерывное обновление технологий, техподдержка, развитие AI-моделей — всё включено.</div></div>
+        <div><div class="fran-title" data-i18n="fran3_title">Поддержка и модернизация</div><div class="fran-desc" data-i18n="fran3_desc">Непрерывное обновление технологий, техподдержка, развитие AI-моделей — всё включено.</div></div>
       </div>
       <div class="fran-item">
         <span class="fran-num">04//</span>
-        <div><div class="fran-title">Региональное масштабирование</div><div class="fran-desc">Партнёры, готовые к системному развитию сети в регионе, рассматриваются в приоритетном порядке.</div></div>
+        <div><div class="fran-title" data-i18n="fran4_title">Региональное масштабирование</div><div class="fran-desc" data-i18n="fran4_desc">Партнёры, готовые к системному развитию сети в регионе, рассматриваются в приоритетном порядке.</div></div>
       </div>
       <div class="fran-item">
         <span class="fran-num">→</span>
         <div>
-          <div class="fran-title">Обсудить партнёрство</div>
-          <div class="fran-desc">Оставьте заявку — расскажем о форматах участия.</div>
+          <div class="fran-title" data-i18n="fran5_title">Обсудить партнёрство</div>
+          <div class="fran-desc" data-i18n="fran5_desc">Оставьте заявку — расскажем о форматах участия.</div>
           <div style="margin-top:10px;"><a href="mailto:franchise@labs67.com" style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold);letter-spacing:0.1em;text-decoration:none;">franchise@labs67.com →</a></div>
         </div>
       </div>
@@ -874,27 +866,27 @@ footer{
 
 <!-- TRADEAI -->
 <section class="trade-section" id="trade">
-  <div class="sec-tag">// TradeAI · Концерн LABS67</div>
-  <h2 class="sec-title">Технологии<br>для <span class="ac">медицины</span></h2>
-  <p class="sec-lead" style="margin-top:12px;">Разработки концерна — доступны партнёрам и рынку. Готовые к развёртыванию решения для клиник, аптек и медицинских пространств.</p>
+  <div class="sec-tag" data-i18n="trade_sec_tag">// TradeAI · Концерн LABS67</div>
+  <h2 class="sec-title"><span data-i18n="trade_h2_1">Технологии</span><br><span data-i18n="trade_h2_2">для</span> <span class="ac" data-i18n="trade_h2_3">медицины</span></h2>
+  <p class="sec-lead" style="margin-top:12px;" data-i18n="trade_lead">Разработки концерна — доступны партнёрам и рынку. Готовые к развёртыванию решения для клиник, аптек и медицинских пространств.</p>
 
   <div class="trade-grid">
     <div class="trade-item">
       <span class="trade-icon">🤖</span>
       <div class="trade-name">AI Core Kit</div>
-      <div class="trade-desc">Готовый AI-стек на NVIDIA Jetson: распознавание лиц, голосовые протоколы, видеоаналитика. Развёртывание — до 1 дня.</div>
+      <div class="trade-desc" data-i18n="trade_item1_desc">Готовый AI-стек на NVIDIA Jetson: распознавание лиц, голосовые протоколы, видеоаналитика. Развёртывание — до 1 дня.</div>
       <div class="trade-price">→ По запросу</div>
     </div>
     <div class="trade-item">
       <span class="trade-icon">📹</span>
       <div class="trade-name">SmartRoom Module</div>
-      <div class="trade-desc">Комплект умного кабинета: датчики присутствия, свет, климат, камеры над рабочим местом. Интеграция с Home Assistant.</div>
+      <div class="trade-desc" data-i18n="trade_item2_desc">Комплект умного кабинета: датчики присутствия, свет, климат, камеры над рабочим местом. Интеграция с Home Assistant.</div>
       <div class="trade-price">→ По запросу</div>
     </div>
     <div class="trade-item">
       <span class="trade-icon">🔬</span>
       <div class="trade-name">Clinical Vision</div>
-      <div class="trade-desc">Нейросетевой анализ рентгеновских снимков и интраоральных фото. Вывод рекомендаций на планшет врача в реальном времени.</div>
+      <div class="trade-desc" data-i18n="trade_item3_desc">Нейросетевой анализ рентгеновских снимков и интраоральных фото. Вывод рекомендаций на планшет врача в реальном времени.</div>
       <div class="trade-price">→ По запросу</div>
     </div>
   </div>
@@ -905,19 +897,19 @@ footer{
 
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
-  <div class="sec-tag">// CONTACT</div>
-  <h2 class="sec-title">Свяжитесь<br>с <span class="ac">концерном</span></h2>
+  <div class="sec-tag" data-i18n="contact_sec_tag">// CONTACT</div>
+  <h2 class="sec-title"><span data-i18n="contact_h2_1">Свяжитесь</span><br><span data-i18n="contact_h2_2">с</span> <span class="ac" data-i18n="contact_h2_3">концерном</span></h2>
 
   <div class="contact-grid">
     <div class="contact-left">
-      <p class="sec-lead">Выберите направление — мы ответим на любой вопрос.</p>
+      <p class="sec-lead" data-i18n="contact_lead">Выберите направление — мы ответим на любой вопрос.</p>
       <div class="cinfo">
         <div class="cinfo-icon">📞</div>
-        <div><span class="cinfo-label">Телефон</span><span class="cinfo-val">+48 571 719 800</span></div>
+        <div><span class="cinfo-label" data-i18n="cinfo_phone_label">Телефон</span><span class="cinfo-val">+48 571 719 800</span></div>
       </div>
       <div class="cinfo">
         <div class="cinfo-icon">✉️</div>
-        <div><span class="cinfo-label">Общий запрос</span><span class="cinfo-val">hello@labs67.com</span></div>
+        <div><span class="cinfo-label" data-i18n="cinfo_email_label">Общий запрос</span><span class="cinfo-val">hello@labs67.com</span></div>
       </div>
       <div class="cinfo">
         <div class="cinfo-icon">🦷</div>
@@ -929,7 +921,7 @@ footer{
       </div>
       <div class="cinfo">
         <div class="cinfo-icon">🤝</div>
-        <div><span class="cinfo-label">Franchise67 / Партнёрство</span><span class="cinfo-val">franchise@labs67.com</span></div>
+        <div><span class="cinfo-label" data-i18n="cinfo_franchise_label">Franchise67 / Партнёрство</span><span class="cinfo-val">franchise@labs67.com</span></div>
       </div>
       <div class="cinfo">
         <div class="cinfo-icon">🛒</div>
@@ -939,7 +931,7 @@ footer{
 
     <div class="cform">
       <div class="cf-header">
-        <span class="cf-title">// НОВЫЙ ЗАПРОС</span>
+        <span class="cf-title" data-i18n="form_title">// НОВЫЙ ЗАПРОС</span>
         <span class="cf-id" id="formId">REQ_XXXXX</span>
       </div>
       <div class="fr">
@@ -981,7 +973,7 @@ footer{
 <footer>
   <div>
     <div class="fl-logo"><em>LABS</em>67</div>
-    <div class="fl-sub">Технологический концерн</div>
+    <div class="fl-sub" data-i18n="logo_sub">Технологический концерн</div>
     <div class="fl-brands" style="margin-top:14px;">
       <a href="https://dental.labs67.com" target="_blank" class="fl-brand-tag" style="color:var(--gold);text-decoration:none;">DentalAI ↗</a>
       <a href="https://academi.labs67.com" target="_blank" class="fl-brand-tag" style="color:var(--green);text-decoration:none;">Academi67 ↗</a>
@@ -989,7 +981,7 @@ footer{
       <a href="https://franchise.labs67.com" target="_blank" class="fl-brand-tag" style="color:var(--red);text-decoration:none;">Franchise67 ↗</a>
     </div>
   </div>
-  <div class="fc">
+  <div class="fc" data-i18n="footer_copy">
     © 2025 LABS67 Концерн<br>
     Все права защищены<br>
     <span class="g">● ALL SYSTEMS ONLINE</span>
@@ -1009,7 +1001,7 @@ footer{
         <div class="ch-avatar">🤖</div>
         <div>
           <div class="ch-title">LABS67 Assistant</div>
-          <div class="ch-sub">● Онлайн · Отвечу сейчас</div>
+          <div class="ch-sub" data-i18n="chat_online">● Онлайн · Отвечу сейчас</div>
         </div>
       </div>
       <button class="chat-close" onclick="toggleChat()">✕</button>
@@ -1037,70 +1029,336 @@ footer{
 <script>
 // ── I18N ──
 const i18n = {
-  ru: {
-    nav_directions:'Направления', nav_contacts:'Контакты', nav_cta:'Связаться',
-    hero_eyebrow:'// Концерн · 4 направления · Медтех',
-    hero_line1:'Мы меняем', hero_line2:'медицину',
-    hero_sub:'<span>LABS67</span> — технологический концерн, создающий экосистему решений для клиник нового поколения. От умных пространств до стандартов обучения.',
-    hero_btn1:'// Наши направления', hero_btn2:'Связаться с нами →',
-    brands_title_1:'Четыре', brands_title_2:'направления',
-    brands_lead:'Выберите направление, которое вас интересует — каждый бренд концерна решает свою задачу.',
-  },
   by: {
+    logo_sub:'Тэхналагічны канцэрн',
     nav_directions:'Кірункі', nav_contacts:'Кантакты', nav_cta:'Звязацца',
     hero_eyebrow:'// Канцэрн · 4 кірункі · Медтэх',
     hero_line1:'Мы мяняем', hero_line2:'медыцыну',
     hero_sub:'<span>LABS67</span> — тэхналагічны канцэрн, які стварае экасістэму рашэнняў для клінік новага пакалення. Ад разумных прастораў да стандартаў навучання.',
     hero_btn1:'// Нашы кірункі', hero_btn2:'Звязацца з намі →',
+    stat_label1:'Кірункі', stat_label2:'Тэхналогій', stat_label3:'ІІ', stat_label4:'Маштаб',
     brands_title_1:'Чатыры', brands_title_2:'кірункі',
     brands_lead:'Выберыце кірунак, які вас цікавіць — кожны брэнд канцэрна вырашае сваю задачу.',
+    dental_eyebrow:'Стаматалогія', dental_tagline:'Стаматалогія ў радасць',
+    dental_desc:'Мяняем стаўленне да стаматалогіі і лічэбнай хірургіі. Разумныя клінікі, ІІ-асістэнт, клопат — не страх.',
+    dental_tag1:'Клінікі', dental_tag2:'ІІ-асістэнт', dental_tag3:'Вопыт пацыента',
+    academi_eyebrow:'Адукацыя', academi_tagline:'Інстытут клінічных стандартаў будучыні',
+    academi_desc:'Не проста курсы павышэння кваліфікацыі — поўная трансфармацыя клінічнага мыслення. Пратаколы, тэхналогіі, стандарты канцэрна.',
+    academi_tag1:'Навучанне', academi_tag2:'Сертыфікацыя', academi_tag3:'Стандарты',
+    trade_eyebrow:'Медтэх', trade_tagline:'Тэхналогіі для медыцыны',
+    trade_desc:'Распрацоўкі канцэрна на адкрытым рынку. Рашэнні для клінік, аптэк, лабараторый — гатовыя да разгортвання.',
+    trade_tag1:'ІІ-рашэнні', trade_tag2:'Абсталяванне', trade_tag3:'Інтэграцыі',
+    franchise_eyebrow:'Развіццё', franchise_tagline:'Цэнтр росту канцэрна',
+    franchise_desc:'Маштабаванне, мадэрнізацыя, тэхналагічныя рашэнні для медыцынскіх прастораў. Ствараем клінікі будучыні разам з партнёрамі.',
+    franchise_tag1:'Партнёрства', franchise_tag2:'Маштаб', franchise_tag3:'Тэхналогіі',
+    dental_sec_tag:'// DentalAI · Канцэрн LABS67',
+    dental_h2_1:'Стаматалогія', dental_h2_2:'ў радасць', dental_h2_3:'радасць',
+    dental_quote:'«Мы мяняем стаўленне да стаматалогіі і лічэбнай хірургіі — назаўсёды.»',
+    dental_p:'Пацыент уваходзіць — сістэма яго пазнае. Ўрач працуе — ІІ асістуе. Даныя абаронены. Клініка жыве як адзіны арганізм.',
+    feat1_title:'Клопат, не страх', feat1_desc:'Разумнае асяроддзе зніжае стрэс пацыента з моманту ўваходу. Пазналі, сустрэлі, падрыхтаваліся.',
+    feat2_title:'ІІ на кожным крэсле', feat2_desc:'Камера над крэслам, галасавы пратакол, аналіз здымкаў. Ўрач факусуецца на пацыенце.',
+    feat3_title:'Поўная прыватнасць', feat3_desc:'Усе даныя — толькі лакальна. Аніякай хмары. Адпаведнасць GDPR.',
+    academi_sec_tag:'// Academi67 · Канцэрн LABS67',
+    academi_h2_1:'Інстытут клінічных', academi_h2_2:'стандартаў', academi_h2_3:'будучыні',
+    academi_lead:'Не павышэнне кваліфікацыі — перазагрузка клінічнага мыслення. Усе ўрачы LABS67 праходзяць праз Academi67.',
+    track1_num:'ТРЭК_01', track1_title:'Праграма перазагрузкі клінікі', track1_desc:'Поўная перазагрузка клінічных пратаколаў. Новыя стандарты працы з пацыентам, дакументавання, асіставання ІІ-сістэме.',
+    track2_num:'ТРЭК_02', track2_title:'Сертыфікацыя інтэграцыі ІІ', track2_desc:'Сертыфікацыя ўрачоў і асістэнтаў па рабоце з ІІ-інструментамі канцэрна. Практыка на рэальным абсталяванні.',
+    track3_num:'ТРЭК_03', track3_title:'Лабараторыя даследаванняў і распрацовак', track3_desc:'Даследчы кірунак — клінічныя выпрабаванні, распрацоўка новых пратаколаў, публікацыі ў партнёрстве з навуковымі інстытутамі.',
+    as_label:'// Наш стандарт', as_text:'Кожны спецыяліст, які працуе пад брэндам LABS67, прайшоў праз Academi67.',
+    as_sub:'Гэта не проста курс. Гэта гарантыя таго, што пацыент усюды атрымлівае адзін і той жа ўзровень клопату — прадказальны, тэхналагічны, чалавечы.',
+    academi_contact_num:'КАНТАКТ', academi_contact_title:'Падаць заяўку', academi_contact_desc:'Набор у праграмы — па заяўцы. Прыярытэт — партнёры і франчайзі канцэрна.',
+    franchise_sec_tag:'// Franchise67 · Канцэрн LABS67',
+    franchise_h2_1:'Цэнтр росту', franchise_h2_2:'і', franchise_h2_3:'маштабавання',
+    franchise_lead:'Franchise67 — інфраструктурнае ядро канцэрна. Забеспячэнне, мадэрнізацыя абсталявання і распрацоўка тэхналагічных рашэнняў для медыцынскіх прастораў.',
+    fh1_label:'// Майстар-партнёрства', fh1_title:'Стаць часткай канцэрна ў сваім рэгіёне',
+    fh1_desc:'Для тых, хто мысліць маштабна — мы адкрыты да стратэгічнага партнёрства з ахопам горада, рэгіёна або краіны. Партнёр бярэ на сябе развіццё сеткі, канцэрн забяспечвае тэхналогіі, стандарты і падтрымку.',
+    fh2_label:'// Гатовыя рашэнні', fh2_title:'Клініка пад ключ',
+    fh2_desc:'Стаматалогіі, клінікі, аптэкі і медыцынскія прасторы — праектаванне разумнага асяроддзя з нуля да запуску. Абсталяванне, ІІ, інтэр\'ер, стандарты.',
+    fran1_title:'Тэхналагічная база', fran1_desc:'Поўны стэк: ІІ-ядро, разумны дом, камеры, галасавыя пратаколы. Усё распрацавана і правераны ўнутры канцэрна.',
+    fran2_title:'Стандарты Academi67', fran2_desc:'Персанал франчайзі праходзіць навучанне і сертыфікацыю. Адзіны ўзровень сэрвісу ў кожнай кропцы.',
+    fran3_title:'Падтрымка і мадэрнізацыя', fran3_desc:'Бесперапыннае абнаўленне тэхналогій, тэхпадтрымка, развіццё ІІ-мадэляў — усё ўключана.',
+    fran4_title:'Рэгіянальнае маштабаванне', fran4_desc:'Партнёры, гатовыя да сістэмнага развіцця сеткі ў рэгіёне, разглядаюцца ў прыярытэтным парадку.',
+    fran5_title:'Абмеркаваць партнёрства', fran5_desc:'Пакіньце заяўку — раскажам аб фарматах удзелу.',
+    trade_sec_tag:'// TradeAI · Канцэрн LABS67',
+    trade_h2_1:'Тэхналогіі', trade_h2_2:'для', trade_h2_3:'медыцыны',
+    trade_lead:'Распрацоўкі канцэрна — даступны партнёрам і рынку. Гатовыя да разгортвання рашэнні для клінік, аптэк і медыцынскіх прастораў.',
+    trade_item1_desc:'Гатовы ІІ-стэк на NVIDIA Jetson: распазнаванне твараў, галасавыя пратаколы, відэааналітыка. Разгортванне — да 1 дня.',
+    trade_item2_desc:'Камплект разумнага кабінета: датчыкі прысутнасці, святло, клімат, камеры над рабочым месцам. Інтэграцыя з Home Assistant.',
+    trade_item3_desc:'Нейрасеткавы аналіз рэнтгенаўскіх здымкаў і інтраральных фота. Вывад рэкамендацый на планшэт урача ў рэальным часе.',
+    contact_sec_tag:'// КАНТАКТЫ',
+    contact_h2_1:'Звяжыцеся', contact_h2_2:'з', contact_h2_3:'канцэрнам',
+    contact_lead:'Выберыце кірунак — мы адкажам на любое пытанне.',
+    cinfo_phone_label:'Тэлефон', cinfo_email_label:'Агульны запыт', cinfo_franchise_label:'Franchise67 / Партнёрства',
+    form_title:'// НОВЫ ЗАПЫТ',
+    footer_copy:'© 2025 LABS67 Канцэрн<br>Усе правы абаронены<br><span class="g">● ALL SYSTEMS ONLINE</span>',
+    chat_online:'● Анлайн · Адкажу зараз',
   },
   en: {
+    logo_sub:'Technology Concern',
     nav_directions:'Directions', nav_contacts:'Contacts', nav_cta:'Contact',
     hero_eyebrow:'// Concern · 4 directions · MedTech',
     hero_line1:'We are changing', hero_line2:'medicine',
     hero_sub:'<span>LABS67</span> — a technology concern building an ecosystem of solutions for next-generation clinics. From smart spaces to training standards.',
     hero_btn1:'// Our directions', hero_btn2:'Contact us →',
+    stat_label1:'Directions', stat_label2:'Technologies', stat_label3:'AI', stat_label4:'Scale',
     brands_title_1:'Four', brands_title_2:'directions',
     brands_lead:'Choose the direction that interests you — each brand of the concern solves its own task.',
-  },
-  de: {
-    nav_directions:'Bereiche', nav_contacts:'Kontakte', nav_cta:'Kontakt',
-    hero_eyebrow:'// Konzern · 4 Bereiche · MedTech',
-    hero_line1:'Wir verändern', hero_line2:'die Medizin',
-    hero_sub:'<span>LABS67</span> — ein Technologiekonzern, der ein Ökosystem von Lösungen für Kliniken der nächsten Generation aufbaut. Von intelligenten Räumen bis hin zu Ausbildungsstandards.',
-    hero_btn1:'// Unsere Bereiche', hero_btn2:'Kontakt aufnehmen →',
-    brands_title_1:'Vier', brands_title_2:'Bereiche',
-    brands_lead:'Wählen Sie den Bereich, der Sie interessiert — jede Marke des Konzerns löst ihre eigene Aufgabe.',
-  },
-  fr: {
-    nav_directions:'Directions', nav_contacts:'Contacts', nav_cta:'Contact',
-    hero_eyebrow:'// Groupe · 4 directions · MedTech',
-    hero_line1:'Nous transformons', hero_line2:'la médecine',
-    hero_sub:'<span>LABS67</span> — un groupe technologique qui construit un écosystème de solutions pour les cliniques de nouvelle génération. Des espaces intelligents aux standards de formation.',
-    hero_btn1:'// Nos directions', hero_btn2:'Nous contacter →',
-    brands_title_1:'Quatre', brands_title_2:'directions',
-    brands_lead:'Choisissez la direction qui vous intéresse — chaque marque du groupe résout sa propre mission.',
+    dental_eyebrow:'Dentistry', dental_tagline:'Dentistry made joyful',
+    dental_desc:'Changing the attitude to dentistry and facial surgery. Smart clinics, AI assistant, care — not fear.',
+    dental_tag1:'Clinics', dental_tag2:'AI assistant', dental_tag3:'Patient experience',
+    academi_eyebrow:'Education', academi_tagline:'Institute of Future Clinical Standards',
+    academi_desc:'Not just qualification courses — a complete transformation of clinical thinking. Protocols, technologies, concern standards.',
+    academi_tag1:'Training', academi_tag2:'Certification', academi_tag3:'Standards',
+    trade_eyebrow:'MedTech', trade_tagline:'Technologies for Medicine',
+    trade_desc:'Concern developments on the open market. Solutions for clinics, pharmacies, labs — ready to deploy.',
+    trade_tag1:'AI solutions', trade_tag2:'Equipment', trade_tag3:'Integrations',
+    franchise_eyebrow:'Growth', franchise_tagline:"Concern's Growth Centre",
+    franchise_desc:'Scaling, modernisation, tech solutions for medical spaces. Building future clinics with our partners.',
+    franchise_tag1:'Partnership', franchise_tag2:'Scale', franchise_tag3:'Technologies',
+    dental_sec_tag:'// DentalAI · LABS67 Concern',
+    dental_h2_1:'Dentistry', dental_h2_2:'made joyful', dental_h2_3:'joyful',
+    dental_quote:'«We are changing the attitude to dentistry and facial surgery — forever.»',
+    dental_p:'The patient enters — the system recognises them. The doctor works — AI assists. Data is protected. The clinic lives as a single organism.',
+    feat1_title:'Care, not fear', feat1_desc:'A smart environment reduces patient stress from the moment of entry. Recognised, welcomed, prepared.',
+    feat2_title:'AI at every chair', feat2_desc:'Camera above the chair, voice protocol, image analysis. The doctor focuses on the patient.',
+    feat3_title:'Full privacy', feat3_desc:'All data — local only. No cloud. GDPR compliant.',
+    academi_sec_tag:'// Academi67 · LABS67 Concern',
+    academi_h2_1:'Institute of Clinical', academi_h2_2:'Standards of the', academi_h2_3:'Future',
+    academi_lead:'Not qualification upgrading — a reboot of clinical thinking. All LABS67 doctors go through Academi67.',
+    track1_num:'TRACK_01', track1_title:'Clinical Reboot Program', track1_desc:'Complete reboot of clinical protocols. New standards for patient interaction, documentation, and AI system assistance.',
+    track2_num:'TRACK_02', track2_title:'AI Integration Certification', track2_desc:'Certification of doctors and assistants in working with the concern\'s AI tools. Practice on real equipment.',
+    track3_num:'TRACK_03', track3_title:'Research & Development Lab', track3_desc:'Research direction — clinical trials, development of new protocols, publications in partnership with scientific institutes.',
+    as_label:'// Our standard', as_text:'Every specialist working under the LABS67 brand has been through Academi67.',
+    as_sub:'This is not just a course. It is a guarantee that the patient everywhere receives the same level of care — predictable, technological, human.',
+    academi_contact_num:'CONTACT', academi_contact_title:'Apply', academi_contact_desc:'Admission to programmes — by application. Priority for partners and franchisees of the concern.',
+    franchise_sec_tag:'// Franchise67 · LABS67 Concern',
+    franchise_h2_1:'Growth Centre', franchise_h2_2:'and', franchise_h2_3:'Scaling',
+    franchise_lead:'Franchise67 — the infrastructure core of the concern. Supply, equipment modernisation and development of tech solutions for medical spaces.',
+    fh1_label:'// Master partnership', fh1_title:'Become part of the concern in your region',
+    fh1_desc:'For those who think big — we are open to strategic partnerships covering a city, region or country. The partner takes on network development; the concern provides technology, standards and support.',
+    fh2_label:'// Ready solutions', fh2_title:'Turnkey clinic',
+    fh2_desc:'Dental practices, clinics, pharmacies and medical spaces — smart environment design from zero to launch. Equipment, AI, interior, standards.',
+    fran1_title:'Technology base', fran1_desc:'Full stack: AI core, smart home, cameras, voice protocols. All developed and tested within the concern.',
+    fran2_title:'Academi67 Standards', fran2_desc:'Franchisee staff undergo training and certification. Uniform service level at every location.',
+    fran3_title:'Support & Modernisation', fran3_desc:'Continuous technology updates, tech support, AI model development — all included.',
+    fran4_title:'Regional scaling', fran4_desc:'Partners ready for systematic network development in a region are considered on a priority basis.',
+    fran5_title:'Discuss partnership', fran5_desc:'Leave an application — we\'ll walk you through participation formats.',
+    trade_sec_tag:'// TradeAI · LABS67 Concern',
+    trade_h2_1:'Technologies', trade_h2_2:'for', trade_h2_3:'Medicine',
+    trade_lead:'Concern developments — available to partners and the market. Ready-to-deploy solutions for clinics, pharmacies and medical spaces.',
+    trade_item1_desc:'Ready AI stack on NVIDIA Jetson: face recognition, voice protocols, video analytics. Deployment — within 1 day.',
+    trade_item2_desc:'Smart room kit: presence sensors, lighting, climate, cameras above the workstation. Home Assistant integration.',
+    trade_item3_desc:'Neural network analysis of X-rays and intraoral photos. Recommendations displayed on the doctor\'s tablet in real time.',
+    contact_sec_tag:'// CONTACTS',
+    contact_h2_1:'Get in touch', contact_h2_2:'with', contact_h2_3:'the concern',
+    contact_lead:'Choose a direction — we will answer any question.',
+    cinfo_phone_label:'Phone', cinfo_email_label:'General enquiry', cinfo_franchise_label:'Franchise67 / Partnership',
+    form_title:'// NEW REQUEST',
+    footer_copy:'© 2025 LABS67 Concern<br>All rights reserved<br><span class="g">● ALL SYSTEMS ONLINE</span>',
+    chat_online:'● Online · Replying now',
   },
   pl: {
+    logo_sub:'Koncern Technologiczny',
     nav_directions:'Kierunki', nav_contacts:'Kontakty', nav_cta:'Kontakt',
     hero_eyebrow:'// Koncern · 4 kierunki · MedTech',
     hero_line1:'Zmieniamy', hero_line2:'medycynę',
     hero_sub:'<span>LABS67</span> — koncern technologiczny budujący ekosystem rozwiązań dla klinik nowej generacji. Od inteligentnych przestrzeni po standardy szkolenia.',
     hero_btn1:'// Nasze kierunki', hero_btn2:'Skontaktuj się →',
+    stat_label1:'Kierunki', stat_label2:'Technologii', stat_label3:'AI', stat_label4:'Skala',
     brands_title_1:'Cztery', brands_title_2:'kierunki',
     brands_lead:'Wybierz kierunek, który Cię interesuje — każda marka koncernu rozwiązuje własne zadanie.',
+    dental_eyebrow:'Stomatologia', dental_tagline:'Stomatologia z radością',
+    dental_desc:'Zmieniamy podejście do stomatologii i chirurgii twarzowej. Inteligentne kliniki, asystent AI, troska — nie strach.',
+    dental_tag1:'Kliniki', dental_tag2:'Asystent AI', dental_tag3:'Doświadczenie pacjenta',
+    academi_eyebrow:'Edukacja', academi_tagline:'Instytut Standardów Klinicznych Przyszłości',
+    academi_desc:'Nie tylko kursy doskonalenia zawodowego — pełna transformacja myślenia klinicznego. Protokoły, technologie, standardy koncernu.',
+    academi_tag1:'Szkolenie', academi_tag2:'Certyfikacja', academi_tag3:'Standardy',
+    trade_eyebrow:'MedTech', trade_tagline:'Technologie dla Medycyny',
+    trade_desc:'Rozwiązania koncernu na otwartym rynku. Systemy dla klinik, aptek, laboratoriów — gotowe do wdrożenia.',
+    trade_tag1:'Rozwiązania AI', trade_tag2:'Wyposażenie', trade_tag3:'Integracje',
+    franchise_eyebrow:'Rozwój', franchise_tagline:'Centrum Wzrostu Koncernu',
+    franchise_desc:'Skalowanie, modernizacja, rozwiązania technologiczne dla przestrzeni medycznych. Tworzymy kliniki przyszłości wspólnie z partnerami.',
+    franchise_tag1:'Partnerstwo', franchise_tag2:'Skala', franchise_tag3:'Technologie',
+    dental_sec_tag:'// DentalAI · Koncern LABS67',
+    dental_h2_1:'Stomatologia', dental_h2_2:'z radością', dental_h2_3:'radością',
+    dental_quote:'«Zmieniamy podejście do stomatologii i chirurgii twarzowej — na zawsze.»',
+    dental_p:'Pacjent wchodzi — system go rozpoznaje. Lekarz pracuje — AI asystuje. Dane są chronione. Klinika działa jak jeden organizm.',
+    feat1_title:'Troska, nie strach', feat1_desc:'Inteligentne środowisko redukuje stres pacjenta od momentu wejścia. Rozpoznani, powitani, przygotowani.',
+    feat2_title:'AI przy każdym fotelu', feat2_desc:'Kamera nad fotelem, protokół głosowy, analiza zdjęć. Lekarz skupia się na pacjencie.',
+    feat3_title:'Pełna prywatność', feat3_desc:'Wszystkie dane — wyłącznie lokalnie. Bez chmury. Zgodność z RODO / GDPR.',
+    academi_sec_tag:'// Academi67 · Koncern LABS67',
+    academi_h2_1:'Instytut Kliniczny', academi_h2_2:'Standardów', academi_h2_3:'Przyszłości',
+    academi_lead:'Nie podnoszenie kwalifikacji — restart myślenia klinicznego. Wszyscy lekarze LABS67 przechodzą przez Academi67.',
+    track1_num:'ŚCIEŻKA_01', track1_title:'Program Restartu Klinicznego', track1_desc:'Pełny restart protokołów klinicznych. Nowe standardy pracy z pacjentem, dokumentowania i asystowania systemowi AI.',
+    track2_num:'ŚCIEŻKA_02', track2_title:'Certyfikacja Integracji AI', track2_desc:'Certyfikacja lekarzy i asystentów w zakresie pracy z narzędziami AI koncernu. Praktyka na prawdziwym sprzęcie.',
+    track3_num:'ŚCIEŻKA_03', track3_title:'Laboratorium B+R', track3_desc:'Kierunek badawczy — próby kliniczne, opracowywanie nowych protokołów, publikacje we współpracy z instytutami naukowymi.',
+    as_label:'// Nasz standard', as_text:'Każdy specjalista pracujący pod marką LABS67 przeszedł przez Academi67.',
+    as_sub:'To nie tylko kurs. To gwarancja, że pacjent wszędzie otrzymuje ten sam poziom troski — przewidywalny, technologiczny, ludzki.',
+    academi_contact_num:'KONTAKT', academi_contact_title:'Złóż wniosek', academi_contact_desc:'Nabór do programów — na wniosek. Priorytet dla partnerów i franczyzobiorców koncernu.',
+    franchise_sec_tag:'// Franchise67 · Koncern LABS67',
+    franchise_h2_1:'Centrum Wzrostu', franchise_h2_2:'i', franchise_h2_3:'Skalowania',
+    franchise_lead:'Franchise67 — infrastrukturalne jądro koncernu. Zaopatrzenie, modernizacja sprzętu i opracowywanie rozwiązań technologicznych dla przestrzeni medycznych.',
+    fh1_label:'// Partnerstwo Master', fh1_title:'Zostań częścią koncernu w swoim regionie',
+    fh1_desc:'Dla tych, którzy myślą na wielką skalę — jesteśmy otwarci na strategiczne partnerstwo obejmujące miasto, region lub kraj. Partner przejmuje rozwój sieci; koncern zapewnia technologie, standardy i wsparcie.',
+    fh2_label:'// Gotowe rozwiązania', fh2_title:'Klinika pod klucz',
+    fh2_desc:'Gabinety stomatologiczne, kliniki, apteki i przestrzenie medyczne — projektowanie inteligentnego środowiska od zera do uruchomienia. Sprzęt, AI, wystrój, standardy.',
+    fran1_title:'Baza technologiczna', fran1_desc:'Pełny stos: rdzeń AI, inteligentny dom, kamery, protokoły głosowe. Wszystko opracowane i przetestowane wewnątrz koncernu.',
+    fran2_title:'Standardy Academi67', fran2_desc:'Personel franczyzobiorcy przechodzi szkolenie i certyfikację. Jednolity poziom usług w każdym miejscu.',
+    fran3_title:'Wsparcie i modernizacja', fran3_desc:'Ciągłe aktualizacje technologii, wsparcie techniczne, rozwój modeli AI — wszystko w pakiecie.',
+    fran4_title:'Skalowanie regionalne', fran4_desc:'Partnerzy gotowi do systematycznego rozwoju sieci w regionie są rozpatrywani priorytetowo.',
+    fran5_title:'Omów partnerstwo', fran5_desc:'Zostaw wniosek — opowiemy o formatach uczestnictwa.',
+    trade_sec_tag:'// TradeAI · Koncern LABS67',
+    trade_h2_1:'Technologie', trade_h2_2:'dla', trade_h2_3:'Medycyny',
+    trade_lead:'Rozwiązania koncernu — dostępne dla partnerów i rynku. Gotowe do wdrożenia systemy dla klinik, aptek i przestrzeni medycznych.',
+    trade_item1_desc:'Gotowy stos AI na NVIDIA Jetson: rozpoznawanie twarzy, protokoły głosowe, analityka wideo. Wdrożenie — do 1 dnia.',
+    trade_item2_desc:'Zestaw inteligentnego gabinetu: czujniki obecności, oświetlenie, klimat, kamery nad stanowiskiem. Integracja z Home Assistant.',
+    trade_item3_desc:'Analiza neuronowa zdjęć rentgenowskich i wewnątrzustnych. Rekomendacje wyświetlane na tablecie lekarza w czasie rzeczywistym.',
+    contact_sec_tag:'// KONTAKTY',
+    contact_h2_1:'Skontaktuj się', contact_h2_2:'z', contact_h2_3:'koncernem',
+    contact_lead:'Wybierz kierunek — odpowiemy na każde pytanie.',
+    cinfo_phone_label:'Telefon', cinfo_email_label:'Zapytanie ogólne', cinfo_franchise_label:'Franchise67 / Partnerstwo',
+    form_title:'// NOWE ZGŁOSZENIE',
+    footer_copy:'© 2025 LABS67 Koncern<br>Wszelkie prawa zastrzeżone<br><span class="g">● ALL SYSTEMS ONLINE</span>',
+    chat_online:'● Online · Odpowiem teraz',
+  },
+  fr: {
+    logo_sub:'Groupe Technologique',
+    nav_directions:'Directions', nav_contacts:'Contacts', nav_cta:'Contact',
+    hero_eyebrow:'// Groupe · 4 directions · MedTech',
+    hero_line1:'Nous transformons', hero_line2:'la médecine',
+    hero_sub:'<span>LABS67</span> — un groupe technologique qui construit un écosystème de solutions pour les cliniques de nouvelle génération. Des espaces intelligents aux standards de formation.',
+    hero_btn1:'// Nos directions', hero_btn2:'Nous contacter →',
+    stat_label1:'Directions', stat_label2:'Technologies', stat_label3:'IA', stat_label4:'Échelle',
+    brands_title_1:'Quatre', brands_title_2:'directions',
+    brands_lead:'Choisissez la direction qui vous intéresse — chaque marque du groupe résout sa propre mission.',
+    dental_eyebrow:'Dentisterie', dental_tagline:'La dentisterie avec plaisir',
+    dental_desc:'Nous changeons l\'approche de la dentisterie et de la chirurgie faciale. Cliniques intelligentes, assistant IA, soin — pas peur.',
+    dental_tag1:'Cliniques', dental_tag2:'Assistant IA', dental_tag3:'Expérience patient',
+    academi_eyebrow:'Éducation', academi_tagline:'Institut des Standards Cliniques du Futur',
+    academi_desc:'Pas seulement de la formation continue — une transformation complète de la pensée clinique. Protocoles, technologies, standards du groupe.',
+    academi_tag1:'Formation', academi_tag2:'Certification', academi_tag3:'Standards',
+    trade_eyebrow:'MedTech', trade_tagline:'Technologies pour la Médecine',
+    trade_desc:'Développements du groupe sur le marché ouvert. Solutions pour cliniques, pharmacies, laboratoires — prêtes à déployer.',
+    trade_tag1:'Solutions IA', trade_tag2:'Équipement', trade_tag3:'Intégrations',
+    franchise_eyebrow:'Développement', franchise_tagline:'Centre de Croissance du Groupe',
+    franchise_desc:'Mise à l\'échelle, modernisation, solutions technologiques pour les espaces médicaux. Nous créons les cliniques du futur avec nos partenaires.',
+    franchise_tag1:'Partenariat', franchise_tag2:'Échelle', franchise_tag3:'Technologies',
+    dental_sec_tag:'// DentalAI · Groupe LABS67',
+    dental_h2_1:'Dentisterie', dental_h2_2:'avec plaisir', dental_h2_3:'plaisir',
+    dental_quote:'«Nous changeons l\'approche de la dentisterie et de la chirurgie faciale — pour toujours.»',
+    dental_p:'Le patient entre — le système le reconnaît. Le médecin travaille — l\'IA assiste. Les données sont protégées. La clinique fonctionne comme un organisme unique.',
+    feat1_title:'Soin, pas peur', feat1_desc:'Un environnement intelligent réduit le stress du patient dès son entrée. Reconnu, accueilli, préparé.',
+    feat2_title:'IA à chaque fauteuil', feat2_desc:'Caméra au-dessus du fauteuil, protocole vocal, analyse des images. Le médecin se concentre sur le patient.',
+    feat3_title:'Confidentialité totale', feat3_desc:'Toutes les données — uniquement en local. Aucun cloud. Conformité RGPD.',
+    academi_sec_tag:'// Academi67 · Groupe LABS67',
+    academi_h2_1:'Institut des Standards', academi_h2_2:'Cliniques du', academi_h2_3:'Futur',
+    academi_lead:'Pas une mise à niveau — un redémarrage de la pensée clinique. Tous les médecins LABS67 passent par Academi67.',
+    track1_num:'VOIE_01', track1_title:'Programme de Redémarrage Clinique', track1_desc:'Redémarrage complet des protocoles cliniques. Nouveaux standards de travail avec le patient, de documentation et d\'assistance au système IA.',
+    track2_num:'VOIE_02', track2_title:'Certification d\'Intégration IA', track2_desc:'Certification des médecins et assistants sur les outils IA du groupe. Pratique sur équipement réel.',
+    track3_num:'VOIE_03', track3_title:'Laboratoire R&D', track3_desc:'Direction de recherche — essais cliniques, développement de nouveaux protocoles, publications en partenariat avec des instituts scientifiques.',
+    as_label:'// Notre standard', as_text:'Chaque spécialiste travaillant sous la marque LABS67 est passé par Academi67.',
+    as_sub:'Ce n\'est pas qu\'un cours. C\'est la garantie que le patient partout reçoit le même niveau de soin — prévisible, technologique, humain.',
+    academi_contact_num:'CONTACT', academi_contact_title:'Postuler', academi_contact_desc:'Admission aux programmes — sur candidature. Priorité aux partenaires et franchisés du groupe.',
+    franchise_sec_tag:'// Franchise67 · Groupe LABS67',
+    franchise_h2_1:'Centre de Croissance', franchise_h2_2:'et d\'', franchise_h2_3:'Expansion',
+    franchise_lead:'Franchise67 — le noyau infrastructurel du groupe. Approvisionnement, modernisation des équipements et développement de solutions technologiques pour les espaces médicaux.',
+    fh1_label:'// Partenariat Master', fh1_title:'Rejoindre le groupe dans votre région',
+    fh1_desc:'Pour ceux qui pensent grand — nous sommes ouverts à des partenariats stratégiques couvrant une ville, une région ou un pays. Le partenaire prend en charge le développement du réseau ; le groupe fournit technologie, standards et support.',
+    fh2_label:'// Solutions prêtes', fh2_title:'Clinique clé en main',
+    fh2_desc:'Cabinets dentaires, cliniques, pharmacies et espaces médicaux — conception d\'un environnement intelligent de zéro au lancement. Équipement, IA, intérieur, standards.',
+    fran1_title:'Base technologique', fran1_desc:'Stack complet : cœur IA, maison intelligente, caméras, protocoles vocaux. Tout développé et testé au sein du groupe.',
+    fran2_title:'Standards Academi67', fran2_desc:'Le personnel franchisé suit une formation et une certification. Niveau de service uniforme en chaque point.',
+    fran3_title:'Support et modernisation', fran3_desc:'Mises à jour continues de la technologie, support technique, développement des modèles IA — tout inclus.',
+    fran4_title:'Expansion régionale', fran4_desc:'Les partenaires prêts au développement systématique du réseau dans une région sont traités en priorité.',
+    fran5_title:'Discuter du partenariat', fran5_desc:'Laissez une candidature — nous vous expliquerons les formats de participation.',
+    trade_sec_tag:'// TradeAI · Groupe LABS67',
+    trade_h2_1:'Technologies', trade_h2_2:'pour la', trade_h2_3:'Médecine',
+    trade_lead:'Développements du groupe — disponibles pour les partenaires et le marché. Solutions prêtes à déployer pour cliniques, pharmacies et espaces médicaux.',
+    trade_item1_desc:'Stack IA prêt sur NVIDIA Jetson : reconnaissance faciale, protocoles vocaux, vidéoanalyse. Déploiement — en 1 jour.',
+    trade_item2_desc:'Kit de salle intelligente : capteurs de présence, éclairage, climatisation, caméras au-dessus du poste de travail. Intégration Home Assistant.',
+    trade_item3_desc:'Analyse neuronale des radiographies et des photos intra-orales. Recommandations affichées sur la tablette du médecin en temps réel.',
+    contact_sec_tag:'// CONTACTS',
+    contact_h2_1:'Contactez', contact_h2_2:'le', contact_h2_3:'groupe',
+    contact_lead:'Choisissez une direction — nous répondrons à toute question.',
+    cinfo_phone_label:'Téléphone', cinfo_email_label:'Demande générale', cinfo_franchise_label:'Franchise67 / Partenariat',
+    form_title:'// NOUVELLE DEMANDE',
+    footer_copy:'© 2025 LABS67 Groupe<br>Tous droits réservés<br><span class="g">● ALL SYSTEMS ONLINE</span>',
+    chat_online:'● En ligne · Je réponds maintenant',
+  },
+  de: {
+    logo_sub:'Technologiekonzern',
+    nav_directions:'Bereiche', nav_contacts:'Kontakte', nav_cta:'Kontakt',
+    hero_eyebrow:'// Konzern · 4 Bereiche · MedTech',
+    hero_line1:'Wir verändern', hero_line2:'die Medizin',
+    hero_sub:'<span>LABS67</span> — ein Technologiekonzern, der ein Ökosystem von Lösungen für Kliniken der nächsten Generation aufbaut. Von intelligenten Räumen bis hin zu Ausbildungsstandards.',
+    hero_btn1:'// Unsere Bereiche', hero_btn2:'Kontakt aufnehmen →',
+    stat_label1:'Bereiche', stat_label2:'Technologien', stat_label3:'KI', stat_label4:'Maßstab',
+    brands_title_1:'Vier', brands_title_2:'Bereiche',
+    brands_lead:'Wählen Sie den Bereich, der Sie interessiert — jede Marke des Konzerns löst ihre eigene Aufgabe.',
+    dental_eyebrow:'Zahnmedizin', dental_tagline:'Zahnmedizin mit Freude',
+    dental_desc:'Wir verändern die Einstellung zur Zahnmedizin und Gesichtschirurgie. Intelligente Kliniken, KI-Assistent, Fürsorge — keine Angst.',
+    dental_tag1:'Kliniken', dental_tag2:'KI-Assistent', dental_tag3:'Patientenerlebnis',
+    academi_eyebrow:'Bildung', academi_tagline:'Institut für klinische Standards der Zukunft',
+    academi_desc:'Nicht nur Weiterbildung — eine vollständige Transformation des klinischen Denkens. Protokolle, Technologien, Konzernstandards.',
+    academi_tag1:'Ausbildung', academi_tag2:'Zertifizierung', academi_tag3:'Standards',
+    trade_eyebrow:'MedTech', trade_tagline:'Technologien für die Medizin',
+    trade_desc:'Konzernentwicklungen auf dem offenen Markt. Lösungen für Kliniken, Apotheken, Labore — einsatzbereit.',
+    trade_tag1:'KI-Lösungen', trade_tag2:'Ausrüstung', trade_tag3:'Integrationen',
+    franchise_eyebrow:'Wachstum', franchise_tagline:'Wachstumszentrum des Konzerns',
+    franchise_desc:'Skalierung, Modernisierung, Technologielösungen für medizinische Räume. Wir bauen Kliniken der Zukunft gemeinsam mit unseren Partnern.',
+    franchise_tag1:'Partnerschaft', franchise_tag2:'Maßstab', franchise_tag3:'Technologien',
+    dental_sec_tag:'// DentalAI · LABS67 Konzern',
+    dental_h2_1:'Zahnmedizin', dental_h2_2:'mit Freude', dental_h2_3:'Freude',
+    dental_quote:'«Wir verändern die Einstellung zur Zahnmedizin und Gesichtschirurgie — für immer.»',
+    dental_p:'Der Patient betritt — das System erkennt ihn. Der Arzt arbeitet — die KI assistiert. Daten sind geschützt. Die Klinik lebt als ein einziger Organismus.',
+    feat1_title:'Fürsorge, nicht Angst', feat1_desc:'Eine intelligente Umgebung reduziert den Stress des Patienten ab dem Moment des Betretens. Erkannt, begrüßt, vorbereitet.',
+    feat2_title:'KI an jedem Stuhl', feat2_desc:'Kamera über dem Stuhl, Sprachprotokoll, Bildanalyse. Der Arzt konzentriert sich auf den Patienten.',
+    feat3_title:'Volle Privatsphäre', feat3_desc:'Alle Daten — nur lokal. Keine Cloud. DSGVO-konform.',
+    academi_sec_tag:'// Academi67 · LABS67 Konzern',
+    academi_h2_1:'Institut für klinische', academi_h2_2:'Standards der', academi_h2_3:'Zukunft',
+    academi_lead:'Keine Qualifikationsaufwertung — ein Neustart des klinischen Denkens. Alle LABS67-Ärzte durchlaufen Academi67.',
+    track1_num:'TRACK_01', track1_title:'Klinisches Reboot-Programm', track1_desc:'Vollständiger Neustart klinischer Protokolle. Neue Standards für die Patientenarbeit, Dokumentation und KI-System-Assistenz.',
+    track2_num:'TRACK_02', track2_title:'KI-Integrations-Zertifizierung', track2_desc:'Zertifizierung von Ärzten und Assistenten im Umgang mit den KI-Tools des Konzerns. Praxis an echten Geräten.',
+    track3_num:'TRACK_03', track3_title:'Forschungs- und Entwicklungslabor', track3_desc:'Forschungsrichtung — klinische Studien, Entwicklung neuer Protokolle, Publikationen in Partnerschaft mit wissenschaftlichen Instituten.',
+    as_label:'// Unser Standard', as_text:'Jeder Spezialist, der unter der Marke LABS67 arbeitet, hat Academi67 durchlaufen.',
+    as_sub:'Das ist nicht nur ein Kurs. Es ist die Garantie, dass der Patient überall dasselbe Niveau an Fürsorge erhält — vorhersehbar, technologisch, menschlich.',
+    academi_contact_num:'KONTAKT', academi_contact_title:'Bewerben', academi_contact_desc:'Aufnahme in Programme — auf Antrag. Priorität für Partner und Franchisenehmer des Konzerns.',
+    franchise_sec_tag:'// Franchise67 · LABS67 Konzern',
+    franchise_h2_1:'Wachstumszentrum', franchise_h2_2:'und', franchise_h2_3:'Skalierung',
+    franchise_lead:'Franchise67 — der infrastrukturelle Kern des Konzerns. Versorgung, Gerätemodernisierung und Entwicklung von Technologielösungen für medizinische Räume.',
+    fh1_label:'// Master-Partnerschaft', fh1_title:'Teil des Konzerns in Ihrer Region werden',
+    fh1_desc:'Für diejenigen, die groß denken — wir sind offen für strategische Partnerschaften mit Stadt-, Regional- oder Landesabdeckung. Der Partner übernimmt die Netzwerkentwicklung; der Konzern liefert Technologie, Standards und Support.',
+    fh2_label:'// Fertige Lösungen', fh2_title:'Schlüsselfertige Klinik',
+    fh2_desc:'Zahnarztpraxen, Kliniken, Apotheken und medizinische Räume — Planung einer intelligenten Umgebung von Null bis zur Inbetriebnahme. Ausstattung, KI, Inneneinrichtung, Standards.',
+    fran1_title:'Technologiebasis', fran1_desc:'Vollständiger Stack: KI-Kern, Smart Home, Kameras, Sprachprotokolle. Alles innerhalb des Konzerns entwickelt und getestet.',
+    fran2_title:'Academi67-Standards', fran2_desc:'Das Personal des Franchisenehmers durchläuft Schulungen und Zertifizierungen. Einheitliches Serviceniveau an jedem Standort.',
+    fran3_title:'Support und Modernisierung', fran3_desc:'Kontinuierliche Technologie-Updates, technischer Support, KI-Modellentwicklung — alles inklusive.',
+    fran4_title:'Regionale Skalierung', fran4_desc:'Partner, die zum systematischen Netzwerkausbau in einer Region bereit sind, werden vorrangig berücksichtigt.',
+    fran5_title:'Partnerschaft besprechen', fran5_desc:'Hinterlassen Sie eine Anfrage — wir erklären die Teilnahmeformate.',
+    trade_sec_tag:'// TradeAI · LABS67 Konzern',
+    trade_h2_1:'Technologien', trade_h2_2:'für die', trade_h2_3:'Medizin',
+    trade_lead:'Konzernentwicklungen — für Partner und den Markt verfügbar. Einsatzbereite Lösungen für Kliniken, Apotheken und medizinische Räume.',
+    trade_item1_desc:'Fertiger KI-Stack auf NVIDIA Jetson: Gesichtserkennung, Sprachprotokolle, Videoanalyse. Einsatz — innerhalb 1 Tages.',
+    trade_item2_desc:'Smart-Room-Kit: Präsenzsensoren, Beleuchtung, Klima, Kameras über dem Arbeitsplatz. Home-Assistant-Integration.',
+    trade_item3_desc:'Neuronale Analyse von Röntgenaufnahmen und Intraoralfotos. Empfehlungen in Echtzeit auf dem Tablet des Arztes.',
+    contact_sec_tag:'// KONTAKTE',
+    contact_h2_1:'Kontaktieren Sie', contact_h2_2:'den', contact_h2_3:'Konzern',
+    contact_lead:'Wählen Sie einen Bereich — wir beantworten jede Frage.',
+    cinfo_phone_label:'Telefon', cinfo_email_label:'Allgemeine Anfrage', cinfo_franchise_label:'Franchise67 / Partnerschaft',
+    form_title:'// NEUE ANFRAGE',
+    footer_copy:'© 2025 LABS67 Konzern<br>Alle Rechte vorbehalten<br><span class="g">● ALL SYSTEMS ONLINE</span>',
+    chat_online:'● Online · Antworte jetzt',
   }
 };
 
-let currentLang = 'ru';
+let currentLang = localStorage.getItem('labs67_lang') || 'by';
 
 function setLang(lang) {
   if (!i18n[lang]) return;
   currentLang = lang;
   document.documentElement.lang = lang;
+  localStorage.setItem('labs67_lang', lang);
 
-  // Update all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (i18n[lang][key] !== undefined) {
@@ -1108,13 +1366,15 @@ function setLang(lang) {
     }
   });
 
-  // Update active button
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  const langOrder = ['by','en','pl','fr','de'];
+  const idx = langOrder.indexOf(lang);
   const btns = document.querySelectorAll('.lang-btn');
-  const langs = ['ru','by','en','de','fr','pl'];
-  const idx = langs.indexOf(lang);
   if (btns[idx]) btns[idx].classList.add('active');
 }
+
+// Init on load
+document.addEventListener('DOMContentLoaded', () => setLang(currentLang));
 
 // Form ID
 document.getElementById('formId').textContent = 'REQ_' + Math.random().toString(36).substr(2,6).toUpperCase();
