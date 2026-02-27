@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LABS67 — Технологический концерн</title>
+<meta name="description" content="LABS67 — концерн технологических решений для медицины. DentalAI, Academi67, TradeAI, Franchise67.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#03050e;
+  --bg2:#060916;
+  --panel:#08101f;
+  --b1:rgba(255,255,255,0.07);
+  --b2:rgba(255,255,255,0.14);
+  --gold:#e8b840;
+  --gold2:#f5cc60;
+  --gold-dim:rgba(232,184,64,0.45);
+  --gold-glow:rgba(232,184,64,0.18);
+  --cyan:#30dcff;
+  --green:#1df59a;
+  --red:#ff4d6d;
+  --text:#cdd8f5;
+  --muted:rgba(160,185,240,0.42);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;}
+
+/* GRID BG */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(232,184,64,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(232,184,64,0.025) 1px,transparent 1px);
+  background-size:80px 80px;pointer-events:none;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  height:58px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 44px;
+  background:rgba(3,5,14,0.82);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--b1);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-mark{
+  width:32px;height:32px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:600;
+  color:#03050e;letter-spacing:0.05em;
+}
+.logo-text{font-size:1rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;}
+.logo-text em{color:var(--gold);font-style:normal;}
+.logo-sub{font-family:'JetBrains Mono',monospace;font-size:0.48rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);margin-top:1px;}
+
+.nav-links{display:flex;gap:0;border:1px solid var(--b1);}
+.nl{
+  padding:7px 18px;
+  font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;border-right:1px solid var(--b1);
+  transition:all 0.3s;
+}
+.nl:last-child{border-right:none;}
+.nl:hover{color:var(--gold);background:rgba(232,184,64,0.05);}
+
+.nav-r{display:flex;align-items:center;gap:16px;}
+.online-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pdot 2.5s infinite;}
+@keyframes pdot{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.online-txt{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;color:var(--green);}
+.nav-cta{
+  padding:7px 18px;border:1px solid var(--gold-dim);color:var(--gold);
+  font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;
+  background:transparent;cursor:pointer;transition:all 0.3s;text-decoration:none;
+}
+.nav-cta:hover{background:var(--gold-glow);border-color:var(--gold);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:80px 40px 60px;position:relative;z-index:1;text-align:center;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:5px 16px;border:1px solid rgba(232,184,64,0.2);background:rgba(232,184,64,0.04);
+  font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--gold-dim);margin-bottom:44px;
+  animation:fu 0.6s ease both;
+}
+.hero-title{
+  font-size:clamp(3.2rem,8vw,7.5rem);font-weight:800;line-height:0.92;
+  letter-spacing:-0.03em;margin-bottom:28px;
+  animation:fu 0.6s ease 0.1s both;
+}
+.ht-line1{display:block;}
+.ht-line2{
+  display:block;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.9rem;font-weight:300;line-height:1.9;
+  color:var(--muted);max-width:560px;margin:0 auto 52px;
+  animation:fu 0.6s ease 0.2s both;
+}
+.hero-sub span{color:var(--gold-dim);}
+
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fu 0.6s ease 0.3s both;}
+
+.btn-gold{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 34px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#03050e;font-weight:700;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:all 0.3s;text-decoration:none;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  box-shadow:0 0 30px rgba(232,184,64,0.3);
+}
+.btn-gold:hover{box-shadow:0 0 50px rgba(232,184,64,0.5);transform:translateY(-2px);}
+
+.btn-outline{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 34px;
+  border:1px solid var(--b2);color:var(--muted);font-size:0.78rem;
+  letter-spacing:0.15em;text-transform:uppercase;background:transparent;
+  cursor:pointer;transition:all 0.3s;text-decoration:none;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+}
+.btn-outline:hover{border-color:var(--gold-dim);color:var(--gold);}
+
+.hero-stats{
+  display:flex;gap:60px;justify-content:center;flex-wrap:wrap;
+  margin-top:80px;padding-top:40px;border-top:1px solid var(--b1);
+  animation:fu 0.6s ease 0.4s both;
+}
+.hs{text-align:center;}
+.hs-num{font-size:2.4rem;font-weight:800;color:var(--gold);display:block;line-height:1;}
+.hs-label{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:block;margin-top:6px;}
+
+@keyframes fu{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── TICKER ── */
+.ticker{
+  background:rgba(232,184,64,0.04);
+  border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);
+  padding:10px 0;overflow:hidden;position:relative;z-index:1;
+}
+.ticker-wrap{display:flex;gap:48px;animation:tick 22s linear infinite;white-space:nowrap;}
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ti{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);display:inline-flex;align-items:center;gap:10px;
+}
+.ti b{color:var(--gold);}
+.ti-sep{color:rgba(232,184,64,0.25);}
+
+/* ── SECTION COMMON ── */
+.section{padding:110px 44px;position:relative;z-index:1;}
+.sec-tag{
+  font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.sec-tag::before{content:'//';opacity:0.5;}
+.sec-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px;}
+.sec-title .ac{color:var(--gold);}
+.sec-lead{font-size:1rem;font-weight:400;line-height:1.8;color:var(--muted);max-width:560px;}
+
+/* ── BRANDS SECTION ── */
+.brands-section{padding:110px 44px 80px;position:relative;z-index:1;}
+.brands-intro{text-align:center;margin-bottom:80px;}
+.brands-intro .sec-tag{justify-content:center;}
+.brands-intro .sec-title{font-size:clamp(2rem,5vw,3.8rem);}
+.brands-intro .sec-lead{margin:0 auto;text-align:center;}
+
+.brands-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--b1);}
+
+.brand-card{
+  background:var(--bg2);padding:52px 48px;
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:all 0.4s;text-decoration:none;color:inherit;display:block;
+}
+.brand-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(232,184,64,0.04),transparent);
+  opacity:0;transition:opacity 0.4s;
+}
+.brand-card:hover{background:var(--panel);}
+.brand-card:hover::after{opacity:1;}
+
+.brand-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  transform:scaleX(0);transition:transform 0.4s;
+  transform-origin:left;
+}
+.bc-gold::before{background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.bc-cyan::before{background:linear-gradient(90deg,var(--cyan),#80f0ff);}
+.bc-green::before{background:linear-gradient(90deg,var(--green),#80ffcc);}
+.bc-red::before{background:linear-gradient(90deg,var(--red),#ff9aaa);}
+.brand-card:hover::before{transform:scaleX(1);}
+
+.brand-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:8px;
+}
+.brand-eyebrow-dot{width:5px;height:5px;border-radius:50%;}
+.bd-gold{background:var(--gold);}
+.bd-cyan{background:var(--cyan);}
+.bd-green{background:var(--green);}
+.bd-red{background:var(--red);}
+
+.brand-name-lg{font-size:2.2rem;font-weight:800;letter-spacing:-0.01em;margin-bottom:10px;line-height:1;}
+.brand-name-lg .gold{color:var(--gold);}
+.brand-name-lg .cyan{color:var(--cyan);}
+.brand-name-lg .green{color:var(--green);}
+.brand-name-lg .red{color:var(--red);}
+
+.brand-tagline{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:16px;line-height:1.3;}
+.brand-desc{font-size:0.88rem;font-weight:400;line-height:1.8;color:var(--muted);}
+
+.brand-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px;}
+.btag{
+  font-family:'JetBrains Mono',monospace;font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;
+  padding:4px 10px;border:1px solid var(--b1);color:var(--muted);
+  transition:all 0.3s;
+}
+.brand-card:hover .btag{border-color:var(--b2);}
+
+.brand-arrow{
+  position:absolute;bottom:48px;right:48px;
+  font-size:1.4rem;color:var(--b2);transition:all 0.3s;
+}
+.brand-card:hover .brand-arrow{color:var(--gold);transform:translate(4px,-4px);}
+
+.brand-bg-label{
+  position:absolute;right:-10px;bottom:-20px;
+  font-size:6rem;font-weight:800;opacity:0.025;line-height:1;
+  pointer-events:none;letter-spacing:-0.05em;
+}
+
+/* ── DENTAL DETAIL ── */
+.dental-section{
+  padding:110px 44px;
+  background:var(--bg2);
+  border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);
+  position:relative;z-index:1;
+}
+.dental-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+
+.dental-visual{position:relative;}
+.dental-screen{
+  background:var(--panel);border:1px solid var(--b2);padding:0;overflow:hidden;
+  box-shadow:0 0 60px rgba(56,232,255,0.08);
+}
+.ds-header{
+  padding:10px 18px;background:rgba(255,255,255,0.03);
+  border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ds-dots{display:flex;gap:6px;}
+.ds-dot{width:9px;height:9px;border-radius:50%;}
+.ds-title{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.18em;color:var(--muted);}
+.ds-body{padding:28px;}
+.ds-metric{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.ds-metric:last-child{border-bottom:none;}
+.ds-key{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;color:var(--muted);}
+.ds-val{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:500;}
+.v-gold{color:var(--gold);}
+.v-green{color:var(--green);}
+.v-cyan{color:var(--cyan);}
+
+.dental-content{}
+.dental-quote{
+  font-size:1.5rem;font-weight:700;line-height:1.4;
+  color:var(--text);margin:24px 0;
+  border-left:3px solid var(--gold);padding-left:24px;
+}
+
+.features-list{margin-top:36px;}
+.feat{
+  display:flex;gap:16px;padding:16px 0;
+  border-bottom:1px solid var(--b1);
+}
+.feat:last-child{border-bottom:none;}
+.feat-icon{
+  width:38px;height:38px;min-width:38px;
+  border:1px solid var(--b2);background:rgba(232,184,64,0.05);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.feat-title{font-size:0.9rem;font-weight:700;margin-bottom:4px;}
+.feat-desc{font-size:0.82rem;font-weight:400;line-height:1.7;color:var(--muted);}
+
+/* ── ACADEMI67 ── */
+.academi-section{padding:110px 44px;position:relative;z-index:1;}
+.academi-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start;margin-top:60px;}
+.academi-card{
+  background:var(--bg2);border:1px solid var(--b1);padding:40px;
+  position:relative;overflow:hidden;margin-bottom:12px;transition:all 0.3s;
+}
+.academi-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--green);opacity:0;transition:opacity 0.3s;
+}
+.academi-card:hover{border-color:var(--b2);}
+.academi-card:hover::before{opacity:1;}
+.ac-num{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.2em;color:var(--muted);margin-bottom:12px;}
+.ac-title{font-size:1.05rem;font-weight:700;margin-bottom:10px;}
+.ac-desc{font-size:0.85rem;font-weight:400;line-height:1.8;color:var(--muted);}
+
+.academi-right{}
+.academi-statement{
+  background:var(--panel);border:1px solid rgba(29,245,154,0.15);
+  padding:40px;margin-bottom:24px;
+  box-shadow:0 0 40px rgba(29,245,154,0.04);
+}
+.as-label{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--green);margin-bottom:16px;}
+.as-text{font-size:1.1rem;font-weight:600;line-height:1.6;color:var(--text);}
+.as-sub{font-size:0.85rem;font-weight:400;line-height:1.8;color:var(--muted);margin-top:12px;}
+
+/* ── FRANCHISE ── */
+.franchise-section{
+  padding:110px 44px;
+  background:var(--bg2);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);
+  position:relative;z-index:1;
+}
+.franchise-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:60px;}
+
+.franchise-left .sec-lead{margin-bottom:36px;}
+.franchise-highlight{
+  background:var(--panel);border:1px solid rgba(232,184,64,0.2);
+  padding:36px;margin-bottom:20px;
+  box-shadow:0 0 40px rgba(232,184,64,0.04);
+  position:relative;overflow:hidden;
+}
+.fh-label{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.fh-title{font-size:1.3rem;font-weight:700;margin-bottom:10px;line-height:1.3;}
+.fh-desc{font-size:0.85rem;font-weight:400;line-height:1.8;color:var(--muted);}
+.fh-corner{position:absolute;top:0;right:0;width:60px;height:60px;background:linear-gradient(135deg,transparent 50%,rgba(232,184,64,0.08) 50%);}
+
+.franchise-right{}
+.fran-item{
+  padding:24px 0;border-bottom:1px solid var(--b1);
+  display:flex;gap:20px;align-items:flex-start;
+}
+.fran-item:last-child{border-bottom:none;}
+.fran-num{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;
+  color:var(--gold-dim);min-width:32px;padding-top:3px;
+}
+.fran-title{font-size:0.95rem;font-weight:700;margin-bottom:6px;}
+.fran-desc{font-size:0.83rem;font-weight:400;line-height:1.7;color:var(--muted);}
+
+/* ── TRADEAI ── */
+.trade-section{padding:110px 44px;position:relative;z-index:1;}
+.trade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--b1);margin-top:60px;}
+.trade-item{
+  background:var(--bg2);padding:40px 36px;
+  transition:all 0.3s;position:relative;overflow:hidden;
+}
+.trade-item::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  transform:scaleX(0);transition:transform 0.4s;
+}
+.trade-item:hover::before{transform:scaleX(1);}
+.trade-item:hover{background:var(--panel);}
+.trade-icon{font-size:1.8rem;margin-bottom:20px;display:block;}
+.trade-name{font-size:1.1rem;font-weight:700;margin-bottom:10px;}
+.trade-desc{font-size:0.85rem;font-weight:400;line-height:1.8;color:var(--muted);}
+.trade-price{
+  margin-top:18px;font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.12em;color:var(--cyan);
+}
+
+/* ── CONTACT ── */
+.contact-section{
+  padding:110px 44px;
+  background:var(--bg2);border-top:1px solid var(--b1);
+  position:relative;z-index:1;
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;margin-top:60px;}
+.contact-left{}
+.contact-left .sec-lead{margin-bottom:40px;}
+.cinfo{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 20px;background:var(--panel);border:1px solid var(--b1);
+  margin-bottom:10px;transition:all 0.3s;
+}
+.cinfo:hover{border-color:var(--b2);}
+.cinfo-icon{
+  width:38px;height:38px;min-width:38px;
+  border:1px solid var(--b1);background:rgba(232,184,64,0.05);
+  display:flex;align-items:center;justify-content:center;font-size:0.95rem;
+}
+.cinfo-label{font-family:'JetBrains Mono',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px;}
+.cinfo-val{font-size:0.92rem;font-weight:500;color:var(--text);}
+
+/* ── CONTACT FORM ── */
+.cform{background:var(--panel);border:1px solid var(--b1);padding:48px 42px;}
+.cf-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-bottom:20px;margin-bottom:30px;border-bottom:1px solid var(--b1);
+}
+.cf-title{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);}
+.cf-id{font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--muted);}
+
+.fg{margin-bottom:20px;}
+.fl{font-family:'JetBrains Mono',monospace;font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;}
+.fi{
+  width:100%;padding:11px 14px;
+  background:rgba(0,0,0,0.3);border:1px solid var(--b1);
+  color:var(--text);font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:400;
+  outline:none;transition:all 0.3s;
+}
+.fi:focus{border-color:var(--gold-dim);box-shadow:0 0 0 1px rgba(232,184,64,0.12);}
+.fi::placeholder{color:rgba(160,185,240,0.18);}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fsubmit{
+  width:100%;padding:14px;margin-top:6px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none;color:#03050e;font-family:'Syne',sans-serif;
+  font-size:0.75rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.3s;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+}
+.fsubmit:hover{box-shadow:0 0 30px rgba(232,184,64,0.4);transform:translateY(-1px);}
+.fprivacy{font-family:'JetBrains Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;color:rgba(160,185,240,0.2);text-align:center;margin-top:12px;}
+
+/* ── FOOTER ── */
+footer{
+  padding:40px 44px;border-top:1px solid var(--b1);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:40px;
+  position:relative;z-index:1;
+}
+.fl-brand{}
+.fl-logo{font-size:0.95rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;}
+.fl-logo em{color:var(--gold);font-style:normal;}
+.fl-sub{font-family:'JetBrains Mono',monospace;font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+.fl-brands{display:flex;flex-wrap:wrap;gap:10px;}
+.fl-brand-tag{
+  font-family:'JetBrains Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;
+  padding:3px 10px;border:1px solid var(--b1);color:var(--muted);
+}
+.fc{font-family:'JetBrains Mono',monospace;font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.9;}
+.fc .g{color:var(--green);}
+.fr2{font-family:'JetBrains Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;color:var(--muted);text-align:right;line-height:1.9;}
+
+/* ── AI CHAT ── */
+#chat-bubble{
+  position:fixed;bottom:28px;right:28px;z-index:9999;
+}
+.chat-trigger{
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+  box-shadow:0 0 30px rgba(232,184,64,0.5);
+  transition:all 0.3s;
+  animation:chatPulse 3s infinite;
+}
+.chat-trigger:hover{transform:scale(1.1);box-shadow:0 0 50px rgba(232,184,64,0.7);}
+@keyframes chatPulse{0%,100%{box-shadow:0 0 30px rgba(232,184,64,0.5);}50%{box-shadow:0 0 50px rgba(232,184,64,0.3),0 0 0 12px rgba(232,184,64,0.06);}}
+
+.chat-window{
+  position:absolute;bottom:70px;right:0;
+  width:380px;
+  background:var(--panel);
+  border:1px solid rgba(232,184,64,0.25);
+  display:none;flex-direction:column;
+  box-shadow:0 0 60px rgba(0,0,0,0.6);
+  max-height:520px;
+}
+.chat-window.open{display:flex;}
+
+.chat-header{
+  padding:14px 18px;background:rgba(232,184,64,0.06);
+  border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ch-left{display:flex;align-items:center;gap:10px;}
+.ch-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;font-size:0.9rem;
+}
+.ch-title{font-size:0.82rem;font-weight:700;}
+.ch-sub{font-family:'JetBrains Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;color:var(--green);}
+.chat-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;transition:color 0.2s;}
+.chat-close:hover{color:var(--text);}
+
+.chat-msgs{
+  flex:1;overflow-y:auto;padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+  max-height:340px;
+}
+.chat-msgs::-webkit-scrollbar{width:3px;}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+
+.msg{max-width:88%;padding:10px 14px;font-size:0.85rem;line-height:1.6;}
+.msg-bot{
+  background:rgba(255,255,255,0.04);border:1px solid var(--b1);
+  border-radius:0 8px 8px 8px;align-self:flex-start;
+  color:var(--text);
+}
+.msg-user{
+  background:rgba(232,184,64,0.12);border:1px solid rgba(232,184,64,0.2);
+  border-radius:8px 0 8px 8px;align-self:flex-end;
+  color:var(--gold2);
+}
+.msg-bot .msg-sender{font-family:'JetBrains Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:4px;display:block;}
+
+.chat-options{padding:8px 16px;display:flex;flex-wrap:wrap;gap:6px;}
+.chat-opt{
+  padding:5px 12px;border:1px solid var(--b2);background:transparent;
+  color:var(--muted);font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.3s;
+}
+.chat-opt:hover{border-color:var(--gold-dim);color:var(--gold);background:rgba(232,184,64,0.05);}
+
+.chat-input-row{
+  padding:12px 14px;border-top:1px solid var(--b1);
+  display:flex;gap:8px;
+}
+.chat-input{
+  flex:1;padding:9px 12px;
+  background:rgba(0,0,0,0.3);border:1px solid var(--b1);
+  color:var(--text);font-family:'Syne',sans-serif;font-size:0.82rem;
+  outline:none;transition:border-color 0.3s;
+}
+.chat-input:focus{border-color:var(--gold-dim);}
+.chat-input::placeholder{color:var(--muted);font-size:0.78rem;}
+.chat-send{
+  padding:9px 14px;
+  background:var(--gold);border:none;color:#03050e;
+  font-size:0.8rem;cursor:pointer;transition:all 0.3s;font-weight:700;
+}
+.chat-send:hover{background:var(--gold2);}
+
+@media(max-width:1000px){
+  .brands-grid{grid-template-columns:1fr;}
+  .dental-grid,.franchise-grid,.contact-grid,.academi-grid{grid-template-columns:1fr;}
+  .trade-grid{grid-template-columns:1fr;}
+  footer{grid-template-columns:1fr;text-align:center;}
+  .fr2{text-align:center;}
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .section,.brands-section,.dental-section,.academi-section,.franchise-section,.trade-section,.contact-section{padding:80px 20px;}
+  .chat-window{width:320px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">L67</div>
+    <div>
+      <div class="logo-text"><em>LABS</em>67</div>
+      <div class="logo-sub">Технологический концерн</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#brands" class="nl">Направления</a>
+    <a href="#dental" class="nl">DentalAI</a>
+    <a href="#academi" class="nl">Academi67</a>
+    <a href="#franchise" class="nl">Franchise67</a>
+    <a href="#contact" class="nl">Контакты</a>
+  </div>
+  <div class="nav-r">
+    <div class="online-dot"></div>
+    <span class="online-txt">ONLINE</span>
+    <a href="#contact" class="nav-cta">Связаться</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">// Концерн · 4 направления · Медтех</div>
+  <h1 class="hero-title">
+    <span class="ht-line1">Мы меняем</span>
+    <span class="ht-line2">медицину</span>
+  </h1>
+  <p class="hero-sub">
+    <span>LABS67</span> — технологический концерн, создающий экосистему решений для клиник нового поколения. От умных пространств до стандартов обучения.
+  </p>
+  <div class="hero-btns">
+    <a href="#brands" class="btn-gold">// Наши направления</a>
+    <a href="#contact" class="btn-outline">Связаться с нами →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hs"><span class="hs-num">4</span><span class="hs-label">Направления</span></div>
+    <div class="hs"><span class="hs-num">67</span><span class="hs-label">Технологий</span></div>
+    <div class="hs"><span class="hs-num">AI</span><span class="hs-label">Везде</span></div>
+    <div class="hs"><span class="hs-num">∞</span><span class="hs-label">Масштаб</span></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-wrap" id="tickerInner">
+    <span class="ti"><b>DentalAI</b> Стоматология в радость</span><span class="ti-sep">///</span>
+    <span class="ti"><b>Academi67</b> Институт клинических стандартов</span><span class="ti-sep">///</span>
+    <span class="ti"><b>TradeAI</b> Медтех решения</span><span class="ti-sep">///</span>
+    <span class="ti"><b>Franchise67</b> Масштабирование концерна</span><span class="ti-sep">///</span>
+    <span class="ti"><b>LABS67</b> Меняем отношение к медицине</span><span class="ti-sep">///</span>
+    <span class="ti"><b>DentalAI</b> Стоматология в радость</span><span class="ti-sep">///</span>
+    <span class="ti"><b>Academi67</b> Институт клинических стандартов</span><span class="ti-sep">///</span>
+    <span class="ti"><b>TradeAI</b> Медтех решения</span><span class="ti-sep">///</span>
+    <span class="ti"><b>Franchise67</b> Масштабирование концерна</span><span class="ti-sep">///</span>
+    <span class="ti"><b>LABS67</b> Меняем отношение к медицине</span><span class="ti-sep">///</span>
+  </div>
+</div>
+
+<!-- BRANDS -->
+<section class="brands-section" id="brands">
+  <div class="brands-intro">
+    <div class="sec-tag">// ECOSYSTEM</div>
+    <h2 class="sec-title">Четыре <span class="ac">направления</span></h2>
+    <p class="sec-lead">Выберите направление, которое вас интересует — каждый бренд концерна решает свою задачу.</p>
+  </div>
+
+  <div class="brands-grid">
+    <!-- DentalAI -->
+    <div class="brand-card bc-gold" onclick="scrollTo('dental')">
+      <div class="brand-bg-label">DA</div>
+      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-gold"></div>Стоматология</div>
+      <div class="brand-name-lg">Dental<span class="gold">AI</span></div>
+      <div class="brand-tagline">Стоматология в радость</div>
+      <p class="brand-desc">Меняем отношение к стоматологии и лицевой хирургии. Умные клиники, AI-ассистент, забота — не страх.</p>
+      <div class="brand-tags">
+        <span class="btag">Клиники</span>
+        <span class="btag">AI-ассистент</span>
+        <span class="btag">Пациентский опыт</span>
+      </div>
+      <div class="brand-arrow">↗</div>
+    </div>
+
+    <!-- Academi67 -->
+    <div class="brand-card bc-green" onclick="scrollTo('academi')">
+      <div class="brand-bg-label">A67</div>
+      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-green"></div>Образование</div>
+      <div class="brand-name-lg">Academi<span class="green">67</span></div>
+      <div class="brand-tagline">Институт клинических стандартов будущего</div>
+      <p class="brand-desc">Не просто курсы повышения квалификации — полная трансформация клинического мышления. Протоколы, технологии, стандарты концерна.</p>
+      <div class="brand-tags">
+        <span class="btag">Обучение</span>
+        <span class="btag">Сертификация</span>
+        <span class="btag">Стандарты</span>
+      </div>
+      <div class="brand-arrow">↗</div>
+    </div>
+
+    <!-- TradeAI -->
+    <div class="brand-card bc-cyan" onclick="scrollTo('trade')">
+      <div class="brand-bg-label">TAI</div>
+      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-cyan"></div>Медтех</div>
+      <div class="brand-name-lg">Trade<span class="cyan">AI</span></div>
+      <div class="brand-tagline">Технологии для медицины</div>
+      <p class="brand-desc">Разработки концерна на открытом рынке. Решения для клиник, аптек, лабораторий — готовые к развёртыванию.</p>
+      <div class="brand-tags">
+        <span class="btag">AI-решения</span>
+        <span class="btag">Оборудование</span>
+        <span class="btag">Интеграции</span>
+      </div>
+      <div class="brand-arrow">↗</div>
+    </div>
+
+    <!-- Franchise67 -->
+    <div class="brand-card bc-red" onclick="scrollTo('franchise')">
+      <div class="brand-bg-label">F67</div>
+      <div class="brand-eyebrow"><div class="brand-eyebrow-dot bd-red"></div>Развитие</div>
+      <div class="brand-name-lg">Franchise<span class="red">67</span></div>
+      <div class="brand-tagline">Центр роста концерна</div>
+      <p class="brand-desc">Масштабирование, модернизация, технологические решения для медицинских пространств. Создаём клиники будущего вместе с партнёрами.</p>
+      <div class="brand-tags">
+        <span class="btag">Партнёрство</span>
+        <span class="btag">Масштаб</span>
+        <span class="btag">Технологии</span>
+      </div>
+      <div class="brand-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- DENTAL AI DETAIL -->
+<section class="dental-section" id="dental">
+  <div class="dental-grid">
+    <div class="dental-visual">
+      <div class="dental-screen">
+        <div class="ds-header">
+          <div class="ds-dots">
+            <div class="ds-dot" style="background:#ff5f56;"></div>
+            <div class="ds-dot" style="background:#ffbd2e;"></div>
+            <div class="ds-dot" style="background:#27c93f;"></div>
+          </div>
+          <span class="ds-title">// DENTALAI · SYS_MONITOR</span>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pdot 2.5s infinite;"></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.5rem;color:var(--green);">LIVE</span>
+          </div>
+        </div>
+        <div class="ds-body">
+          <div class="ds-metric"><span class="ds-key">AI_ASSISTANT</span><span class="ds-val v-green">● ACTIVE</span></div>
+          <div class="ds-metric"><span class="ds-key">FACE_RECOGNITION</span><span class="ds-val v-cyan">ONLINE</span></div>
+          <div class="ds-metric"><span class="ds-key">VOICE_PROTOCOL</span><span class="ds-val v-cyan">WHISPER v3</span></div>
+          <div class="ds-metric"><span class="ds-key">CAMERAS</span><span class="ds-val v-gold">14 / 15</span></div>
+          <div class="ds-metric"><span class="ds-key">SMART_HOME</span><span class="ds-val v-green">38 DEVICES</span></div>
+          <div class="ds-metric"><span class="ds-key">DATA_PRIVACY</span><span class="ds-val v-green">LOCAL ONLY</span></div>
+          <div class="ds-metric"><span class="ds-key">AI_CORE</span><span class="ds-val v-gold">NVIDIA 275 TOPS</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dental-content">
+      <div class="sec-tag">// DentalAI · Концерн LABS67</div>
+      <h2 class="sec-title">Стоматология<br>в <span class="ac">радость</span></h2>
+      <div class="dental-quote">«Мы меняем отношение к стоматологии и лицевой хирургии — навсегда.»</div>
+      <p style="font-size:0.9rem;line-height:1.9;color:var(--muted);margin-bottom:30px;">Пациент входит — система его узнаёт. Врач работает — AI ассистирует. Данные защищены. Клиника живёт как единый организм.</p>
+      <div class="features-list">
+        <div class="feat">
+          <div class="feat-icon">😌</div>
+          <div><div class="feat-title">Забота, не страх</div><div class="feat-desc">Умная среда снижает стресс пациента с момента входа. Узнали, встретили, подготовились.</div></div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">🤖</div>
+          <div><div class="feat-title">AI на каждом кресле</div><div class="feat-desc">Камера над креслом, голосовой протокол, анализ снимков. Врач фокусируется на пациенте.</div></div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">🔒</div>
+          <div><div class="feat-title">Полная приватность</div><div class="feat-desc">Все данные — только локально. Никакого облака. Соответствие 152-ФЗ / GDPR.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMI67 -->
+<section class="academi-section" id="academi">
+  <div class="sec-tag">// Academi67 · Концерн LABS67</div>
+  <h2 class="sec-title">Институт клинических<br>стандартов <span class="ac">будущего</span></h2>
+  <p class="sec-lead">Не повышение квалификации — перезагрузка клинического мышления. Все врачи LABS67 проходят через Academi67 и адаптируются под протоколы концерна.</p>
+
+  <div class="academi-grid">
+    <div>
+      <div class="academi-card">
+        <div class="ac-num">TRACK_01</div>
+        <div class="ac-title">Clinical Reboot Program</div>
+        <div class="ac-desc">Полная перезагрузка клинических протоколов. Новые стандарты работы с пациентом, документирования, ассистирования AI-системе.</div>
+      </div>
+      <div class="academi-card">
+        <div class="ac-num">TRACK_02</div>
+        <div class="ac-title">AI Integration Certification</div>
+        <div class="ac-desc">Сертификация врачей и ассистентов по работе с AI-инструментами концерна. Практика на реальном оборудовании.</div>
+      </div>
+      <div class="academi-card">
+        <div class="ac-num">TRACK_03</div>
+        <div class="ac-title">Research & Development Lab</div>
+        <div class="ac-desc">Исследовательское направление — клинические испытания, разработка новых протоколов, публикации в партнёрстве с научными институтами.</div>
+      </div>
+    </div>
+    <div class="academi-right">
+      <div class="academi-statement">
+        <div class="as-label">// Наш стандарт</div>
+        <div class="as-text">Каждый специалист, работающий под брендом LABS67, прошёл через Academi67.</div>
+        <div class="as-sub">Это не просто курс. Это гарантия того, что пациент везде получает один и тот же уровень заботы — предсказуемый, технологичный, человеческий.</div>
+      </div>
+      <div class="academi-card">
+        <div class="ac-num">CONTACT</div>
+        <div class="ac-title">Подать заявку</div>
+        <div class="ac-desc">Набор в программы — по заявке. Приоритет — партнёры и франчайзи концерна.</div>
+        <div style="margin-top:16px;"><a href="mailto:academi@labs67.com" style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--green);letter-spacing:0.1em;text-decoration:none;">academi@labs67.com →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRANCHISE67 -->
+<section class="franchise-section" id="franchise">
+  <div class="sec-tag">// Franchise67 · Концерн LABS67</div>
+  <h2 class="sec-title">Центр роста<br>и <span class="ac">масштабирования</span></h2>
+
+  <div class="franchise-grid">
+    <div class="franchise-left">
+      <p class="sec-lead">Franchise67 — инфраструктурное ядро концерна. Обеспечение, модернизация оборудования и разработка технологичных решений для медицинских пространств.</p>
+
+      <div class="franchise-highlight">
+        <div class="fh-corner"></div>
+        <div class="fh-label">// Мастер-партнёрство</div>
+        <div class="fh-title">Стать частью концерна в своём регионе</div>
+        <div class="fh-desc">Для тех, кто думает масштабно — мы открыты к стратегическому партнёрству с охватом города, региона или страны. Партнёр берёт на себя развитие сети, концерн обеспечивает технологии, стандарты и поддержку.</div>
+      </div>
+
+      <div class="franchise-highlight" style="border-color:rgba(255,77,109,0.15);">
+        <div class="fh-corner" style="background:linear-gradient(135deg,transparent 50%,rgba(255,77,109,0.06) 50%);"></div>
+        <div class="fh-label" style="color:var(--red);">// Готовые решения</div>
+        <div class="fh-title">Клиника под ключ</div>
+        <div class="fh-desc">Стоматологии, клиники, аптеки и медицинские пространства — проектирование умной среды с нуля до запуска. Оборудование, AI, интерьер, стандарты.</div>
+      </div>
+    </div>
+
+    <div class="franchise-right">
+      <div class="fran-item">
+        <span class="fran-num">01//</span>
+        <div><div class="fran-title">Технологическая база</div><div class="fran-desc">Полный стек: AI-ядро, умный дом, камеры, голосовые протоколы. Всё разработано и проверено внутри концерна.</div></div>
+      </div>
+      <div class="fran-item">
+        <span class="fran-num">02//</span>
+        <div><div class="fran-title">Стандарты Academi67</div><div class="fran-desc">Персонал франчайзи проходит обучение и сертификацию. Единый уровень сервиса в каждой точке.</div></div>
+      </div>
+      <div class="fran-item">
+        <span class="fran-num">03//</span>
+        <div><div class="fran-title">Поддержка и модернизация</div><div class="fran-desc">Непрерывное обновление технологий, техподдержка, развитие AI-моделей — всё включено.</div></div>
+      </div>
+      <div class="fran-item">
+        <span class="fran-num">04//</span>
+        <div><div class="fran-title">Региональное масштабирование</div><div class="fran-desc">Партнёры, готовые к системному развитию сети в регионе, рассматриваются в приоритетном порядке.</div></div>
+      </div>
+      <div class="fran-item">
+        <span class="fran-num">→</span>
+        <div>
+          <div class="fran-title">Обсудить партнёрство</div>
+          <div class="fran-desc">Оставьте заявку — расскажем о форматах участия.</div>
+          <div style="margin-top:10px;"><a href="mailto:franchise@labs67.com" style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold);letter-spacing:0.1em;text-decoration:none;">franchise@labs67.com →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADEAI -->
+<section class="trade-section" id="trade">
+  <div class="sec-tag">// TradeAI · Концерн LABS67</div>
+  <h2 class="sec-title">Технологии<br>для <span class="ac">медицины</span></h2>
+  <p class="sec-lead" style="margin-top:12px;">Разработки концерна — доступны партнёрам и рынку. Готовые к развёртыванию решения для клиник, аптек и медицинских пространств.</p>
+
+  <div class="trade-grid">
+    <div class="trade-item">
+      <span class="trade-icon">🤖</span>
+      <div class="trade-name">AI Core Kit</div>
+      <div class="trade-desc">Готовый AI-стек на NVIDIA Jetson: распознавание лиц, голосовые протоколы, видеоаналитика. Развёртывание — до 1 дня.</div>
+      <div class="trade-price">→ По запросу</div>
+    </div>
+    <div class="trade-item">
+      <span class="trade-icon">📹</span>
+      <div class="trade-name">SmartRoom Module</div>
+      <div class="trade-desc">Комплект умного кабинета: датчики присутствия, свет, климат, камеры над рабочим местом. Интеграция с Home Assistant.</div>
+      <div class="trade-price">→ По запросу</div>
+    </div>
+    <div class="trade-item">
+      <span class="trade-icon">🔬</span>
+      <div class="trade-name">Clinical Vision</div>
+      <div class="trade-desc">Нейросетевой анализ рентгеновских снимков и интраоральных фото. Вывод рекомендаций на планшет врача в реальном времени.</div>
+      <div class="trade-price">→ По запросу</div>
+    </div>
+  </div>
+  <div style="margin-top:28px;text-align:center;">
+    <a href="mailto:trade@labs67.com" class="btn-outline" style="font-size:0.72rem;">Каталог решений → trade@labs67.com</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="sec-tag">// CONTACT</div>
+  <h2 class="sec-title">Свяжитесь<br>с <span class="ac">концерном</span></h2>
+
+  <div class="contact-grid">
+    <div class="contact-left">
+      <p class="sec-lead">Выберите направление — мы ответим на любой вопрос.</p>
+      <div class="cinfo">
+        <div class="cinfo-icon">📞</div>
+        <div><span class="cinfo-label">Телефон</span><span class="cinfo-val">+48 571 719 800</span></div>
+      </div>
+      <div class="cinfo">
+        <div class="cinfo-icon">✉️</div>
+        <div><span class="cinfo-label">Общий запрос</span><span class="cinfo-val">hello@labs67.com</span></div>
+      </div>
+      <div class="cinfo">
+        <div class="cinfo-icon">🦷</div>
+        <div><span class="cinfo-label">DentalAI</span><span class="cinfo-val">dental@labs67.com</span></div>
+      </div>
+      <div class="cinfo">
+        <div class="cinfo-icon">🎓</div>
+        <div><span class="cinfo-label">Academi67</span><span class="cinfo-val">academi@labs67.com</span></div>
+      </div>
+      <div class="cinfo">
+        <div class="cinfo-icon">🤝</div>
+        <div><span class="cinfo-label">Franchise67 / Партнёрство</span><span class="cinfo-val">franchise@labs67.com</span></div>
+      </div>
+      <div class="cinfo">
+        <div class="cinfo-icon">🛒</div>
+        <div><span class="cinfo-label">TradeAI</span><span class="cinfo-val">trade@labs67.com</span></div>
+      </div>
+    </div>
+
+    <div class="cform">
+      <div class="cf-header">
+        <span class="cf-title">// НОВЫЙ ЗАПРОС</span>
+        <span class="cf-id" id="formId">REQ_XXXXX</span>
+      </div>
+      <div class="fr">
+        <div class="fg">
+          <label class="fl">Имя</label>
+          <input type="text" class="fi" placeholder="Ваше имя">
+        </div>
+        <div class="fg">
+          <label class="fl">Телефон</label>
+          <input type="tel" class="fi" placeholder="+48 571 719 800">
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">Email</label>
+        <input type="email" class="fi" placeholder="you@company.com">
+      </div>
+      <div class="fg">
+        <label class="fl">Направление</label>
+        <select class="fi">
+          <option style="background:#08101f">— Выберите —</option>
+          <option style="background:#08101f">DentalAI — Стоматология</option>
+          <option style="background:#08101f">Academi67 — Обучение</option>
+          <option style="background:#08101f">Franchise67 — Партнёрство</option>
+          <option style="background:#08101f">TradeAI — Технологии</option>
+          <option style="background:#08101f">Общий вопрос</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">Сообщение</label>
+        <textarea class="fi" rows="3" placeholder="Расскажите о вашем запросе..."></textarea>
+      </div>
+      <button class="fsubmit" onclick="handleSubmit()">// ОТПРАВИТЬ ЗАПРОС →</button>
+      <div class="fprivacy">ОТПРАВЛЯЯ ФОРМУ, ВЫ СОГЛАШАЕТЕСЬ С ПОЛИТИКОЙ КОНФИДЕНЦИАЛЬНОСТИ</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="fl-logo"><em>LABS</em>67</div>
+    <div class="fl-sub">Технологический концерн</div>
+    <div class="fl-brands" style="margin-top:14px;">
+      <span class="fl-brand-tag" style="color:var(--gold);">DentalAI</span>
+      <span class="fl-brand-tag" style="color:var(--green);">Academi67</span>
+      <span class="fl-brand-tag" style="color:var(--cyan);">TradeAI</span>
+      <span class="fl-brand-tag" style="color:var(--red);">Franchise67</span>
+    </div>
+  </div>
+  <div class="fc">
+    © 2025 LABS67 Концерн<br>
+    Все права защищены<br>
+    <span class="g">● ALL SYSTEMS ONLINE</span>
+  </div>
+  <div class="fr2">
+    +48 571 719 800<br>
+    hello@labs67.com<br>
+    <span style="color:var(--muted);font-size:0.48rem;">labs67.com</span>
+  </div>
+</footer>
+
+<!-- AI CHAT -->
+<div id="chat-bubble">
+  <div class="chat-window" id="chatWin">
+    <div class="chat-header">
+      <div class="ch-left">
+        <div class="ch-avatar">🤖</div>
+        <div>
+          <div class="ch-title">LABS67 Assistant</div>
+          <div class="ch-sub">● Онлайн · Отвечу сейчас</div>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="msg msg-bot">
+        <span class="msg-sender">// LABS67 AI</span>
+        Привет! Я помогу разобраться с направлениями концерна. Что вас интересует?
+      </div>
+    </div>
+    <div class="chat-options" id="chatOpts">
+      <button class="chat-opt" onclick="chatSelect('dental')">🦷 DentalAI</button>
+      <button class="chat-opt" onclick="chatSelect('academi')">🎓 Academi67</button>
+      <button class="chat-opt" onclick="chatSelect('franchise')">🤝 Franchise67</button>
+      <button class="chat-opt" onclick="chatSelect('trade')">🛒 TradeAI</button>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Напишите вопрос..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-send" onclick="sendChat()">→</button>
+    </div>
+  </div>
+  <button class="chat-trigger" onclick="toggleChat()" title="Чат с ассистентом">💬</button>
+</div>
+
+<script>
+// Form ID
+document.getElementById('formId').textContent = 'REQ_' + Math.random().toString(36).substr(2,6).toUpperCase();
+
+// Scroll helper
+function scrollTo(id){
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// Form submit
+function handleSubmit(){
+  const btn = document.querySelector('.fsubmit');
+  btn.textContent = '// ОБРАБОТКА...';
+  btn.style.background = 'rgba(232,184,64,0.3)';
+  btn.style.color = 'var(--gold)';
+  setTimeout(()=>{
+    btn.textContent = '// ЗАПРОС ПРИНЯТ ✓';
+    btn.style.background = 'var(--green)';
+    btn.style.color = '#03050e';
+    document.getElementById('formId').textContent = 'REQ_' + Math.random().toString(36).substr(2,6).toUpperCase();
+    setTimeout(()=>{
+      btn.textContent = '// ОТПРАВИТЬ ЗАПРОС →';
+      btn.style.background=''; btn.style.color='';
+    },3000);
+  },1400);
+}
+
+// Chat
+let chatOpen = false;
+const chatData = {
+  dental:{
+    answer:'DentalAI — это наш флагманский бренд. Умные стоматологические клиники, где AI ассистирует врачу, узнаёт пациента у входа и ведёт протоколы голосом. Девиз: **стоматология в радость**.',
+    follow:['Как записаться?','Технологии клиники','Партнёрство DentalAI']
+  },
+  academi:{
+    answer:'Academi67 — институт клинических стандартов будущего. Все врачи концерна проходят здесь полную перезагрузку: новые протоколы, AI-инструменты, сертификация.',
+    follow:['Как попасть в программу?','Что входит в обучение?','Стоимость']
+  },
+  franchise:{
+    answer:'Franchise67 — центр масштабирования концерна. Мы создаём клиники под ключ и рассматриваем стратегических партнёров, готовых развивать сеть в своём городе или стране.',
+    follow:['Форматы партнёрства','Мастер-франшиза','Что нужно для старта?']
+  },
+  trade:{
+    answer:'TradeAI — технологические разработки концерна на открытом рынке. AI Core Kit, SmartRoom Module, Clinical Vision. Готовые решения для клиник и аптек.',
+    follow:['Каталог решений','Цены','Интеграция']
+  },
+  default:'Уточните, пожалуйста, ваш вопрос — или выберите направление, которое вас интересует. Я помогу разобраться!'
+};
+
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById('chatWin').classList.toggle('open',chatOpen);
+}
+
+function addMsg(text,isBot){
+  const msgs=document.getElementById('chatMsgs');
+  const div=document.createElement('div');
+  div.className='msg '+(isBot?'msg-bot':'msg-user');
+  if(isBot) div.innerHTML='<span class="msg-sender">// LABS67 AI</span>'+text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+  else div.textContent=text;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function showOptions(opts){
+  const el=document.getElementById('chatOpts');
+  el.innerHTML='';
+  opts.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='chat-opt';
+    b.textContent=o;
+    b.onclick=()=>sendChatMsg(o);
+    el.appendChild(b);
+  });
+}
+
+function chatSelect(key){
+  const d=chatData[key];
+  document.getElementById('chatOpts').innerHTML='';
+  const labels={dental:'🦷 DentalAI',academi:'🎓 Academi67',franchise:'🤝 Franchise67',trade:'🛒 TradeAI'};
+  addMsg(labels[key]||key,false);
+  setTimeout(()=>{
+    addMsg(d.answer,true);
+    setTimeout(()=>showOptions(d.follow||[]),400);
+  },500);
+}
+
+function sendChatMsg(text){
+  document.getElementById('chatOpts').innerHTML='';
+  addMsg(text,false);
+  setTimeout(()=>{
+    if(text.includes('записаться')||text.includes('Как записаться'))
+      addMsg('Отлично! Заполните форму в разделе «Контакты» или напишите напрямую: dental@labs67.com. Ответим в течение часа.',true);
+    else if(text.includes('партнёрства')||text.includes('Форматы'))
+      addMsg('Есть несколько форматов: от одиночной клиники до мастер-партнёрства в регионе. Напишите на franchise@labs67.com — обсудим детали конфиденциально.',true);
+    else if(text.includes('Мастер'))
+      addMsg('Мастер-партнёрство — для тех, кто мыслит масштабом города или страны. Включает эксклюзивные права, поддержку и технологии концерна. Пишите: franchise@labs67.com',true);
+    else if(text.includes('Цены')||text.includes('Стоимость'))
+      addMsg('Стоимость зависит от конфигурации и масштаба. Для точного расчёта — оставьте заявку или напишите hello@labs67.com.',true);
+    else if(text.includes('Каталог'))
+      addMsg('Полный каталог решений — на trade@labs67.com. Высылаем по запросу с техническими спецификациями.',true);
+    else
+      addMsg('Понял ваш вопрос. Для детального ответа лучше связаться напрямую — +48 571 719 800 или hello@labs67.com. Что-то ещё могу рассказать?',true);
+    showOptions(['Связаться с командой','Другое направление','Спасибо!']);
+  },600);
+}
+
+function sendChat(){
+  const inp=document.getElementById('chatInput');
+  const val=inp.value.trim();
+  if(!val)return;
+  inp.value='';
+  document.getElementById('chatOpts').innerHTML='';
+  addMsg(val,false);
+  setTimeout(()=>{
+    const low=val.toLowerCase();
+    if(low.includes('dental')||low.includes('стоматолог'))
+      addMsg(chatData.dental.answer,true),setTimeout(()=>showOptions(chatData.dental.follow),400);
+    else if(low.includes('academi')||low.includes('обучен')||low.includes('курс'))
+      addMsg(chatData.academi.answer,true),setTimeout(()=>showOptions(chatData.academi.follow),400);
+    else if(low.includes('franchise')||low.includes('франш')||low.includes('партнёр'))
+      addMsg(chatData.franchise.answer,true),setTimeout(()=>showOptions(chatData.franchise.follow),400);
+    else if(low.includes('trade')||low.includes('купить')||low.includes('оборудование'))
+      addMsg(chatData.trade.answer,true),setTimeout(()=>showOptions(chatData.trade.follow),400);
+    else if(low.includes('спасибо')||low.includes('хорошо'))
+      addMsg('Отлично! Если появятся вопросы — мы здесь 24/7. Удачи! 🚀',true);
+    else
+      addMsg(chatData.default,true),setTimeout(()=>showOptions(['🦷 DentalAI','🎓 Academi67','🤝 Franchise67','🛒 TradeAI']),400);
+  },600);
+}
+</script>
+</body>
+</html>
