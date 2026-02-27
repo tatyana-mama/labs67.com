@@ -76,6 +76,18 @@ nav{
 }
 .nav-cta:hover{background:var(--gold-glow);border-color:var(--gold);}
 
+/* ── LANG SWITCHER ── */
+.lang-switcher{display:flex;gap:2px;border:1px solid var(--b1);margin-left:8px;}
+.lang-btn{
+  display:flex;align-items:center;gap:4px;padding:5px 8px;
+  background:transparent;border:none;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;
+  color:var(--muted);transition:all 0.2s;border-right:1px solid var(--b1);
+}
+.lang-btn:last-child{border-right:none;}
+.lang-btn:hover,.lang-btn.active{color:var(--gold);background:rgba(232,184,64,0.07);}
+.lang-flag{width:18px;height:12px;display:inline-block;vertical-align:middle;}
+
 /* ── HERO ── */
 .hero{
   min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -567,32 +579,58 @@ footer{
     </div>
   </a>
   <div class="nav-links">
-    <a href="#brands" class="nl">Направления</a>
+    <a href="#brands" class="nl" data-i18n="nav_directions">Направления</a>
     <a href="#dental" class="nl">DentalAI</a>
     <a href="#academi" class="nl">Academi67</a>
     <a href="#franchise" class="nl">Franchise67</a>
-    <a href="#contact" class="nl">Контакты</a>
+    <a href="#contact" class="nl" data-i18n="nav_contacts">Контакты</a>
   </div>
   <div class="nav-r">
     <div class="online-dot"></div>
     <span class="online-txt">ONLINE</span>
-    <a href="#contact" class="nav-cta">Связаться</a>
+    <!-- LANG SWITCHER -->
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ru')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="4" fill="#fff"/><rect y="4" width="18" height="4" fill="#0039A6"/><rect y="8" width="18" height="4" fill="#D52B1E"/></svg>RU
+      </button>
+      <button class="lang-btn" onclick="setLang('by')">
+        <svg class="lang-flag" viewBox="0 0 18 12">
+          <rect width="18" height="4" fill="#fff"/>
+          <rect y="4" width="18" height="4" fill="#CF101A"/>
+          <rect y="8" width="18" height="4" fill="#fff"/>
+          <text x="9" y="9.5" text-anchor="middle" font-size="5" fill="white" font-family="serif">⚔</text>
+        </svg>BY
+      </button>
+      <button class="lang-btn" onclick="setLang('en')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="12" fill="#012169"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#fff" stroke-width="2"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#C8102E" stroke-width="1"/><rect x="7" width="4" height="12" fill="#fff"/><rect y="4" width="18" height="4" fill="#fff"/><rect x="8" width="2" height="12" fill="#C8102E"/><rect y="5" width="18" height="2" fill="#C8102E"/></svg>EN
+      </button>
+      <button class="lang-btn" onclick="setLang('de')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="4" fill="#000"/><rect y="4" width="18" height="4" fill="#DD0000"/><rect y="8" width="18" height="4" fill="#FFCE00"/></svg>DE
+      </button>
+      <button class="lang-btn" onclick="setLang('fr')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="6" height="12" fill="#002395"/><rect x="6" width="6" height="12" fill="#fff"/><rect x="12" width="6" height="12" fill="#ED2939"/></svg>FR
+      </button>
+      <button class="lang-btn" onclick="setLang('pl')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="6" fill="#fff"/><rect y="6" width="18" height="6" fill="#DC143C"/></svg>PL
+      </button>
+    </div>
+    <a href="#contact" class="nav-cta" data-i18n="nav_cta">Связаться</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">// Концерн · 4 направления · Медтех</div>
+  <div class="hero-eyebrow" data-i18n="hero_eyebrow">// Концерн · 4 направления · Медтех</div>
   <h1 class="hero-title">
-    <span class="ht-line1">Мы меняем</span>
-    <span class="ht-line2">медицину</span>
+    <span class="ht-line1" data-i18n="hero_line1">Мы меняем</span>
+    <span class="ht-line2" data-i18n="hero_line2">медицину</span>
   </h1>
-  <p class="hero-sub">
+  <p class="hero-sub" data-i18n="hero_sub">
     <span>LABS67</span> — технологический концерн, создающий экосистему решений для клиник нового поколения. От умных пространств до стандартов обучения.
   </p>
   <div class="hero-btns">
-    <a href="#brands" class="btn-gold">// Наши направления</a>
-    <a href="#contact" class="btn-outline">Связаться с нами →</a>
+    <a href="#brands" class="btn-gold" data-i18n="hero_btn1">// Наши направления</a>
+    <a href="#contact" class="btn-outline" data-i18n="hero_btn2">Связаться с нами →</a>
   </div>
   <div class="hero-stats">
     <div class="hs"><span class="hs-num">4</span><span class="hs-label">Направления</span></div>
@@ -622,8 +660,8 @@ footer{
 <section class="brands-section" id="brands">
   <div class="brands-intro">
     <div class="sec-tag">// ECOSYSTEM</div>
-    <h2 class="sec-title">Четыре <span class="ac">направления</span></h2>
-    <p class="sec-lead">Выберите направление, которое вас интересует — каждый бренд концерна решает свою задачу.</p>
+    <h2 class="sec-title"><span data-i18n="brands_title_1">Четыре</span> <span class="ac" data-i18n="brands_title_2">направления</span></h2>
+    <p class="sec-lead" data-i18n="brands_lead">Выберите направление, которое вас интересует — каждый бренд концерна решает свою задачу.</p>
   </div>
 
   <div class="brands-grid">
@@ -997,6 +1035,87 @@ footer{
 </div>
 
 <script>
+// ── I18N ──
+const i18n = {
+  ru: {
+    nav_directions:'Направления', nav_contacts:'Контакты', nav_cta:'Связаться',
+    hero_eyebrow:'// Концерн · 4 направления · Медтех',
+    hero_line1:'Мы меняем', hero_line2:'медицину',
+    hero_sub:'<span>LABS67</span> — технологический концерн, создающий экосистему решений для клиник нового поколения. От умных пространств до стандартов обучения.',
+    hero_btn1:'// Наши направления', hero_btn2:'Связаться с нами →',
+    brands_title_1:'Четыре', brands_title_2:'направления',
+    brands_lead:'Выберите направление, которое вас интересует — каждый бренд концерна решает свою задачу.',
+  },
+  by: {
+    nav_directions:'Кірункі', nav_contacts:'Кантакты', nav_cta:'Звязацца',
+    hero_eyebrow:'// Канцэрн · 4 кірункі · Медтэх',
+    hero_line1:'Мы мяняем', hero_line2:'медыцыну',
+    hero_sub:'<span>LABS67</span> — тэхналагічны канцэрн, які стварае экасістэму рашэнняў для клінік новага пакалення. Ад разумных прастораў да стандартаў навучання.',
+    hero_btn1:'// Нашы кірункі', hero_btn2:'Звязацца з намі →',
+    brands_title_1:'Чатыры', brands_title_2:'кірункі',
+    brands_lead:'Выберыце кірунак, які вас цікавіць — кожны брэнд канцэрна вырашае сваю задачу.',
+  },
+  en: {
+    nav_directions:'Directions', nav_contacts:'Contacts', nav_cta:'Contact',
+    hero_eyebrow:'// Concern · 4 directions · MedTech',
+    hero_line1:'We are changing', hero_line2:'medicine',
+    hero_sub:'<span>LABS67</span> — a technology concern building an ecosystem of solutions for next-generation clinics. From smart spaces to training standards.',
+    hero_btn1:'// Our directions', hero_btn2:'Contact us →',
+    brands_title_1:'Four', brands_title_2:'directions',
+    brands_lead:'Choose the direction that interests you — each brand of the concern solves its own task.',
+  },
+  de: {
+    nav_directions:'Bereiche', nav_contacts:'Kontakte', nav_cta:'Kontakt',
+    hero_eyebrow:'// Konzern · 4 Bereiche · MedTech',
+    hero_line1:'Wir verändern', hero_line2:'die Medizin',
+    hero_sub:'<span>LABS67</span> — ein Technologiekonzern, der ein Ökosystem von Lösungen für Kliniken der nächsten Generation aufbaut. Von intelligenten Räumen bis hin zu Ausbildungsstandards.',
+    hero_btn1:'// Unsere Bereiche', hero_btn2:'Kontakt aufnehmen →',
+    brands_title_1:'Vier', brands_title_2:'Bereiche',
+    brands_lead:'Wählen Sie den Bereich, der Sie interessiert — jede Marke des Konzerns löst ihre eigene Aufgabe.',
+  },
+  fr: {
+    nav_directions:'Directions', nav_contacts:'Contacts', nav_cta:'Contact',
+    hero_eyebrow:'// Groupe · 4 directions · MedTech',
+    hero_line1:'Nous transformons', hero_line2:'la médecine',
+    hero_sub:'<span>LABS67</span> — un groupe technologique qui construit un écosystème de solutions pour les cliniques de nouvelle génération. Des espaces intelligents aux standards de formation.',
+    hero_btn1:'// Nos directions', hero_btn2:'Nous contacter →',
+    brands_title_1:'Quatre', brands_title_2:'directions',
+    brands_lead:'Choisissez la direction qui vous intéresse — chaque marque du groupe résout sa propre mission.',
+  },
+  pl: {
+    nav_directions:'Kierunki', nav_contacts:'Kontakty', nav_cta:'Kontakt',
+    hero_eyebrow:'// Koncern · 4 kierunki · MedTech',
+    hero_line1:'Zmieniamy', hero_line2:'medycynę',
+    hero_sub:'<span>LABS67</span> — koncern technologiczny budujący ekosystem rozwiązań dla klinik nowej generacji. Od inteligentnych przestrzeni po standardy szkolenia.',
+    hero_btn1:'// Nasze kierunki', hero_btn2:'Skontaktuj się →',
+    brands_title_1:'Cztery', brands_title_2:'kierunki',
+    brands_lead:'Wybierz kierunek, który Cię interesuje — każda marka koncernu rozwiązuje własne zadanie.',
+  }
+};
+
+let currentLang = 'ru';
+
+function setLang(lang) {
+  if (!i18n[lang]) return;
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key] !== undefined) {
+      el.innerHTML = i18n[lang][key];
+    }
+  });
+
+  // Update active button
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  const btns = document.querySelectorAll('.lang-btn');
+  const langs = ['ru','by','en','de','fr','pl'];
+  const idx = langs.indexOf(lang);
+  if (btns[idx]) btns[idx].classList.add('active');
+}
+
 // Form ID
 document.getElementById('formId').textContent = 'REQ_' + Math.random().toString(36).substr(2,6).toUpperCase();
 
