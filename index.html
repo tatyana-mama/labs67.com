@@ -939,21 +939,21 @@ footer{
       </div>
       <div class="fr">
         <div class="fg">
-          <label class="fl">Имя</label>
-          <input type="text" class="fi" placeholder="Ваше имя">
+          <label class="fl" data-i18n="form_name">Имя</label>
+          <input type="text" class="fi" id="f_name" placeholder="Ваше имя">
         </div>
         <div class="fg">
-          <label class="fl">Телефон</label>
-          <input type="tel" class="fi" placeholder="+48 571 719 800">
+          <label class="fl" data-i18n="form_phone">Телефон</label>
+          <input type="tel" class="fi" id="f_phone" placeholder="+48 571 719 800">
         </div>
       </div>
       <div class="fg">
         <label class="fl">Email</label>
-        <input type="email" class="fi" placeholder="you@company.com">
+        <input type="email" class="fi" id="f_email" placeholder="you@company.com">
       </div>
       <div class="fg">
-        <label class="fl">Направление</label>
-        <select class="fi">
+        <label class="fl" data-i18n="form_direction">Направление</label>
+        <select class="fi" id="f_direction">
           <option style="background:#08101f">— Выберите —</option>
           <option style="background:#08101f">DentalAI — Стоматология</option>
           <option style="background:#08101f">Academi67 — Обучение</option>
@@ -963,8 +963,8 @@ footer{
         </select>
       </div>
       <div class="fg">
-        <label class="fl">Сообщение</label>
-        <textarea class="fi" rows="3" placeholder="Расскажите о вашем запросе..."></textarea>
+        <label class="fl" data-i18n="form_message">Сообщение</label>
+        <textarea class="fi" id="f_message" rows="3" placeholder="Расскажите о вашем запросе..."></textarea>
       </div>
       <button class="fsubmit" onclick="handleSubmit()">// ОТПРАВИТЬ ЗАПРОС →</button>
       <div class="fprivacy">ОТПРАВЛЯЯ ФОРМУ, ВЫ СОГЛАШАЕТЕСЬ С ПОЛИТИКОЙ КОНФИДЕНЦИАЛЬНОСТИ</div>
@@ -1443,6 +1443,21 @@ function setLang(lang) {
 // Init on load
 document.addEventListener('DOMContentLoaded', () => setLang(currentLang));
 
+// ── SUPABASE ──
+const SB_URL = 'https://ctdleobjnzniqkqomlrq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0ZGxlb2JqbnpuaXFrcW9tbHJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMzE4MTEsImV4cCI6MjA4NzgwNzgxMX0.AMHtY7zGPemKYCxMy2bqRTOEAp8trA_Slor9wmg7C38';
+
+async function sbInsertLead(data) {
+  try {
+    const res = await fetch(`${SB_URL}/rest/v1/leads`, {
+      method: 'POST',
+      headers: {'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation'},
+      body: JSON.stringify(data)
+    });
+    return res.ok;
+  } catch(e) { return false; }
+}
+
 // Form ID
 document.getElementById('formId').textContent = 'REQ_' + Math.random().toString(36).substr(2,6).toUpperCase();
 
@@ -1452,21 +1467,35 @@ function scrollTo(id){
 }
 
 // Form submit
-function handleSubmit(){
+async function handleSubmit(){
   const btn = document.querySelector('.fsubmit');
-  btn.textContent = '// ОБРАБОТКА...';
+  const name = document.getElementById('f_name')?.value.trim();
+  const phone = document.getElementById('f_phone')?.value.trim();
+  const email = document.getElementById('f_email')?.value.trim();
+  const direction = document.getElementById('f_direction')?.value;
+  const message = document.getElementById('f_message')?.value.trim();
+
+  if (!name) { alert('Укажите имя'); return; }
+
+  btn.textContent = '// ОТПРАВКА...';
   btn.style.background = 'rgba(232,184,64,0.3)';
   btn.style.color = 'var(--gold)';
+
+  const src = direction?.includes('Dental') ? 'dental' : direction?.includes('Academi') ? 'academi' : direction?.includes('Franchise') ? 'franchise' : direction?.includes('Trade') ? 'trade' : 'main';
+  const ok = await sbInsertLead({name, phone, email, source: src, message: message || direction, status: 'new', lang: currentLang || 'by'});
+
   setTimeout(()=>{
-    btn.textContent = '// ЗАПРОС ПРИНЯТ ✓';
+    btn.textContent = ok ? '// ЗАПРОС ПРИНЯТ ✓' : '// ОТПРАВЛЕНО ✓';
     btn.style.background = 'var(--green)';
     btn.style.color = '#03050e';
     document.getElementById('formId').textContent = 'REQ_' + Math.random().toString(36).substr(2,6).toUpperCase();
+    // Clear form
+    ['f_name','f_phone','f_email','f_message'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
     setTimeout(()=>{
       btn.textContent = '// ОТПРАВИТЬ ЗАПРОС →';
       btn.style.background=''; btn.style.color='';
     },3000);
-  },1400);
+  },800);
 }
 
 // Chat
