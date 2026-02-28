@@ -1493,7 +1493,8 @@ async function handleSubmit(){
   if (!name) { alert('Укажыце імя / Укажите имя'); return; }
   if (!phone || !phoneRe.test(phone)) { alert('Укажыце тэлефон / Укажите телефон'); return; }
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Укажыце правiльны Email (прыклад: you@mail.com)'); return; }
-  if (!message && (!direction || direction.includes('—'))) { alert('Укажыце кірунак або паведамленне'); return; }
+  const directionSelected = direction && !direction.startsWith('—');
+  if (!message && !directionSelected) { alert('Укажыце кірунак або паведамленне'); return; }
 
   btn.textContent = '// ОТПРАВКА...';
   btn.style.background = 'rgba(232,184,64,0.3)';
