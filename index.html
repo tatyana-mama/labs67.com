@@ -1488,7 +1488,12 @@ async function handleSubmit(){
   const direction = document.getElementById('f_direction')?.value;
   const message = document.getElementById('f_message')?.value.trim();
 
-  if (!name) { alert('Укажите имя'); return; }
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRe = /^[\+\d][\d\s\-\(\)]{6,}$/;
+  if (!name) { alert('Укажыце імя / Укажите имя'); return; }
+  if (!phone || !phoneRe.test(phone)) { alert('Укажыце тэлефон / Укажите телефон'); return; }
+  if (!email || !emailRe.test(email)) { alert('Укажыце Email'); return; }
+  if (!message && (!direction || direction.includes('—'))) { alert('Укажыце кірунак або паведамленне'); return; }
 
   btn.textContent = '// ОТПРАВКА...';
   btn.style.background = 'rgba(232,184,64,0.3)';
