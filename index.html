@@ -593,6 +593,9 @@ footer{
       <button class="lang-btn active" onclick="setLang('by')">
         <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="4" fill="#fff"/><rect y="4" width="18" height="4" fill="#CF101A"/><rect y="8" width="18" height="4" fill="#fff"/><text x="9" y="9.5" text-anchor="middle" font-size="5" fill="white" font-family="serif">⚔</text></svg><span class="lang-code">BY</span>
       </button>
+      <button class="lang-btn" onclick="setLang('ua')">
+        <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="6" fill="#005BBB"/><rect y="6" width="18" height="6" fill="#FFD500"/></svg><span class="lang-code">UA</span>
+      </button>
       <button class="lang-btn" onclick="setLang('en')">
         <svg class="lang-flag" viewBox="0 0 18 12"><rect width="18" height="12" fill="#012169"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#fff" stroke-width="2"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#C8102E" stroke-width="1"/><rect x="7" width="4" height="12" fill="#fff"/><rect y="4" width="18" height="4" fill="#fff"/><rect x="8" width="2" height="12" fill="#C8102E"/><rect y="5" width="18" height="2" fill="#C8102E"/></svg><span class="lang-code">EN</span>
       </button>
@@ -1093,6 +1096,70 @@ const i18n = {
     footer_copy:'© 2025 LABS67 Канцэрн<br>Усе правы абаронены<br><span class="g">● ALL SYSTEMS ONLINE</span>',
     chat_online:'● Анлайн · Адкажу зараз',
   },
+  ua: {
+    logo_sub:'Технологічний концерн',
+    nav_directions:'Напрямки', nav_contacts:'Контакти', nav_cta:'Зв\'язатися',
+    hero_eyebrow:'// Концерн · 4 напрямки · МедТех',
+    hero_line1:'Ми змінюємо', hero_line2:'медицину',
+    hero_sub:'<span>LABS67</span> — технологічний концерн, що будує екосистему рішень для клінік нового покоління. Від розумних просторів до стандартів навчання.',
+    hero_btn1:'// Наші напрямки', hero_btn2:'Зв\'язатися з нами →',
+    stat_label1:'Напрямки', stat_label2:'Технологій', stat_label3:'ШІ', stat_label4:'Масштаб',
+    brands_title_1:'Чотири', brands_title_2:'напрямки',
+    brands_lead:'Оберіть напрямок, який вас цікавить — кожен бренд концерну вирішує своє завдання.',
+    dental_eyebrow:'Стоматологія', dental_tagline:'Стоматологія із задоволенням',
+    dental_desc:'Змінюємо ставлення до стоматології та щелепно-лицевої хірургії. Розумні клініки, ШІ-асистент, турбота — не страх.',
+    dental_tag1:'Клініки', dental_tag2:'ШІ-асистент', dental_tag3:'Досвід пацієнта',
+    academi_eyebrow:'Освіта', academi_tagline:'Інститут клінічних стандартів майбутнього',
+    academi_desc:'Не просто курси підвищення кваліфікації — повна трансформація клінічного мислення. Протоколи, технології, стандарти концерну.',
+    academi_tag1:'Навчання', academi_tag2:'Сертифікація', academi_tag3:'Стандарти',
+    trade_eyebrow:'МедТех', trade_tagline:'Технології для медицини',
+    trade_desc:'Розробки концерну на відкритому ринку. Рішення для клінік, аптек, лабораторій — готові до розгортання.',
+    trade_tag1:'ШІ-рішення', trade_tag2:'Обладнання', trade_tag3:'Інтеграції',
+    franchise_eyebrow:'Розвиток', franchise_tagline:'Центр зростання концерну',
+    franchise_desc:'Масштабування, модернізація, технологічні рішення для медичних просторів. Створюємо клініки майбутнього разом із партнерами.',
+    franchise_tag1:'Партнерство', franchise_tag2:'Масштаб', franchise_tag3:'Технології',
+    dental_sec_tag:'// DentalAI · Концерн LABS67',
+    dental_h2_1:'Стоматологія', dental_h2_2:'із задоволенням', dental_h2_3:'задоволенням',
+    dental_quote:'«Ми змінюємо ставлення до стоматології та щелепно-лицевої хірургії — назавжди.»',
+    dental_p:'Пацієнт входить — система його впізнає. Лікар працює — ШІ асистує. Дані захищені. Клініка живе як єдиний організм.',
+    feat1_title:'Турбота, не страх', feat1_desc:'Розумне середовище знижує стрес пацієнта з моменту входу. Впізнали, зустріли, підготувалися.',
+    feat2_title:'ШІ на кожному кріслі', feat2_desc:'Камера над кріслом, голосовий протокол, аналіз знімків. Лікар зосереджується на пацієнті.',
+    feat3_title:'Повна приватність', feat3_desc:'Усі дані — лише локально. Жодної хмари. Відповідність GDPR.',
+    academi_sec_tag:'// Academi67 · Концерн LABS67',
+    academi_h2_1:'Інститут клінічних', academi_h2_2:'стандартів', academi_h2_3:'майбутнього',
+    academi_lead:'Не підвищення кваліфікації — перезавантаження клінічного мислення. Всі лікарі LABS67 проходять через Academi67.',
+    track1_num:'ТРЕК_01', track1_title:'Програма перезавантаження клініки', track1_desc:'Повне перезавантаження клінічних протоколів. Нові стандарти роботи з пацієнтом, документування, асистування ШІ-системі.',
+    track2_num:'ТРЕК_02', track2_title:'Сертифікація інтеграції ШІ', track2_desc:'Сертифікація лікарів і асистентів з роботи з ШІ-інструментами концерну. Практика на реальному обладнанні.',
+    track3_num:'ТРЕК_03', track3_title:'Лабораторія досліджень і розробок', track3_desc:'Дослідницький напрямок — клінічні випробування, розробка нових протоколів, публікації у партнерстві з науковими інститутами.',
+    as_label:'// Наш стандарт', as_text:'Кожен фахівець, що працює під брендом LABS67, пройшов через Academi67.',
+    as_sub:'Це не просто курс. Це гарантія того, що пацієнт скрізь отримує однаковий рівень турботи — передбачуваний, технологічний, людяний.',
+    academi_contact_num:'КОНТАКТ', academi_contact_title:'Подати заявку', academi_contact_desc:'Набір до програм — за заявкою. Пріоритет — партнери та франчайзі концерну.',
+    franchise_sec_tag:'// Franchise67 · Концерн LABS67',
+    franchise_h2_1:'Центр зростання', franchise_h2_2:'і', franchise_h2_3:'масштабування',
+    franchise_lead:'Franchise67 — інфраструктурне ядро концерну. Забезпечення, модернізація обладнання та розробка технологічних рішень для медичних просторів.',
+    fh1_label:'// Майстер-партнерство', fh1_title:'Стати частиною концерну у своєму регіоні',
+    fh1_desc:'Для тих, хто мислить масштабно — ми відкриті до стратегічного партнерства з охопленням міста, регіону або країни.',
+    fh2_label:'// Готові рішення', fh2_title:'Клініка під ключ',
+    fh2_desc:'Стоматології, клініки, аптеки та медичні простори — проектування розумного середовища з нуля до запуску. Обладнання, ШІ, інтер\'єр, стандарти.',
+    fran1_title:'Технологічна база', fran1_desc:'Повний стек: ШІ-ядро, розумний будинок, камери, голосові протоколи. Все розроблено і перевірено всередині концерну.',
+    fran2_title:'Стандарти Academi67', fran2_desc:'Персонал франчайзі проходить навчання та сертифікацію. Єдиний рівень сервісу в кожній точці.',
+    fran3_title:'Підтримка і модернізація', fran3_desc:'Безперервне оновлення технологій, техпідтримка, розвиток ШІ-моделей — все включено.',
+    fran4_title:'Регіональне масштабування', fran4_desc:'Партнери, готові до системного розвитку мережі в регіоні, розглядаються в пріоритетному порядку.',
+    fran5_title:'Обговорити партнерство', fran5_desc:'Залиште заявку — розповімо про формати участі.',
+    trade_sec_tag:'// TradeAI · Концерн LABS67',
+    trade_h2_1:'Технології', trade_h2_2:'для', trade_h2_3:'медицини',
+    trade_lead:'Розробки концерну — доступні партнерам і ринку. Готові до розгортання рішення для клінік, аптек і медичних просторів.',
+    trade_item1_desc:'Готовий ШІ-стек на NVIDIA Jetson: розпізнавання облич, голосові протоколи, відеоаналітика. Розгортання — до 1 дня.',
+    trade_item2_desc:'Комплект розумного кабінету: датчики присутності, світло, клімат, камери над робочим місцем. Інтеграція з Home Assistant.',
+    trade_item3_desc:'Нейромережевий аналіз рентгенівських знімків та інтраоральних фото. Виведення рекомендацій на планшет лікаря в реальному часі.',
+    contact_sec_tag:'// КОНТАКТИ',
+    contact_h2_1:'Зв\'яжіться', contact_h2_2:'з', contact_h2_3:'концерном',
+    contact_lead:'Оберіть напрямок — ми відповімо на будь-яке запитання.',
+    cinfo_phone_label:'Телефон', cinfo_email_label:'Загальний запит', cinfo_franchise_label:'Franchise67 / Партнерство',
+    form_title:'// НОВИЙ ЗАПИТ',
+    footer_copy:'© 2025 LABS67 Концерн<br>Всі права захищені<br><span class="g">● ALL SYSTEMS ONLINE</span>',
+    chat_online:'● Онлайн · Відповім зараз',
+  },
   en: {
     logo_sub:'Technology Concern',
     nav_directions:'Directions', nav_contacts:'Contacts', nav_cta:'Contact',
@@ -1367,7 +1434,7 @@ function setLang(lang) {
   });
 
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  const langOrder = ['by','en','pl','fr','de'];
+  const langOrder = ['by','ua','en','pl','fr','de'];
   const idx = langOrder.indexOf(lang);
   const btns = document.querySelectorAll('.lang-btn');
   if (btns[idx]) btns[idx].classList.add('active');
