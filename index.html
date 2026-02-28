@@ -8,9 +8,11 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%2303050e'/%3E%3Cpolygon points='90,12 168,51 168,129 90,168 12,129 12,51' fill='%23e8b840'/%3E%3Ctext x='90' y='115' text-anchor='middle' font-size='58' font-weight='900' font-family='monospace' fill='%2303050e'%3EL67%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#03050e">
 <meta name="msapplication-TileColor" content="#e8b840">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title id="pageTitle">LABS67 — Тэхналагічны канцэрн</title>
 <meta name="description" content="LABS67 — концерн технологических решений для медицины. DentalAI, Academi67, TradeAI, Franchise67.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -30,8 +32,10 @@
   --muted:rgba(160,185,240,0.42);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+*,*::before,*::after{box-sizing:border-box;}
+button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 
 /* GRID BG */
 body::before{
@@ -109,7 +113,7 @@ nav{
 /* ── HERO ── */
 .hero{
   min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:80px 40px 60px;position:relative;z-index:1;text-align:center;
+  padding:clamp(60px,10vw,100px) clamp(16px,5vw,40px) 60px;position:relative;z-index:1;text-align:center;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:10px;
@@ -187,7 +191,7 @@ nav{
 .ti-sep{color:rgba(232,184,64,0.25);}
 
 /* ── SECTION COMMON ── */
-.section{padding:110px 44px;position:relative;z-index:1;}
+.section{padding:clamp(60px,8vw,110px) clamp(20px,5vw,44px);position:relative;z-index:1;}
 .sec-tag{
   font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:16px;
@@ -560,7 +564,7 @@ footer{
 .chat-input{
   flex:1;padding:9px 12px;
   background:rgba(0,0,0,0.3);border:1px solid var(--b1);
-  color:var(--text);font-family:'Syne',sans-serif;font-size:0.82rem;
+  color:var(--text);font-family:'Syne',sans-serif;font-size:1rem;
   outline:none;transition:border-color 0.3s;
 }
 .chat-input:focus{border-color:var(--gold-dim);}
