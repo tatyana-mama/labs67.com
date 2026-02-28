@@ -71,7 +71,7 @@ nav{
 .nl:last-child{border-right:none;}
 .nl:hover{color:var(--gold);background:rgba(232,184,64,0.05);}
 
-.nav-r{display:flex;align-items:center;gap:16px;}
+.nav-r{display:flex;align-items:center;gap:16px;min-width:0;overflow:visible;}
 .online-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pdot 2.5s infinite;}
 @keyframes pdot{0%,100%{opacity:1;}50%{opacity:0.3;}}
 .online-txt{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;color:var(--green);}
@@ -102,6 +102,8 @@ nav{
 @media(max-width:768px){
   .lang-switcher>.lang-btn{display:none;}
   .lang-dropdown-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;background:transparent;border:none;cursor:pointer;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.5rem;letter-spacing:0.08em;}
+  .online-txt{display:none;}
+  .nav-cta{padding:6px 12px;font-size:0.5rem;letter-spacing:0.08em;}
 }
 
 /* ── HERO ── */
@@ -580,6 +582,22 @@ footer{
   .nav-links{display:none;}
   .section,.brands-section,.dental-section,.academi-section,.franchise-section,.trade-section,.contact-section{padding:80px 20px;}
   .chat-window{width:320px;}
+}
+@media(max-width:768px){
+  .brand-card{padding:32px 24px;}
+  .brand-name-lg{font-size:1.6rem;}
+  .brand-tagline{font-size:0.9rem;}
+  .brand-desc{font-size:0.82rem;}
+  .brand-bg-label{font-size:3rem;right:10px;bottom:10px;}
+  .btag{font-size:0.38rem;padding:3px 7px;}
+  .brands-grid{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .brand-card{padding:24px 18px;}
+  .brand-name-lg{font-size:1.3rem;}
+  .brand-tagline{font-size:0.82rem;margin-bottom:10px;}
+  .brand-desc{font-size:0.78rem;line-height:1.6;}
+  .brand-tags{gap:4px;margin-top:16px;}
 }
 </style>
 </head>
