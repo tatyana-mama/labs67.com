@@ -1467,7 +1467,7 @@ const pageTitles = {
   fr: 'LABS67 — Groupe Technologique',
   de: 'LABS67 — Technologiekonzern',
 };
-let currentLang = localStorage.getItem('labs67_lang') || 'by';
+let currentLang = localStorage.getItem('labs67_lang_main') || 'by';
 
 const LANG_FLAGS_MAIN = {
   by:`<rect width="18" height="4" fill="#fff"/><rect y="4" width="18" height="4" fill="#CF101A"/><rect y="8" width="18" height="4" fill="#fff"/>`,
@@ -1482,7 +1482,7 @@ function setLang(lang) {
   if (!i18n[lang]) return;
   currentLang = lang;
   document.documentElement.lang = lang;
-  localStorage.setItem('labs67_lang', lang);
+  localStorage.setItem('labs67_lang_main', lang);
   if (pageTitles && pageTitles[lang]) document.title = pageTitles[lang];
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
