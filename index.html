@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2303050e'/%3E%3Cpolygon points='16,2 30,9 30,23 16,30 2,23 2,9' fill='%23e8b840'/%3E%3Ctext x='16' y='21.5' text-anchor='middle' font-size='10' font-weight='900' font-family='monospace' fill='%2303050e'%3EL67%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%2303050e%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%2212%22%20width%3D%2224%22%20height%3D%2216%22%20fill%3D%22%23e8b840%22%20opacity%3D%220.15%22%20stroke%3D%22%23e8b840%22%20stroke-width%3D%221%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%2218%22%20width%3D%2224%22%20height%3D%2210%22%20fill%3D%22%23e8b840%22%20opacity%3D%220.25%22%20stroke%3D%22%23e8b840%22%20stroke-width%3D%220.5%22%2F%3E%3Cpolygon%20points%3D%224%2C12%204%2C4%2016%2C8%2016%2C16%22%20fill%3D%22%23e8b840%22%20opacity%3D%220.5%22%2F%3E%3Cpolygon%20points%3D%2228%2C12%2028%2C4%2016%2C8%2016%2C16%22%20fill%3D%22%23e8b840%22%20opacity%3D%220.35%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2226%22%20text-anchor%3D%22middle%22%20font-size%3D%227%22%20font-weight%3D%22900%22%20font-family%3D%22monospace%22%20fill%3D%22%23e8b840%22%3EL6%3C%2Ftext%3E%3Crect%20x%3D%224%22%20y%3D%2212%22%20width%3D%2224%22%20height%3D%2216%22%20fill%3D%22none%22%20stroke%3D%22%23e8b840%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml">
 <link rel="alternate icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB3SURBVFhH7ZZBCsAgDATz/0/bQwuJZHc3UXooBxUHZsCHiMjR3T8kBEiIkCEgUoSAaBECokUIiBYhIFqEgGgRAqJFCIgWISBahIBoEQKiRQiIFiEgWoSAaBECokUIiBYhIFqEgGgRAqJFCIgWISBahIBoEQKiRTiBFxAqB6k6hwAAAABJRU5ErkJggg==">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%2303050e'/%3E%3Cpolygon points='90,12 168,51 168,129 90,168 12,129 12,51' fill='%23e8b840'/%3E%3Ctext x='90' y='115' text-anchor='middle' font-size='58' font-weight='900' font-family='monospace' fill='%2303050e'%3EL67%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#03050e">
@@ -1071,6 +1071,15 @@ footer{
 
 <script>
 // ── I18N ──
+const LANG_FLAGS_SUB = {
+  by: '<rect width="18" height="4" fill="#fff"/><rect y="4" width="18" height="4" fill="#CF101A"/><rect y="8" width="18" height="4" fill="#fff"/>',
+  ua: '<rect width="18" height="6" fill="#005BBB"/><rect y="6" width="18" height="6" fill="#FFD500"/>',
+  en: '<rect width="18" height="12" fill="#012169"/><path d="M0,0 L18,12 M18,0 L0,12" stroke="#fff" stroke-width="2"/><rect x="7" width="4" height="12" fill="#fff"/><rect y="4" width="18" height="4" fill="#fff"/><rect x="8" width="2" height="12" fill="#C8102E"/><rect y="5" width="18" height="2" fill="#C8102E"/>',
+  pl: '<rect width="18" height="6" fill="#fff"/><rect y="6" width="18" height="6" fill="#DC143C"/>',
+  fr: '<rect width="6" height="12" fill="#002395"/><rect x="6" width="6" height="12" fill="#fff"/><rect x="12" width="6" height="12" fill="#ED2939"/>',
+  de: '<rect width="18" height="4" fill="#000"/><rect y="4" width="18" height="4" fill="#DD0000"/><rect y="8" width="18" height="4" fill="#FFCE00"/>',
+};
+
 const i18n = {
   by: {
     logo_sub:'Тэхналагічны канцэрн',
