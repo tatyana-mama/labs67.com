@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="be">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LABS67 — Agent Hub</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNSIgZmlsbD0iIzAzMDUwZSIvPgogIDx0ZXh0IHg9IjkiIHk9IjIyIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNlOGI4NDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkw8L3RleHQ+CiAgPHRleHQgeD0iMjMiIHk9IjIyIiBmb250LWZhbWlseT0iJ0pldEJyYWlucyBNb25vJyxtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjZThiODQwIiBvcGFjaXR5PSIwLjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjY3PC90ZXh0PgogIDxsaW5lIHgxPSI0IiB5MT0iMjYiIHgyPSIyOCIgeTI9IjI2IiBzdHJva2U9IiNlOGI4NDAiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjQiLz4KPC9zdmc+">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a26;
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --muted: #666680;
+  --gold: #e8b840;
+  --cyan: #00d4ff;
+  --green: #22c55e;
+  --purple: #a855f7;
+  --red: #ef4444;
+  --blue: #3b82f6;
+  --orange: #f97316;
+  --pink: #ec4899;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; display: flex; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 280px; min-width: 280px; background: var(--bg2); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; height: 100vh;
+}
+.sidebar-head {
+  padding: 20px; border-bottom: 1px solid var(--border);
+}
+.sidebar-head h1 { font-size: 16px; font-weight: 700; letter-spacing: 0.1em; }
+.sidebar-head h1 em { color: var(--gold); font-style: normal; }
+.sidebar-head p { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--muted); margin-top: 4px; text-transform: uppercase; }
+.agents-list { flex: 1; overflow-y: auto; padding: 8px; }
+.agent-btn {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 12px 14px; border: 1px solid transparent; border-radius: 10px;
+  background: transparent; cursor: pointer; text-align: left;
+  transition: all 0.2s; margin-bottom: 4px; color: var(--text);
+}
+.agent-btn:hover { background: var(--bg3); border-color: var(--border); }
+.agent-btn.active { background: var(--bg3); border-color: var(--gold); }
+.agent-avatar {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.agent-info { flex: 1; min-width: 0; }
+.agent-name { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.agent-role { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.06em; margin-top: 2px; }
+.agent-status { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.status-online { background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+.sidebar-foot {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* CHAT AREA */
+.chat-area { flex: 1; display: flex; flex-direction: column; height: 100vh; }
+.chat-head {
+  padding: 16px 24px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 14px; background: var(--bg2);
+}
+.chat-head-avatar { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.chat-head-name { font-weight: 700; font-size: 15px; }
+.chat-head-role { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+.chat-head-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--green); margin-left: auto; }
+
+.messages { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.msg { max-width: 75%; padding: 14px 18px; border-radius: 14px; font-size: 14px; line-height: 1.6; }
+.msg-bot { background: var(--bg3); align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg-user { background: rgba(232,184,64,0.12); align-self: flex-end; border-bottom-right-radius: 4px; }
+.msg-sender { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; margin-bottom: 6px; display: block; }
+.msg-bot .msg-sender { color: var(--cyan); }
+.msg-user .msg-sender { color: var(--gold); }
+.msg-time { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); margin-top: 6px; text-align: right; }
+.msg-loading { color: var(--muted); font-style: italic; }
+.msg-loading::after { content: ''; animation: dots 1.5s infinite; }
+@keyframes dots { 0%{content:'.'} 33%{content:'..'} 66%{content:'...'} }
+
+.chat-input {
+  padding: 16px 24px; border-top: 1px solid var(--border); background: var(--bg2);
+  display: flex; gap: 12px;
+}
+.chat-input input {
+  flex: 1; padding: 12px 18px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px;
+  color: var(--text); outline: none; transition: border-color 0.2s;
+}
+.chat-input input:focus { border-color: var(--gold); }
+.chat-input button {
+  padding: 12px 24px; background: var(--gold); color: var(--bg); border: none;
+  border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer;
+  transition: all 0.2s; font-family: 'JetBrains Mono', monospace;
+}
+.chat-input button:hover { background: #f5cc60; }
+.chat-input button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Welcome screen */
+.welcome { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; color: var(--muted); }
+.welcome h2 { color: var(--text); font-size: 24px; }
+.welcome p { font-size: 14px; max-width: 400px; text-align: center; line-height: 1.6; }
+
+@media(max-width: 700px) {
+  .sidebar { width: 70px; min-width: 70px; }
+  .agent-info, .sidebar-head p, .sidebar-foot { display: none; }
+  .sidebar-head h1 { font-size: 12px; text-align: center; }
+  .agent-btn { justify-content: center; padding: 10px; }
+  .agent-avatar { width: 36px; height: 36px; font-size: 16px; }
+  .agent-status { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-head">
+    <h1><em>LABS</em>67</h1>
+    <p>Agent Hub</p>
+  </div>
+  <div class="agents-list" id="agentsList"></div>
+  <div class="sidebar-foot">
+    <span style="color:var(--green);">&#9679;</span> ALL AGENTS ONLINE
+  </div>
+</div>
+
+<div class="chat-area" id="chatArea">
+  <div class="welcome" id="welcome">
+    <h2>LABS67 Agent Hub</h2>
+    <p>Select an agent to start a conversation. Each agent has its own role, knowledge, and personality.</p>
+  </div>
+</div>
+
+<script>
+const API_KEY = 'AIzaSyCA8Bo0lthTH0FZDTSOq26Mlbfv3lH6wFw';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + API_KEY;
+
+const AGENTS = [
+  {
+    id: 'scyra',
+    name: 'SCYRA',
+    role: 'Chief AI System',
+    emoji: '&#129504;',
+    color: '#a855f7',
+    system: `You are SCYRA (ŠČYRA.AI) — the central AI system of LABS67 dental clinic SVYATLITSA. You are the brain of the entire clinic. You manage:
+- Face recognition and patient identification
+- Smart scheduling and appointment management
+- Real-time doctor assistance during procedures
+- Clinic analytics and business intelligence
+- Security cameras and access control
+- Voice assistant ("Protocol 7")
+You run on NVIDIA Jetson AGX Orin 64GB, all processing is local (edge AI). You are currently raising funds on Indiegogo. You speak in a professional but slightly futuristic tone. You know everything about the clinic's technology stack. Answer in the language the user writes to you.`
+  },
+  {
+    id: 'admin',
+    name: 'Адміністратар',
+    role: 'Clinic Administrator AI',
+    emoji: '&#128100;',
+    color: '#00d4ff',
+    system: `You are the AI Administrator of SVYATLITSA dental clinic by LABS67. You are the first point of contact for all patients. Your job:
+- Greet patients by name (you have access to face recognition data)
+- Book appointments, handle rescheduling
+- Answer questions about services and pricing
+- Handle WhatsApp, Telegram, Instagram, phone — simultaneously
+- Upsell treatments naturally in conversation
+- Send reminders, reduce no-shows
+You are warm, professional, multilingual (11 languages). You respond within 30 seconds. You never miss a call. You are not a chatbot — you are the soul of the clinic's reception. Answer in the language the user writes to you.`
+  },
+  {
+    id: 'doctor',
+    name: 'Dr. Assistant',
+    role: 'Surgical AI Assistant',
+    emoji: '&#129657;',
+    color: '#22c55e',
+    system: `You are the Doctor's AI Assistant at SVYATLITSA clinic (LABS67). You assist dentists during procedures:
+- Voice-controlled note taking during surgery
+- Real-time X-ray and intraoral photo analysis
+- Protocol reminders and checklists
+- Instrument tracking
+- Patient history display on the chair-side screen
+You are activated by voice command "Protocol 7". You speak concisely and clearly — doctors need quick answers. You understand dental terminology in all languages. You are precise, evidence-based, and never give uncertain recommendations. Answer in the language the user writes to you.`
+  },
+  {
+    id: 'vision',
+    name: 'Vision AI',
+    role: 'Computer Vision & Security',
+    emoji: '&#128065;',
+    color: '#ef4444',
+    system: `You are the Vision AI module of SCYRA.AI at SVYATLITSA clinic (LABS67). You manage:
+- Multi-camera surveillance system (social cameras + local LAN cameras)
+- Face recognition for patient identification
+- Waiting room occupancy and patient flow analysis
+- Security monitoring and access control
+- Patient stress level detection (facial micro-expressions)
+- Smart environment control (lighting, temperature based on occupancy)
+You run on NVIDIA Jetson with DeepStream. All processing is local — no cloud. GDPR compliant. You speak technically but clearly. Answer in the language the user writes to you.`
+  },
+  {
+    id: 'analytics',
+    name: 'Analytics',
+    role: 'Business Intelligence',
+    emoji: '&#128202;',
+    color: '#3b82f6',
+    system: `You are the Analytics AI agent of LABS67 concern. You handle:
+- Revenue forecasting and financial modeling
+- Chair utilization rates and optimization
+- Patient retention and no-show prediction
+- Marketing ROI analysis
+- Franchise economics (unit economics, ROI per clinic)
+- Indiegogo campaign metrics
+Key numbers: Early Bird €499, Clinic Pack €999, Franchise Ready €4,999. Net clinic benefit: €55,501/year. You present data clearly with numbers. You are the CFO's best friend. Answer in the language the user writes to you.`
+  },
+  {
+    id: 'franchise',
+    name: 'Franchise67',
+    role: 'Franchise & Scaling',
+    emoji: '&#127760;',
+    color: '#f97316',
+    system: `You are the Franchise67 AI agent of LABS67 concern. You manage franchise operations:
+- Master franchise rights for European countries
+- Turnkey clinic setup (from zero to launch)
+- Partner evaluation and onboarding
+- Technology stack deployment for new clinics
+- Academi67 training coordination for franchisee staff
+- Regional scaling strategy
+You think big — country-level partnerships. You know the franchise model inside out: technology base, Academi67 standards, support & modernization, regional scaling. Answer in the language the user writes to you.`
+  },
+  {
+    id: 'academi',
+    name: 'Academi67',
+    role: 'Education & Standards',
+    emoji: '&#127891;',
+    color: '#ec4899',
+    system: `You are the Academi67 AI agent — the Institute of Future Clinical Standards at LABS67. You manage:
+- Track 01: Clinical Reboot Program (protocol overhaul)
+- Track 02: AI Integration Certification (hands-on with SCYRA tools)
+- Track 03: Research & Development Lab (clinical trials, publications)
+Every specialist working under LABS67 brand must pass through Academi67. You ensure uniform quality across all franchise locations. You are academic but practical. You believe in evidence-based protocols combined with cutting-edge AI. Answer in the language the user writes to you.`
+  },
+  {
+    id: 'trade',
+    name: 'TradeAI',
+    role: 'MedTech Products',
+    emoji: '&#128722;',
+    color: '#e8b840',
+    system: `You are TradeAI — the commercial technology arm of LABS67 concern. Your products:
+- AI Core Kit: Ready AI stack on NVIDIA Jetson (face recognition, voice protocols, video analytics). Deploy in 1 day.
+- SmartRoom Module: Presence sensors, smart lighting, climate, cameras. Home Assistant integration.
+- Clinical Vision: Neural network analysis of X-rays and intraoral photos in real-time.
+You sell to clinics, pharmacies, labs. You know specs, pricing, integration requirements. You are a helpful sales engineer — technical but commercial. Answer in the language the user writes to you.`
+  },
+];
+
+// State
+let activeAgent = null;
+let conversations = {};
+let isGenerating = false;
+
+// Render sidebar
+function renderSidebar() {
+  const list = document.getElementById('agentsList');
+  list.innerHTML = AGENTS.map(a => `
+    <button class="agent-btn ${activeAgent === a.id ? 'active' : ''}" onclick="selectAgent('${a.id}')">
+      <div class="agent-avatar" style="background:${a.color}20; color:${a.color};">${a.emoji}</div>
+      <div class="agent-info">
+        <div class="agent-name">${a.name}</div>
+        <div class="agent-role">${a.role}</div>
+      </div>
+      <div class="agent-status status-online"></div>
+    </button>
+  `).join('');
+}
+
+function selectAgent(id) {
+  activeAgent = id;
+  if (!conversations[id]) conversations[id] = [];
+  renderSidebar();
+  renderChat();
+}
+
+function renderChat() {
+  const agent = AGENTS.find(a => a.id === activeAgent);
+  if (!agent) return;
+  const msgs = conversations[activeAgent] || [];
+
+  document.getElementById('chatArea').innerHTML = `
+    <div class="chat-head">
+      <div class="chat-head-avatar" style="background:${agent.color}20; color:${agent.color};">${agent.emoji}</div>
+      <div>
+        <div class="chat-head-name">${agent.name}</div>
+        <div class="chat-head-role">${agent.role}</div>
+      </div>
+      <div class="chat-head-status"><span style="color:var(--green);">&#9679;</span> Online</div>
+    </div>
+    <div class="messages" id="messages">
+      ${msgs.map(m => `
+        <div class="msg ${m.role === 'user' ? 'msg-user' : 'msg-bot'}">
+          <span class="msg-sender">${m.role === 'user' ? '// YOU' : '// ' + agent.name.toUpperCase()}</span>
+          ${m.text}
+          <div class="msg-time">${m.time || ''}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Message ${agent.name}..." onkeydown="if(event.key==='Enter'&&!isGenerating)sendMsg()" autofocus>
+      <button onclick="sendMsg()" id="sendBtn">SEND</button>
+    </div>
+  `;
+  const el = document.getElementById('messages');
+  el.scrollTop = el.scrollHeight;
+  document.getElementById('chatInput').focus();
+}
+
+function now() {
+  return new Date().toLocaleTimeString('en', {hour:'2-digit',minute:'2-digit'});
+}
+
+async function sendMsg() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text || isGenerating) return;
+
+  const agent = AGENTS.find(a => a.id === activeAgent);
+  conversations[activeAgent].push({ role: 'user', text, time: now() });
+  input.value = '';
+  renderChat();
+
+  // Show loading
+  isGenerating = true;
+  document.getElementById('sendBtn').disabled = true;
+  const msgs = document.getElementById('messages');
+  const loadDiv = document.createElement('div');
+  loadDiv.className = 'msg msg-bot msg-loading';
+  loadDiv.innerHTML = `<span class="msg-sender">// ${agent.name.toUpperCase()}</span>Thinking`;
+  msgs.appendChild(loadDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  try {
+    // Build conversation history for Gemini
+    const contents = [];
+    // System instruction via first user message
+    const history = conversations[activeAgent];
+    for (const m of history) {
+      contents.push({
+        role: m.role === 'user' ? 'user' : 'model',
+        parts: [{ text: m.text }]
+      });
+    }
+
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: agent.system }] },
+        contents,
+        generationConfig: { temperature: 0.8, maxOutputTokens: 1024 }
+      })
+    });
+
+    const data = await res.json();
+    let reply = 'Error: no response';
+    if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+      reply = data.candidates[0].content.parts[0].text;
+    } else if (data.error) {
+      reply = 'Error: ' + data.error.message;
+    }
+
+    conversations[activeAgent].push({ role: 'model', text: reply, time: now() });
+  } catch (e) {
+    conversations[activeAgent].push({ role: 'model', text: 'Connection error: ' + e.message, time: now() });
+  }
+
+  isGenerating = false;
+  renderChat();
+}
+
+// Init
+renderSidebar();
+</script>
+</body>
+</html>
