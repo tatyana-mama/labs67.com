@@ -442,14 +442,14 @@ async function sendMsg() {
   const text = input.value.trim();
   if (!text || isGenerating) return;
 
-  const agent = AGENTS.find(a => a.id === activeAgent);
-  conversations[activeAgent].push({ role: 'user', text, time: now() });
+  const currentAgentId = activeAgent;
+  const agent = AGENTS.find(a => a.id === currentAgentId);
+  conversations[currentAgentId].push({ role: 'user', text, time: now() });
   input.value = '';
   renderChat();
 
   // Show loading
   isGenerating = true;
-  const currentAgentId = activeAgent;
   agentStates[currentAgentId] = 'thinking';
   renderSidebar();
   document.getElementById('sendBtn').disabled = true;
@@ -464,7 +464,7 @@ async function sendMsg() {
     // Build conversation history for Gemini
     const contents = [];
     // System instruction via first user message
-    const history = conversations[activeAgent];
+    const history = conversations[currentAgentId];
     for (const m of history) {
       contents.push({
         role: m.role === 'user' ? 'user' : 'model',
@@ -472,6 +472,7 @@ async function sendMsg() {
       });
     }
 
+    console.log('Sending to API...', contents.length, 'messages');
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -490,9 +491,10 @@ async function sendMsg() {
       reply = 'Error: ' + data.error.message;
     }
 
-    conversations[activeAgent].push({ role: 'model', text: reply, time: now() });
+    conversations[currentAgentId].push({ role: 'model', text: reply, time: now() });
   } catch (e) {
-    conversations[activeAgent].push({ role: 'model', text: 'Connection error: ' + e.message, time: now() });
+    console.error('Chat error:', e);
+    conversations[currentAgentId].push({ role: 'model', text: 'Connection error: ' + e.message, time: now() });
   }
 
   isGenerating = false;
