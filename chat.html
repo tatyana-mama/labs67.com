@@ -239,8 +239,15 @@ if (localStorage.getItem('labs67_auth') === '1') {
   document.getElementById('loginOverlay').classList.add('hidden');
 }
 
-const API_KEY = 'AIzaSyCA8Bo0lthTH0FZDTSOq26Mlbfv3lH6wFw';
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + API_KEY;
+function getApiKey() {
+  let k = localStorage.getItem('labs67_gemini_key');
+  if (!k) {
+    k = prompt('Enter Gemini API Key:');
+    if (k) localStorage.setItem('labs67_gemini_key', k.trim());
+  }
+  return k ? k.trim() : null;
+}
+const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=';
 
 const AGENTS = [
   {
@@ -472,8 +479,9 @@ async function sendMsg() {
       });
     }
 
-    console.log('Sending to API...', contents.length, 'messages');
-    const res = await fetch(API_URL, {
+    const apiKey = getApiKey();
+    if (!apiKey) { conversations[currentAgentId].push({ role: 'model', text: 'API key not set. Reload page to enter.', time: now() }); isGenerating = false; renderChat(); return; }
+    const res = await fetch(API_BASE + apiKey, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
