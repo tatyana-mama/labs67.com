@@ -56,9 +56,23 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 .agent-info { flex: 1; min-width: 0; }
 .agent-name { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .agent-role { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.06em; margin-top: 2px; }
-.agent-status { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.agent-status { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; position: relative; }
 .status-online { background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2.5s infinite; }
+.status-thinking { background: var(--orange); box-shadow: 0 0 8px var(--orange); animation: spin-pulse 1s infinite; }
+.status-unread { background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+@keyframes spin-pulse { 0%{opacity:1;transform:scale(1);} 50%{opacity:0.3;transform:scale(1.4);} 100%{opacity:1;transform:scale(1);} }
+.unread-badge {
+  position: absolute; top: -4px; right: -4px; min-width: 16px; height: 16px;
+  background: var(--red); border-radius: 8px; font-size: 9px; font-weight: 700;
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  padding: 0 4px; font-family: 'JetBrains Mono', monospace;
+}
+.agent-status-wrap { position: relative; flex-shrink: 0; }
+.agent-typing-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--orange);
+  letter-spacing: 0.06em; margin-top: 2px;
+}
 .sidebar-foot {
   padding: 14px 20px; border-top: 1px solid var(--border);
   font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted);
@@ -348,25 +362,40 @@ You sell to clinics, pharmacies, labs. You know specs, pricing, integration requ
 let activeAgent = null;
 let conversations = {};
 let isGenerating = false;
+let agentStates = {}; // 'idle' | 'thinking' | 'unread'
+AGENTS.forEach(a => agentStates[a.id] = 'idle');
+let unreadCounts = {};
+AGENTS.forEach(a => unreadCounts[a.id] = 0);
 
 // Render sidebar
 function renderSidebar() {
   const list = document.getElementById('agentsList');
-  list.innerHTML = AGENTS.map(a => `
+  list.innerHTML = AGENTS.map(a => {
+    const state = agentStates[a.id];
+    const unread = unreadCounts[a.id] || 0;
+    const statusClass = state === 'thinking' ? 'status-thinking' : (state === 'unread' ? 'status-unread' : 'status-online');
+    const roleOrStatus = state === 'thinking' ? `<div class="agent-typing-label">thinking...</div>` : `<div class="agent-role">${a.role}</div>`;
+    const badge = unread > 0 ? `<div class="unread-badge">${unread}</div>` : '';
+    return `
     <button class="agent-btn ${activeAgent === a.id ? 'active' : ''}" onclick="selectAgent('${a.id}')">
       <div class="agent-avatar" style="background:${a.color}20; color:${a.color};">${a.emoji}</div>
       <div class="agent-info">
         <div class="agent-name">${a.name}</div>
-        <div class="agent-role">${a.role}</div>
+        ${roleOrStatus}
       </div>
-      <div class="agent-status status-online"></div>
-    </button>
-  `).join('');
+      <div class="agent-status-wrap">
+        <div class="agent-status ${statusClass}"></div>
+        ${badge}
+      </div>
+    </button>`;
+  }).join('');
 }
 
 function selectAgent(id) {
   activeAgent = id;
   if (!conversations[id]) conversations[id] = [];
+  unreadCounts[id] = 0;
+  if (agentStates[id] === 'unread') agentStates[id] = 'idle';
   renderSidebar();
   renderChat();
 }
@@ -420,6 +449,9 @@ async function sendMsg() {
 
   // Show loading
   isGenerating = true;
+  const currentAgentId = activeAgent;
+  agentStates[currentAgentId] = 'thinking';
+  renderSidebar();
   document.getElementById('sendBtn').disabled = true;
   const msgs = document.getElementById('messages');
   const loadDiv = document.createElement('div');
@@ -464,6 +496,13 @@ async function sendMsg() {
   }
 
   isGenerating = false;
+  if (activeAgent === currentAgentId) {
+    agentStates[currentAgentId] = 'idle';
+  } else {
+    agentStates[currentAgentId] = 'unread';
+    unreadCounts[currentAgentId] = (unreadCounts[currentAgentId] || 0) + 1;
+  }
+  renderSidebar();
   renderChat();
 }
 
