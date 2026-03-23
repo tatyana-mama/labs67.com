@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artsiom Veyalka — CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4;margin:0}
+body{font-family:'Inter',sans-serif;color:#1a1a1a;background:#fff;line-height:1.6;max-width:800px;margin:0 auto;padding:48px 56px}
+h1{font-size:32px;font-weight:800;letter-spacing:-0.02em;margin-bottom:2px}
+h1 span{font-weight:300;color:#888}
+.tagline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#B8860B;text-transform:uppercase;margin-bottom:6px}
+.contact{font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;margin-bottom:32px;display:flex;gap:20px;flex-wrap:wrap}
+.contact a{color:#666;text-decoration:none}
+
+.section{margin-bottom:28px}
+.section-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#B8860B;padding-bottom:8px;border-bottom:2px solid #B8860B;margin-bottom:16px}
+
+.summary{font-size:14px;color:#444;line-height:1.8;margin-bottom:28px}
+
+.exp-item{margin-bottom:20px}
+.exp-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.exp-role{font-size:15px;font-weight:700}
+.exp-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.06em}
+.exp-company{font-size:13px;color:#B8860B;font-weight:600;margin-bottom:6px}
+.exp-desc{font-size:12px;color:#555;line-height:1.7}
+.exp-desc li{margin-bottom:3px;margin-left:16px}
+
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.skill-group h4{font-size:12px;font-weight:700;margin-bottom:6px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:4px}
+.skill-tag{padding:3px 10px;background:#f4f0e8;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#555;letter-spacing:0.02em}
+
+.projects-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.proj{padding:12px;border:1px solid #e8e6e2;border-radius:8px}
+.proj h4{font-size:12px;font-weight:700;margin-bottom:2px}
+.proj-url{font-family:'JetBrains Mono',monospace;font-size:9px;color:#B8860B;text-decoration:none;display:block;margin-bottom:4px}
+.proj p{font-size:10px;color:#888;line-height:1.5}
+
+.langs{display:flex;gap:6px;flex-wrap:wrap}
+.lang-item{font-size:11px;color:#555}
+.lang-item strong{color:#1a1a1a}
+
+.print-btn{position:fixed;bottom:20px;right:20px;padding:10px 20px;background:#B8860B;color:#fff;border:none;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;letter-spacing:0.06em;z-index:100}
+.print-btn:hover{background:#d4a017}
+@media print{.print-btn{display:none}body{padding:40px 48px}}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">SAVE AS PDF</button>
+
+<div class="tagline">// AI Solutions Architect & Full-Stack Developer</div>
+<h1>ARTSIOM <span>VEYALKA</span></h1>
+<div class="contact">
+  <span>a.barkouski@labs67.com</span>
+  <span>+48 571 719 800</span>
+  <a href="https://labs67.com">labs67.com</a>
+  <a href="https://labs67.com/portfolio.html">portfolio</a>
+  <span>Poland / Remote</span>
+</div>
+
+<div class="summary">
+AI-focused full-stack developer and founder of LABS67 — a technology concern building next-generation MedTech infrastructure. I design and deploy AI-powered products: multi-agent chatbots, multilingual websites (11 languages), computer vision systems, edge AI on NVIDIA Jetson, and complete brand ecosystems. Fast delivery, clean code, production-grade results.
+</div>
+
+<div class="section">
+  <div class="section-title">Experience</div>
+
+  <div class="exp-item">
+    <div class="exp-header"><div class="exp-role">CEO & Lead Developer</div><div class="exp-date">2024 — Present</div></div>
+    <div class="exp-company">LABS67 Technology Concern</div>
+    <div class="exp-desc">
+      <ul>
+        <li>Built and manage 6 production websites across 5 sub-brands with 11-language support</li>
+        <li>Developed SCYRA.AI — edge AI system for dental clinics (NVIDIA Jetson, face recognition, voice assistant, computer vision)</li>
+        <li>Created multi-agent AI chat platform with 8 specialized agents powered by Gemini 2.5 Flash</li>
+        <li>Designed complete brand system: color palettes, typography, component specs for 6 domains</li>
+        <li>Launched Indiegogo crowdfunding campaign with promotional video content (Veo 3.0)</li>
+        <li>Built Telegram bots for notifications, video delivery, and customer interaction</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header"><div class="exp-role">AI Integration Specialist</div><div class="exp-date">2023 — 2024</div></div>
+    <div class="exp-company">Freelance / Contract Work</div>
+    <div class="exp-desc">
+      <ul>
+        <li>Integrated AI APIs (Gemini, Claude, OpenAI) into client products and workflows</li>
+        <li>Developed multilingual landing pages and web applications for EU market</li>
+        <li>Built custom chatbots and automation pipelines for businesses</li>
+        <li>Deployed edge AI solutions on embedded hardware</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Skills</div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>AI & Machine Learning</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Gemini API</span>
+        <span class="skill-tag">Claude API</span>
+        <span class="skill-tag">OpenAI</span>
+        <span class="skill-tag">Computer Vision</span>
+        <span class="skill-tag">Edge AI</span>
+        <span class="skill-tag">NVIDIA Jetson</span>
+        <span class="skill-tag">DeepStream</span>
+        <span class="skill-tag">Voice AI</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Web Development</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">JavaScript ES6+</span>
+        <span class="skill-tag">HTML5/CSS3</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Next.js</span>
+        <span class="skill-tag">Responsive Design</span>
+        <span class="skill-tag">i18n (11 langs)</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Tools & Platforms</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Google Cloud</span>
+        <span class="skill-tag">Supabase</span>
+        <span class="skill-tag">GitHub Pages</span>
+        <span class="skill-tag">Telegram API</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Docker</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Design & Brand</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">UI/UX Design</span>
+        <span class="skill-tag">Brand Systems</span>
+        <span class="skill-tag">Design Systems</span>
+        <span class="skill-tag">Landing Pages</span>
+        <span class="skill-tag">SVG/Animation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Portfolio — Live Projects</div>
+  <div class="projects-list">
+    <div class="proj">
+      <h4>LABS67 — Corporate Hub</h4>
+      <a href="https://labs67.com" class="proj-url">labs67.com</a>
+      <p>5 brands, 11 languages, AI chat, Supabase forms, responsive</p>
+    </div>
+    <div class="proj">
+      <h4>SCYRA.AI — Edge AI Product</h4>
+      <a href="https://scyra.labs67.com" class="proj-url">scyra.labs67.com</a>
+      <p>AI system for clinics, NVIDIA Jetson, Indiegogo campaign</p>
+    </div>
+    <div class="proj">
+      <h4>SVYATLITSA — Clinic Website</h4>
+      <a href="https://svyatlitsa.com" class="proj-url">svyatlitsa.com</a>
+      <p>Premium dental clinic, luxury design, booking system</p>
+    </div>
+    <div class="proj">
+      <h4>Agent Hub — Multi-Agent Chat</h4>
+      <a href="https://labs67.com/chat.html" class="proj-url">labs67.com/chat.html</a>
+      <p>8 AI agents, Gemini 2.5 Flash, secure auth, real-time</p>
+    </div>
+    <div class="proj">
+      <h4>Academi67 — Education</h4>
+      <a href="https://academi67.com" class="proj-url">academi67.com</a>
+      <p>Clinical training institute, 3 tracks, dark theme</p>
+    </div>
+    <div class="proj">
+      <h4>Brand Book — Design System</h4>
+      <a href="https://labs67.com/brandbook.html" class="proj-url">labs67.com/brandbook.html</a>
+      <p>Full design system for 6 domains, component specs</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Languages</div>
+  <div class="langs">
+    <span class="lang-item"><strong>Belarusian</strong> — Native</span> |
+    <span class="lang-item"><strong>Russian</strong> — Native</span> |
+    <span class="lang-item"><strong>Polish</strong> — Fluent</span> |
+    <span class="lang-item"><strong>English</strong> — Professional</span>
+  </div>
+</div>
+
+</body>
+</html>
