@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aliaksandr Barkouski — AI Solutions Architect & Full-Stack Developer</title>
+<meta name="description" content="Portfolio: AI integration, multilingual websites, chatbots, edge AI, brand systems. CEO of LABS67 technology concern.">
+<meta property="og:title" content="Aliaksandr Barkouski — Portfolio">
+<meta property="og:description" content="AI Solutions Architect & Full-Stack Developer. Building the future of MedTech.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--bg2:#111114;--bg3:#18181b;--border:rgba(255,255,255,0.06);--text:#e4e4e7;--muted:#71717a;--gold:#e8b840;--cyan:#22d3ee;--green:#22c55e;--purple:#a855f7;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--pink:#ec4899}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(232,184,64,0.3)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:52px;display:flex;align-items:center;gap:28px;background:rgba(9,9,11,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav .logo{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;letter-spacing:0.06em}
+nav .logo em{color:var(--gold);font-style:normal}
+nav a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+nav a:hover{color:var(--gold)}
+nav .cta{margin-left:auto;padding:6px 16px;border:1px solid var(--gold);border-radius:6px;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;transition:all 0.2s}
+nav .cta:hover{background:var(--gold);color:var(--bg)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:80px 32px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,184,64,0.06),transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(168,85,247,0.04),transparent 70%);pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;position:relative}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.15em;color:var(--gold);margin-bottom:24px;text-transform:uppercase}
+.hero h1{font-size:clamp(36px,6vw,64px);font-weight:800;line-height:1.1;margin-bottom:20px;letter-spacing:-0.02em}
+.hero h1 .thin{font-weight:300;color:var(--muted)}
+.hero-desc{font-size:18px;color:var(--muted);max-width:600px;line-height:1.8;margin-bottom:40px}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap}
+.hero-stat{text-align:left}
+.hero-stat-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--gold)}
+.hero-stat-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
+
+/* SECTIONS */
+section{padding:100px 32px}
+.container{max-width:1100px;margin:0 auto}
+.label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.stitle{font-size:clamp(24px,4vw,40px);font-weight:800;line-height:1.15;margin-bottom:16px;letter-spacing:-0.01em}
+.sdesc{font-size:15px;color:var(--muted);max-width:600px;line-height:1.8;margin-bottom:48px}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.service{padding:28px;border:1px solid var(--border);border-radius:14px;transition:all 0.25s;position:relative;overflow:hidden}
+.service:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 12px 40px rgba(232,184,64,0.06)}
+.service-icon{font-size:28px;margin-bottom:16px}
+.service h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.service p{font-size:13px;color:var(--muted);line-height:1.7}
+.service-price{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px}
+.project{border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.25s}
+.project:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 16px 48px rgba(232,184,64,0.06)}
+.project-header{padding:24px 24px 0;display:flex;align-items:center;gap:14px}
+.project-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.project-name{font-weight:700;font-size:16px}
+.project-type{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.08em;margin-left:auto;text-transform:uppercase}
+.project-body{padding:16px 24px 24px}
+.project-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+.project-tags{display:flex;gap:6px;flex-wrap:wrap}
+.ptag{padding:3px 10px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.04em;background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--border)}
+.project-link{display:block;padding:14px 24px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:0.06em;transition:background 0.2s}
+.project-link:hover{background:rgba(232,184,64,0.04)}
+
+/* STACK */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.stack-item{padding:20px;border:1px solid var(--border);border-radius:12px;text-align:center;transition:all 0.2s}
+.stack-item:hover{border-color:var(--gold);background:rgba(232,184,64,0.02)}
+.stack-item-icon{font-size:24px;margin-bottom:8px}
+.stack-item h4{font-size:12px;font-weight:600}
+.stack-item p{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px}
+
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:48px}
+.metric{padding:24px;border:1px solid var(--border);border-radius:14px;text-align:center}
+.metric-num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;color:var(--gold)}
+.metric-label{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* CTA SECTION */
+.cta-section{text-align:center;padding:120px 32px;position:relative}
+.cta-section::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,184,64,0.03),rgba(168,85,247,0.02));pointer-events:none}
+.cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px}
+.cta-section p{color:var(--muted);font-size:16px;margin-bottom:32px}
+.cta-btn{display:inline-block;padding:14px 40px;background:var(--gold);color:var(--bg);font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;letter-spacing:0.06em;text-decoration:none;border-radius:10px;transition:all 0.2s}
+.cta-btn:hover{background:#f5cc60;transform:translateY(-2px);box-shadow:0 8px 32px rgba(232,184,64,0.2)}
+
+/* FOOTER */
+footer{padding:40px 32px;border-top:1px solid var(--border);text-align:center}
+footer .flogo{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.08em;margin-bottom:8px}
+footer .flogo em{color:var(--gold);font-style:normal}
+footer .fcopy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:0.08em}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:0 16px;gap:12px}
+  nav a:not(.cta):not(.logo){display:none}
+  section{padding:60px 16px}
+  .hero{padding:80px 16px 60px}
+  .hero-stats{gap:24px}
+  .projects-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><em>A</em>.BARKOUSKI</div>
+  <a href="#services">Services</a>
+  <a href="#projects">Projects</a>
+  <a href="#stack">Stack</a>
+  <a href="#contact" class="cta">HIRE ME</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">// Available for freelance</div>
+    <h1>AI Solutions Architect<br><span class="thin">&amp; Full-Stack Developer</span></h1>
+    <p class="hero-desc">I build AI-powered products, multilingual websites, intelligent chatbots, and complete brand systems. CEO of LABS67 — a technology concern building the future of MedTech.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">5+</div><div class="hero-stat-label">Live products</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">11</div><div class="hero-stat-label">Languages / i18n</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">8</div><div class="hero-stat-label">AI Agents built</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Edge</div><div class="hero-stat-label">AI / NVIDIA Jetson</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--bg2)">
+  <div class="container">
+    <div class="label">// What I Do</div>
+    <div class="stitle">Services</div>
+    <div class="sdesc">End-to-end development from concept to deployed product. Specializing in AI integration and multilingual web systems.</div>
+
+    <div class="services-grid">
+      <div class="service reveal">
+        <div class="service-icon">&#129302;</div>
+        <h3>AI Chatbot Development</h3>
+        <p>Custom AI chatbots powered by Gemini, Claude, or GPT. Integrated into websites, Telegram, WhatsApp. Multi-agent systems with specialized roles.</p>
+        <div class="service-price">from $500</div>
+      </div>
+      <div class="service reveal">
+        <div class="service-icon">&#127760;</div>
+        <h3>Multilingual Websites</h3>
+        <p>Full websites with 11+ language support, custom flag systems, localStorage persistence. SEO-optimized, responsive, fast-loading.</p>
+        <div class="service-price">from $800</div>
+      </div>
+      <div class="service reveal">
+        <div class="service-icon">&#129504;</div>
+        <h3>AI Integration</h3>
+        <p>Connect AI APIs to your existing product. Voice assistants, computer vision, real-time analytics, smart automation. Edge AI on NVIDIA Jetson.</p>
+        <div class="service-price">from $1,500</div>
+      </div>
+      <div class="service reveal">
+        <div class="service-icon">&#127912;</div>
+        <h3>Brand System & Design</h3>
+        <p>Complete brand books, design systems, UI component libraries. Color palettes, typography, responsive component specs for dev teams.</p>
+        <div class="service-price">from $600</div>
+      </div>
+      <div class="service reveal">
+        <div class="service-icon">&#128640;</div>
+        <h3>Landing Pages & Campaigns</h3>
+        <p>High-conversion landing pages for crowdfunding (Indiegogo, Kickstarter), product launches, SaaS. A/B tested, analytics-ready.</p>
+        <div class="service-price">from $400</div>
+      </div>
+      <div class="service reveal">
+        <div class="service-icon">&#128225;</div>
+        <h3>Telegram / Bot Development</h3>
+        <p>Telegram bots for notifications, customer support, content delivery, payments. Integration with external APIs and AI models.</p>
+        <div class="service-price">from $300</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="label">// Portfolio</div>
+    <div class="stitle">Live Projects</div>
+    <div class="sdesc">Real products in production. Every project built and deployed by me.</div>
+
+    <div class="projects-grid">
+      <div class="project reveal">
+        <div class="project-header">
+          <div class="project-dot" style="background:var(--gold)"></div>
+          <div class="project-name">LABS67</div>
+          <div class="project-type">Corporate Site</div>
+        </div>
+        <div class="project-body">
+          <div class="project-desc">Technology concern website with 5 sub-brands, 11-language switcher with custom SVG flags, Supabase-powered contact forms, AI chat widget, and full responsive design.</div>
+          <div class="project-tags">
+            <span class="ptag">HTML/CSS/JS</span>
+            <span class="ptag">11 Languages</span>
+            <span class="ptag">Supabase</span>
+            <span class="ptag">AI Chat</span>
+            <span class="ptag">Responsive</span>
+          </div>
+        </div>
+        <a href="https://labs67.com" target="_blank" class="project-link">labs67.com &#8594;</a>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <div class="project-dot" style="background:var(--purple)"></div>
+          <div class="project-name">SCYRA.AI</div>
+          <div class="project-type">AI Product</div>
+        </div>
+        <div class="project-body">
+          <div class="project-desc">Edge AI system for dental clinics. Face recognition, voice assistant, computer vision, real-time analytics. Runs on NVIDIA Jetson AGX Orin 64GB. Indiegogo crowdfunding campaign.</div>
+          <div class="project-tags">
+            <span class="ptag">Edge AI</span>
+            <span class="ptag">NVIDIA Jetson</span>
+            <span class="ptag">Computer Vision</span>
+            <span class="ptag">Voice AI</span>
+            <span class="ptag">Indiegogo</span>
+          </div>
+        </div>
+        <a href="https://scyra.labs67.com" target="_blank" class="project-link">scyra.labs67.com &#8594;</a>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <div class="project-dot" style="background:var(--red)"></div>
+          <div class="project-name">SVYATLITSA</div>
+          <div class="project-type">Clinic Website</div>
+        </div>
+        <div class="project-body">
+          <div class="project-desc">Premium dental clinic website. Luxury serif typography, 7-language support, appointment booking system, service catalog with pricing, scroll animations.</div>
+          <div class="project-tags">
+            <span class="ptag">EB Garamond</span>
+            <span class="ptag">Multilingual</span>
+            <span class="ptag">Booking Form</span>
+            <span class="ptag">Animations</span>
+            <span class="ptag">Medical</span>
+          </div>
+        </div>
+        <a href="https://svyatlitsa.com" target="_blank" class="project-link">svyatlitsa.com &#8594;</a>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <div class="project-dot" style="background:var(--cyan)"></div>
+          <div class="project-name">Agent Hub</div>
+          <div class="project-type">AI Multi-Agent Chat</div>
+        </div>
+        <div class="project-body">
+          <div class="project-desc">Web interface for 8 specialized AI agents. Each agent has unique role, personality, and system prompt. Powered by Gemini 2.5 Flash API. Secure login with SHA-256 auth.</div>
+          <div class="project-tags">
+            <span class="ptag">Gemini API</span>
+            <span class="ptag">Multi-Agent</span>
+            <span class="ptag">SHA-256 Auth</span>
+            <span class="ptag">Real-time</span>
+            <span class="ptag">8 Agents</span>
+          </div>
+        </div>
+        <a href="https://labs67.com/chat.html" target="_blank" class="project-link">labs67.com/chat.html &#8594;</a>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <div class="project-dot" style="background:var(--green)"></div>
+          <div class="project-name">Academi67</div>
+          <div class="project-type">Education Platform</div>
+        </div>
+        <div class="project-body">
+          <div class="project-desc">Clinical education institute website. 3 training tracks, application form, dark-theme with neon green accents. 6-language support, chat widget, scroll-reveal animations.</div>
+          <div class="project-tags">
+            <span class="ptag">Dark Theme</span>
+            <span class="ptag">Syne Font</span>
+            <span class="ptag">Education</span>
+            <span class="ptag">Forms</span>
+            <span class="ptag">MedTech</span>
+          </div>
+        </div>
+        <a href="https://academi67.com" target="_blank" class="project-link">academi67.com &#8594;</a>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <div class="project-dot" style="background:var(--gold)"></div>
+          <div class="project-name">Brand Book</div>
+          <div class="project-type">Design System</div>
+        </div>
+        <div class="project-body">
+          <div class="project-desc">Complete design system documentation for 6 domains. Color palettes, typography specs, component library, language standards, domain audit, developer guidelines.</div>
+          <div class="project-tags">
+            <span class="ptag">Design System</span>
+            <span class="ptag">4 Font Families</span>
+            <span class="ptag">6 Domains</span>
+            <span class="ptag">Component Specs</span>
+          </div>
+        </div>
+        <a href="https://labs67.com/brandbook.html" target="_blank" class="project-link">labs67.com/brandbook.html &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="stack" style="background:var(--bg2)">
+  <div class="container">
+    <div class="label">// Tech Stack</div>
+    <div class="stitle">Tools & Technologies</div>
+    <div class="sdesc">Battle-tested technologies I use daily to build products.</div>
+
+    <div class="stack-grid">
+      <div class="stack-item reveal"><div class="stack-item-icon">&#9889;</div><h4>JavaScript</h4><p>Vanilla / ES6+</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#128013;</div><h4>Python</h4><p>AI / Automation</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#127912;</div><h4>HTML/CSS</h4><p>Responsive / i18n</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#129302;</div><h4>Gemini API</h4><p>2.5 Flash / Pro</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#129504;</div><h4>Claude API</h4><p>Opus / Sonnet</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#128248;</div><h4>Computer Vision</h4><p>DeepStream / YOLO</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#128377;</div><h4>NVIDIA Jetson</h4><p>AGX Orin 64GB</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#9729;</div><h4>Google Cloud</h4><p>APIs / Compute</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#128194;</div><h4>Supabase</h4><p>DB / Auth / API</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#128225;</div><h4>Telegram API</h4><p>Bots / Webhooks</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#128736;</div><h4>Git / GitHub</h4><p>Pages / Actions</p></div>
+      <div class="stack-item reveal"><div class="stack-item-icon">&#127463;</div><h4>Next.js</h4><p>React / SSR</p></div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric reveal"><div class="metric-num">6</div><div class="metric-label">Domains in production</div></div>
+      <div class="metric reveal"><div class="metric-num">8</div><div class="metric-label">AI agents deployed</div></div>
+      <div class="metric reveal"><div class="metric-num">11</div><div class="metric-label">Languages per site</div></div>
+      <div class="metric reveal"><div class="metric-num">5</div><div class="metric-label">Sub-brands managed</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Let's Build Something</h2>
+  <p>Available for freelance projects. Fast delivery, clean code, AI-powered.</p>
+  <a href="https://www.upwork.com/" target="_blank" class="cta-btn">HIRE ME ON UPWORK &#8594;</a>
+  <div style="margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">
+    a.barkouski@labs67.com &middot; +48 571 719 800 &middot; labs67.com
+  </div>
+</section>
+
+<footer>
+  <div class="flogo"><em>A</em>.BARKOUSKI // <em>LABS</em>67</div>
+  <div class="fcopy">&copy; 2026 // AI Solutions Architect & Full-Stack Developer</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
