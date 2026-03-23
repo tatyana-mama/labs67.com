@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LABS67 — Brand Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafafa;--bg2:#fff;--bg3:#f3f1ed;
+  --dark:#0a0a0f;--dark2:#12121a;--dark3:#1a1a26;
+  --text:#1a1a1a;--muted:#888;--border:rgba(0,0,0,0.08);
+  --gold:#B8860B;--gold-light:#D4A017;
+  --cyan:#30dcff;--green:#1df59a;--red:#CF101A;
+  --purple:#a855f7;--blue:#3b82f6;--orange:#f97316;--pink:#ec4899;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}
+
+/* NAV */
+.bb-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 40px;height:56px;display:flex;align-items:center;gap:32px}
+.bb-nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:0.08em;color:var(--text)}
+.bb-nav-logo em{color:var(--gold);font-style:normal}
+.bb-nav a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.bb-nav a:hover{color:var(--gold)}
+.bb-nav-ver{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em}
+
+/* HERO */
+.bb-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:120px 40px 80px;text-align:center;background:var(--dark);color:#fff;position:relative;overflow:hidden}
+.bb-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(184,134,11,0.06),rgba(168,13,22,0.04),rgba(48,220,255,0.03));pointer-events:none}
+.bb-hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
+.bb-hero h1{font-family:'Syne',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:800;line-height:1.05;margin-bottom:24px}
+.bb-hero h1 em{color:var(--gold);font-style:normal}
+.bb-hero-sub{font-size:18px;color:rgba(255,255,255,0.5);max-width:600px;line-height:1.8;margin-bottom:40px}
+.bb-hero-meta{display:flex;gap:40px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:rgba(255,255,255,0.3)}
+.bb-hero-meta span em{color:var(--gold);font-style:normal;font-size:20px;display:block;margin-bottom:4px}
+
+/* SECTIONS */
+.bb-section{padding:100px 40px;max-width:1200px;margin:0 auto}
+.bb-section-dark{background:var(--dark);color:#fff;max-width:none;padding:100px 40px}
+.bb-section-dark .bb-section-inner{max-width:1200px;margin:0 auto}
+.bb-section-gray{background:var(--bg3);max-width:none;padding:100px 40px}
+.bb-section-gray .bb-section-inner{max-width:1200px;margin:0 auto}
+.bb-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.bb-title{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;line-height:1.2;margin-bottom:24px}
+.bb-subtitle{font-size:16px;color:var(--muted);max-width:700px;line-height:1.8;margin-bottom:48px}
+
+/* TOC */
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px}
+.toc-item{padding:24px;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);transition:all 0.2s}
+.toc-item:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,134,11,0.08)}
+.toc-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.1em;margin-bottom:8px}
+.toc-name{font-weight:700;font-size:15px;margin-bottom:4px}
+.toc-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ARCHITECTURE */
+.arch-grid{display:grid;grid-template-columns:1fr;gap:0;margin-top:48px}
+.arch-parent{background:var(--dark);color:#fff;border-radius:16px;padding:40px;text-align:center;margin-bottom:24px}
+.arch-parent h3{font-family:'Syne',sans-serif;font-size:28px;font-weight:800}
+.arch-parent h3 em{color:var(--gold);font-style:normal}
+.arch-parent p{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.4);margin-top:8px;text-transform:uppercase}
+.arch-line{width:2px;height:32px;background:var(--gold);margin:0 auto}
+.arch-children{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:0}
+.arch-child{border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;transition:all 0.2s;position:relative}
+.arch-child::before{content:'';position:absolute;top:-13px;left:50%;width:2px;height:13px;background:var(--border)}
+.arch-child:hover{border-color:var(--gold);transform:translateY(-2px)}
+.arch-child-dot{width:10px;height:10px;border-radius:50%;margin:0 auto 12px}
+.arch-child h4{font-size:13px;font-weight:700;margin-bottom:4px}
+.arch-child p{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.06em}
+.arch-child-domain{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);margin-top:8px;letter-spacing:0.04em}
+
+/* COLOR SYSTEM */
+.color-brand{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:32px}
+.color-card{border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.color-swatch{height:80px;display:flex;align-items:flex-end;padding:12px}
+.color-swatch span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;padding:4px 8px;border-radius:4px;background:rgba(0,0,0,0.4);color:#fff}
+.color-info{padding:16px}
+.color-info h5{font-size:12px;font-weight:700;margin-bottom:4px}
+.color-info p{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.color-usage{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
+
+.brand-colors{margin-top:48px}
+.brand-colors h4{font-size:16px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.brand-palette{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.brand-dot{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.4);position:relative}
+.brand-dot-label{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--muted);white-space:nowrap}
+
+/* TYPOGRAPHY */
+.type-specimen{margin-top:40px}
+.type-row{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--border);align-items:baseline}
+.type-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.06em;line-height:1.8}
+.type-meta strong{display:block;color:var(--text);font-size:11px;margin-bottom:4px}
+.type-sample-inter{font-family:'Inter',sans-serif}
+.type-sample-syne{font-family:'Syne',sans-serif}
+.type-sample-jb{font-family:'JetBrains Mono',monospace}
+.type-sample-garamond{font-family:'EB Garamond',serif}
+.type-sample-mont{font-family:'Montserrat',sans-serif}
+
+.type-usage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px}
+.type-usage-card{padding:24px;border:1px solid var(--border);border-radius:12px}
+.type-usage-card h5{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+
+/* DOMAINS TABLE */
+.domain-table{width:100%;border-collapse:collapse;margin-top:32px;font-size:13px}
+.domain-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:12px 16px;border-bottom:2px solid var(--border)}
+.domain-table td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+.domain-table tr:hover td{background:rgba(184,134,11,0.03)}
+.domain-name{font-weight:700}
+.domain-url{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold)}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.04em;margin:2px}
+.tag-dark{background:var(--dark);color:#fff}
+.tag-light{background:#f0f0f0;color:var(--text)}
+.tag-gold{background:rgba(184,134,11,0.12);color:var(--gold)}
+.tag-red{background:rgba(207,16,26,0.1);color:var(--red)}
+.tag-cyan{background:rgba(48,220,255,0.1);color:#0891b2}
+.tag-green{background:rgba(29,245,154,0.1);color:#059669}
+.tag-issue{background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.2)}
+
+/* ISSUES */
+.issue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:32px}
+.issue-card{padding:20px;border-radius:12px;border:1px solid rgba(239,68,68,0.15);background:rgba(239,68,68,0.02)}
+.issue-card.warn{border-color:rgba(249,115,22,0.2);background:rgba(249,115,22,0.02)}
+.issue-card.ok{border-color:rgba(34,197,94,0.2);background:rgba(34,197,94,0.02)}
+.issue-severity{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.issue-severity.crit{color:#ef4444}
+.issue-severity.med{color:var(--orange)}
+.issue-severity.low{color:var(--green)}
+.issue-title{font-weight:700;font-size:14px;margin-bottom:6px}
+.issue-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.issue-fix{font-family:'JetBrains Mono',monospace;font-size:10px;margin-top:10px;padding:8px 12px;background:rgba(0,0,0,0.03);border-radius:6px;color:var(--text)}
+
+/* COMPONENT SPEC */
+.spec-block{margin-top:40px;padding:32px;border:1px solid var(--border);border-radius:16px;background:var(--bg2)}
+.spec-block h4{font-size:16px;font-weight:700;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.spec-row{display:grid;grid-template-columns:160px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px}
+.spec-key{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.spec-val{color:var(--text)}
+.spec-code{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(0,0,0,0.04);padding:2px 6px;border-radius:4px}
+
+/* LANG MAP */
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:24px}
+.lang-card{padding:16px;border:1px solid var(--border);border-radius:10px;text-align:center}
+.lang-card h5{font-size:13px;font-weight:600;margin-bottom:4px}
+.lang-card p{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.lang-avail{display:flex;gap:4px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.lang-dot{width:8px;height:8px;border-radius:50%}
+.lang-dot.yes{background:var(--green)}
+.lang-dot.no{background:#ddd}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .bb-nav{padding:0 16px;gap:16px}
+  .bb-section,.bb-section-dark,.bb-section-gray{padding:60px 20px}
+  .arch-children{grid-template-columns:repeat(2,1fr)}
+  .type-row{grid-template-columns:1fr;gap:12px}
+  .domain-table{font-size:11px}
+  .domain-table th,.domain-table td{padding:8px}
+  .bb-hero-meta{flex-wrap:wrap;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="bb-nav">
+  <div class="bb-nav-logo"><em>LABS</em>67</div>
+  <a href="#architecture">Architecture</a>
+  <a href="#colors">Colors</a>
+  <a href="#typography">Typography</a>
+  <a href="#domains">Domains</a>
+  <a href="#languages">Languages</a>
+  <a href="#components">Components</a>
+  <a href="#issues">Issues</a>
+  <a href="#guidelines">Guidelines</a>
+  <div class="bb-nav-ver">v1.0 // 2026-03-23</div>
+</nav>
+
+<!-- HERO -->
+<section class="bb-hero">
+  <div class="bb-hero-eyebrow">// LABS67 Concern Brand Book</div>
+  <h1>Brand<br><em>System</em></h1>
+  <p class="bb-hero-sub">Complete design standards, color systems, typography rules, component specifications, and guidelines for all LABS67 concern domains. For developers, designers, and partners.</p>
+  <div class="bb-hero-meta">
+    <span><em>6</em>Domains</span>
+    <span><em>5</em>Sub-Brands</span>
+    <span><em>11</em>Languages</span>
+    <span><em>4</em>Font Families</span>
+    <span><em>1</em>System</span>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section class="bb-section" id="toc">
+  <div class="bb-label">// Contents</div>
+  <div class="bb-title">Brand Book Structure</div>
+  <div class="toc">
+    <a href="#architecture" class="toc-item"><div class="toc-num">01</div><div class="toc-name">Brand Architecture</div><div class="toc-desc">Parent brand, sub-brands, hierarchy and relationships</div></a>
+    <a href="#colors" class="toc-item"><div class="toc-num">02</div><div class="toc-name">Color System</div><div class="toc-desc">Primary, secondary, accent palettes per brand</div></a>
+    <a href="#typography" class="toc-item"><div class="toc-num">03</div><div class="toc-name">Typography</div><div class="toc-desc">Font families, sizes, weights, usage rules</div></a>
+    <a href="#domains" class="toc-item"><div class="toc-num">04</div><div class="toc-name">Domain Audit</div><div class="toc-desc">Current state of all 6 domains</div></a>
+    <a href="#languages" class="toc-item"><div class="toc-num">05</div><div class="toc-name">Language System</div><div class="toc-desc">11 languages, flags, i18n standards</div></a>
+    <a href="#components" class="toc-item"><div class="toc-num">06</div><div class="toc-name">UI Components</div><div class="toc-desc">Buttons, forms, cards, navigation specs</div></a>
+    <a href="#issues" class="toc-item"><div class="toc-num">07</div><div class="toc-name">Inconsistencies</div><div class="toc-desc">Found problems and required fixes</div></a>
+    <a href="#guidelines" class="toc-item"><div class="toc-num">08</div><div class="toc-name">Developer Guidelines</div><div class="toc-desc">Rules for developers implementing changes</div></a>
+  </div>
+</section>
+
+<!-- 01 ARCHITECTURE -->
+<section class="bb-section-gray" id="architecture">
+  <div class="bb-section-inner">
+    <div class="bb-label">// 01 Brand Architecture</div>
+    <div class="bb-title">Concern Structure</div>
+    <p class="bb-subtitle">LABS67 is a technology concern (holding company) with 5 operational sub-brands. Each sub-brand has its own visual identity but must follow the parent system.</p>
+
+    <div class="arch-grid">
+      <div class="arch-parent">
+        <h3><em>LABS</em>67</h3>
+        <p>Technology Concern // Parent Brand</p>
+      </div>
+      <div class="arch-line"></div>
+      <div class="arch-children">
+        <div class="arch-child">
+          <div class="arch-child-dot" style="background:var(--red)"></div>
+          <h4>SVYATLITSA</h4>
+          <p>Aesthetic Dentistry</p>
+          <div class="arch-child-domain">svyatlitsa.com</div>
+        </div>
+        <div class="arch-child">
+          <div class="arch-child-dot" style="background:var(--purple)"></div>
+          <h4>SCYRA.AI</h4>
+          <p>Edge AI System</p>
+          <div class="arch-child-domain">scyra.labs67.com</div>
+        </div>
+        <div class="arch-child">
+          <div class="arch-child-dot" style="background:var(--green)"></div>
+          <h4>Academi67</h4>
+          <p>Clinical Education</p>
+          <div class="arch-child-domain">academi67.com</div>
+        </div>
+        <div class="arch-child">
+          <div class="arch-child-dot" style="background:var(--cyan)"></div>
+          <h4>TradeAI</h4>
+          <p>MedTech Products</p>
+          <div class="arch-child-domain">trade.labs67.com</div>
+        </div>
+        <div class="arch-child">
+          <div class="arch-child-dot" style="background:var(--orange)"></div>
+          <h4>Franchise67</h4>
+          <p>Scaling & Partners</p>
+          <div class="arch-child-domain">franchise.labs67.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hierarchy Rules -->
+    <div class="spec-block" style="margin-top:48px">
+      <h4>Hierarchy Rules</h4>
+      <div class="spec-row"><div class="spec-key">Parent badge</div><div class="spec-val">Every sub-brand page MUST display "Concern LABS67" or localized equivalent in the header and footer</div></div>
+      <div class="spec-row"><div class="spec-key">Logo lock-up</div><div class="spec-val">Sub-brand logo + "LABS67" text. Never show sub-brand without parent reference</div></div>
+      <div class="spec-row"><div class="spec-key">Domain pattern</div><div class="spec-val">Primary brands: <span class="spec-code">brand.com</span> &mdash; Sub-brands: <span class="spec-code">brand.labs67.com</span></div></div>
+      <div class="spec-row"><div class="spec-key">Cross-linking</div><div class="spec-val">Every site footer must link to labs67.com and all sister brands</div></div>
+      <div class="spec-row"><div class="spec-key">Chat widget</div><div class="spec-val">All domains must include the AI chat widget (bottom-right, consistent behavior)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 COLORS -->
+<section class="bb-section" id="colors">
+  <div class="bb-label">// 02 Color System</div>
+  <div class="bb-title">Color Palette</div>
+  <p class="bb-subtitle">The LABS67 color system defines a shared foundation with brand-specific accent colors. All sub-brands share the same neutrals and gold primary.</p>
+
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:24px">Global Foundation</h3>
+  <div class="color-brand">
+    <div class="color-card">
+      <div class="color-swatch" style="background:#B8860B"><span>#B8860B</span></div>
+      <div class="color-info"><h5>LABS67 Gold</h5><p>Primary brand color</p><div class="color-usage">CTAs, accents, links, active states. Used across ALL domains as the unifying element.</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#0a0a0f"><span>#0A0A0F</span></div>
+      <div class="color-info"><h5>Deep Black</h5><p>Dark theme background</p><div class="color-usage">Primary background for dark-themed sub-brands (Academi67, TradeAI, Franchise67, Agent Hub)</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#FAFAFA"><span>#FAFAFA</span></div>
+      <div class="color-info"><h5>Off White</h5><p>Light theme background</p><div class="color-usage">Primary background for light-themed brands (labs67.com, svyatlitsa.com)</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#1A1A1A"><span>#1A1A1A</span></div>
+      <div class="color-info"><h5>Text Black</h5><p>Primary text (light theme)</p><div class="color-usage">Headlines and body text on light backgrounds</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#E0E0E8"><span>#E0E0E8</span></div>
+      <div class="color-info"><h5>Text Light</h5><p>Primary text (dark theme)</p><div class="color-usage">Body text on dark backgrounds</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#888888"><span>#888888</span></div>
+      <div class="color-info"><h5>Muted</h5><p>Secondary text</p><div class="color-usage">Captions, labels, metadata on both themes</div></div>
+    </div>
+  </div>
+
+  <div class="brand-colors">
+    <h4>Brand-Specific Accents</h4>
+    <table class="domain-table">
+      <thead><tr><th>Brand</th><th>Primary Accent</th><th>Secondary</th><th>Theme</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>LABS67</strong></td>
+          <td><span class="tag" style="background:#B8860B;color:#fff">#B8860B Gold</span></td>
+          <td><span class="tag tag-cyan">#0891B2 Cyan</span></td>
+          <td><span class="tag tag-light">Light</span></td>
+          <td>Parent brand. Gold is the primary across entire ecosystem</td>
+        </tr>
+        <tr>
+          <td><strong>SVYATLITSA</strong></td>
+          <td><span class="tag" style="background:#CF101A;color:#fff">#CF101A Red</span></td>
+          <td><span class="tag" style="background:#111;color:#fff">#111 Black</span></td>
+          <td><span class="tag tag-light">Light</span></td>
+          <td>Premium clinic. Elegant, luxurious feel with red accents</td>
+        </tr>
+        <tr>
+          <td><strong>SCYRA.AI</strong></td>
+          <td><span class="tag" style="background:#a855f7;color:#fff">#A855F7 Purple</span></td>
+          <td><span class="tag tag-cyan">#00D4FF Cyan</span></td>
+          <td><span class="tag tag-dark">Dark</span></td>
+          <td>AI product. Futuristic, tech-forward with purple glow</td>
+        </tr>
+        <tr>
+          <td><strong>Academi67</strong></td>
+          <td><span class="tag" style="background:#1df59a;color:#000">#1DF59A Green</span></td>
+          <td><span class="tag tag-cyan">#30DCFF Cyan</span></td>
+          <td><span class="tag tag-dark">Dark</span></td>
+          <td>Education. Growth, knowledge, clinical precision</td>
+        </tr>
+        <tr>
+          <td><strong>TradeAI</strong></td>
+          <td><span class="tag" style="background:#30dcff;color:#000">#30DCFF Cyan</span></td>
+          <td><span class="tag" style="background:#1df59a;color:#000">#1DF59A Green</span></td>
+          <td><span class="tag tag-dark">Dark</span></td>
+          <td>Products. Technical, reliable, equipment-grade</td>
+        </tr>
+        <tr>
+          <td><strong>Franchise67</strong></td>
+          <td><span class="tag" style="background:#ff4d6d;color:#fff">#FF4D6D Red-Pink</span></td>
+          <td><span class="tag" style="background:#e8b840;color:#000">#E8B840 Gold</span></td>
+          <td><span class="tag tag-dark">Dark</span></td>
+          <td>Partnerships. Energy, ambition, premium business</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="spec-block" style="margin-top:32px">
+      <h4>Color Rules</h4>
+      <div class="spec-row"><div class="spec-key">Gold mandatory</div><div class="spec-val">LABS67 Gold <span class="spec-code">#B8860B</span> MUST appear on every sub-brand site (at minimum in parent badge, footer link, or hover state)</div></div>
+      <div class="spec-row"><div class="spec-key">Status colors</div><div class="spec-val">Green <span class="spec-code">#22C55E</span> = online/success. Red <span class="spec-code">#EF4444</span> = error. Orange <span class="spec-code">#F97316</span> = warning/thinking. Global, do not override.</div></div>
+      <div class="spec-row"><div class="spec-key">Dark theme borders</div><div class="spec-val"><span class="spec-code">rgba(255,255,255,0.08)</span> &mdash; consistent across all dark-themed sub-brands</div></div>
+      <div class="spec-row"><div class="spec-key">Light theme borders</div><div class="spec-val"><span class="spec-code">rgba(0,0,0,0.08)</span> &mdash; consistent across all light-themed brands</div></div>
+      <div class="spec-row"><div class="spec-key">Contrast ratio</div><div class="spec-val">Minimum 4.5:1 for body text, 3:1 for large text (WCAG AA). Test all accent colors on chosen backgrounds.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 TYPOGRAPHY -->
+<section class="bb-section-gray" id="typography">
+  <div class="bb-section-inner">
+    <div class="bb-label">// 03 Typography</div>
+    <div class="bb-title">Font System</div>
+    <p class="bb-subtitle">Four font families serve different roles across the ecosystem. Each sub-brand uses a specific combination.</p>
+
+    <div class="type-specimen">
+      <div class="type-row">
+        <div class="type-meta"><strong>Syne</strong>Display / Headlines<br>Weights: 600, 700, 800<br>Used by: Sub-brand sites</div>
+        <div class="type-sample-syne" style="font-size:36px;font-weight:800;line-height:1.2">The future of clinical care<br><span style="font-weight:600;font-size:24px;color:var(--muted)">Academi67 / TradeAI / Franchise67</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Inter</strong>Body / UI Text<br>Weights: 400, 500, 600, 700<br>Used by: labs67.com, chat.html</div>
+        <div class="type-sample-inter" style="font-size:16px;line-height:1.8">LABS67 is a technology concern that builds the infrastructure for next-generation medical clinics. <strong style="font-weight:700">Our ecosystem includes AI systems, training, equipment, and franchise partnerships.</strong></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>JetBrains Mono</strong>Monospace / Technical<br>Weights: 400, 500<br>Used by: ALL domains</div>
+        <div class="type-sample-jb" style="font-size:13px;line-height:1.8;color:var(--muted)">// LABELS, NAVIGATION, METADATA, STATUS INDICATORS<br>REQ_A7X92K // request identifiers<br>TRACK_01 // program codes<br>v2.1.0 // version numbers</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>EB Garamond</strong>Serif / Luxury<br>Weights: 400, 600, 700<br>Used by: svyatlitsa.com only</div>
+        <div class="type-sample-garamond" style="font-size:32px;font-weight:400;line-height:1.3"><em>SVYATLITSA</em><br><span style="font-size:20px;color:var(--muted)">aesthetic dentistry</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><strong>Montserrat</strong>Sans / Clean<br>Weights: 400, 500, 600<br>Used by: svyatlitsa.com body</div>
+        <div class="type-sample-mont" style="font-size:15px;line-height:1.8">Professional dental care with AI-powered precision. Every visit is tracked, analyzed, and optimized for your comfort and health.</div>
+      </div>
+    </div>
+
+    <div class="type-usage-grid">
+      <div class="type-usage-card">
+        <h5>labs67.com</h5>
+        <p style="font-size:13px;line-height:1.6"><strong>Headlines:</strong> Inter 700-800<br><strong>Body:</strong> Inter 400-500<br><strong>Labels:</strong> JetBrains Mono 400<br><strong>Note:</strong> Currently uses Inter only. OK as parent brand.</p>
+      </div>
+      <div class="type-usage-card">
+        <h5>svyatlitsa.com</h5>
+        <p style="font-size:13px;line-height:1.6"><strong>Headlines:</strong> EB Garamond 400-700<br><strong>Body:</strong> Montserrat 400-500<br><strong>Labels:</strong> JetBrains Mono 400<br><strong>Note:</strong> Unique luxury stack. Do NOT change to Syne.</p>
+      </div>
+      <div class="type-usage-card">
+        <h5>academi67 / trade / franchise</h5>
+        <p style="font-size:13px;line-height:1.6"><strong>Headlines:</strong> Syne 700-800<br><strong>Body:</strong> Syne 400-600<br><strong>Labels:</strong> JetBrains Mono 400-500<br><strong>Note:</strong> Unified dark-theme trio. Keep consistent.</p>
+      </div>
+      <div class="type-usage-card">
+        <h5>Agent Hub (chat.html)</h5>
+        <p style="font-size:13px;line-height:1.6"><strong>Headlines:</strong> Inter 600-700<br><strong>Body:</strong> Inter 400<br><strong>Labels:</strong> JetBrains Mono 400<br><strong>Note:</strong> Internal tool. Matches labs67.com stack.</p>
+      </div>
+    </div>
+
+    <div class="spec-block" style="margin-top:40px">
+      <h4>Typography Rules</h4>
+      <div class="spec-row"><div class="spec-key">JetBrains Mono</div><div class="spec-val">MANDATORY on all sites for: navigation labels, section eyebrows (// prefix), metadata, timestamps, status text, form IDs, version numbers</div></div>
+      <div class="spec-row"><div class="spec-key">// prefix pattern</div><div class="spec-val">Section labels use <span class="spec-code">// SECTION_NAME</span> format. This is a core brand element across ALL domains.</div></div>
+      <div class="spec-row"><div class="spec-key">Letter spacing</div><div class="spec-val">Labels: <span class="spec-code">0.1em-0.2em</span>. Body: <span class="spec-code">normal</span>. Nav: <span class="spec-code">0.06em-0.12em</span></div></div>
+      <div class="spec-row"><div class="spec-key">Line height</div><div class="spec-val">Headlines: <span class="spec-code">1.1-1.2</span>. Body: <span class="spec-code">1.7-1.8</span>. Labels: <span class="spec-code">1.4</span></div></div>
+      <div class="spec-row"><div class="spec-key">Max body width</div><div class="spec-val"><span class="spec-code">700px</span> for readability. Headlines can span full container.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 DOMAIN AUDIT -->
+<section class="bb-section" id="domains">
+  <div class="bb-label">// 04 Domain Audit</div>
+  <div class="bb-title">Current State</div>
+  <p class="bb-subtitle">Snapshot of all 6 LABS67 domains as of March 23, 2026. Each domain analyzed for design consistency, language support, and standards compliance.</p>
+
+  <table class="domain-table">
+    <thead>
+      <tr><th>Domain</th><th>Theme</th><th>Fonts</th><th>Languages</th><th>Chat</th><th>Forms</th><th>ID Format</th><th>Issues</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="domain-name">labs67.com</div><div class="domain-url">labs67.com</div></td>
+        <td><span class="tag tag-light">Light</span></td>
+        <td>Inter + JB Mono</td>
+        <td><strong>11</strong></td>
+        <td>Yes</td>
+        <td>Supabase</td>
+        <td><span class="spec-code">REQ_</span></td>
+        <td><span class="tag tag-issue">setLang.js deleted</span></td>
+      </tr>
+      <tr>
+        <td><div class="domain-name">svyatlitsa.com</div><div class="domain-url">svyatlitsa.com</div></td>
+        <td><span class="tag tag-light">Light</span></td>
+        <td>EB Garamond + Montserrat + JB Mono</td>
+        <td><strong>7</strong></td>
+        <td>No</td>
+        <td>Custom</td>
+        <td>None</td>
+        <td><span class="tag tag-issue">Missing 4 langs</span> <span class="tag tag-issue">No chat</span></td>
+      </tr>
+      <tr>
+        <td><div class="domain-name">academi67.com</div><div class="domain-url">academi67.com</div></td>
+        <td><span class="tag tag-dark">Dark</span></td>
+        <td>Syne + JB Mono</td>
+        <td><strong>6</strong></td>
+        <td>Yes</td>
+        <td>Custom</td>
+        <td>None</td>
+        <td><span class="tag tag-issue">Missing 5 langs</span> <span class="tag tag-issue">No form IDs</span></td>
+      </tr>
+      <tr>
+        <td><div class="domain-name">trade.labs67.com</div><div class="domain-url">trade.labs67.com</div></td>
+        <td><span class="tag tag-dark">Dark</span></td>
+        <td>Syne + JB Mono</td>
+        <td><strong>6</strong></td>
+        <td>Yes</td>
+        <td>Custom</td>
+        <td><span class="spec-code">TRQ_</span></td>
+        <td><span class="tag tag-issue">Missing 5 langs</span></td>
+      </tr>
+      <tr>
+        <td><div class="domain-name">franchise.labs67.com</div><div class="domain-url">franchise.labs67.com</div></td>
+        <td><span class="tag tag-dark">Dark</span></td>
+        <td>Syne + JB Mono</td>
+        <td><strong>6</strong></td>
+        <td>Yes</td>
+        <td>Custom</td>
+        <td><span class="spec-code">PRQ_</span></td>
+        <td><span class="tag tag-issue">Missing 5 langs</span></td>
+      </tr>
+      <tr>
+        <td><div class="domain-name">Agent Hub</div><div class="domain-url">labs67.com/chat.html</div></td>
+        <td><span class="tag tag-dark">Dark</span></td>
+        <td>Inter + JB Mono</td>
+        <td><strong>0</strong></td>
+        <td>Is chat</td>
+        <td>Login</td>
+        <td>N/A</td>
+        <td><span class="tag tag-issue">No i18n</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 05 LANGUAGES -->
+<section class="bb-section-dark" id="languages">
+  <div class="bb-section-inner">
+    <div class="bb-label" style="color:var(--gold)">// 05 Language System</div>
+    <div class="bb-title" style="color:#fff">11 Languages Standard</div>
+    <p class="bb-subtitle" style="color:rgba(255,255,255,0.4)">ALL LABS67 domains must support 11 languages. Belarusian is the default language. Special flag rules apply for BY and RU.</p>
+
+    <div class="lang-grid">
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">Belarusian</h5>
+        <p>BY &mdash; Default</p>
+        <p style="color:var(--gold);margin-top:4px">Flag: White-Red-White (BChB)</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">English</h5><p>EN</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">Ukrainian</h5><p>UK</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">Russian</h5>
+        <p>RU</p>
+        <p style="color:var(--orange);margin-top:4px">Flag: White-Blue-White (BSB)</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">German</h5><p>DE</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">French</h5><p>FR</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">Spanish</h5><p>ES</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">Italian</h5><p>IT</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">Portuguese</h5><p>PT</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">Japanese</h5><p>JA</p>
+      </div>
+      <div class="lang-card" style="background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+        <h5 style="color:#fff">Korean</h5><p>KO</p>
+      </div>
+    </div>
+
+    <div class="spec-block" style="margin-top:48px;background:var(--dark2);border-color:rgba(255,255,255,0.08)">
+      <h4 style="color:#fff;border-color:rgba(255,255,255,0.08)">Language Implementation Rules</h4>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Default language</div><div class="spec-val" style="color:#fff"><span class="spec-code">be</span> (Belarusian) on ALL domains</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">localStorage key</div><div class="spec-val" style="color:#fff"><span class="spec-code">{brand}_lang</span> &mdash; e.g. scyra_lang, labs67_lang, svt_lang</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">i18n method</div><div class="spec-val" style="color:#fff"><span class="spec-code">data-i18n</span> attributes or <span class="spec-code">data-t</span> attributes. Both accepted. Content in JS object <span class="spec-code">T[lang][key]</span></div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">BY flag</div><div class="spec-val" style="color:#fff">White-Red-White (BChB) historical flag. NEVER use the official green-red state flag.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">RU flag</div><div class="spec-val" style="color:#fff">White-Blue-White (BSB) protest flag. NEVER use the standard Russian tricolor.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Flags format</div><div class="spec-val" style="color:#fff">Inline SVG, 20x14px. All flags stored as SVG strings in JS. No external flag CDNs.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Switcher style</div><div class="spec-val" style="color:#fff">Dropdown in header nav. Current flag + code visible. Click opens list of all 11 options.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Missing langs</div><div class="spec-val" style="color:#fff">svyatlitsa: needs +4 (IT, PT, JA, KO). academi67/trade/franchise: need +5 (ES, IT, PT, JA, KO). Plus RU missing on some.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 COMPONENTS -->
+<section class="bb-section" id="components">
+  <div class="bb-label">// 06 UI Components</div>
+  <div class="bb-title">Component Specifications</div>
+  <p class="bb-subtitle">Standard UI component specifications for developers. All measurements in pixels, all durations in milliseconds.</p>
+
+  <div class="spec-block">
+    <h4>Navigation Bar</h4>
+    <div class="spec-row"><div class="spec-key">Height</div><div class="spec-val"><span class="spec-code">56-58px</span></div></div>
+    <div class="spec-row"><div class="spec-key">Position</div><div class="spec-val"><span class="spec-code">fixed</span>, top: 0, z-index: 100</div></div>
+    <div class="spec-row"><div class="spec-key">Background</div><div class="spec-val">Light: <span class="spec-code">rgba(255,255,255,0.92)</span> / Dark: <span class="spec-code">rgba(10,10,15,0.92)</span></div></div>
+    <div class="spec-row"><div class="spec-key">Blur</div><div class="spec-val"><span class="spec-code">backdrop-filter: blur(16px)</span></div></div>
+    <div class="spec-row"><div class="spec-key">Border</div><div class="spec-val">Bottom: <span class="spec-code">1px solid</span> theme border color</div></div>
+    <div class="spec-row"><div class="spec-key">Elements</div><div class="spec-val">Logo (left) / Nav links (center) / Lang switcher + CTA (right)</div></div>
+    <div class="spec-row"><div class="spec-key">Mobile</div><div class="spec-val">Hamburger menu at <span class="spec-code">&le;768px</span>. Logo always visible.</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Buttons</h4>
+    <div class="spec-row"><div class="spec-key">Primary</div><div class="spec-val">Background: brand accent color. Text: contrast (white or black). Border-radius: <span class="spec-code">10px</span>. Padding: <span class="spec-code">12px 24px</span></div></div>
+    <div class="spec-row"><div class="spec-key">Secondary</div><div class="spec-val">Background: transparent. Border: <span class="spec-code">1px solid</span> brand accent. Same radius/padding.</div></div>
+    <div class="spec-row"><div class="spec-key">Font</div><div class="spec-val"><span class="spec-code">JetBrains Mono</span>, 600 weight, 13px, letter-spacing: 0.06em</div></div>
+    <div class="spec-row"><div class="spec-key">Hover</div><div class="spec-val">Background lighten 10%. translateY(-1px). Box-shadow expand. Transition: <span class="spec-code">0.2s ease</span></div></div>
+    <div class="spec-row"><div class="spec-key">Clip-path</div><div class="spec-val">Dark-theme sub-brands use angled corners: <span class="spec-code">polygon(12px 0, 100% 0, calc(100%-12px) 100%, 0 100%)</span></div></div>
+    <div class="spec-row"><div class="spec-key">Light-theme</div><div class="spec-val">Standard border-radius, no clip-path</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Cards</h4>
+    <div class="spec-row"><div class="spec-key">Border</div><div class="spec-val"><span class="spec-code">1px solid</span> theme border color. Radius: <span class="spec-code">12px</span></div></div>
+    <div class="spec-row"><div class="spec-key">Padding</div><div class="spec-val"><span class="spec-code">24px</span></div></div>
+    <div class="spec-row"><div class="spec-key">Hover</div><div class="spec-val">Border-color: brand accent. translateY(-2px). Box-shadow: <span class="spec-code">0 8px 24px rgba(accent, 0.08)</span></div></div>
+    <div class="spec-row"><div class="spec-key">Transition</div><div class="spec-val"><span class="spec-code">all 0.2s ease</span></div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Forms</h4>
+    <div class="spec-row"><div class="spec-key">Input height</div><div class="spec-val"><span class="spec-code">48px</span> (padding: 12px 16px)</div></div>
+    <div class="spec-row"><div class="spec-key">Input style</div><div class="spec-val">Background: theme bg. Border: <span class="spec-code">1px solid</span> theme border. Radius: <span class="spec-code">10px</span></div></div>
+    <div class="spec-row"><div class="spec-key">Focus</div><div class="spec-val">Border-color: brand accent. No outline.</div></div>
+    <div class="spec-row"><div class="spec-key">Labels</div><div class="spec-val"><span class="spec-code">JetBrains Mono</span>, 9px, uppercase, letter-spacing: 0.12em</div></div>
+    <div class="spec-row"><div class="spec-key">Request ID</div><div class="spec-val">Format: <span class="spec-code">{PREFIX}_{6 alphanumeric}</span>. Prefixes: REQ_ (labs67), TRQ_ (trade), PRQ_ (franchise), APL_ (academi), SVT_ (svyatlitsa)</div></div>
+    <div class="spec-row"><div class="spec-key">Submit feedback</div><div class="spec-val">Button text changes: "PROCESSING..." &rarr; "ACCEPTED". Color transitions to green. Auto-reset after 3s.</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Chat Widget</h4>
+    <div class="spec-row"><div class="spec-key">Position</div><div class="spec-val"><span class="spec-code">fixed</span>, bottom: 24px, right: 24px, z-index: 9990</div></div>
+    <div class="spec-row"><div class="spec-key">Bubble size</div><div class="spec-val"><span class="spec-code">52-54px</span> circle. Background: brand accent gradient.</div></div>
+    <div class="spec-row"><div class="spec-key">Window</div><div class="spec-val"><span class="spec-code">340px</span> wide, max-height: <span class="spec-code">440px</span></div></div>
+    <div class="spec-row"><div class="spec-key">Required on</div><div class="spec-val">ALL public-facing domains. Not on internal tools (chat.html).</div></div>
+    <div class="spec-row"><div class="spec-key">Bot name</div><div class="spec-val">"SCYRA AI" on all sites (not brand-specific names)</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Layout</h4>
+    <div class="spec-row"><div class="spec-key">Max width</div><div class="spec-val"><span class="spec-code">1100-1200px</span> centered</div></div>
+    <div class="spec-row"><div class="spec-key">Section padding</div><div class="spec-val"><span class="spec-code">100px</span> vertical (desktop), <span class="spec-code">60px</span> (mobile)</div></div>
+    <div class="spec-row"><div class="spec-key">Side padding</div><div class="spec-val"><span class="spec-code">40px</span> (desktop), <span class="spec-code">20px</span> (mobile)</div></div>
+    <div class="spec-row"><div class="spec-key">Grid</div><div class="spec-val"><span class="spec-code">auto-fit, minmax(220px, 1fr)</span> for cards. Gap: <span class="spec-code">16-24px</span></div></div>
+    <div class="spec-row"><div class="spec-key">Breakpoints</div><div class="spec-val"><span class="spec-code">768px</span> (mobile), <span class="spec-code">960px</span> (tablet), <span class="spec-code">1200px</span> (desktop)</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Animations</h4>
+    <div class="spec-row"><div class="spec-key">Scroll reveal</div><div class="spec-val">Fade-in + translateY(20px). Triggered by IntersectionObserver. Duration: <span class="spec-code">0.6s ease</span></div></div>
+    <div class="spec-row"><div class="spec-key">Hover</div><div class="spec-val">All transitions: <span class="spec-code">0.2s ease</span></div></div>
+    <div class="spec-row"><div class="spec-key">Status pulse</div><div class="spec-val">Opacity 1 &rarr; 0.4 &rarr; 1. Duration: <span class="spec-code">2.5s infinite</span></div></div>
+    <div class="spec-row"><div class="spec-key">Page load</div><div class="spec-val">Staggered fade-in. Delay between elements: <span class="spec-code">0.08s</span></div></div>
+  </div>
+</section>
+
+<!-- 07 ISSUES -->
+<section class="bb-section-gray" id="issues">
+  <div class="bb-section-inner">
+    <div class="bb-label">// 07 Inconsistencies Found</div>
+    <div class="bb-title">Audit Issues</div>
+    <p class="bb-subtitle">Problems discovered during the domain audit that need to be fixed for brand consistency.</p>
+
+    <div class="issue-grid">
+      <div class="issue-card">
+        <div class="issue-severity crit">// CRITICAL</div>
+        <div class="issue-title">Language count mismatch</div>
+        <div class="issue-desc">labs67.com has 11 languages. svyatlitsa has 7. academi67/trade/franchise have 6 each. Standard is 11 everywhere.</div>
+        <div class="issue-fix">FIX: Add missing languages to all sub-brand sites. Priority: svyatlitsa (+4), then trio (+5 each).</div>
+      </div>
+      <div class="issue-card">
+        <div class="issue-severity crit">// CRITICAL</div>
+        <div class="issue-title">svyatlitsa.com has no chat widget</div>
+        <div class="issue-desc">The main clinic site has no AI chat widget. Patients cannot interact with SCYRA directly from the clinic website.</div>
+        <div class="issue-fix">FIX: Add standard chat widget (340px, bottom-right, SCYRA AI branded).</div>
+      </div>
+      <div class="issue-card">
+        <div class="issue-severity crit">// CRITICAL</div>
+        <div class="issue-title">No cross-linking between sites</div>
+        <div class="issue-desc">Sub-brand sites don't link to each other in footers. Users can't discover the full LABS67 ecosystem.</div>
+        <div class="issue-fix">FIX: Add unified footer with links to all 5 brands + labs67.com on every site.</div>
+      </div>
+      <div class="issue-card warn">
+        <div class="issue-severity med">// MEDIUM</div>
+        <div class="issue-title">Inconsistent form backends</div>
+        <div class="issue-desc">labs67.com uses Supabase. All other sites use custom/no backend. Form data goes to different places.</div>
+        <div class="issue-fix">FIX: Unify all forms to Supabase with 'source' field identifying origin domain.</div>
+      </div>
+      <div class="issue-card warn">
+        <div class="issue-severity med">// MEDIUM</div>
+        <div class="issue-title">Missing request ID on some forms</div>
+        <div class="issue-desc">academi67 and svyatlitsa forms don't generate request IDs. Others use REQ_, TRQ_, PRQ_ inconsistently.</div>
+        <div class="issue-fix">FIX: All forms must generate {PREFIX}_{6char} IDs: REQ_, TRQ_, PRQ_, APL_, SVT_.</div>
+      </div>
+      <div class="issue-card warn">
+        <div class="issue-severity med">// MEDIUM</div>
+        <div class="issue-title">Flag inconsistency</div>
+        <div class="issue-desc">labs67.com uses custom BChB/BSB flags. Sub-brands may use standard flags or different SVGs.</div>
+        <div class="issue-fix">FIX: Extract shared flag SVGs into a common JS module. Import on all sites.</div>
+      </div>
+      <div class="issue-card warn">
+        <div class="issue-severity med">// MEDIUM</div>
+        <div class="issue-title">Copyright year inconsistency</div>
+        <div class="issue-desc">Some sites show 2025, others 2026. Should be uniform.</div>
+        <div class="issue-fix">FIX: All footers: "2026 {Brand} &middot; LABS67". Dynamic year via JS.</div>
+      </div>
+      <div class="issue-card warn">
+        <div class="issue-severity med">// MEDIUM</div>
+        <div class="issue-title">Contact info varies</div>
+        <div class="issue-desc">Phone is consistent (+48 571 719 800) but email addresses differ per brand without clear pattern.</div>
+        <div class="issue-fix">STANDARD: dental@labs67.com (svyatlitsa), trade@labs67.com (trade), academi@labs67.com (academi), franchise@labs67.com (franchise), info@labs67.com (main).</div>
+      </div>
+      <div class="issue-card">
+        <div class="issue-severity crit">// CRITICAL</div>
+        <div class="issue-title">No Privacy Policy / Terms</div>
+        <div class="issue-desc">None of the sites have Privacy Policy or Terms of Service pages. Required for Indiegogo launch and GDPR compliance.</div>
+        <div class="issue-fix">FIX: Create shared Privacy Policy + Terms pages. Link from all site footers.</div>
+      </div>
+      <div class="issue-card warn">
+        <div class="issue-severity med">// MEDIUM</div>
+        <div class="issue-title">setLang.js deleted from labs67.com</div>
+        <div class="issue-desc">Git shows setLang.js was deleted but it may have been replaced by inline i18n. Verify language switching works.</div>
+        <div class="issue-fix">FIX: Confirm i18n is functional. If inline, document the approach. If broken, restore.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 GUIDELINES -->
+<section class="bb-section" id="guidelines">
+  <div class="bb-label">// 08 Developer Guidelines</div>
+  <div class="bb-title">Implementation Rules</div>
+  <p class="bb-subtitle">Mandatory rules for any developer working on LABS67 ecosystem sites. Follow these before making any changes.</p>
+
+  <div class="spec-block">
+    <h4>Before You Start</h4>
+    <div class="spec-row"><div class="spec-key">Read this doc</div><div class="spec-val">Every developer MUST read this brand book before touching any LABS67 site</div></div>
+    <div class="spec-row"><div class="spec-key">Check the audit</div><div class="spec-val">Review Section 07 (Issues) for known problems on the site you're working on</div></div>
+    <div class="spec-row"><div class="spec-key">Test all 11 langs</div><div class="spec-val">After any text change, verify all 11 language versions render correctly</div></div>
+    <div class="spec-row"><div class="spec-key">Mobile first</div><div class="spec-val">Test on 375px (iPhone SE), 768px (iPad), 1440px (desktop)</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Code Standards</h4>
+    <div class="spec-row"><div class="spec-key">HTML</div><div class="spec-val">Semantic HTML5. <span class="spec-code">&lt;html lang="be"&gt;</span> default. All text in <span class="spec-code">data-i18n</span> or <span class="spec-code">data-t</span> attributes.</div></div>
+    <div class="spec-row"><div class="spec-key">CSS</div><div class="spec-val">CSS custom properties for all colors. No hardcoded color values in components. Use <span class="spec-code">var(--gold)</span> etc.</div></div>
+    <div class="spec-row"><div class="spec-key">JavaScript</div><div class="spec-val">Vanilla JS. No frameworks (React, Vue) on static sites. External dependencies only via CDN with integrity hash.</div></div>
+    <div class="spec-row"><div class="spec-key">Images</div><div class="spec-val">SVG for icons/logos. WebP for photos. Lazy-load below fold. Max 200KB per image.</div></div>
+    <div class="spec-row"><div class="spec-key">Fonts</div><div class="spec-val">Google Fonts CDN. Preconnect in <span class="spec-code">&lt;head&gt;</span>. <span class="spec-code">display=swap</span> always.</div></div>
+    <div class="spec-row"><div class="spec-key">API keys</div><div class="spec-val">NEVER in source code. Use localStorage prompt or environment variables. Keys in public repos WILL be revoked by Google.</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Deployment</h4>
+    <div class="spec-row"><div class="spec-key">Hosting</div><div class="spec-val">GitHub Pages via <span class="spec-code">tatyana-mama</span> organization. Push to <span class="spec-code">main</span> branch deploys automatically.</div></div>
+    <div class="spec-row"><div class="spec-key">DNS</div><div class="spec-val">Custom domains via CNAME. Subdomains (trade., franchise.) point to separate repos.</div></div>
+    <div class="spec-row"><div class="spec-key">SSL</div><div class="spec-val">GitHub Pages auto-SSL. Enforce HTTPS on all domains.</div></div>
+    <div class="spec-row"><div class="spec-key">Testing</div><div class="spec-val">Open in browser before push. Check: all langs switch, forms submit, chat opens, no console errors.</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Priority Roadmap</h4>
+    <div class="spec-row"><div class="spec-key">Phase 1</div><div class="spec-val"><strong>Pre-Indiegogo:</strong> Privacy Policy + Terms. Fix svyatlitsa chat. Unify languages to 11 on all sites.</div></div>
+    <div class="spec-row"><div class="spec-key">Phase 2</div><div class="spec-val"><strong>Post-launch:</strong> Unify forms to Supabase. Add cross-linking footers. Standardize request IDs.</div></div>
+    <div class="spec-row"><div class="spec-key">Phase 3</div><div class="spec-val"><strong>Scale:</strong> Extract shared components (nav, footer, chat, lang switcher) into reusable JS modules.</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--dark);color:rgba(255,255,255,0.4);padding:40px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em">
+  <div style="color:var(--gold);font-size:14px;font-weight:700;margin-bottom:8px;font-family:'Syne',sans-serif">LABS<span style="opacity:0.6">67</span></div>
+  <div>Brand Book v1.0 // Generated 2026-03-23</div>
+  <div style="margin-top:8px">&copy; 2026 LABS67 Concern // Confidential</div>
+</footer>
+
+</body>
+</html>
