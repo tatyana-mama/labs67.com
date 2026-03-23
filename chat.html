@@ -197,6 +197,7 @@ async function doLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const pass = document.getElementById('loginPass').value;
   const hash = await sha256(email + ':' + pass);
+  alert('Input: [' + email + ':' + pass + ']\nHash: ' + hash + '\nExpected: ' + AUTH_HASHES[0]);
   if (AUTH_HASHES.includes(hash)) {
     localStorage.setItem('labs67_auth', '1');
     localStorage.setItem('labs67_creds', JSON.stringify({e: email, p: pass}));
