@@ -155,7 +155,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
     <h2><em>LABS</em>67</h2>
     <p>Agent Hub — Authorized Access</p>
     <input type="email" id="loginEmail" placeholder="Email" autocomplete="username">
-    <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div style="position:relative;">
+      <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" style="width:100%;padding-right:48px;">
+      <button type="button" onclick="togglePass()" id="eyeBtn" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;">&#128065;</button>
+    </div>
     <button onclick="doLogin()">LOGIN</button>
     <div class="login-error" id="loginError">Invalid credentials</div>
   </div>
@@ -195,14 +198,30 @@ async function doLogin() {
   const pass = document.getElementById('loginPass').value;
   const hash = await sha256(email + ':' + pass);
   if (AUTH_HASHES.includes(hash)) {
-    sessionStorage.setItem('labs67_auth', '1');
+    localStorage.setItem('labs67_auth', '1');
+    localStorage.setItem('labs67_creds', JSON.stringify({e: email, p: pass}));
     document.getElementById('loginOverlay').classList.add('hidden');
   } else {
     document.getElementById('loginError').style.display = 'block';
   }
 }
 
-if (sessionStorage.getItem('labs67_auth') === '1') {
+function togglePass() {
+  const p = document.getElementById('loginPass');
+  p.type = p.type === 'password' ? 'text' : 'password';
+}
+
+// Restore saved credentials
+const saved = localStorage.getItem('labs67_creds');
+if (saved) {
+  try {
+    const c = JSON.parse(saved);
+    document.getElementById('loginEmail').value = c.e || '';
+    document.getElementById('loginPass').value = c.p || '';
+  } catch(e) {}
+}
+
+if (localStorage.getItem('labs67_auth') === '1') {
   document.getElementById('loginOverlay').classList.add('hidden');
 }
 
