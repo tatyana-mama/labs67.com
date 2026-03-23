@@ -111,6 +111,33 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 .welcome h2 { color: var(--text); font-size: 24px; }
 .welcome p { font-size: 14px; max-width: 400px; text-align: center; line-height: 1.6; }
 
+/* LOGIN OVERLAY */
+.login-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg); display: flex; align-items: center; justify-content: center;
+}
+.login-overlay.hidden { display: none; }
+.login-box {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  padding: 40px; width: 360px; text-align: center;
+}
+.login-box h2 { font-size: 20px; margin-bottom: 6px; }
+.login-box h2 em { color: var(--gold); font-style: normal; }
+.login-box p { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.12em; margin-bottom: 28px; text-transform: uppercase; }
+.login-box input {
+  width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px;
+  color: var(--text); outline: none; margin-bottom: 12px; transition: border-color 0.2s;
+}
+.login-box input:focus { border-color: var(--gold); }
+.login-box button {
+  width: 100%; padding: 12px; background: var(--gold); color: var(--bg); border: none;
+  border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; margin-top: 8px; transition: background 0.2s;
+}
+.login-box button:hover { background: #f5cc60; }
+.login-error { color: var(--red); font-size: 12px; margin-top: 12px; display: none; }
+
 @media(max-width: 700px) {
   .sidebar { width: 70px; min-width: 70px; }
   .agent-info, .sidebar-head p, .sidebar-foot { display: none; }
@@ -122,6 +149,17 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 </style>
 </head>
 <body>
+
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <h2><em>LABS</em>67</h2>
+    <p>Agent Hub — Authorized Access</p>
+    <input type="email" id="loginEmail" placeholder="Email" autocomplete="username">
+    <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()">LOGIN</button>
+    <div class="login-error" id="loginError">Invalid credentials</div>
+  </div>
+</div>
 
 <div class="sidebar">
   <div class="sidebar-head">
@@ -142,6 +180,30 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 </div>
 
 <script>
+// Auth
+const AUTH_HASH = 'f0131ed625b570ca76047fb17a9f31f0bffc29e12c0a6c4da41609cdd606f174';
+
+async function sha256(text) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const hash = await sha256(email + ':' + pass);
+  if (hash === AUTH_HASH) {
+    sessionStorage.setItem('labs67_auth', '1');
+    document.getElementById('loginOverlay').classList.add('hidden');
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+if (sessionStorage.getItem('labs67_auth') === '1') {
+  document.getElementById('loginOverlay').classList.add('hidden');
+}
+
 const API_KEY = 'AIzaSyCA8Bo0lthTH0FZDTSOq26Mlbfv3lH6wFw';
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + API_KEY;
 
