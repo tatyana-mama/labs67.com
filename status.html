@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LABS67 — Status Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a26;
+  --text:#e8e6e2;--muted:#888;--border:rgba(255,255,255,0.06);
+  --gold:#B8860B;--gold2:#D4A017;
+  --green:#22c55e;--red:#ef4444;--yellow:#eab308;--cyan:#30dcff;
+  --mono:'JetBrains Mono',monospace;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+.dash-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 40px;height:56px;display:flex;align-items:center;gap:24px}
+.dash-nav-logo{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:0.08em;color:var(--text)}
+.dash-nav-logo em{color:var(--gold);font-style:normal}
+.dash-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.dash-nav a:hover{color:var(--gold)}
+.dash-nav-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.dash-nav-status{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--green)}
+.dash-nav-time{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.06em}
+
+.dash-hero{padding:100px 40px 60px;text-align:center}
+.dash-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.dash-hero h1{font-family:'Syne',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:800;margin-bottom:12px}
+.dash-hero h1 em{color:var(--gold);font-style:normal}
+.dash-hero-sub{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto}
+
+.dash-stats{display:flex;justify-content:center;gap:48px;padding:0 40px 60px}
+.dash-stat{text-align:center}
+.dash-stat-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--gold)}
+.dash-stat-label{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+.dash-grid{max-width:1100px;margin:0 auto;padding:0 40px 80px;display:grid;grid-template-columns:1fr;gap:16px}
+
+.site-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px 32px;display:grid;grid-template-columns:1fr auto;gap:20px;transition:border-color 0.2s}
+.site-card:hover{border-color:rgba(184,134,11,0.3)}
+.site-top{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.site-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.site-dot.live{background:var(--green);box-shadow:0 0 8px rgba(34,197,94,0.5)}
+.site-dot.dev{background:var(--yellow);box-shadow:0 0 8px rgba(234,179,8,0.4)}
+.site-dot.offline{background:var(--red);box-shadow:0 0 8px rgba(239,68,68,0.4)}
+.site-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.02em}
+.site-name em{color:var(--gold);font-style:normal}
+.site-url{font-family:var(--mono);font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:0.04em}
+.site-url:hover{color:var(--gold2);text-decoration:underline}
+.site-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.site-tags{display:flex;flex-wrap:wrap;gap:6px}
+.site-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;padding:4px 10px;border-radius:4px;background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--border)}
+.site-tag.green{color:var(--green);border-color:rgba(34,197,94,0.2);background:rgba(34,197,94,0.06)}
+.site-tag.gold{color:var(--gold);border-color:rgba(184,134,11,0.2);background:rgba(184,134,11,0.06)}
+.site-tag.cyan{color:var(--cyan);border-color:rgba(48,220,255,0.2);background:rgba(48,220,255,0.06)}
+.site-tag.red{color:#ff6b6b;border-color:rgba(255,107,107,0.2);background:rgba(255,107,107,0.06)}
+
+.site-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:6px;min-width:120px}
+.site-status{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase}
+.site-status.live{color:var(--green)}
+.site-status.dev{color:var(--yellow)}
+.site-langs{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.dash-footer{text-align:center;padding:40px;border-top:1px solid var(--border);font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em}
+
+@media(max-width:768px){
+  .dash-nav{padding:0 20px}
+  .dash-hero{padding:80px 20px 40px}
+  .dash-stats{flex-wrap:wrap;gap:24px;padding:0 20px 40px}
+  .dash-grid{padding:0 16px 60px}
+  .site-card{grid-template-columns:1fr;padding:20px}
+  .site-right{flex-direction:row;align-items:center;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<nav class="dash-nav">
+  <div class="dash-nav-logo">LABS<em>67</em></div>
+  <a href="index.html">Home</a>
+  <a href="brandbook.html">Brand Book</a>
+  <a href="chat.html">Agent Hub</a>
+  <div class="dash-nav-right">
+    <span class="dash-nav-status" id="globalStatus">● ALL SYSTEMS OPERATIONAL</span>
+    <span class="dash-nav-time" id="dashTime"></span>
+  </div>
+</nav>
+
+<div class="dash-hero">
+  <div class="dash-eyebrow">// LABS67 Infrastructure</div>
+  <h1>Status <em>Dashboard</em></h1>
+  <p class="dash-hero-sub">Real-time overview of all concern domains, features, and deployment state.</p>
+</div>
+
+<div class="dash-stats">
+  <div class="dash-stat"><div class="dash-stat-num" id="totalSites">8</div><div class="dash-stat-label">Total Sites</div></div>
+  <div class="dash-stat"><div class="dash-stat-num" id="totalLive">8</div><div class="dash-stat-label">Live</div></div>
+  <div class="dash-stat"><div class="dash-stat-num" id="totalLangs">11</div><div class="dash-stat-label">Max Languages</div></div>
+  <div class="dash-stat"><div class="dash-stat-num" id="totalBrands">6</div><div class="dash-stat-label">Brands</div></div>
+</div>
+
+<div class="dash-grid" id="grid"></div>
+
+<footer class="dash-footer">
+  &copy; 2026 LABS67 Technology Concern &middot; Status Dashboard v1.0
+</footer>
+
+<script>
+const sites = [
+  {
+    name: 'LABS<em>67</em>',
+    url: 'https://labs67.com',
+    desc: 'Corporate hub. 6 brand directions, AI chat, Supabase forms, full i18n.',
+    status: 'live',
+    langs: 11,
+    tags: [
+      {text:'11 LANGS',cls:'green'},
+      {text:'AI CHAT',cls:'gold'},
+      {text:'SUPABASE',cls:'cyan'},
+      {text:'FAVICON',cls:'green'},
+    ]
+  },
+  {
+    name: 'SVYATLITSA',
+    url: 'https://svyatlitsa.com',
+    desc: 'Flagship dental clinic. Premium aesthetic design, AI-powered booking, chat widget.',
+    status: 'live',
+    langs: 11,
+    tags: [
+      {text:'11 LANGS',cls:'green'},
+      {text:'AI CHAT',cls:'gold'},
+      {text:'BOOKING FORM',cls:'cyan'},
+      {text:'FAVICON',cls:'green'},
+    ]
+  },
+  {
+    name: 'SCYRA<em>.AI</em>',
+    url: 'https://scyra.labs67.com',
+    desc: 'Edge AI product for dental clinics. NVIDIA Jetson. Indiegogo campaign landing.',
+    status: 'live',
+    langs: 3,
+    tags: [
+      {text:'3 LANGS',cls:'gold'},
+      {text:'INDIEGOGO',cls:'red'},
+      {text:'VIDEO',cls:'cyan'},
+      {text:'FAVICON',cls:'green'},
+    ]
+  },
+  {
+    name: 'Academi<em>67</em>',
+    url: 'https://academi67.com',
+    desc: 'Institute of clinical standards. 3 training tracks, application form, AI chat.',
+    status: 'live',
+    langs: 12,
+    tags: [
+      {text:'12 LANGS',cls:'green'},
+      {text:'AI CHAT',cls:'gold'},
+      {text:'APP FORM',cls:'cyan'},
+      {text:'FAVICON',cls:'green'},
+    ]
+  },
+  {
+    name: 'Trade<em>AI</em>',
+    url: 'https://trade.labs67.com',
+    desc: 'Tech products on the open market. AI Core Kit, SmartRoom Module, Clinical Vision.',
+    status: 'live',
+    langs: 12,
+    tags: [
+      {text:'12 LANGS',cls:'green'},
+      {text:'AI CHAT',cls:'gold'},
+      {text:'PRODUCT CATALOG',cls:'cyan'},
+      {text:'FAVICON',cls:'green'},
+    ]
+  },
+  {
+    name: 'Franchise<em>67</em>',
+    url: 'https://franchise.labs67.com',
+    desc: 'Scaling centre. Turnkey clinic franchise, master partnership, 3 formats.',
+    status: 'live',
+    langs: 12,
+    tags: [
+      {text:'12 LANGS',cls:'green'},
+      {text:'AI CHAT',cls:'gold'},
+      {text:'CONTACT FORM',cls:'cyan'},
+      {text:'FAVICON',cls:'green'},
+    ]
+  },
+  {
+    name: 'Brand <em>Book</em>',
+    url: 'https://labs67.com/brandbook.html',
+    desc: 'Design system documentation. Colors, typography, domain audit, components, guidelines.',
+    status: 'live',
+    langs: 1,
+    tags: [
+      {text:'1 LANG',cls:'gold'},
+      {text:'DESIGN SYSTEM',cls:'cyan'},
+      {text:'AUDIT',cls:'gold'},
+      {text:'GUIDELINES',cls:'green'},
+    ]
+  },
+  {
+    name: 'Agent <em>Hub</em>',
+    url: 'https://labs67.com/chat.html',
+    desc: '8 specialized AI agents. Gemini 2.5 Flash. Secure auth, real-time conversations.',
+    status: 'live',
+    langs: 1,
+    tags: [
+      {text:'8 AGENTS',cls:'green'},
+      {text:'GEMINI 2.5',cls:'gold'},
+      {text:'AUTH',cls:'red'},
+      {text:'REAL-TIME',cls:'cyan'},
+    ]
+  },
+];
+
+const grid = document.getElementById('grid');
+sites.forEach(s => {
+  const card = document.createElement('div');
+  card.className = 'site-card';
+  card.innerHTML = `
+    <div>
+      <div class="site-top">
+        <span class="site-dot ${s.status}"></span>
+        <span class="site-name">${s.name}</span>
+        <a class="site-url" href="${s.url}" target="_blank">${s.url.replace('https://','')}</a>
+      </div>
+      <div class="site-desc">${s.desc}</div>
+      <div class="site-tags">${s.tags.map(t=>`<span class="site-tag ${t.cls}">${t.text}</span>`).join('')}</div>
+    </div>
+    <div class="site-right">
+      <span class="site-status ${s.status}">${s.status === 'live' ? '● LIVE' : s.status === 'dev' ? '● DEV' : '● OFFLINE'}</span>
+      <span class="site-langs">${s.langs} lang${s.langs>1?'s':''}</span>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+function updateTime() {
+  const now = new Date();
+  document.getElementById('dashTime').textContent = now.toLocaleString('en-GB', {
+    day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit'
+  });
+}
+updateTime();
+setInterval(updateTime, 1000);
+</script>
+</body>
+</html>
