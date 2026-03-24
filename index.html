@@ -386,6 +386,9 @@ function resize() {
   cv.width = W * dpr; cv.height = H * dpr;
   cv.style.width = W + 'px'; cv.style.height = H + 'px';
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  // Fit graph to screen — scale based on smallest dimension
+  let fitZoom = Math.min(W, H) / 900;
+  zoom = fitZoom; targetZoom = fitZoom;
 }
 window.addEventListener('resize', resize);
 resize();
@@ -611,9 +614,9 @@ function applyTheme(themeClass) {
 function selectNode(n) {
   selected = n;
   if(!n) { goHome(); return; }
-  targetCamX = n.x + 120/zoom;
+  // Pan camera so selected node is left-of-center (panel opens right)
+  targetCamX = n.x + 100;
   targetCamY = n.y;
-  targetZoom = 1.8;
   document.getElementById('hero-overlay').classList.add('hidden');
   document.getElementById('hint').classList.add('hidden');
   applyTheme(THEMES[n.id] || 'theme-dark');
@@ -623,7 +626,7 @@ function selectNode(n) {
 
 function goHome() {
   selected = null;
-  targetCamX = 0; targetCamY = 0; targetZoom = 1;
+  targetCamX = 0; targetCamY = 0;
   document.getElementById('content').classList.remove('open');
   document.getElementById('hero-overlay').classList.remove('hidden');
   document.getElementById('hint').classList.remove('hidden');
@@ -683,26 +686,18 @@ cv.addEventListener('mouseup', e => {
     else if(!document.getElementById('content').classList.contains('open')) goHome();
   }
 });
-cv.addEventListener('wheel', e => {
-  e.preventDefault();
-  let f = e.deltaY > 0 ? 0.92 : 1.08;
-  let nz = Math.max(0.6, Math.min(2.5, targetZoom * f));
-  let [wx,wy] = s2w(e.clientX, e.clientY);
-  targetZoom = nz;
-  targetCamX = wx - (e.clientX - W/2) / nz;
-  targetCamY = wy - (e.clientY - H/2) / nz;
-}, {passive:false});
+// No scroll zoom — fixed scale
 
 // Touch
 let lastDist=0;
 cv.addEventListener('touchstart', e => {
   if(e.touches.length===1) { drag=true; dragSX=e.touches[0].clientX; dragSY=e.touches[0].clientY; camSX=targetCamX; camSY=targetCamY; }
-  if(e.touches.length===2) { let dx=e.touches[1].clientX-e.touches[0].clientX, dy=e.touches[1].clientY-e.touches[0].clientY; lastDist=Math.sqrt(dx*dx+dy*dy); }
+  // no pinch zoom
 },{passive:true});
 cv.addEventListener('touchmove', e => {
   e.preventDefault();
   if(e.touches.length===1&&drag) { targetCamX=camSX-(e.touches[0].clientX-dragSX)/zoom; targetCamY=camSY-(e.touches[0].clientY-dragSY)/zoom; }
-  if(e.touches.length===2) { let dx=e.touches[1].clientX-e.touches[0].clientX, dy=e.touches[1].clientY-e.touches[0].clientY, d=Math.sqrt(dx*dx+dy*dy); if(lastDist>0) targetZoom=Math.max(0.4,Math.min(4,targetZoom*(d/lastDist))); lastDist=d; }
+  // no pinch zoom on move
 },{passive:false});
 cv.addEventListener('touchend', e => {
   drag=false; lastDist=0;
