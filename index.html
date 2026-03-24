@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="be">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title id="pageTitle">LABS67 — Тэхналагічны канцэрн</title>
+<title>LABS67 — Technology Concern</title>
 <meta name="description" content="LABS67 — technology concern for next-generation medicine. SVYATLITSA, SCYRA.AI, Academi67, TradeAI, Franchise67.">
 <meta property="og:title" content="LABS67 — Technology Concern">
 <meta property="og:description" content="Ecosystem of AI-powered solutions for dental clinics. Edge AI, smart spaces, training standards.">
@@ -12,1560 +12,704 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@natchnennie">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #FAFAFA;
-  --bg2: #FFFFFF;
-  --bg3: #F3F1ED;
-  --panel: #FFFFFF;
-  --gold: #B8860B;
-  --gold2: #D4A017;
-  --gold-light: rgba(184,134,11,0.08);
-  --gold-glow: rgba(184,134,11,0.12);
-  --text: #1A1A1A;
-  --text2: #444444;
-  --muted: #888888;
-  --border: rgba(0,0,0,0.08);
-  --border2: rgba(0,0,0,0.12);
-  --green: #22C55E;
+  --bg: #f5f2ed;
+  --panel: rgba(255,255,255,0.94);
+  --card: rgba(245,242,237,0.95);
+  --accent: #B8860B;
+  --accent2: #D4A017;
+  --accent-dim: rgba(184,134,11,0.08);
+  --accent-glow: rgba(184,134,11,0.04);
+  --white: #1a1a1a;
+  --text: #555555;
+  --muted: #999999;
+  --border: rgba(0,0,0,0.06);
+  --border2: rgba(0,0,0,0.1);
   --cyan: #0891B2;
-  --font: 'Inter', sans-serif;
+  --green: #16a34a;
+  --purple: #7c3aed;
+  --pink: #db2777;
+  --serif: 'EB Garamond', Georgia, serif;
+  --sans: 'Inter', sans-serif;
   --mono: 'JetBrains Mono', monospace;
 }
-
+/* Theme transitions */
+body { transition: background 0.8s ease; }
+body.theme-dark { --bg:#0a0a0a; --panel:rgba(12,12,16,0.92); --card:rgba(18,18,24,0.95); --white:#f0ece4; --text:#a09888; --muted:#555; --border:rgba(255,255,255,0.06); --border2:rgba(255,255,255,0.1); }
+body.theme-svyatlitsa { --bg:#0a0808; --panel:rgba(10,8,8,0.94); --accent:#c9a96e; --accent2:#dbb87a; --accent-dim:rgba(201,169,110,0.1); --white:#f0ece4; --text:#a09888; --muted:#504838; --border:rgba(201,169,110,0.08); }
+body.theme-scyra { --bg:#080a10; --panel:rgba(8,10,16,0.94); --accent:#00D4FF; --accent2:#5ec4d4; --accent-dim:rgba(0,212,255,0.08); --white:#e0eaf0; --text:#8098a8; --muted:#405060; --border:rgba(0,212,255,0.08); }
+body.theme-academi { --bg:#0a080e; --panel:rgba(10,8,14,0.94); --accent:#a48bfa; --accent2:#c4b0ff; --accent-dim:rgba(164,139,250,0.08); --white:#ece8f4; --text:#9088a0; --muted:#504860; --border:rgba(164,139,250,0.08); }
+body.theme-trade { --bg:#0a080e; --panel:rgba(10,8,14,0.94); --accent:#a48bfa; --accent2:#c4b0ff; --accent-dim:rgba(164,139,250,0.08); --white:#ece8f4; --text:#9088a0; --muted:#504860; --border:rgba(164,139,250,0.08); }
+body.theme-franchise { --bg:#0a080e; --panel:rgba(10,8,14,0.94); --accent:#a48bfa; --accent2:#c4b0ff; --accent-dim:rgba(164,139,250,0.08); --white:#ece8f4; --text:#9088a0; --muted:#504860; --border:rgba(164,139,250,0.08); }
+body.theme-agents { --bg:#0e080a; --panel:rgba(14,8,10,0.94); --accent:#d47a9a; --accent2:#e8a0b8; --accent-dim:rgba(212,122,154,0.08); --white:#f0e8ec; --text:#a08890; --muted:#604850; --border:rgba(212,122,154,0.08); }
+body.theme-dragona { --bg:#080a08; --panel:rgba(8,10,8,0.94); --accent:#22C55E; --accent2:#5ec482; --accent-dim:rgba(34,197,94,0.08); --white:#e8f0e8; --text:#88a088; --muted:#486048; --border:rgba(34,197,94,0.08); }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--gold); color: var(--bg); }
 
-/* NAV */
-nav {
+canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+
+/* BG OVERLAY for theme color bleed */
+#bg-wash {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;
+  background: var(--bg); transition: background 0.8s ease;
+}
+
+/* TOP BAR */
+.topbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px; height: 60px;
-  background: rgba(255,255,255,0.92); backdrop-filter: blur(20px);
+  padding: 0 28px; height: 48px;
+  background: var(--panel); backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border);
+  transition: background 0.6s, border-color 0.6s;
 }
-.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
-.logo-hex {
-  width: 34px; height: 34px; background: linear-gradient(135deg, var(--gold), var(--gold2));
+.tb-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); cursor: pointer; transition: color 0.6s; }
+.tb-hex {
+  width: 28px; height: 28px; background: linear-gradient(135deg, var(--accent), var(--accent2));
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 9px; font-weight: 600; color: #fff; letter-spacing: 0.05em;
+  font-family: var(--mono); font-size: 7px; font-weight: 600; color: #fff;
+  transition: background 0.6s;
 }
-.logo-name { font-weight: 800; font-size: 16px; letter-spacing: 0.15em; }
-.logo-name em { color: var(--gold); font-style: normal; }
-.logo-sub { font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.tb-name { font-weight: 800; font-size: 14px; letter-spacing: 0.15em; }
+.tb-name em { color: var(--accent); font-style: normal; transition: color 0.6s; }
+.tb-links { display: flex; gap: 2px; }
+.tb-links a {
+  padding: 5px 12px; font-size: 10px; font-weight: 500; letter-spacing: 0.06em;
+  color: var(--muted); text-decoration: none; border-radius: 4px; transition: all 0.3s;
+}
+.tb-links a:hover { color: var(--accent); background: var(--accent-dim); }
+.tb-right { display: flex; align-items: center; gap: 10px; }
+.tb-status {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  color: var(--muted); display: flex; align-items: center; gap: 6px;
+}
+.tb-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+@media(max-width:768px) { .tb-links { display: none; } }
 
-.nav-links { display: flex; gap: 0; }
-.nav-links a {
-  padding: 8px 16px; font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
-  color: var(--text2); text-decoration: none; transition: color 0.2s;
+/* CONTENT PANEL — slides from right */
+#content {
+  position: fixed; top: 48px; right: 0; bottom: 0;
+  width: min(520px, 85vw); z-index: 50;
+  background: var(--panel); border-left: 1px solid var(--border);
+  backdrop-filter: blur(30px);
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s, border-color 0.6s;
+  overflow-y: auto; overflow-x: hidden;
+  scrollbar-width: thin; scrollbar-color: var(--muted) transparent;
 }
-.nav-links a:hover { color: var(--gold); }
+#content.open { transform: translateX(0); }
+#content::-webkit-scrollbar { width: 4px; }
+#content::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }
 
-.nav-r { display: flex; align-items: center; gap: 14px; }
-
-/* LANG DROPDOWN */
-.lang-wrap { position: relative; }
-.lang-btn {
-  display: flex; align-items: center; gap: 6px; padding: 6px 12px;
-  background: transparent; border: 1px solid var(--border); border-radius: 6px;
-  cursor: pointer; font-family: var(--mono); font-size: 11px; color: var(--text2);
-  transition: all 0.2s;
+.cp { padding: 32px 28px 60px; }
+.cp-close {
+  position: absolute; top: 12px; right: 16px;
+  width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 6px;
+  background: transparent; color: var(--muted); font-size: 16px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; z-index: 10;
 }
-.lang-btn:hover { border-color: var(--gold); color: var(--gold); }
-.lang-btn .lf { line-height: 1; }
-.lang-btn .la { font-size: 8px; margin-left: 2px; transition: transform 0.2s; }
-.lang-wrap.open .la { transform: rotate(180deg); }
-.lang-dd {
-  position: absolute; top: 100%; right: 0; margin-top: 6px;
-  background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08); min-width: 180px;
-  opacity: 0; pointer-events: none; transform: translateY(-6px);
-  transition: all 0.2s; z-index: 200; overflow: hidden;
+.cp-close:hover { border-color: var(--accent); color: var(--accent); }
+.cp-cat { font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.cp-title { font-family: var(--serif); font-size: 2.2rem; color: var(--white); font-weight: 400; letter-spacing: 0.08em; line-height: 1.1; margin-bottom: 12px; }
+.cp-desc { font-size: 0.9rem; line-height: 1.8; color: var(--text); margin-bottom: 24px; }
+.cp-divider { height: 1px; background: var(--border); margin: 24px 0; }
+.cp-section { margin-bottom: 24px; }
+.cp-section h3 { font-family: var(--serif); font-size: 1.1rem; color: var(--white); font-weight: 400; margin-bottom: 8px; }
+.cp-section p, .cp-section li { font-size: 0.82rem; line-height: 1.7; }
+.cp-section ul { list-style: none; }
+.cp-section ul li { padding: 3px 0 3px 16px; position: relative; }
+.cp-section ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+.cp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.cp-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em;
+  padding: 3px 10px; border: 1px solid var(--border); border-radius: 3px; color: var(--muted);
+  transition: border-color 0.4s, color 0.4s;
 }
-.lang-wrap.open .lang-dd { opacity: 1; pointer-events: auto; transform: translateY(0); }
-.lang-opt {
-  display: flex; align-items: center; gap: 8px; padding: 9px 14px;
-  width: 100%; border: none; background: transparent; cursor: pointer;
-  font-family: var(--mono); font-size: 11px; color: var(--text2);
-  transition: background 0.15s; text-align: left;
-}
-.lang-opt:hover { background: var(--gold-light); color: var(--gold); }
-.lang-opt.active { color: var(--gold); font-weight: 600; }
-.lang-opt .lf svg { display: block; }
-
-.nav-cta {
-  padding: 8px 18px; border: 1px solid var(--gold); color: var(--gold);
-  font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
-  text-decoration: none; border-radius: 6px; transition: all 0.2s;
-}
-.nav-cta:hover { background: var(--gold); color: #fff; }
-
-@media(max-width: 900px) {
-  nav { padding: 0 16px; }
-  .nav-links { display: none; }
-}
-
-/* HERO */
-.hero {
-  padding: 140px 40px 80px; max-width: 1100px; margin: 0 auto; text-align: center;
-}
-.hero-eyebrow {
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 24px;
-}
-.hero h1 {
-  font-size: clamp(36px, 5vw, 64px); font-weight: 800; line-height: 1.1;
-  letter-spacing: -0.02em; margin-bottom: 24px;
-}
-.hero h1 .gold { color: var(--gold); }
-.hero-sub {
-  font-size: 17px; line-height: 1.7; color: var(--text2); max-width: 640px;
-  margin: 0 auto 40px;
-}
-.hero-sub span { color: var(--gold); font-weight: 700; }
-.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; }
-.btn-gold {
-  padding: 14px 32px; background: var(--gold); color: #fff; border: none;
-  font-size: 14px; font-weight: 600; border-radius: 8px; text-decoration: none;
-  transition: all 0.2s; cursor: pointer;
-}
-.btn-gold:hover { background: var(--gold2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(184,134,11,0.25); }
-.btn-outline {
-  padding: 14px 32px; background: transparent; border: 1px solid var(--border2);
-  color: var(--text); font-size: 14px; font-weight: 500; border-radius: 8px;
+.cp-btn {
+  display: inline-block; padding: 10px 24px; margin-top: 16px;
+  border: 1px solid var(--accent); color: var(--accent); border-radius: 6px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
   text-decoration: none; transition: all 0.2s;
 }
-.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.cp-btn:hover { background: var(--accent); color: var(--bg); }
+.cp-stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 16px 0; }
+.cp-stat { text-align: center; padding: 14px 8px; background: var(--accent-glow); border: 1px solid var(--border); border-radius: 6px; transition: background 0.6s, border-color 0.6s; }
+.cp-stat-val { font-family: var(--serif); font-size: 1.4rem; color: var(--white); }
+.cp-stat-lbl { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; color: var(--muted); margin-top: 2px; }
+.cp-img { width: 100%; border-radius: 6px; margin: 12px 0; border: 1px solid var(--border); }
+.cp-links { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.cp-link {
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  border: 1px solid var(--border); border-radius: 6px;
+  text-decoration: none; color: var(--text); transition: all 0.2s;
+}
+.cp-link:hover { border-color: var(--accent); color: var(--accent); }
+.cp-link-icon { font-size: 16px; }
+.cp-link-text { font-size: 0.82rem; font-weight: 500; }
+.cp-link-url { font-family: var(--mono); font-size: 9px; color: var(--muted); }
 
-.hero-stats {
-  display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+/* HERO OVERLAY — center screen when no node selected */
+#hero-overlay {
+  position: fixed; z-index: 20;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; pointer-events: none;
+  transition: opacity 0.6s;
 }
-.hs { text-align: center; }
-.hs-num { font-size: 32px; font-weight: 800; color: var(--gold); display: block; }
-.hs-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+#hero-overlay.hidden { opacity: 0; }
+.ho-name { font-weight: 800; font-size: clamp(36px, 7vw, 72px); letter-spacing: 0.12em; color: var(--white); opacity: 0.08; transition: color 0.6s; }
+.ho-name em { color: var(--accent); font-style: normal; opacity: 1; transition: color 0.6s; }
+.ho-sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); opacity: 0.4; margin-top: 8px; transition: color 0.6s; }
 
-/* SECTIONS */
-section {
-  max-width: 1100px; margin: 0 auto; padding: 80px 40px;
+/* BOTTOM HINT */
+#hint {
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 30;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; color: var(--muted);
+  background: rgba(6,6,8,0.6); padding: 6px 16px; border-radius: 20px;
+  border: 1px solid var(--border); backdrop-filter: blur(10px);
+  transition: opacity 0.4s;
 }
-.section-label {
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
-}
-.section-title {
-  font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; line-height: 1.15;
-  letter-spacing: -0.02em; margin-bottom: 20px;
-}
-.section-title .light { color: var(--muted); font-weight: 500; }
-.section-desc { font-size: 16px; line-height: 1.7; color: var(--text2); max-width: 600px; }
-
-/* BRANDS GRID */
-.brands-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px; margin-top: 40px;
-}
-.brand-card {
-  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
-  padding: 32px; transition: all 0.3s; cursor: pointer; text-decoration: none; color: var(--text);
-  display: block;
-}
-.brand-card:hover { border-color: var(--gold); box-shadow: 0 8px 30px rgba(184,134,11,0.08); transform: translateY(-2px); }
-.brand-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-.brand-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-.brand-desc { font-size: 14px; line-height: 1.6; color: var(--text2); margin-bottom: 16px; }
-.brand-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-.brand-tag {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
-  padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; color: var(--muted);
-}
-
-/* SCYRA HIGHLIGHT */
-.scyra-banner {
-  background: linear-gradient(135deg, #1a0a30 0%, #2d1458 100%);
-  border-radius: 16px; padding: 48px; margin: 60px auto; max-width: 1100px;
-  color: #fff; display: flex; align-items: center; gap: 40px; flex-wrap: wrap;
-}
-.scyra-banner .scyra-info { flex: 1; min-width: 280px; }
-.scyra-banner h3 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
-.scyra-banner h3 .cyan { color: #00D4FF; }
-.scyra-banner p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.75); margin-bottom: 24px; }
-.scyra-banner .badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
-  padding: 6px 14px; border: 1px solid rgba(0,212,255,0.3); border-radius: 20px;
-  color: #00D4FF; margin-bottom: 16px;
-}
-.scyra-banner .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #00D4FF; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-.btn-cyan {
-  display: inline-block; padding: 14px 32px; background: #00D4FF; color: #1a0a30;
-  font-weight: 700; font-size: 14px; border-radius: 8px; text-decoration: none;
-  transition: all 0.2s;
-}
-.btn-cyan:hover { background: #00BFEA; transform: translateY(-1px); }
-.scyra-perks { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px; }
-.scyra-perk { text-align: center; min-width: 100px; }
-.scyra-perk .price { font-size: 24px; font-weight: 800; color: #00D4FF; }
-.scyra-perk .name { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-top: 4px; }
-
-/* DETAIL SECTIONS */
-.detail-section { border-top: 1px solid var(--border); }
-.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 40px; }
-@media(max-width: 768px) { .detail-grid { grid-template-columns: 1fr; gap: 32px; } }
-.detail-quote {
-  font-size: 18px; font-style: italic; line-height: 1.6; color: var(--text2);
-  border-left: 3px solid var(--gold); padding-left: 20px; margin: 24px 0;
-}
-.features { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
-.feat {
-  padding: 20px; background: var(--bg3); border-radius: 10px;
-}
-.feat-title { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
-.feat-desc { font-size: 13px; line-height: 1.6; color: var(--text2); }
-
-/* TRACKS */
-.tracks { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
-.track {
-  padding: 24px; border: 1px solid var(--border); border-radius: 10px;
-  transition: border-color 0.2s;
-}
-.track:hover { border-color: var(--gold); }
-.track-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 8px; }
-.track-title { font-weight: 700; font-size: 16px; margin-bottom: 6px; }
-.track-desc { font-size: 13px; line-height: 1.6; color: var(--text2); }
-
-/* FRANCHISE CARDS */
-.fr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 32px; }
-.fr-card {
-  padding: 24px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
-}
-.fr-card-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
-.fr-card-desc { font-size: 13px; line-height: 1.6; color: var(--text2); }
-
-/* TRADE ITEMS */
-.trade-items { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
-.trade-item {
-  display: flex; gap: 16px; padding: 20px; border: 1px solid var(--border); border-radius: 10px;
-  align-items: start;
-}
-.trade-icon { font-size: 28px; flex-shrink: 0; }
-.trade-item-desc { font-size: 14px; line-height: 1.6; color: var(--text2); }
-
-/* CONTACT */
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 40px; }
-@media(max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
-.c-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
-.c-value { font-size: 15px; font-weight: 500; margin-bottom: 16px; }
-.c-value a { color: var(--text); text-decoration: none; }
-.c-value a:hover { color: var(--gold); }
-
-.form { display: flex; flex-direction: column; gap: 12px; }
-.form-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 8px; }
-.form input, .form select, .form textarea {
-  padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px;
-  font-family: var(--font); font-size: 14px; color: var(--text);
-  background: var(--bg); transition: border-color 0.2s; width: 100%;
-}
-.form input:focus, .form select:focus, .form textarea:focus {
-  outline: none; border-color: var(--gold);
-}
-.form textarea { resize: vertical; min-height: 80px; }
-.form select { cursor: pointer; }
-.fsubmit {
-  padding: 14px 28px; background: var(--gold); color: #fff; border: none;
-  font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer;
-  font-family: var(--mono); letter-spacing: 0.05em; transition: all 0.2s;
-}
-.fsubmit:hover { background: var(--gold2); }
-
-/* FOOTER */
-footer {
-  border-top: 1px solid var(--border); padding: 40px;
-  text-align: center; font-size: 13px; color: var(--muted);
-}
-footer .footer-logo { font-size: 18px; font-weight: 800; letter-spacing: 0.1em; color: var(--text); margin-bottom: 8px; }
-footer .footer-logo em { color: var(--gold); font-style: normal; }
-footer .footer-links { margin-top: 16px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-footer .footer-links a { color: var(--muted); text-decoration: none; font-size: 12px; }
-footer .footer-links a:hover { color: var(--gold); }
-footer .footer-brands { margin-top: 20px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
-footer .footer-brands a { color: var(--muted); text-decoration: none; font-size: 11px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
-footer .footer-brands a:hover { color: var(--gold); }
-footer .footer-legal { margin-top: 12px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-footer .footer-legal a { color: var(--muted); text-decoration: none; font-size: 11px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
-footer .footer-legal a:hover { color: var(--gold); }
-.g { color: var(--green); }
-
-/* CHAT */
-#chat-bubble {
-  position: fixed; bottom: 24px; right: 24px; z-index: 500;
-  width: 52px; height: 52px; border-radius: 50%;
-  background: var(--gold); color: #fff; font-size: 22px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; box-shadow: 0 4px 20px rgba(184,134,11,0.3);
-  border: none; transition: transform 0.2s;
-}
-#chat-bubble:hover { transform: scale(1.08); }
-#chatWin {
-  position: fixed; bottom: 88px; right: 24px; z-index: 500;
-  width: 340px; max-height: 440px; background: var(--bg2);
-  border: 1px solid var(--border2); border-radius: 14px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-  display: none; flex-direction: column; overflow: hidden;
-}
-#chatWin.open { display: flex; }
-.chat-head {
-  padding: 14px 18px; border-bottom: 1px solid var(--border);
-  font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px;
-}
-.chat-head .online { font-family: var(--mono); font-size: 10px; color: var(--green); }
-#chatMsgs { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; min-height: 180px; }
-.msg { padding: 10px 14px; border-radius: 10px; font-size: 13px; line-height: 1.5; max-width: 85%; }
-.msg-bot { background: var(--bg3); align-self: flex-start; }
-.msg-user { background: var(--gold-light); align-self: flex-end; color: var(--text); }
-.msg-sender { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 4px; display: block; }
-#chatOpts { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 14px 10px; }
-.chat-opt {
-  padding: 6px 12px; border: 1px solid var(--border); border-radius: 16px;
-  background: transparent; cursor: pointer; font-size: 12px; color: var(--text2);
-  transition: all 0.15s;
-}
-.chat-opt:hover { border-color: var(--gold); color: var(--gold); }
-.chat-foot {
-  display: flex; border-top: 1px solid var(--border); padding: 10px;
-}
-.chat-foot input {
-  flex: 1; border: none; outline: none; font-size: 13px; padding: 6px 10px;
-  font-family: var(--font); background: transparent; color: var(--text);
-}
-.chat-foot button {
-  background: var(--gold); color: #fff; border: none; padding: 6px 14px;
-  border-radius: 6px; font-size: 13px; cursor: pointer;
-}
-
-/* ANIMATIONS */
-.fade-in {
-  opacity: 0; transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.fade-in.visible { opacity: 1; transform: translateY(0); }
+#hint.hidden { opacity: 0; pointer-events: none; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <div class="logo-hex">L67</div>
-    <div>
-      <div class="logo-name"><em>LABS</em>67</div>
-      <div class="logo-sub" data-i18n="logo_sub">Тэхналагічны канцэрн</div>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="#brands" data-i18n="nav_directions">Кірункі</a>
-    <a href="https://scyra.labs67.com">SCYRA.AI</a>
-    <a href="https://svyatlitsa.com">SVYATLITSA</a>
-    <a href="#academi">Academi67</a>
-    <a href="#trade">TradeAI</a>
-    <a href="#franchise">Franchise67</a>
-    <a href="#contact" data-i18n="nav_contacts">Кантакты</a>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-logo" onclick="goHome()">
+    <div class="tb-hex">L67</div>
+    <div><div class="tb-name"><em>LABS</em>67</div></div>
   </div>
-  <div class="nav-r">
-    <div class="lang-wrap" id="langWrap">
-      <button class="lang-btn" onclick="document.getElementById('langWrap').classList.toggle('open')">
-        <span class="lf" id="langFlag"></span>
-        <span id="langName">BY</span>
-        <span class="la">&#9660;</span>
-      </button>
-      <div class="lang-dd" id="langDD"></div>
-    </div>
-    <a href="#contact" class="nav-cta" data-i18n="nav_cta">Звязацца</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow" data-i18n="hero_eyebrow">// Канцэрн &middot; 5 кірункаў &middot; Медтэх</div>
-  <h1>
-    <span data-i18n="hero_line1">Мы мяняем</span><br>
-    <span class="gold" data-i18n="hero_line2">медыцыну</span>
-  </h1>
-  <p class="hero-sub" data-i18n="hero_sub"><span>LABS67</span> — тэхналагічны канцэрн, які стварае экасістэму рашэнняў для клінік новага пакалення. Ад разумных прастораў да стандартаў навучання.</p>
-  <div class="hero-btns">
-    <a href="#brands" class="btn-gold" data-i18n="hero_btn1">// Нашы кірункі</a>
-    <a href="#contact" class="btn-outline" data-i18n="hero_btn2">Звязацца з намі &rarr;</a>
-  </div>
-  <div class="hero-stats">
-    <div class="hs"><span class="hs-num">5</span><span class="hs-label" data-i18n="stat_label1">Кірункаў</span></div>
-    <div class="hs"><span class="hs-num">67</span><span class="hs-label" data-i18n="stat_label2">Тэхналогій</span></div>
-    <div class="hs"><span class="hs-num">AI</span><span class="hs-label" data-i18n="stat_label3">II</span></div>
-    <div class="hs"><span class="hs-num">&infin;</span><span class="hs-label" data-i18n="stat_label4">Маштаб</span></div>
-  </div>
-</div>
-
-<!-- SCYRA.AI BANNER -->
-<div class="scyra-banner" style="margin: 0 40px 60px; max-width: 1100px; margin-left: auto; margin-right: auto;">
-  <div class="scyra-info">
-    <div class="badge"><span class="dot"></span> LIVE ON INDIEGOGO</div>
-    <h3>SCYRA<span class="cyan">.AI</span></h3>
-    <p data-i18n="scyra_desc">Першая ў свеце edge AI сістэма для стаматалагічных клінік. AI-рэцэпцыя, разумнае планаванне, хірургічная асістэнцыя — усё на адным прыладзе NVIDIA Jetson.</p>
-    <a href="https://scyra.labs67.com" class="btn-cyan" data-i18n="scyra_btn">Падтрымаць на Indiegogo &rarr;</a>
-    <div class="scyra-perks">
-      <div class="scyra-perk"><div class="price">&euro;499</div><div class="name">EARLY BIRD</div></div>
-      <div class="scyra-perk"><div class="price">&euro;999</div><div class="name">CLINIC PACK</div></div>
-      <div class="scyra-perk"><div class="price">&euro;4,999</div><div class="name">FRANCHISE</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- BRANDS / DIRECTIONS -->
-<section id="brands">
-  <div class="section-label" data-i18n="brands_label">// Кірункі канцэрна</div>
-  <h2 class="section-title">
-    <span data-i18n="brands_title_1">Пяць</span> <span class="light" data-i18n="brands_title_2">кірункаў</span>
-  </h2>
-  <p class="section-desc" data-i18n="brands_lead">Выберыце кірунак, які вас цікавіць — кожны брэнд канцэрна вырашае сваю задачу.</p>
-  <div class="brands-grid">
-    <a href="https://svyatlitsa.com" class="brand-card" target="_blank">
-      <div class="brand-eyebrow" data-i18n="dental_eyebrow">Стаматалогія</div>
-      <div class="brand-name">SVYATLITSA</div>
-      <div class="brand-desc" data-i18n="dental_desc">Мяняем стаўленне да стаматалогіі і лічэбнай хірургіі. Разумныя клінікі, II-асістэнт, клопат — не страх.</div>
-      <div class="brand-tags">
-        <span class="brand-tag" data-i18n="dental_tag1">Клінікі</span>
-        <span class="brand-tag" data-i18n="dental_tag2">II-асістэнт</span>
-        <span class="brand-tag" data-i18n="dental_tag3">Вопыт пацыента</span>
-      </div>
-    </a>
-    <a href="https://scyra.labs67.com" class="brand-card" target="_blank">
-      <div class="brand-eyebrow">Edge AI</div>
-      <div class="brand-name">SCYRA.AI</div>
-      <div class="brand-desc" data-i18n="scyra_card_desc">Edge AI сістэма для клінік. Распазнаванне твараў, галасавы асістэнт, аналітыка — усё лакальна на NVIDIA Jetson.</div>
-      <div class="brand-tags">
-        <span class="brand-tag">NVIDIA Jetson</span>
-        <span class="brand-tag">Indiegogo</span>
-        <span class="brand-tag">Edge AI</span>
-      </div>
-    </a>
-    <a href="#academi" class="brand-card">
-      <div class="brand-eyebrow" data-i18n="academi_eyebrow">Адукацыя</div>
-      <div class="brand-name">Academi67</div>
-      <div class="brand-desc" data-i18n="academi_desc">Не проста курсы павышэння кваліфікацыі — поўная трансфармацыя клінічнага мыслення. Пратаколы, тэхналогіі, стандарты канцэрна.</div>
-      <div class="brand-tags">
-        <span class="brand-tag" data-i18n="academi_tag1">Навучанне</span>
-        <span class="brand-tag" data-i18n="academi_tag2">Сертыфікацыя</span>
-        <span class="brand-tag" data-i18n="academi_tag3">Стандарты</span>
-      </div>
-    </a>
-    <a href="#trade" class="brand-card">
-      <div class="brand-eyebrow" data-i18n="trade_eyebrow">Медтэх</div>
-      <div class="brand-name">TradeAI</div>
-      <div class="brand-desc" data-i18n="trade_desc">Распрацоўкі канцэрна на адкрытым рынку. Рашэнні для клінік, аптэк, лабараторый — гатовыя да разгортвання.</div>
-      <div class="brand-tags">
-        <span class="brand-tag" data-i18n="trade_tag1">II-рашэнні</span>
-        <span class="brand-tag" data-i18n="trade_tag2">Абсталяванне</span>
-        <span class="brand-tag" data-i18n="trade_tag3">Інтэграцыі</span>
-      </div>
-    </a>
-    <a href="#franchise" class="brand-card">
-      <div class="brand-eyebrow" data-i18n="franchise_eyebrow">Развіццё</div>
-      <div class="brand-name">Franchise67</div>
-      <div class="brand-desc" data-i18n="franchise_desc">Маштабаванне, мадэрнізацыя, тэхналагічныя рашэнні для медыцынскіх прастораў. Ствараем клінікі будучыні разам з партнёрамі.</div>
-      <div class="brand-tags">
-        <span class="brand-tag" data-i18n="franchise_tag1">Партнёрства</span>
-        <span class="brand-tag" data-i18n="franchise_tag2">Маштаб</span>
-        <span class="brand-tag" data-i18n="franchise_tag3">Тэхналогіі</span>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- DENTAL / SVYATLITSA -->
-<section id="dental" class="detail-section">
-  <div class="section-label" data-i18n="dental_sec_tag">// SVYATLITSA &middot; Канцэрн LABS67</div>
-  <h2 class="section-title">
-    <span data-i18n="dental_h2_1">Стаматалогія</span><br>
-    <span class="light" data-i18n="dental_h2_2">ў радасць</span>
-  </h2>
-  <div class="detail-grid">
-    <div>
-      <div class="detail-quote" data-i18n="dental_quote">&laquo;Мы мяняем стаўленне да стаматалогіі і лічэбнай хірургіі — назаўсёды.&raquo;</div>
-      <p class="section-desc" data-i18n="dental_p">Пацыент уваходзіць — сістэма яго пазнае. Ўрач працуе — II асістуе. Даныя абаронены. Клініка жыве як адзіны арганізм.</p>
-    </div>
-    <div class="features">
-      <div class="feat">
-        <div class="feat-title" data-i18n="feat1_title">Клопат, не страх</div>
-        <div class="feat-desc" data-i18n="feat1_desc">Разумнае асяроддзе зніжае стрэс пацыента з моманту ўваходу. Пазналі, сустрэлі, падрыхтаваліся.</div>
-      </div>
-      <div class="feat">
-        <div class="feat-title" data-i18n="feat2_title">II на кожным крэсле</div>
-        <div class="feat-desc" data-i18n="feat2_desc">Камера над крэслам, галасавы пратакол, аналіз здымкаў. Ўрач факусуецца на пацыенце.</div>
-      </div>
-      <div class="feat">
-        <div class="feat-title" data-i18n="feat3_title">Поўная прыватнасць</div>
-        <div class="feat-desc" data-i18n="feat3_desc">Усе даныя — толькі лакальна. Аніякай хмары. Адпаведнасць GDPR.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ACADEMI67 -->
-<section id="academi" class="detail-section">
-  <div class="section-label" data-i18n="academi_sec_tag">// Academi67 &middot; Канцэрн LABS67</div>
-  <h2 class="section-title">
-    <span data-i18n="academi_h2_1">Інстытут клінічных</span><br>
-    <span class="light" data-i18n="academi_h2_2">стандартаў</span> <span data-i18n="academi_h2_3">будучыні</span>
-  </h2>
-  <p class="section-desc" data-i18n="academi_lead">Не павышэнне кваліфікацыі — перазагрузка клінічнага мыслення. Усе ўрачы LABS67 праходзяць праз Academi67.</p>
-  <div class="tracks">
-    <div class="track">
-      <div class="track-num" data-i18n="track1_num">ТРЭК_01</div>
-      <div class="track-title" data-i18n="track1_title">Праграма перазагрузкі клінікі</div>
-      <div class="track-desc" data-i18n="track1_desc">Поўная перазагрузка клінічных пратаколаў. Новыя стандарты працы з пацыентам, дакументавання, асіставання II-сістэме.</div>
-    </div>
-    <div class="track">
-      <div class="track-num" data-i18n="track2_num">ТРЭК_02</div>
-      <div class="track-title" data-i18n="track2_title">Сертыфікацыя інтэграцыі II</div>
-      <div class="track-desc" data-i18n="track2_desc">Сертыфікацыя ўрачоў і асістэнтаў па рабоце з II-інструментамі канцэрна. Практыка на рэальным абсталяванні.</div>
-    </div>
-    <div class="track">
-      <div class="track-num" data-i18n="track3_num">ТРЭК_03</div>
-      <div class="track-title" data-i18n="track3_title">Лабараторыя даследаванняў і распрацовак</div>
-      <div class="track-desc" data-i18n="track3_desc">Даследчы кірунак — клінічныя выпрабаванні, распрацоўка новых пратаколаў, публікацыі ў партнёрстве з навуковымі інстытутамі.</div>
-    </div>
-  </div>
-  <div style="margin-top: 32px; padding: 24px; background: var(--gold-light); border-radius: 10px;">
-    <div class="section-label" data-i18n="as_label">// Наш стандарт</div>
-    <p style="font-weight: 600; margin-bottom: 8px;" data-i18n="as_text">Кожны спецыяліст, які працуе пад брэндам LABS67, прайшоў праз Academi67.</p>
-    <p class="section-desc" data-i18n="as_sub">Гэта не проста курс. Гэта гарантыя таго, што пацыент усюды атрымлівае адзін і той жа ўзровень клопату — прадказальны, тэхналагічны, чалавечы.</p>
-  </div>
-</section>
-
-<!-- TRADE -->
-<section id="trade" class="detail-section">
-  <div class="section-label" data-i18n="trade_sec_tag">// TradeAI &middot; Канцэрн LABS67</div>
-  <h2 class="section-title">
-    <span data-i18n="trade_h2_1">Тэхналогіі</span><br>
-    <span class="light" data-i18n="trade_h2_2">для</span> <span data-i18n="trade_h2_3">медыцыны</span>
-  </h2>
-  <p class="section-desc" data-i18n="trade_lead">Распрацоўкі канцэрна — даступны партнёрам і рынку. Гатовыя да разгортвання рашэнні для клінік, аптэк і медыцынскіх прастораў.</p>
-  <div class="trade-items">
-    <div class="trade-item">
-      <div class="trade-icon">&#9889;</div>
-      <div>
-        <div class="feat-title">AI Core Kit</div>
-        <div class="trade-item-desc" data-i18n="trade_item1_desc">Гатовы II-стэк на NVIDIA Jetson: распазнаванне твараў, галасавыя пратаколы, відэааналітыка. Разгортванне — да 1 дня.</div>
-      </div>
-    </div>
-    <div class="trade-item">
-      <div class="trade-icon">&#127969;</div>
-      <div>
-        <div class="feat-title">SmartRoom Module</div>
-        <div class="trade-item-desc" data-i18n="trade_item2_desc">Камплект разумнага кабінета: датчыкі прысутнасці, святло, клімат, камеры над рабочым месцам. Інтэграцыя з Home Assistant.</div>
-      </div>
-    </div>
-    <div class="trade-item">
-      <div class="trade-icon">&#129504;</div>
-      <div>
-        <div class="feat-title">Clinical Vision</div>
-        <div class="trade-item-desc" data-i18n="trade_item3_desc">Нейрасеткавы аналіз рэнтгенаўскіх здымкаў і інтраральных фота. Вывад рэкамендацый на планшэт урача ў рэальным часе.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FRANCHISE -->
-<section id="franchise" class="detail-section">
-  <div class="section-label" data-i18n="franchise_sec_tag">// Franchise67 &middot; Канцэрн LABS67</div>
-  <h2 class="section-title">
-    <span data-i18n="franchise_h2_1">Цэнтр росту</span><br>
-    <span class="light" data-i18n="franchise_h2_2">і</span> <span data-i18n="franchise_h2_3">маштабавання</span>
-  </h2>
-  <p class="section-desc" data-i18n="franchise_lead">Franchise67 — інфраструктурнае ядро канцэрна. Забеспячэнне, мадэрнізацыя абсталявання і распрацоўка тэхналагічных рашэнняў для медыцынскіх прастораў.</p>
-
-  <div class="detail-grid" style="margin-top: 32px;">
-    <div>
-      <div class="section-label" data-i18n="fh1_label">// Майстар-партнёрства</div>
-      <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 12px;" data-i18n="fh1_title">Стаць часткай канцэрна ў сваім рэгіёне</h3>
-      <p class="section-desc" data-i18n="fh1_desc">Для тых, хто мысліць маштабна — мы адкрыты да стратэгічнага партнёрства з ахопам горада, рэгіёна або краіны. Партнёр бярэ на сябе развіццё сеткі, канцэрн забяспечвае тэхналогіі, стандарты і падтрымку.</p>
-    </div>
-    <div>
-      <div class="section-label" data-i18n="fh2_label">// Гатовыя рашэнні</div>
-      <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 12px;" data-i18n="fh2_title">Клініка пад ключ</h3>
-      <p class="section-desc" data-i18n="fh2_desc">Стаматалогіі, клінікі, аптэкі і медыцынскія прасторы — праектаванне разумнага асяроддзя з нуля да запуску. Абсталяванне, II, інтэр'ер, стандарты.</p>
-    </div>
-  </div>
-
-  <div class="fr-grid">
-    <div class="fr-card">
-      <div class="fr-card-title" data-i18n="fran1_title">Тэхналагічная база</div>
-      <div class="fr-card-desc" data-i18n="fran1_desc">Поўны стэк: II-ядро, разумны дом, камеры, галасавыя пратаколы. Усё распрацавана і правераны ўнутры канцэрна.</div>
-    </div>
-    <div class="fr-card">
-      <div class="fr-card-title" data-i18n="fran2_title">Стандарты Academi67</div>
-      <div class="fr-card-desc" data-i18n="fran2_desc">Персанал франчайзі праходзіць навучанне і сертыфікацыю. Адзіны ўзровень сэрвісу ў кожнай кропцы.</div>
-    </div>
-    <div class="fr-card">
-      <div class="fr-card-title" data-i18n="fran3_title">Падтрымка і мадэрнізацыя</div>
-      <div class="fr-card-desc" data-i18n="fran3_desc">Бесперапыннае абнаўленне тэхналогій, тэхпадтрымка, развіццё II-мадэляў — усё ўключана.</div>
-    </div>
-    <div class="fr-card">
-      <div class="fr-card-title" data-i18n="fran4_title">Рэгіянальнае маштабаванне</div>
-      <div class="fr-card-desc" data-i18n="fran4_desc">Партнёры, гатовыя да сістэмнага развіцця сеткі ў рэгіёне, разглядаюцца ў прыярытэтным парадку.</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="detail-section">
-  <div class="section-label" data-i18n="contact_sec_tag">// КАНТАКТЫ</div>
-  <h2 class="section-title">
-    <span data-i18n="contact_h2_1">Звяжыцеся</span><br>
-    <span class="light" data-i18n="contact_h2_2">з</span> <span data-i18n="contact_h2_3">канцэрнам</span>
-  </h2>
-  <p class="section-desc" data-i18n="contact_lead">Выберыце кірунак — мы адкажам на любое пытанне.</p>
-  <div class="contact-grid">
-    <div>
-      <div class="c-label" data-i18n="cinfo_phone_label">Тэлефон</div>
-      <div class="c-value"><a href="tel:+48571719800">+48 571 719 800</a></div>
-      <div class="c-label" data-i18n="cinfo_email_label">Агульны запыт</div>
-      <div class="c-value"><a href="mailto:hello@labs67.com">hello@labs67.com</a></div>
-      <div class="c-label" data-i18n="cinfo_franchise_label">Franchise67 / Партнёрства</div>
-      <div class="c-value"><a href="mailto:franchise@labs67.com">franchise@labs67.com</a></div>
-    </div>
-    <div class="form">
-      <div class="form-label"><span id="formId">REQ_000000</span> &mdash; <span data-i18n="form_title">// НОВЫ ЗАПЫТ</span></div>
-      <input type="text" id="f_name" data-i18n-placeholder="form_name" placeholder="Імя">
-      <input type="tel" id="f_phone" data-i18n-placeholder="form_phone" placeholder="Тэлефон">
-      <input type="email" id="f_email" placeholder="Email">
-      <select id="f_direction">
-        <option data-i18n="form_direction">— Кірунак —</option>
-        <option>SVYATLITSA (Dental)</option>
-        <option>SCYRA.AI (Edge AI)</option>
-        <option>Academi67 (Education)</option>
-        <option>TradeAI (MedTech)</option>
-        <option>Franchise67 (Growth)</option>
-      </select>
-      <textarea id="f_message" rows="3" data-i18n-placeholder="form_message" placeholder="Паведамленне"></textarea>
-      <button class="fsubmit" onclick="handleSubmit()">// АДПРАВІЦЬ ЗАПЫТ &rarr;</button>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo"><em>LABS</em>67</div>
-  <div class="footer-brands">
-    <a href="https://svyatlitsa.com">SVYATLITSA</a>
-    <a href="https://scyra.labs67.com">SCYRA.AI</a>
-    <a href="https://academi67.com">Academi67</a>
-    <a href="https://trade.labs67.com">TradeAI</a>
-    <a href="https://franchise.labs67.com">Franchise67</a>
-  </div>
-  <div class="footer-legal">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Service</a>
+  <div class="tb-links">
+    <a href="portfolio.html">Portfolio</a>
+    <a href="chat.html">Agent Hub</a>
+    <a href="brandbook.html">LABS67 Brand</a>
+    <a href="svyatlitsa-brand.html">SVYATLITSA Brand</a>
     <a href="status.html">Status</a>
   </div>
-  <div data-i18n="footer_copy">&copy; 2026 LABS67 Канцэрн<br>Усе правы абаронены<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span></div>
-  <div class="footer-links">
-    <a href="https://x.com/natchnennie" target="_blank">@natchnennie</a>
-  </div>
-</footer>
-
-<!-- CHAT -->
-<button id="chat-bubble" onclick="toggleChat()">&#128172;</button>
-<div id="chatWin">
-  <div class="chat-head">LABS67 AI <span class="online" data-i18n="chat_online">&#9679; Анлайн &middot; Адкажу зараз</span></div>
-  <div id="chatMsgs">
-    <div class="msg msg-bot"><span class="msg-sender">// LABS67 AI</span>Вітаю! Які кірунак вас цікавіць?</div>
-  </div>
-  <div id="chatOpts">
-    <button class="chat-opt" onclick="chatSelect('dental')">&#129463; SVYATLITSA</button>
-    <button class="chat-opt" onclick="chatSelect('scyra')">&#9889; SCYRA.AI</button>
-    <button class="chat-opt" onclick="chatSelect('academi')">&#127891; Academi67</button>
-    <button class="chat-opt" onclick="chatSelect('franchise')">&#129309; Franchise67</button>
-    <button class="chat-opt" onclick="chatSelect('trade')">&#128722; TradeAI</button>
-  </div>
-  <div class="chat-foot">
-    <input type="text" id="chatInput" placeholder="..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button onclick="sendChat()">&rarr;</button>
+  <div class="tb-right">
+    <div class="tb-status"><div class="tb-dot"></div> ONLINE</div>
   </div>
 </div>
 
+<!-- BG -->
+<div id="bg-wash"></div>
+
+<!-- CANVAS -->
+<canvas id="g"></canvas>
+
+<!-- HERO OVERLAY -->
+<div id="hero-overlay">
+  <div class="ho-name"><em>LABS</em>67</div>
+  <div class="ho-sub">Technology Concern &middot; Click a node</div>
+</div>
+
+<!-- CONTENT PANEL -->
+<div id="content"><div class="cp" id="cp"></div></div>
+
+<!-- HINT -->
+<div id="hint">CLICK NODE TO EXPLORE &middot; SCROLL TO ZOOM &middot; DRAG TO PAN</div>
+
 <script>
-// ── i18n ──
-const i18n = {
-  be: {
-    logo_sub:'Тэхналагічны канцэрн',
-    nav_directions:'Кірункі', nav_contacts:'Кантакты', nav_cta:'Звязацца',
-    hero_eyebrow:'// Канцэрн &middot; 5 кірункаў &middot; Медтэх',
-    hero_line1:'Мы мяняем', hero_line2:'медыцыну',
-    hero_sub:'<span>LABS67</span> — тэхналагічны канцэрн, які стварае экасістэму рашэнняў для клінік новага пакалення. Ад разумных прастораў да стандартаў навучання.',
-    hero_btn1:'// Нашы кірункі', hero_btn2:'Звязацца з намі &rarr;',
-    stat_label1:'Кірункаў', stat_label2:'Тэхналогій', stat_label3:'II', stat_label4:'Маштаб',
-    brands_label:'// Кірункі канцэрна', brands_title_1:'Пяць', brands_title_2:'кірункаў',
-    brands_lead:'Выберыце кірунак, які вас цікавіць — кожны брэнд канцэрна вырашае сваю задачу.',
-    scyra_desc:'Першая ў свеце edge AI сістэма для стаматалагічных клінік. AI-рэцэпцыя, разумнае планаванне, хірургічная асістэнцыя — усё на адным прыладзе NVIDIA Jetson.',
-    scyra_btn:'Падтрымаць на Indiegogo &rarr;',
-    scyra_card_desc:'Edge AI сістэма для клінік. Распазнаванне твараў, галасавы асістэнт, аналітыка — усё лакальна на NVIDIA Jetson.',
-    dental_eyebrow:'Стаматалогія', dental_desc:'Мяняем стаўленне да стаматалогіі і лічэбнай хірургіі. Разумныя клінікі, II-асістэнт, клопат — не страх.',
-    dental_tag1:'Клінікі', dental_tag2:'II-асістэнт', dental_tag3:'Вопыт пацыента',
-    academi_eyebrow:'Адукацыя', academi_desc:'Не проста курсы павышэння кваліфікацыі — поўная трансфармацыя клінічнага мыслення.',
-    academi_tag1:'Навучанне', academi_tag2:'Сертыфікацыя', academi_tag3:'Стандарты',
-    trade_eyebrow:'Медтэх', trade_desc:'Распрацоўкі канцэрна на адкрытым рынку. Рашэнні для клінік, аптэк, лабараторый.',
-    trade_tag1:'II-рашэнні', trade_tag2:'Абсталяванне', trade_tag3:'Інтэграцыі',
-    franchise_eyebrow:'Развіццё', franchise_desc:'Маштабаванне, мадэрнізацыя, тэхналагічныя рашэнні для медыцынскіх прастораў.',
-    franchise_tag1:'Партнёрства', franchise_tag2:'Маштаб', franchise_tag3:'Тэхналогіі',
-    dental_sec_tag:'// SVYATLITSA &middot; Канцэрн LABS67',
-    dental_h2_1:'Стаматалогія', dental_h2_2:'ў радасць',
-    dental_quote:'&laquo;Мы мяняем стаўленне да стаматалогіі і лічэбнай хірургіі — назаўсёды.&raquo;',
-    dental_p:'Пацыент уваходзіць — сістэма яго пазнае. Ўрач працуе — II асістуе. Даныя абаронены. Клініка жыве як адзіны арганізм.',
-    feat1_title:'Клопат, не страх', feat1_desc:'Разумнае асяроддзе зніжае стрэс пацыента з моманту ўваходу.',
-    feat2_title:'II на кожным крэсле', feat2_desc:'Камера над крэслам, галасавы пратакол, аналіз здымкаў.',
-    feat3_title:'Поўная прыватнасць', feat3_desc:'Усе даныя — толькі лакальна. Аніякай хмары. GDPR.',
-    academi_sec_tag:'// Academi67 &middot; Канцэрн LABS67',
-    academi_h2_1:'Інстытут клінічных', academi_h2_2:'стандартаў', academi_h2_3:'будучыні',
-    academi_lead:'Не павышэнне кваліфікацыі — перазагрузка клінічнага мыслення. Усе ўрачы LABS67 праходзяць праз Academi67.',
-    track1_num:'ТРЭК_01', track1_title:'Праграма перазагрузкі клінікі', track1_desc:'Поўная перазагрузка клінічных пратаколаў.',
-    track2_num:'ТРЭК_02', track2_title:'Сертыфікацыя інтэграцыі II', track2_desc:'Сертыфікацыя ўрачоў і асістэнтаў па рабоце з II-інструментамі.',
-    track3_num:'ТРЭК_03', track3_title:'Лабараторыя даследаванняў', track3_desc:'Клінічныя выпрабаванні, новыя пратаколы, публікацыі.',
-    as_label:'// Наш стандарт', as_text:'Кожны спецыяліст пад брэндам LABS67 прайшоў праз Academi67.',
-    as_sub:'Гарантыя аднолькавага ўзроўню клопату — прадказальнага, тэхналагічнага, чалавечага.',
-    trade_sec_tag:'// TradeAI &middot; Канцэрн LABS67',
-    trade_h2_1:'Тэхналогіі', trade_h2_2:'для', trade_h2_3:'медыцыны',
-    trade_lead:'Распрацоўкі канцэрна — даступны партнёрам і рынку.',
-    trade_item1_desc:'Гатовы II-стэк на NVIDIA Jetson: распазнаванне твараў, галасавыя пратаколы, відэааналітыка.',
-    trade_item2_desc:'Камплект разумнага кабінета: датчыкі, святло, клімат, камеры. Home Assistant.',
-    trade_item3_desc:'Нейрасеткавы аналіз рэнтгенаў і інтраральных фота ў рэальным часе.',
-    franchise_sec_tag:'// Franchise67 &middot; Канцэрн LABS67',
-    franchise_h2_1:'Цэнтр росту', franchise_h2_2:'і', franchise_h2_3:'маштабавання',
-    franchise_lead:'Franchise67 — інфраструктурнае ядро канцэрна.',
-    fh1_label:'// Майстар-партнёрства', fh1_title:'Стаць часткай канцэрна ў сваім рэгіёне',
-    fh1_desc:'Стратэгічнае партнёрства з ахопам горада, рэгіёна або краіны.',
-    fh2_label:'// Гатовыя рашэнні', fh2_title:'Клініка пад ключ',
-    fh2_desc:'Праектаванне разумнага асяроддзя з нуля да запуску.',
-    fran1_title:'Тэхналагічная база', fran1_desc:'Поўны стэк: II-ядро, разумны дом, камеры, галасавыя пратаколы.',
-    fran2_title:'Стандарты Academi67', fran2_desc:'Персанал франчайзі праходзіць навучанне і сертыфікацыю.',
-    fran3_title:'Падтрымка і мадэрнізацыя', fran3_desc:'Бесперапыннае абнаўленне тэхналогій.',
-    fran4_title:'Рэгіянальнае маштабаванне', fran4_desc:'Сістэмнае развіццё сеткі ў рэгіёне.',
-    contact_sec_tag:'// КАНТАКТЫ',
-    contact_h2_1:'Звяжыцеся', contact_h2_2:'з', contact_h2_3:'канцэрнам',
-    contact_lead:'Выберыце кірунак — мы адкажам на любое пытанне.',
-    cinfo_phone_label:'Тэлефон', cinfo_email_label:'Агульны запыт', cinfo_franchise_label:'Franchise67 / Партнёрства',
-    form_title:'// НОВЫ ЗАПЫТ', form_name:'Імя', form_phone:'Тэлефон', form_direction:'Кірунак', form_message:'Паведамленне',
-    footer_copy:'&copy; 2026 LABS67 Канцэрн<br>Усе правы абаронены<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; Анлайн &middot; Адкажу зараз',
+// ===== DATA =====
+const NODES = [
+  { id:'hub', label:'LABS67', color:'#c9a96e', r:48, cat:'concern',
+    desc:'Technology concern building an AI-powered ecosystem for next-gen dental medicine.',
+    tags:['medtech','AI','franchise','edge-computing'],
+    stats:[{v:'5',l:'Directions'},{v:'67',l:'Technologies'},{v:'EU',l:'Market'}],
+    links:[
+      {icon:'&#9733;',text:'Indiegogo Campaign',url:'#',note:'Coming soon'},
+      {icon:'&#9881;',text:'Status Dashboard',url:'status.html',note:'labs67.com/status'},
+      {icon:'&#9998;',text:'Portfolio',url:'portfolio.html',note:'labs67.com/portfolio'},
+    ],
+    html:`<div class="cp-section"><h3>Mission</h3><p>We build the infrastructure for clinics of tomorrow. From AI diagnostics to smart spaces, from training standards to franchise systems — everything connected, everything automated.</p></div>
+    <div class="cp-section"><h3>Directions</h3><ul>
+      <li><strong style="color:var(--cyan)">SCYRA.AI</strong> — Edge AI for dental clinics</li>
+      <li><strong style="color:var(--white)">SVYATLITSA</strong> — Flagship premium clinic</li>
+      <li><strong style="color:var(--purple)">Academi67</strong> — Education & certification</li>
+      <li><strong style="color:var(--purple)">TradeAI</strong> — Trading analytics</li>
+      <li><strong style="color:var(--purple)">Franchise67</strong> — EU franchise system</li>
+    </ul></div>`
   },
-  en: {
-    logo_sub:'Technology Concern',
-    nav_directions:'Directions', nav_contacts:'Contacts', nav_cta:'Contact',
-    hero_eyebrow:'// Concern &middot; 5 directions &middot; MedTech',
-    hero_line1:'We are changing', hero_line2:'medicine',
-    hero_sub:'<span>LABS67</span> &mdash; a technology concern building an ecosystem of solutions for next-generation clinics. From smart spaces to training standards.',
-    hero_btn1:'// Our directions', hero_btn2:'Contact us &rarr;',
-    stat_label1:'Directions', stat_label2:'Technologies', stat_label3:'AI', stat_label4:'Scale',
-    brands_label:'// Concern directions', brands_title_1:'Five', brands_title_2:'directions',
-    brands_lead:'Choose the direction that interests you &mdash; each brand solves its own task.',
-    scyra_desc:'The world\'s first edge AI system for dental clinics. AI reception, smart scheduling, surgical assistance &mdash; all on one NVIDIA Jetson device.',
-    scyra_btn:'Back on Indiegogo &rarr;',
-    scyra_card_desc:'Edge AI system for clinics. Face recognition, voice assistant, analytics &mdash; all locally on NVIDIA Jetson.',
-    dental_eyebrow:'Dentistry', dental_desc:'Changing the attitude to dentistry and facial surgery. Smart clinics, AI assistant, care &mdash; not fear.',
-    dental_tag1:'Clinics', dental_tag2:'AI assistant', dental_tag3:'Patient experience',
-    academi_eyebrow:'Education', academi_desc:'Not just courses &mdash; a complete transformation of clinical thinking.',
-    academi_tag1:'Training', academi_tag2:'Certification', academi_tag3:'Standards',
-    trade_eyebrow:'MedTech', trade_desc:'Concern developments on the open market. Solutions for clinics, pharmacies, labs.',
-    trade_tag1:'AI solutions', trade_tag2:'Equipment', trade_tag3:'Integrations',
-    franchise_eyebrow:'Growth', franchise_desc:'Scaling, modernisation, tech solutions for medical spaces.',
-    franchise_tag1:'Partnership', franchise_tag2:'Scale', franchise_tag3:'Technologies',
-    dental_sec_tag:'// SVYATLITSA &middot; LABS67 Concern',
-    dental_h2_1:'Dentistry', dental_h2_2:'made joyful',
-    dental_quote:'&laquo;We are changing the attitude to dentistry and facial surgery &mdash; forever.&raquo;',
-    dental_p:'The patient enters &mdash; the system recognises them. The doctor works &mdash; AI assists. Data is protected. The clinic lives as a single organism.',
-    feat1_title:'Care, not fear', feat1_desc:'A smart environment reduces patient stress from the moment of entry.',
-    feat2_title:'AI at every chair', feat2_desc:'Camera above the chair, voice protocol, image analysis.',
-    feat3_title:'Full privacy', feat3_desc:'All data &mdash; local only. No cloud. GDPR compliant.',
-    academi_sec_tag:'// Academi67 &middot; LABS67 Concern',
-    academi_h2_1:'Institute of Clinical', academi_h2_2:'Standards of the', academi_h2_3:'Future',
-    academi_lead:'Not qualification upgrading &mdash; a reboot of clinical thinking. All LABS67 doctors go through Academi67.',
-    track1_num:'TRACK_01', track1_title:'Clinical Reboot Program', track1_desc:'Complete reboot of clinical protocols.',
-    track2_num:'TRACK_02', track2_title:'AI Integration Certification', track2_desc:'Certification of doctors and assistants in AI tools.',
-    track3_num:'TRACK_03', track3_title:'Research &amp; Development Lab', track3_desc:'Clinical trials, new protocols, publications.',
-    as_label:'// Our standard', as_text:'Every specialist under the LABS67 brand has been through Academi67.',
-    as_sub:'A guarantee that the patient everywhere receives the same level of care &mdash; predictable, technological, human.',
-    trade_sec_tag:'// TradeAI &middot; LABS67 Concern',
-    trade_h2_1:'Technologies', trade_h2_2:'for', trade_h2_3:'Medicine',
-    trade_lead:'Concern developments &mdash; available to partners and the market.',
-    trade_item1_desc:'Ready AI stack on NVIDIA Jetson: face recognition, voice protocols, video analytics.',
-    trade_item2_desc:'Smart room kit: sensors, lighting, climate, cameras. Home Assistant integration.',
-    trade_item3_desc:'Neural network analysis of X-rays and intraoral photos in real time.',
-    franchise_sec_tag:'// Franchise67 &middot; LABS67 Concern',
-    franchise_h2_1:'Growth Centre', franchise_h2_2:'and', franchise_h2_3:'Scaling',
-    franchise_lead:'Franchise67 &mdash; the infrastructure core of the concern.',
-    fh1_label:'// Master partnership', fh1_title:'Become part of the concern in your region',
-    fh1_desc:'Strategic partnership covering a city, region or country.',
-    fh2_label:'// Ready solutions', fh2_title:'Turnkey clinic',
-    fh2_desc:'Smart environment design from zero to launch.',
-    fran1_title:'Technology base', fran1_desc:'Full stack: AI core, smart home, cameras, voice protocols.',
-    fran2_title:'Academi67 Standards', fran2_desc:'Franchisee staff undergo training and certification.',
-    fran3_title:'Support &amp; Modernisation', fran3_desc:'Continuous technology updates.',
-    fran4_title:'Regional scaling', fran4_desc:'Systematic network development in a region.',
-    contact_sec_tag:'// CONTACTS',
-    contact_h2_1:'Get in touch', contact_h2_2:'with', contact_h2_3:'the concern',
-    contact_lead:'Choose a direction &mdash; we will answer any question.',
-    cinfo_phone_label:'Phone', cinfo_email_label:'General enquiry', cinfo_franchise_label:'Franchise67 / Partnership',
-    form_title:'// NEW REQUEST', form_name:'Name', form_phone:'Phone', form_direction:'Direction', form_message:'Message',
-    footer_copy:'&copy; 2026 LABS67 Concern<br>All rights reserved<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; Online &middot; Reply now',
+  { id:'scyra', label:'SCYRA.AI', color:'#5ec4d4', r:36, cat:'product',
+    desc:'First edge AI system for dental clinics. NVIDIA Jetson AGX Orin 64GB. No cloud — all data stays in the building.',
+    tags:['nvidia','jetson','edge-ai','dental','HIPAA','local'],
+    stats:[{v:'64GB',l:'GPU RAM'},{v:'0ms',l:'Cloud Latency'},{v:'100%',l:'Privacy'}],
+    links:[
+      {icon:'&#9889;',text:'SCYRA.AI Website',url:'https://scyra.labs67.com',note:'scyra.labs67.com'},
+      {icon:'&#9733;',text:'Indiegogo',url:'#',note:'Campaign launching soon'},
+    ],
+    html:`<div class="cp-section"><h3>Core Capabilities</h3><ul>
+      <li>AI reception — face recognition, auto check-in</li>
+      <li>Smart scheduling — real-time optimization</li>
+      <li>Surgical assistance — X-ray analysis, treatment planning</li>
+      <li>Video recording — every procedure documented</li>
+      <li>Voice assistant — hands-free control</li>
+    </ul></div>
+    <div class="cp-section"><h3>Hardware</h3><ul>
+      <li>NVIDIA Jetson AGX Orin 64GB — main compute</li>
+      <li>NVMe 2TB — hot storage, DeepStream buffer</li>
+      <li>NAS 48TB HDD (RAID5) — archive</li>
+      <li>4K cameras — treatment rooms + reception</li>
+      <li>Aqara sensors — IoT mesh</li>
+    </ul></div>
+    <div class="cp-section"><h3>ML Pipeline</h3><p>3-stage strategy: (1) off-the-shelf models at launch, (2) data collection via Label Studio, (3) fine-tune custom models on real clinical data. PyTorch + TensorRT + DeepStream.</p></div>`
   },
-  uk: {
-    logo_sub:'Технологічний концерн',
-    nav_directions:'Напрямки', nav_contacts:'Контакти', nav_cta:'Зв\'язатися',
-    hero_eyebrow:'// Концерн &middot; 5 напрямків &middot; МедТех',
-    hero_line1:'Ми змінюємо', hero_line2:'медицину',
-    hero_sub:'<span>LABS67</span> &mdash; технологічний концерн, що будує екосистему рішень для клінік нового покоління.',
-    hero_btn1:'// Наші напрямки', hero_btn2:'Зв\'язатися з нами &rarr;',
-    stat_label1:'Напрямків', stat_label2:'Технологій', stat_label3:'ШІ', stat_label4:'Масштаб',
-    brands_label:'// Напрямки концерну', brands_title_1:'П\'ять', brands_title_2:'напрямків',
-    brands_lead:'Оберіть напрямок, який вас цікавить.',
-    scyra_desc:'Перша у світі edge AI система для стоматологічних клінік. AI-рецепція, розумне планування, хірургічна асистенція.',
-    scyra_btn:'Підтримати на Indiegogo &rarr;',
-    scyra_card_desc:'Edge AI система для клінік. Розпізнавання облич, голосовий асистент, аналітика.',
-    dental_eyebrow:'Стоматологія', dental_desc:'Змінюємо ставлення до стоматології. Розумні клініки, ШІ-асистент, турбота.',
-    dental_tag1:'Клініки', dental_tag2:'ШІ-асистент', dental_tag3:'Досвід пацієнта',
-    academi_eyebrow:'Освіта', academi_desc:'Повна трансформація клінічного мислення.',
-    academi_tag1:'Навчання', academi_tag2:'Сертифікація', academi_tag3:'Стандарти',
-    trade_eyebrow:'МедТех', trade_desc:'Розробки концерну на відкритому ринку.',
-    trade_tag1:'ШІ-рішення', trade_tag2:'Обладнання', trade_tag3:'Інтеграції',
-    franchise_eyebrow:'Розвиток', franchise_desc:'Масштабування, технологічні рішення для медичних просторів.',
-    franchise_tag1:'Партнерство', franchise_tag2:'Масштаб', franchise_tag3:'Технології',
-    dental_sec_tag:'// SVYATLITSA &middot; Концерн LABS67',
-    dental_h2_1:'Стоматологія', dental_h2_2:'із задоволенням',
-    dental_quote:'&laquo;Ми змінюємо ставлення до стоматології &mdash; назавжди.&raquo;',
-    dental_p:'Пацієнт входить &mdash; система впізнає. Лікар працює &mdash; ШІ асистує.',
-    feat1_title:'Турбота, не страх', feat1_desc:'Розумне середовище знижує стрес пацієнта з моменту входу.',
-    feat2_title:'ШІ на кожному кріслі', feat2_desc:'Камера, голосовий протокол, аналіз знімків.',
-    feat3_title:'Повна приватність', feat3_desc:'Усі дані &mdash; лише локально. GDPR.',
-    academi_sec_tag:'// Academi67 &middot; Концерн LABS67',
-    academi_h2_1:'Інститут клінічних', academi_h2_2:'стандартів', academi_h2_3:'майбутнього',
-    academi_lead:'Перезавантаження клінічного мислення. Всі лікарі LABS67 проходять через Academi67.',
-    track1_num:'ТРЕК_01', track1_title:'Програма перезавантаження', track1_desc:'Нові стандарти роботи з пацієнтом.',
-    track2_num:'ТРЕК_02', track2_title:'Сертифікація інтеграції ШІ', track2_desc:'Практика на реальному обладнанні.',
-    track3_num:'ТРЕК_03', track3_title:'Лабораторія досліджень', track3_desc:'Клінічні випробування, нові протоколи.',
-    as_label:'// Наш стандарт', as_text:'Кожен фахівець під брендом LABS67 пройшов через Academi67.',
-    as_sub:'Гарантія однакового рівня турботи.',
-    trade_sec_tag:'// TradeAI &middot; Концерн LABS67',
-    trade_h2_1:'Технології', trade_h2_2:'для', trade_h2_3:'медицини',
-    trade_lead:'Розробки концерну для партнерів і ринку.',
-    trade_item1_desc:'ШІ-стек на NVIDIA Jetson: розпізнавання, протоколи, відеоаналітика.',
-    trade_item2_desc:'Комплект розумного кабінету: датчики, світло, клімат, камери.',
-    trade_item3_desc:'Нейромережевий аналіз знімків у реальному часі.',
-    franchise_sec_tag:'// Franchise67 &middot; Концерн LABS67',
-    franchise_h2_1:'Центр зростання', franchise_h2_2:'і', franchise_h2_3:'масштабування',
-    franchise_lead:'Franchise67 &mdash; інфраструктурне ядро концерну.',
-    fh1_label:'// Майстер-партнерство', fh1_title:'Стати частиною концерну у своєму регіоні',
-    fh1_desc:'Стратегічне партнерство з охопленням міста, регіону або країни.',
-    fh2_label:'// Готові рішення', fh2_title:'Клініка під ключ',
-    fh2_desc:'Проектування розумного середовища з нуля до запуску.',
-    fran1_title:'Технологічна база', fran1_desc:'Повний стек: ШІ-ядро, розумний будинок, камери.',
-    fran2_title:'Стандарти Academi67', fran2_desc:'Навчання та сертифікація персоналу.',
-    fran3_title:'Підтримка і модернізація', fran3_desc:'Безперервне оновлення технологій.',
-    fran4_title:'Регіональне масштабування', fran4_desc:'Системний розвиток мережі.',
-    contact_sec_tag:'// КОНТАКТИ',
-    contact_h2_1:'Зв\'яжіться', contact_h2_2:'з', contact_h2_3:'концерном',
-    contact_lead:'Оберіть напрямок &mdash; ми відповімо.',
-    cinfo_phone_label:'Телефон', cinfo_email_label:'Загальний запит', cinfo_franchise_label:'Franchise67 / Партнерство',
-    form_title:'// НОВИЙ ЗАПИТ', form_name:'Ім\'я', form_phone:'Телефон', form_direction:'Напрямок', form_message:'Повідомлення',
-    footer_copy:'&copy; 2026 LABS67 Концерн<br>Всі права захищені<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; Онлайн &middot; Відповім зараз',
+  { id:'svyatlitsa', label:'SVYATLITSA', color:'#c9a96e', r:34, cat:'clinic',
+    desc:'Premium dental clinic. Ceiling-down system — all equipment mounted above. Smart glass. KYNOSYS vertical storage. Robot cleaning. Zero clutter.',
+    tags:['clinic','warsaw','franchise','ceiling-down','smart-glass'],
+    stats:[{v:'1.7M',l:'PLN Budget'},{v:'Q3',l:'2026 Open'},{v:'35-75k',l:'PLN/month'}],
+    links:[
+      {icon:'&#9968;',text:'Business Plan',url:'https://academi67.com/business-plan.html',note:'Full financial model'},
+      {icon:'&#9998;',text:'Brand Guidelines',url:'https://academi67.com/brandbook.html',note:'10 sections'},
+      {icon:'&#127968;',text:'SVYATLITSA Website',url:'https://svyatlitsa.com',note:'svyatlitsa.com'},
+    ],
+    html:`<div class="cp-section"><h3>Design Philosophy</h3><p>Surgical precision in warm materials. Oak slat walls, micro-cement floors, electrochromic glass. One chair per room. Everything descends from the ceiling — floor stays empty for robot cleaning.</p></div>
+    <div class="cp-section"><h3>Ceiling-Down System</h3><ul>
+      <li>Dental unit — articulated arm on ceiling rail</li>
+      <li>Shadowless lamp — ceiling mounted</li>
+      <li>Microscope + camera — spring balanced</li>
+      <li>KYNOSYS storage — descending cabinets on steel rails</li>
+      <li>AI camera (SCYRA) — fixed dome, ceiling corner</li>
+    </ul></div>
+    <div class="cp-section"><h3>4 Phases</h3><ul>
+      <li><strong style="color:var(--white)">Phase 1:</strong> Flagship clinic, Warsaw — 1.38M PLN</li>
+      <li><strong style="color:var(--white)">Phase 2:</strong> Franchise package — 106k PLN</li>
+      <li><strong style="color:var(--white)">Phase 3:</strong> EU franchise launch — 199k PLN</li>
+      <li><strong style="color:var(--white)">Phase 4:</strong> LABS67 divisions — 73k PLN</li>
+    </ul></div>`
   },
-  ru: {
-    logo_sub:'Технологический концерн',
-    nav_directions:'Направления', nav_contacts:'Контакты', nav_cta:'Связаться',
-    hero_eyebrow:'// Концерн &middot; 5 направлений &middot; МедТех',
-    hero_line1:'Мы меняем', hero_line2:'медицину',
-    hero_sub:'<span>LABS67</span> &mdash; технологический концерн, создающий экосистему решений для клиник нового поколения.',
-    hero_btn1:'// Наши направления', hero_btn2:'Связаться с нами &rarr;',
-    stat_label1:'Направлений', stat_label2:'Технологий', stat_label3:'ИИ', stat_label4:'Масштаб',
-    brands_label:'// Направления концерна', brands_title_1:'Пять', brands_title_2:'направлений',
-    brands_lead:'Выберите направление &mdash; каждый бренд концерна решает свою задачу.',
-    scyra_desc:'Первая в мире edge AI система для стоматологических клиник. AI-ресепшн, умное планирование, хирургическая ассистенция.',
-    scyra_btn:'Поддержать на Indiegogo &rarr;',
-    scyra_card_desc:'Edge AI система для клиник. Распознавание лиц, голосовой ассистент, аналитика.',
-    dental_eyebrow:'Стоматология', dental_desc:'Меняем отношение к стоматологии. Умные клиники, ИИ-ассистент, забота.',
-    dental_tag1:'Клиники', dental_tag2:'ИИ-ассистент', dental_tag3:'Опыт пациента',
-    academi_eyebrow:'Образование', academi_desc:'Полная трансформация клинического мышления.',
-    academi_tag1:'Обучение', academi_tag2:'Сертификация', academi_tag3:'Стандарты',
-    trade_eyebrow:'МедТех', trade_desc:'Разработки концерна на открытом рынке.',
-    trade_tag1:'ИИ-решения', trade_tag2:'Оборудование', trade_tag3:'Интеграции',
-    franchise_eyebrow:'Развитие', franchise_desc:'Масштабирование, технологические решения для медицинских пространств.',
-    franchise_tag1:'Партнёрство', franchise_tag2:'Масштаб', franchise_tag3:'Технологии',
-    dental_sec_tag:'// SVYATLITSA &middot; Концерн LABS67',
-    dental_h2_1:'Стоматология', dental_h2_2:'в радость',
-    dental_quote:'&laquo;Мы меняем отношение к стоматологии &mdash; навсегда.&raquo;',
-    dental_p:'Пациент входит &mdash; система узнаёт. Врач работает &mdash; ИИ ассистирует.',
-    feat1_title:'Забота, не страх', feat1_desc:'Умная среда снижает стресс пациента с момента входа.',
-    feat2_title:'ИИ на каждом кресле', feat2_desc:'Камера, голосовой протокол, анализ снимков.',
-    feat3_title:'Полная приватность', feat3_desc:'Все данные &mdash; только локально. GDPR.',
-    academi_sec_tag:'// Academi67 &middot; Концерн LABS67',
-    academi_h2_1:'Институт клинических', academi_h2_2:'стандартов', academi_h2_3:'будущего',
-    academi_lead:'Перезагрузка клинического мышления. Все врачи LABS67 проходят через Academi67.',
-    track1_num:'ТРЕК_01', track1_title:'Программа перезагрузки клиники', track1_desc:'Новые стандарты работы с пациентом.',
-    track2_num:'ТРЕК_02', track2_title:'Сертификация интеграции ИИ', track2_desc:'Практика на реальном оборудовании.',
-    track3_num:'ТРЕК_03', track3_title:'Лаборатория исследований', track3_desc:'Клинические испытания, новые протоколы.',
-    as_label:'// Наш стандарт', as_text:'Каждый специалист под брендом LABS67 прошёл через Academi67.',
-    as_sub:'Гарантия одинакового уровня заботы.',
-    trade_sec_tag:'// TradeAI &middot; Концерн LABS67',
-    trade_h2_1:'Технологии', trade_h2_2:'для', trade_h2_3:'медицины',
-    trade_lead:'Разработки концерна для партнёров и рынка.',
-    trade_item1_desc:'ИИ-стек на NVIDIA Jetson: распознавание, протоколы, видеоаналитика.',
-    trade_item2_desc:'Комплект умного кабинета: датчики, свет, климат, камеры.',
-    trade_item3_desc:'Нейросетевой анализ снимков в реальном времени.',
-    franchise_sec_tag:'// Franchise67 &middot; Концерн LABS67',
-    franchise_h2_1:'Центр роста', franchise_h2_2:'и', franchise_h2_3:'масштабирования',
-    franchise_lead:'Franchise67 &mdash; инфраструктурное ядро концерна.',
-    fh1_label:'// Мастер-партнёрство', fh1_title:'Стать частью концерна в своём регионе',
-    fh1_desc:'Стратегическое партнёрство с охватом города, региона или страны.',
-    fh2_label:'// Готовые решения', fh2_title:'Клиника под ключ',
-    fh2_desc:'Проектирование умной среды с нуля до запуска.',
-    fran1_title:'Технологическая база', fran1_desc:'Полный стек: ИИ-ядро, умный дом, камеры, голосовые протоколы.',
-    fran2_title:'Стандарты Academi67', fran2_desc:'Обучение и сертификация персонала.',
-    fran3_title:'Поддержка и модернизация', fran3_desc:'Непрерывное обновление технологий.',
-    fran4_title:'Региональное масштабирование', fran4_desc:'Системное развитие сети.',
-    contact_sec_tag:'// КОНТАКТЫ',
-    contact_h2_1:'Свяжитесь', contact_h2_2:'с', contact_h2_3:'концерном',
-    contact_lead:'Выберите направление &mdash; мы ответим на любой вопрос.',
-    cinfo_phone_label:'Телефон', cinfo_email_label:'Общий запрос', cinfo_franchise_label:'Franchise67 / Партнёрство',
-    form_title:'// НОВЫЙ ЗАПРОС', form_name:'Имя', form_phone:'Телефон', form_direction:'Направление', form_message:'Сообщение',
-    footer_copy:'&copy; 2026 LABS67 Концерн<br>Все права защищены<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; Онлайн &middot; Отвечу сейчас',
+  { id:'academi', label:'Academi67', color:'#a48bfa', r:26, cat:'platform',
+    desc:'Education and certification platform. Training standards for franchise clinics. Digital learning, practical assessments.',
+    tags:['education','certification','e-learning'],
+    stats:[{v:'67',l:'Modules'},{v:'EU',l:'Certified'},{v:'24/7',l:'Access'}],
+    links:[
+      {icon:'&#128218;',text:'Academi67',url:'https://academi67.com',note:'academi67.com'},
+    ],
+    html:`<div class="cp-section"><h3>Purpose</h3><p>Every SVYATLITSA franchise operator goes through Academi67 certification. Standardized protocols, equipment training, AI system onboarding.</p></div>
+    <div class="cp-section"><h3>Tracks</h3><ul>
+      <li>Clinical protocols — treatment standards</li>
+      <li>SCYRA.AI training — AI system operation</li>
+      <li>Business operations — franchise management</li>
+      <li>Equipment maintenance — ceiling-down, KYNOSYS</li>
+    </ul></div>`
   },
-  de: {
-    logo_sub:'Technologiekonzern',
-    nav_directions:'Bereiche', nav_contacts:'Kontakte', nav_cta:'Kontakt',
-    hero_eyebrow:'// Konzern &middot; 5 Bereiche &middot; MedTech',
-    hero_line1:'Wir verandern', hero_line2:'die Medizin',
-    hero_sub:'<span>LABS67</span> &mdash; ein Technologiekonzern, der ein Losungs-Okosystem fur Kliniken der nachsten Generation aufbaut.',
-    hero_btn1:'// Unsere Bereiche', hero_btn2:'Kontaktieren Sie uns &rarr;',
-    stat_label1:'Bereiche', stat_label2:'Technologien', stat_label3:'KI', stat_label4:'Masstab',
-    brands_label:'// Konzernbereiche', brands_title_1:'Funf', brands_title_2:'Bereiche',
-    brands_lead:'Wahlen Sie den Bereich, der Sie interessiert.',
-    scyra_desc:'Das weltweit erste Edge-AI-System fur Zahnkliniken. KI-Rezeption, intelligente Planung, chirurgische Assistenz.',
-    scyra_btn:'Auf Indiegogo unterstutzen &rarr;',
-    scyra_card_desc:'Edge AI System fur Kliniken. Gesichtserkennung, Sprachassistent, Analytik.',
-    dental_eyebrow:'Zahnmedizin', dental_desc:'Zahnmedizin mit Freude. Intelligente Kliniken, KI-Assistent.',
-    dental_tag1:'Kliniken', dental_tag2:'KI-Assistent', dental_tag3:'Patientenerlebnis',
-    academi_eyebrow:'Bildung', academi_desc:'Komplette Transformation des klinischen Denkens.',
-    academi_tag1:'Ausbildung', academi_tag2:'Zertifizierung', academi_tag3:'Standards',
-    trade_eyebrow:'MedTech', trade_desc:'Konzernentwicklungen auf dem offenen Markt.',
-    trade_tag1:'KI-Losungen', trade_tag2:'Ausrustung', trade_tag3:'Integrationen',
-    franchise_eyebrow:'Wachstum', franchise_desc:'Skalierung, Technologielosungen fur medizinische Raume.',
-    franchise_tag1:'Partnerschaft', franchise_tag2:'Masstab', franchise_tag3:'Technologien',
-    dental_sec_tag:'// SVYATLITSA &middot; LABS67 Konzern',
-    dental_h2_1:'Zahnmedizin', dental_h2_2:'mit Freude',
-    dental_quote:'&laquo;Wir verandern die Einstellung zur Zahnmedizin &mdash; fur immer.&raquo;',
-    dental_p:'Patient tritt ein &mdash; System erkennt. Arzt arbeitet &mdash; KI assistiert.',
-    feat1_title:'Fursorge, nicht Angst', feat1_desc:'Intelligente Umgebung reduziert Patientenstress.',
-    feat2_title:'KI an jedem Stuhl', feat2_desc:'Kamera, Sprachprotokoll, Bildanalyse.',
-    feat3_title:'Volle Privatsphare', feat3_desc:'Alle Daten nur lokal. DSGVO-konform.',
-    academi_sec_tag:'// Academi67 &middot; LABS67 Konzern',
-    academi_h2_1:'Institut fur klinische', academi_h2_2:'Standards der', academi_h2_3:'Zukunft',
-    academi_lead:'Neustart des klinischen Denkens. Alle LABS67-Arzte durchlaufen Academi67.',
-    track1_num:'TRACK_01', track1_title:'Klinisches Reboot-Programm', track1_desc:'Neue Standards fur die Patientenarbeit.',
-    track2_num:'TRACK_02', track2_title:'KI-Integrations-Zertifizierung', track2_desc:'Praxis an echten Geraten.',
-    track3_num:'TRACK_03', track3_title:'Forschungslabor', track3_desc:'Klinische Studien, neue Protokolle.',
-    as_label:'// Unser Standard', as_text:'Jeder Spezialist unter LABS67 hat Academi67 durchlaufen.',
-    as_sub:'Garantie fur gleiches Pflegeniveau.',
-    trade_sec_tag:'// TradeAI &middot; LABS67 Konzern',
-    trade_h2_1:'Technologien', trade_h2_2:'fur die', trade_h2_3:'Medizin',
-    trade_lead:'Konzernentwicklungen fur Partner und den Markt.',
-    trade_item1_desc:'KI-Stack auf NVIDIA Jetson: Gesichtserkennung, Sprachprotokolle, Videoanalyse.',
-    trade_item2_desc:'Smart-Room-Kit: Sensoren, Beleuchtung, Klima, Kameras.',
-    trade_item3_desc:'Neuronale Analyse von Rontgenaufnahmen in Echtzeit.',
-    franchise_sec_tag:'// Franchise67 &middot; LABS67 Konzern',
-    franchise_h2_1:'Wachstumszentrum', franchise_h2_2:'und', franchise_h2_3:'Skalierung',
-    franchise_lead:'Franchise67 &mdash; infrastruktureller Kern des Konzerns.',
-    fh1_label:'// Master-Partnerschaft', fh1_title:'Teil des Konzerns in Ihrer Region werden',
-    fh1_desc:'Strategische Partnerschaft mit Stadt-, Regional- oder Landesabdeckung.',
-    fh2_label:'// Fertige Losungen', fh2_title:'Schlusselfertige Klinik',
-    fh2_desc:'Planung einer intelligenten Umgebung von Null bis Inbetriebnahme.',
-    fran1_title:'Technologiebasis', fran1_desc:'Voller Stack: KI-Kern, Smart Home, Kameras.',
-    fran2_title:'Academi67-Standards', fran2_desc:'Schulung und Zertifizierung des Personals.',
-    fran3_title:'Support und Modernisierung', fran3_desc:'Kontinuierliche Technologie-Updates.',
-    fran4_title:'Regionale Skalierung', fran4_desc:'Systematischer Netzwerkausbau.',
-    contact_sec_tag:'// KONTAKTE',
-    contact_h2_1:'Kontaktieren Sie', contact_h2_2:'den', contact_h2_3:'Konzern',
-    contact_lead:'Wahlen Sie einen Bereich &mdash; wir beantworten jede Frage.',
-    cinfo_phone_label:'Telefon', cinfo_email_label:'Allgemeine Anfrage', cinfo_franchise_label:'Franchise67 / Partnerschaft',
-    form_title:'// NEUE ANFRAGE', form_name:'Name', form_phone:'Telefon', form_direction:'Richtung', form_message:'Nachricht',
-    footer_copy:'&copy; 2026 LABS67 Konzern<br>Alle Rechte vorbehalten<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; Online &middot; Antworte jetzt',
+  { id:'trade', label:'TradeAI', color:'#a48bfa', r:20, cat:'platform',
+    desc:'AI-powered trading analytics. Portfolio management, market analysis, automated strategies.',
+    tags:['trading','analytics','AI'],
+    stats:[{v:'24/7',l:'Monitoring'},{v:'AI',l:'Signals'},{v:'Multi',l:'Assets'}],
+    links:[
+      {icon:'&#128200;',text:'TradeAI',url:'https://trade.labs67.com',note:'trade.labs67.com'},
+    ],
+    html:`<div class="cp-section"><h3>Features</h3><ul>
+      <li>Real-time market analysis</li>
+      <li>AI-generated trade signals</li>
+      <li>Portfolio optimization</li>
+      <li>Risk management automation</li>
+    </ul></div>`
   },
-  fr: {
-    logo_sub:'Groupe technologique',
-    nav_directions:'Directions', nav_contacts:'Contacts', nav_cta:'Contacter',
-    hero_eyebrow:'// Groupe &middot; 5 directions &middot; MedTech',
-    hero_line1:'Nous changeons', hero_line2:'la medecine',
-    hero_sub:'<span>LABS67</span> &mdash; un groupe technologique creant un ecosysteme de solutions pour les cliniques de nouvelle generation.',
-    hero_btn1:'// Nos directions', hero_btn2:'Nous contacter &rarr;',
-    stat_label1:'Directions', stat_label2:'Technologies', stat_label3:'IA', stat_label4:'Echelle',
-    brands_label:'// Directions du groupe', brands_title_1:'Cinq', brands_title_2:'directions',
-    brands_lead:'Choisissez la direction qui vous interesse.',
-    scyra_desc:'Le premier systeme edge AI au monde pour les cliniques dentaires. Reception IA, planification intelligente, assistance chirurgicale.',
-    scyra_btn:'Soutenir sur Indiegogo &rarr;',
-    scyra_card_desc:'Systeme Edge AI pour cliniques. Reconnaissance faciale, assistant vocal, analytique.',
-    dental_eyebrow:'Dentisterie', dental_desc:'La dentisterie avec plaisir. Cliniques intelligentes, assistant IA.',
-    dental_tag1:'Cliniques', dental_tag2:'Assistant IA', dental_tag3:'Experience patient',
-    academi_eyebrow:'Education', academi_desc:'Transformation complete de la pensee clinique.',
-    academi_tag1:'Formation', academi_tag2:'Certification', academi_tag3:'Standards',
-    trade_eyebrow:'MedTech', trade_desc:'Developpements du groupe sur le marche ouvert.',
-    trade_tag1:'Solutions IA', trade_tag2:'Equipement', trade_tag3:'Integrations',
-    franchise_eyebrow:'Croissance', franchise_desc:'Mise a l\'echelle, solutions technologiques pour les espaces medicaux.',
-    franchise_tag1:'Partenariat', franchise_tag2:'Echelle', franchise_tag3:'Technologies',
-    dental_sec_tag:'// SVYATLITSA &middot; Groupe LABS67',
-    dental_h2_1:'Dentisterie', dental_h2_2:'avec plaisir',
-    dental_quote:'&laquo;Nous changeons l\'attitude envers la dentisterie &mdash; pour toujours.&raquo;',
-    dental_p:'Le patient entre &mdash; le systeme le reconnait. Le medecin travaille &mdash; l\'IA assiste.',
-    feat1_title:'Soin, pas peur', feat1_desc:'Un environnement intelligent reduit le stress du patient.',
-    feat2_title:'IA a chaque fauteuil', feat2_desc:'Camera, protocole vocal, analyse d\'images.',
-    feat3_title:'Confidentialite totale', feat3_desc:'Toutes les donnees uniquement en local. RGPD.',
-    academi_sec_tag:'// Academi67 &middot; Groupe LABS67',
-    academi_h2_1:'Institut de normes', academi_h2_2:'cliniques du', academi_h2_3:'futur',
-    academi_lead:'Redemarrage de la pensee clinique. Tous les medecins LABS67 passent par Academi67.',
-    track1_num:'PISTE_01', track1_title:'Programme de redemarrage clinique', track1_desc:'Nouvelles normes de travail avec les patients.',
-    track2_num:'PISTE_02', track2_title:'Certification d\'integration IA', track2_desc:'Pratique sur equipements reels.',
-    track3_num:'PISTE_03', track3_title:'Laboratoire de recherche', track3_desc:'Essais cliniques, nouveaux protocoles.',
-    as_label:'// Notre standard', as_text:'Chaque specialiste sous la marque LABS67 a passe par Academi67.',
-    as_sub:'Garantie d\'un niveau de soin identique partout.',
-    trade_sec_tag:'// TradeAI &middot; Groupe LABS67',
-    trade_h2_1:'Technologies', trade_h2_2:'pour la', trade_h2_3:'medecine',
-    trade_lead:'Developpements du groupe pour les partenaires et le marche.',
-    trade_item1_desc:'Stack IA sur NVIDIA Jetson : reconnaissance, protocoles, video-analytique.',
-    trade_item2_desc:'Kit salle intelligente : capteurs, eclairage, climat, cameras.',
-    trade_item3_desc:'Analyse neuronale de radiographies en temps reel.',
-    franchise_sec_tag:'// Franchise67 &middot; Groupe LABS67',
-    franchise_h2_1:'Centre de croissance', franchise_h2_2:'et de', franchise_h2_3:'mise a l\'echelle',
-    franchise_lead:'Franchise67 &mdash; le noyau d\'infrastructure du groupe.',
-    fh1_label:'// Partenariat principal', fh1_title:'Devenir partie du groupe dans votre region',
-    fh1_desc:'Partenariat strategique couvrant une ville, une region ou un pays.',
-    fh2_label:'// Solutions pretes', fh2_title:'Clinique cle en main',
-    fh2_desc:'Conception d\'un environnement intelligent de zero au lancement.',
-    fran1_title:'Base technologique', fran1_desc:'Stack complet : noyau IA, maison intelligente, cameras.',
-    fran2_title:'Standards Academi67', fran2_desc:'Formation et certification du personnel.',
-    fran3_title:'Support et modernisation', fran3_desc:'Mises a jour technologiques continues.',
-    fran4_title:'Mise a l\'echelle regionale', fran4_desc:'Developpement systematique du reseau.',
-    contact_sec_tag:'// CONTACTS',
-    contact_h2_1:'Contactez', contact_h2_2:'le', contact_h2_3:'groupe',
-    contact_lead:'Choisissez une direction &mdash; nous repondrons.',
-    cinfo_phone_label:'Telephone', cinfo_email_label:'Demande generale', cinfo_franchise_label:'Franchise67 / Partenariat',
-    form_title:'// NOUVELLE DEMANDE', form_name:'Nom', form_phone:'Telephone', form_direction:'Direction', form_message:'Message',
-    footer_copy:'&copy; 2026 LABS67 Groupe<br>Tous droits reserves<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; En ligne &middot; Reponse immediate',
+  { id:'franchise', label:'Franchise67', color:'#a48bfa', r:24, cat:'platform',
+    desc:'Franchise management system. Turnkey SVYATLITSA clinic deployment across EU markets.',
+    tags:['franchise','EU','scaling','turnkey'],
+    stats:[{v:'305k',l:'PLN Package'},{v:'EU',l:'Markets'},{v:'18mo',l:'Break-even'}],
+    links:[
+      {icon:'&#127758;',text:'Franchise67',url:'https://franchise.labs67.com',note:'franchise.labs67.com'},
+    ],
+    html:`<div class="cp-section"><h3>What You Get</h3><ul>
+      <li>Complete clinic blueprint + design package</li>
+      <li>SCYRA.AI system license</li>
+      <li>Academi67 certification for your team</li>
+      <li>Equipment procurement assistance</li>
+      <li>Ongoing technical support</li>
+    </ul></div>
+    <div class="cp-section"><h3>Investment</h3><p>Master franchise: 50-200k EUR per country. Individual clinic franchise: from 150k EUR including equipment leasing.</p></div>`
   },
-  es: {
-    logo_sub:'Grupo tecnologico',
-    nav_directions:'Direcciones', nav_contacts:'Contactos', nav_cta:'Contactar',
-    hero_eyebrow:'// Grupo &middot; 5 direcciones &middot; MedTech',
-    hero_line1:'Estamos cambiando', hero_line2:'la medicina',
-    hero_sub:'<span>LABS67</span> &mdash; un grupo tecnologico que crea un ecosistema de soluciones para clinicas de nueva generacion.',
-    hero_btn1:'// Nuestras direcciones', hero_btn2:'Contactenos &rarr;',
-    stat_label1:'Direcciones', stat_label2:'Tecnologias', stat_label3:'IA', stat_label4:'Escala',
-    brands_label:'// Direcciones del grupo', brands_title_1:'Cinco', brands_title_2:'direcciones',
-    brands_lead:'Elija la direccion que le interese.',
-    scyra_desc:'El primer sistema edge AI del mundo para clinicas dentales. Recepcion IA, planificacion inteligente, asistencia quirurgica.',
-    scyra_btn:'Apoyar en Indiegogo &rarr;',
-    scyra_card_desc:'Sistema Edge AI para clinicas. Reconocimiento facial, asistente de voz, analitica.',
-    dental_eyebrow:'Odontologia', dental_desc:'Odontologia con alegria. Clinicas inteligentes, asistente IA.',
-    dental_tag1:'Clinicas', dental_tag2:'Asistente IA', dental_tag3:'Experiencia del paciente',
-    academi_eyebrow:'Educacion', academi_desc:'Transformacion completa del pensamiento clinico.',
-    academi_tag1:'Formacion', academi_tag2:'Certificacion', academi_tag3:'Estandares',
-    trade_eyebrow:'MedTech', trade_desc:'Desarrollos del grupo en el mercado abierto.',
-    trade_tag1:'Soluciones IA', trade_tag2:'Equipamiento', trade_tag3:'Integraciones',
-    franchise_eyebrow:'Crecimiento', franchise_desc:'Escalamiento, soluciones tecnologicas para espacios medicos.',
-    franchise_tag1:'Asociacion', franchise_tag2:'Escala', franchise_tag3:'Tecnologias',
-    dental_sec_tag:'// SVYATLITSA &middot; Grupo LABS67',
-    dental_h2_1:'Odontologia', dental_h2_2:'con alegria',
-    dental_quote:'&laquo;Cambiamos la actitud hacia la odontologia &mdash; para siempre.&raquo;',
-    dental_p:'El paciente entra &mdash; el sistema lo reconoce. El doctor trabaja &mdash; la IA asiste.',
-    feat1_title:'Cuidado, no miedo', feat1_desc:'Un entorno inteligente reduce el estres del paciente.',
-    feat2_title:'IA en cada sillon', feat2_desc:'Camara, protocolo de voz, analisis de imagenes.',
-    feat3_title:'Privacidad total', feat3_desc:'Todos los datos solo locales. RGPD.',
-    academi_sec_tag:'// Academi67 &middot; Grupo LABS67',
-    academi_h2_1:'Instituto de estandares', academi_h2_2:'clinicos del', academi_h2_3:'futuro',
-    academi_lead:'Reinicio del pensamiento clinico. Todos los medicos LABS67 pasan por Academi67.',
-    track1_num:'PISTA_01', track1_title:'Programa de reinicio clinico', track1_desc:'Nuevos estandares de trabajo con pacientes.',
-    track2_num:'PISTA_02', track2_title:'Certificacion de integracion IA', track2_desc:'Practica con equipos reales.',
-    track3_num:'PISTA_03', track3_title:'Laboratorio de investigacion', track3_desc:'Ensayos clinicos, nuevos protocolos.',
-    as_label:'// Nuestro estandar', as_text:'Cada especialista bajo la marca LABS67 ha pasado por Academi67.',
-    as_sub:'Garantia del mismo nivel de cuidado en todas partes.',
-    trade_sec_tag:'// TradeAI &middot; Grupo LABS67',
-    trade_h2_1:'Tecnologias', trade_h2_2:'para la', trade_h2_3:'medicina',
-    trade_lead:'Desarrollos del grupo para socios y el mercado.',
-    trade_item1_desc:'Stack IA en NVIDIA Jetson: reconocimiento, protocolos, video-analitica.',
-    trade_item2_desc:'Kit de sala inteligente: sensores, iluminacion, clima, camaras.',
-    trade_item3_desc:'Analisis neuronal de radiografias en tiempo real.',
-    franchise_sec_tag:'// Franchise67 &middot; Grupo LABS67',
-    franchise_h2_1:'Centro de crecimiento', franchise_h2_2:'y', franchise_h2_3:'escalamiento',
-    franchise_lead:'Franchise67 &mdash; nucleo de infraestructura del grupo.',
-    fh1_label:'// Asociacion principal', fh1_title:'Ser parte del grupo en su region',
-    fh1_desc:'Asociacion estrategica cubriendo ciudad, region o pais.',
-    fh2_label:'// Soluciones listas', fh2_title:'Clinica llave en mano',
-    fh2_desc:'Diseno de entorno inteligente desde cero hasta el lanzamiento.',
-    fran1_title:'Base tecnologica', fran1_desc:'Stack completo: nucleo IA, hogar inteligente, camaras.',
-    fran2_title:'Estandares Academi67', fran2_desc:'Formacion y certificacion del personal.',
-    fran3_title:'Soporte y modernizacion', fran3_desc:'Actualizaciones tecnologicas continuas.',
-    fran4_title:'Escalamiento regional', fran4_desc:'Desarrollo sistematico de la red.',
-    contact_sec_tag:'// CONTACTOS',
-    contact_h2_1:'Contacte', contact_h2_2:'con', contact_h2_3:'el grupo',
-    contact_lead:'Elija una direccion &mdash; responderemos.',
-    cinfo_phone_label:'Telefono', cinfo_email_label:'Consulta general', cinfo_franchise_label:'Franchise67 / Asociacion',
-    form_title:'// NUEVA SOLICITUD', form_name:'Nombre', form_phone:'Telefono', form_direction:'Direccion', form_message:'Mensaje',
-    footer_copy:'&copy; 2026 LABS67 Grupo<br>Todos los derechos reservados<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; En linea &middot; Respondo ahora',
+  { id:'dental-ai', label:'Dental AI', color:'#5ec4d4', r:20, cat:'product',
+    desc:'Next.js diagnostic application. X-ray analysis, treatment planning, patient management.',
+    tags:['next.js','diagnostics','web-app'],
+    links:[],
+    html:`<div class="cp-section"><h3>Stack</h3><ul><li>Next.js + TypeScript</li><li>Supabase backend</li><li>SCYRA.AI integration via local API</li><li>DICOM viewer</li></ul></div>`
   },
-  it: {
-    logo_sub:'Gruppo tecnologico',
-    nav_directions:'Direzioni', nav_contacts:'Contatti', nav_cta:'Contattaci',
-    hero_eyebrow:'// Gruppo &middot; 5 direzioni &middot; MedTech',
-    hero_line1:'Stiamo cambiando', hero_line2:'la medicina',
-    hero_sub:'<span>LABS67</span> &mdash; un gruppo tecnologico che crea un ecosistema di soluzioni per cliniche di nuova generazione.',
-    hero_btn1:'// Le nostre direzioni', hero_btn2:'Contattaci &rarr;',
-    stat_label1:'Direzioni', stat_label2:'Tecnologie', stat_label3:'IA', stat_label4:'Scala',
-    brands_label:'// Direzioni del gruppo', brands_title_1:'Cinque', brands_title_2:'direzioni',
-    brands_lead:'Scegli la direzione che ti interessa.',
-    scyra_desc:'Il primo sistema edge AI al mondo per cliniche dentali. Reception IA, pianificazione intelligente, assistenza chirurgica.',
-    scyra_btn:'Supporta su Indiegogo &rarr;',
-    scyra_card_desc:'Sistema Edge AI per cliniche. Riconoscimento facciale, assistente vocale, analitica.',
-    dental_eyebrow:'Odontoiatria', dental_desc:'Odontoiatria con gioia. Cliniche intelligenti, assistente IA.',
-    dental_tag1:'Cliniche', dental_tag2:'Assistente IA', dental_tag3:'Esperienza paziente',
-    academi_eyebrow:'Formazione', academi_desc:'Trasformazione completa del pensiero clinico.',
-    academi_tag1:'Formazione', academi_tag2:'Certificazione', academi_tag3:'Standard',
-    trade_eyebrow:'MedTech', trade_desc:'Sviluppi del gruppo sul mercato aperto.',
-    trade_tag1:'Soluzioni IA', trade_tag2:'Attrezzature', trade_tag3:'Integrazioni',
-    franchise_eyebrow:'Crescita', franchise_desc:'Scalabilita, soluzioni tecnologiche per spazi medici.',
-    franchise_tag1:'Partnership', franchise_tag2:'Scala', franchise_tag3:'Tecnologie',
-    dental_sec_tag:'// SVYATLITSA &middot; Gruppo LABS67',
-    dental_h2_1:'Odontoiatria', dental_h2_2:'con gioia',
-    dental_quote:'&laquo;Cambiamo l\'atteggiamento verso l\'odontoiatria &mdash; per sempre.&raquo;',
-    dental_p:'Il paziente entra &mdash; il sistema lo riconosce. Il medico lavora &mdash; l\'IA assiste.',
-    feat1_title:'Cura, non paura', feat1_desc:'Un ambiente intelligente riduce lo stress del paziente.',
-    feat2_title:'IA su ogni poltrona', feat2_desc:'Telecamera, protocollo vocale, analisi delle immagini.',
-    feat3_title:'Privacy totale', feat3_desc:'Tutti i dati solo in locale. GDPR.',
-    academi_sec_tag:'// Academi67 &middot; Gruppo LABS67',
-    academi_h2_1:'Istituto di standard', academi_h2_2:'clinici del', academi_h2_3:'futuro',
-    academi_lead:'Riavvio del pensiero clinico. Tutti i medici LABS67 passano per Academi67.',
-    track1_num:'TRACCIA_01', track1_title:'Programma di riavvio clinico', track1_desc:'Nuovi standard per il lavoro con i pazienti.',
-    track2_num:'TRACCIA_02', track2_title:'Certificazione integrazione IA', track2_desc:'Pratica su attrezzature reali.',
-    track3_num:'TRACCIA_03', track3_title:'Laboratorio di ricerca', track3_desc:'Studi clinici, nuovi protocolli.',
-    as_label:'// Il nostro standard', as_text:'Ogni specialista sotto il marchio LABS67 ha superato Academi67.',
-    as_sub:'Garanzia dello stesso livello di cura ovunque.',
-    trade_sec_tag:'// TradeAI &middot; Gruppo LABS67',
-    trade_h2_1:'Tecnologie', trade_h2_2:'per la', trade_h2_3:'medicina',
-    trade_lead:'Sviluppi del gruppo per partner e mercato.',
-    trade_item1_desc:'Stack IA su NVIDIA Jetson: riconoscimento, protocolli, video-analitica.',
-    trade_item2_desc:'Kit stanza intelligente: sensori, illuminazione, clima, telecamere.',
-    trade_item3_desc:'Analisi neurale di radiografie in tempo reale.',
-    franchise_sec_tag:'// Franchise67 &middot; Gruppo LABS67',
-    franchise_h2_1:'Centro di crescita', franchise_h2_2:'e', franchise_h2_3:'scalabilita',
-    franchise_lead:'Franchise67 &mdash; nucleo infrastrutturale del gruppo.',
-    fh1_label:'// Partnership principale', fh1_title:'Diventa parte del gruppo nella tua regione',
-    fh1_desc:'Partnership strategica con copertura di citta, regione o paese.',
-    fh2_label:'// Soluzioni pronte', fh2_title:'Clinica chiavi in mano',
-    fh2_desc:'Progettazione di ambiente intelligente da zero al lancio.',
-    fran1_title:'Base tecnologica', fran1_desc:'Stack completo: nucleo IA, smart home, telecamere.',
-    fran2_title:'Standard Academi67', fran2_desc:'Formazione e certificazione del personale.',
-    fran3_title:'Supporto e modernizzazione', fran3_desc:'Aggiornamenti tecnologici continui.',
-    fran4_title:'Scalabilita regionale', fran4_desc:'Sviluppo sistematico della rete.',
-    contact_sec_tag:'// CONTATTI',
-    contact_h2_1:'Contatta', contact_h2_2:'il', contact_h2_3:'gruppo',
-    contact_lead:'Scegli una direzione &mdash; risponderemo.',
-    cinfo_phone_label:'Telefono', cinfo_email_label:'Richiesta generale', cinfo_franchise_label:'Franchise67 / Partnership',
-    form_title:'// NUOVA RICHIESTA', form_name:'Nome', form_phone:'Telefono', form_direction:'Direzione', form_message:'Messaggio',
-    footer_copy:'&copy; 2026 LABS67 Gruppo<br>Tutti i diritti riservati<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; Online &middot; Rispondo subito',
+  { id:'dragona', label:'DRAGONA', color:'#5ec482', r:18, cat:'site',
+    desc:'DRAGONA.PL — Polish market business presence.',
+    tags:['poland','business'],
+    links:[{icon:'&#127477;&#127473;',text:'DRAGONA.PL',url:'https://dragona.pl',note:'dragona.pl'}],
+    html:``
   },
-  pt: {
-    logo_sub:'Grupo tecnologico',
-    nav_directions:'Direcoes', nav_contacts:'Contactos', nav_cta:'Contactar',
-    hero_eyebrow:'// Grupo &middot; 5 direcoes &middot; MedTech',
-    hero_line1:'Estamos a mudar', hero_line2:'a medicina',
-    hero_sub:'<span>LABS67</span> &mdash; um grupo tecnologico que cria um ecossistema de solucoes para clinicas de nova geracao.',
-    hero_btn1:'// As nossas direcoes', hero_btn2:'Contacte-nos &rarr;',
-    stat_label1:'Direcoes', stat_label2:'Tecnologias', stat_label3:'IA', stat_label4:'Escala',
-    brands_label:'// Direcoes do grupo', brands_title_1:'Cinco', brands_title_2:'direcoes',
-    brands_lead:'Escolha a direcao que lhe interessa.',
-    scyra_desc:'O primeiro sistema edge AI do mundo para clinicas dentarias. Rececao IA, planeamento inteligente, assistencia cirurgica.',
-    scyra_btn:'Apoiar no Indiegogo &rarr;',
-    scyra_card_desc:'Sistema Edge AI para clinicas. Reconhecimento facial, assistente de voz, analitica.',
-    dental_eyebrow:'Medicina dentaria', dental_desc:'Medicina dentaria com alegria. Clinicas inteligentes, assistente IA.',
-    dental_tag1:'Clinicas', dental_tag2:'Assistente IA', dental_tag3:'Experiencia do paciente',
-    academi_eyebrow:'Educacao', academi_desc:'Transformacao completa do pensamento clinico.',
-    academi_tag1:'Formacao', academi_tag2:'Certificacao', academi_tag3:'Padroes',
-    trade_eyebrow:'MedTech', trade_desc:'Desenvolvimentos do grupo no mercado aberto.',
-    trade_tag1:'Solucoes IA', trade_tag2:'Equipamento', trade_tag3:'Integracoes',
-    franchise_eyebrow:'Crescimento', franchise_desc:'Escalonamento, solucoes tecnologicas para espacos medicos.',
-    franchise_tag1:'Parceria', franchise_tag2:'Escala', franchise_tag3:'Tecnologias',
-    dental_sec_tag:'// SVYATLITSA &middot; Grupo LABS67',
-    dental_h2_1:'Medicina dentaria', dental_h2_2:'com alegria',
-    dental_quote:'&laquo;Mudamos a atitude em relacao a medicina dentaria &mdash; para sempre.&raquo;',
-    dental_p:'O paciente entra &mdash; o sistema reconhece-o. O medico trabalha &mdash; a IA assiste.',
-    feat1_title:'Cuidado, nao medo', feat1_desc:'Ambiente inteligente reduz o stress do paciente.',
-    feat2_title:'IA em cada cadeira', feat2_desc:'Camara, protocolo de voz, analise de imagens.',
-    feat3_title:'Privacidade total', feat3_desc:'Todos os dados apenas locais. RGPD.',
-    academi_sec_tag:'// Academi67 &middot; Grupo LABS67',
-    academi_h2_1:'Instituto de padroes', academi_h2_2:'clinicos do', academi_h2_3:'futuro',
-    academi_lead:'Reinicio do pensamento clinico. Todos os medicos LABS67 passam pelo Academi67.',
-    track1_num:'FAIXA_01', track1_title:'Programa de reinicio clinico', track1_desc:'Novos padroes de trabalho com pacientes.',
-    track2_num:'FAIXA_02', track2_title:'Certificacao de integracao IA', track2_desc:'Pratica com equipamentos reais.',
-    track3_num:'FAIXA_03', track3_title:'Laboratorio de pesquisa', track3_desc:'Ensaios clinicos, novos protocolos.',
-    as_label:'// Nosso padrao', as_text:'Cada especialista sob a marca LABS67 passou pelo Academi67.',
-    as_sub:'Garantia do mesmo nivel de cuidado em todo lugar.',
-    trade_sec_tag:'// TradeAI &middot; Grupo LABS67',
-    trade_h2_1:'Tecnologias', trade_h2_2:'para a', trade_h2_3:'medicina',
-    trade_lead:'Desenvolvimentos do grupo para parceiros e mercado.',
-    trade_item1_desc:'Stack IA no NVIDIA Jetson: reconhecimento, protocolos, video-analitica.',
-    trade_item2_desc:'Kit de sala inteligente: sensores, iluminacao, clima, camaras.',
-    trade_item3_desc:'Analise neural de radiografias em tempo real.',
-    franchise_sec_tag:'// Franchise67 &middot; Grupo LABS67',
-    franchise_h2_1:'Centro de crescimento', franchise_h2_2:'e', franchise_h2_3:'escalonamento',
-    franchise_lead:'Franchise67 &mdash; nucleo de infraestrutura do grupo.',
-    fh1_label:'// Parceria principal', fh1_title:'Torne-se parte do grupo na sua regiao',
-    fh1_desc:'Parceria estrategica cobrindo cidade, regiao ou pais.',
-    fh2_label:'// Solucoes prontas', fh2_title:'Clinica chave na mao',
-    fh2_desc:'Design de ambiente inteligente do zero ao lancamento.',
-    fran1_title:'Base tecnologica', fran1_desc:'Stack completo: nucleo IA, casa inteligente, camaras.',
-    fran2_title:'Padroes Academi67', fran2_desc:'Formacao e certificacao do pessoal.',
-    fran3_title:'Suporte e modernizacao', fran3_desc:'Atualizacoes tecnologicas continuas.',
-    fran4_title:'Escalonamento regional', fran4_desc:'Desenvolvimento sistematico da rede.',
-    contact_sec_tag:'// CONTACTOS',
-    contact_h2_1:'Contacte', contact_h2_2:'o', contact_h2_3:'grupo',
-    contact_lead:'Escolha uma direcao &mdash; responderemos.',
-    cinfo_phone_label:'Telefone', cinfo_email_label:'Consulta geral', cinfo_franchise_label:'Franchise67 / Parceria',
-    form_title:'// NOVO PEDIDO', form_name:'Nome', form_phone:'Telefone', form_direction:'Direcao', form_message:'Mensagem',
-    footer_copy:'&copy; 2026 LABS67 Grupo<br>Todos os direitos reservados<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; Online &middot; Respondo agora',
+  { id:'agents', label:'Agent Hub', color:'#d47a9a', r:22, cat:'service',
+    desc:'Multi-agent AI team. Each agent has a role, personality, and specialization.',
+    tags:['AI-agents','automation','team'],
+    links:[{icon:'&#129302;',text:'Chat with Agents',url:'chat.html',note:'labs67.com/chat'}],
+    html:`<div class="cp-section"><h3>The Team</h3><ul>
+      <li><strong style="color:var(--cyan)">Kai</strong> — Lead AI, architecture, strategy</li>
+      <li><strong style="color:var(--green)">Stepa</strong> — Code, deploy, infrastructure</li>
+      <li><strong style="color:var(--purple)">Tatiana</strong> — Analytics, data, research</li>
+      <li><strong style="color:var(--pink)">Gennady</strong> — Design, UI/UX, visuals</li>
+      <li><strong style="color:var(--gold)">Alexei</strong> — Operations, planning</li>
+      <li><strong style="color:var(--white)">Vitya</strong> — Testing, QA</li>
+    </ul></div>`
   },
-  ja: {
-    logo_sub:'テクノロジーグループ',
-    nav_directions:'方向', nav_contacts:'お問い合わせ', nav_cta:'連絡する',
-    hero_eyebrow:'// グループ &middot; 5つの方向 &middot; MedTech',
-    hero_line1:'私たちは変えています', hero_line2:'医療を',
-    hero_sub:'<span>LABS67</span> &mdash; 次世代クリニックのためのソリューションエコシステムを構築するテクノロジーグループ。',
-    hero_btn1:'// 私たちの方向', hero_btn2:'お問い合わせ &rarr;',
-    stat_label1:'方向', stat_label2:'技術', stat_label3:'AI', stat_label4:'スケール',
-    brands_label:'// グループの方向', brands_title_1:'5つの', brands_title_2:'方向',
-    brands_lead:'興味のある方向をお選びください。',
-    scyra_desc:'世界初の歯科クリニック向けエッジAIシステム。AIレセプション、スマートスケジューリング、手術アシスタンス。',
-    scyra_btn:'Indiegogoで支援する &rarr;',
-    scyra_card_desc:'クリニック向けエッジAIシステム。顔認識、音声アシスタント、分析。',
-    dental_eyebrow:'歯科', dental_desc:'喜びの歯科医療。スマートクリニック、AIアシスタント。',
-    dental_tag1:'クリニック', dental_tag2:'AIアシスタント', dental_tag3:'患者体験',
-    academi_eyebrow:'教育', academi_desc:'臨床思考の完全な変革。',
-    academi_tag1:'トレーニング', academi_tag2:'認証', academi_tag3:'基準',
-    trade_eyebrow:'MedTech', trade_desc:'オープンマーケットでのグループ開発。',
-    trade_tag1:'AIソリューション', trade_tag2:'機器', trade_tag3:'統合',
-    franchise_eyebrow:'成長', franchise_desc:'スケーリング、医療空間のテクノロジーソリューション。',
-    franchise_tag1:'パートナーシップ', franchise_tag2:'スケール', franchise_tag3:'テクノロジー',
-    dental_sec_tag:'// SVYATLITSA &middot; LABS67グループ',
-    dental_h2_1:'歯科医療', dental_h2_2:'を喜びに',
-    dental_quote:'&laquo;私たちは歯科医療への態度を永遠に変えます。&raquo;',
-    dental_p:'患者が入る &mdash; システムが認識する。医師が働く &mdash; AIがアシストする。',
-    feat1_title:'恐怖ではなくケア', feat1_desc:'スマート環境が患者のストレスを軽減。',
-    feat2_title:'すべてのチェアにAI', feat2_desc:'カメラ、音声プロトコル、画像分析。',
-    feat3_title:'完全なプライバシー', feat3_desc:'すべてのデータはローカルのみ。GDPR準拠。',
-    academi_sec_tag:'// Academi67 &middot; LABS67グループ',
-    academi_h2_1:'臨床基準の', academi_h2_2:'研究所', academi_h2_3:'未来の',
-    academi_lead:'臨床思考のリブート。すべてのLABS67医師はAcademi67を通過。',
-    track1_num:'トラック_01', track1_title:'クリニカルリブートプログラム', track1_desc:'患者対応の新基準。',
-    track2_num:'トラック_02', track2_title:'AI統合認証', track2_desc:'実機での実習。',
-    track3_num:'トラック_03', track3_title:'研究開発ラボ', track3_desc:'臨床試験、新プロトコル。',
-    as_label:'// 私たちの基準', as_text:'LABS67ブランドのすべての専門家はAcademi67を修了。',
-    as_sub:'どこでも同じレベルのケアを保証。',
-    trade_sec_tag:'// TradeAI &middot; LABS67グループ',
-    trade_h2_1:'テクノロジー', trade_h2_2:'医療の', trade_h2_3:'ための',
-    trade_lead:'パートナーと市場向けのグループ開発。',
-    trade_item1_desc:'NVIDIA Jetson上のAIスタック：認識、プロトコル、ビデオ分析。',
-    trade_item2_desc:'スマートルームキット：センサー、照明、空調、カメラ。',
-    trade_item3_desc:'リアルタイムのX線ニューラル分析。',
-    franchise_sec_tag:'// Franchise67 &middot; LABS67グループ',
-    franchise_h2_1:'成長センター', franchise_h2_2:'と', franchise_h2_3:'スケーリング',
-    franchise_lead:'Franchise67 &mdash; グループのインフラコア。',
-    fh1_label:'// マスターパートナーシップ', fh1_title:'あなたの地域でグループの一員に',
-    fh1_desc:'都市、地域、国をカバーする戦略的パートナーシップ。',
-    fh2_label:'// 既製ソリューション', fh2_title:'ターンキークリニック',
-    fh2_desc:'ゼロからローンチまでのスマート環境設計。',
-    fran1_title:'テクノロジーベース', fran1_desc:'フルスタック：AIコア、スマートホーム、カメラ。',
-    fran2_title:'Academi67基準', fran2_desc:'スタッフのトレーニングと認証。',
-    fran3_title:'サポートと近代化', fran3_desc:'継続的な技術アップデート。',
-    fran4_title:'地域スケーリング', fran4_desc:'体系的なネットワーク開発。',
-    contact_sec_tag:'// お問い合わせ',
-    contact_h2_1:'グループに', contact_h2_2:'お', contact_h2_3:'問い合わせ',
-    contact_lead:'方向をお選びください。',
-    cinfo_phone_label:'電話', cinfo_email_label:'一般問い合わせ', cinfo_franchise_label:'Franchise67 / パートナーシップ',
-    form_title:'// 新規リクエスト', form_name:'名前', form_phone:'電話', form_direction:'方向', form_message:'メッセージ',
-    footer_copy:'&copy; 2026 LABS67 グループ<br>全著作権所有<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; オンライン &middot; すぐに返信',
+  { id:'upwork', label:'Upwork', color:'#d47a9a', r:16, cat:'service',
+    desc:'Freelance direction. AI/ML, web development, automation services.',
+    tags:['freelance','revenue'],
+    links:[{icon:'&#128188;',text:'Portfolio',url:'portfolio.html',note:'labs67.com/portfolio'}],
+    html:``
   },
-  ko: {
-    logo_sub:'기술 그룹',
-    nav_directions:'방향', nav_contacts:'문의', nav_cta:'연락하기',
-    hero_eyebrow:'// 그룹 &middot; 5개 방향 &middot; MedTech',
-    hero_line1:'우리는 바꾸고 있습니다', hero_line2:'의료를',
-    hero_sub:'<span>LABS67</span> &mdash; 차세대 클리닉을 위한 솔루션 생태계를 구축하는 기술 그룹.',
-    hero_btn1:'// 우리의 방향', hero_btn2:'문의하기 &rarr;',
-    stat_label1:'방향', stat_label2:'기술', stat_label3:'AI', stat_label4:'규모',
-    brands_label:'// 그룹 방향', brands_title_1:'다섯', brands_title_2:'방향',
-    brands_lead:'관심 있는 방향을 선택하세요.',
-    scyra_desc:'세계 최초의 치과 클리닉용 엣지 AI 시스템. AI 리셉션, 스마트 스케줄링, 수술 어시스턴스.',
-    scyra_btn:'Indiegogo에서 후원하기 &rarr;',
-    scyra_card_desc:'클리닉용 엣지 AI 시스템. 얼굴 인식, 음성 어시스턴트, 분석.',
-    dental_eyebrow:'치과', dental_desc:'즐거운 치과 진료. 스마트 클리닉, AI 어시스턴트.',
-    dental_tag1:'클리닉', dental_tag2:'AI 어시스턴트', dental_tag3:'환자 경험',
-    academi_eyebrow:'교육', academi_desc:'임상 사고의 완전한 변혁.',
-    academi_tag1:'교육', academi_tag2:'인증', academi_tag3:'기준',
-    trade_eyebrow:'MedTech', trade_desc:'오픈 마켓에서의 그룹 개발.',
-    trade_tag1:'AI 솔루션', trade_tag2:'장비', trade_tag3:'통합',
-    franchise_eyebrow:'성장', franchise_desc:'확장, 의료 공간을 위한 기술 솔루션.',
-    franchise_tag1:'파트너십', franchise_tag2:'규모', franchise_tag3:'기술',
-    dental_sec_tag:'// SVYATLITSA &middot; LABS67 그룹',
-    dental_h2_1:'치과 진료', dental_h2_2:'를 즐겁게',
-    dental_quote:'&laquo;치과 진료에 대한 태도를 영원히 바꿉니다.&raquo;',
-    dental_p:'환자가 들어오면 &mdash; 시스템이 인식합니다. 의사가 일하면 &mdash; AI가 도와줍니다.',
-    feat1_title:'두려움이 아닌 케어', feat1_desc:'스마트 환경이 환자 스트레스를 줄입니다.',
-    feat2_title:'모든 체어에 AI', feat2_desc:'카메라, 음성 프로토콜, 이미지 분석.',
-    feat3_title:'완전한 프라이버시', feat3_desc:'모든 데이터는 로컬에만. GDPR 준수.',
-    academi_sec_tag:'// Academi67 &middot; LABS67 그룹',
-    academi_h2_1:'미래 임상', academi_h2_2:'기준', academi_h2_3:'연구소',
-    academi_lead:'임상 사고의 리부트. 모든 LABS67 의사는 Academi67를 수료.',
-    track1_num:'트랙_01', track1_title:'클리닉 리부트 프로그램', track1_desc:'환자 응대 새 기준.',
-    track2_num:'트랙_02', track2_title:'AI 통합 인증', track2_desc:'실제 장비 실습.',
-    track3_num:'트랙_03', track3_title:'연구개발 연구소', track3_desc:'임상 시험, 새 프로토콜.',
-    as_label:'// 우리의 기준', as_text:'LABS67 브랜드의 모든 전문가는 Academi67를 수료.',
-    as_sub:'어디서나 동일한 수준의 케어를 보장.',
-    trade_sec_tag:'// TradeAI &middot; LABS67 그룹',
-    trade_h2_1:'기술', trade_h2_2:'의료를', trade_h2_3:'위한',
-    trade_lead:'파트너와 시장을 위한 그룹 개발.',
-    trade_item1_desc:'NVIDIA Jetson의 AI 스택: 인식, 프로토콜, 비디오 분석.',
-    trade_item2_desc:'스마트룸 키트: 센서, 조명, 공조, 카메라.',
-    trade_item3_desc:'실시간 X-ray 신경망 분석.',
-    franchise_sec_tag:'// Franchise67 &middot; LABS67 그룹',
-    franchise_h2_1:'성장 센터', franchise_h2_2:'와', franchise_h2_3:'확장',
-    franchise_lead:'Franchise67 &mdash; 그룹의 인프라 핵심.',
-    fh1_label:'// 마스터 파트너십', fh1_title:'귀하의 지역에서 그룹의 일원이 되세요',
-    fh1_desc:'도시, 지역 또는 국가를 커버하는 전략적 파트너십.',
-    fh2_label:'// 기성 솔루션', fh2_title:'턴키 클리닉',
-    fh2_desc:'제로부터 런칭까지 스마트 환경 설계.',
-    fran1_title:'기술 기반', fran1_desc:'풀 스택: AI 코어, 스마트홈, 카메라.',
-    fran2_title:'Academi67 기준', fran2_desc:'직원 교육 및 인증.',
-    fran3_title:'지원 및 현대화', fran3_desc:'지속적인 기술 업데이트.',
-    fran4_title:'지역 확장', fran4_desc:'체계적인 네트워크 개발.',
-    contact_sec_tag:'// 문의',
-    contact_h2_1:'그룹에', contact_h2_2:'', contact_h2_3:'문의하기',
-    contact_lead:'방향을 선택하세요.',
-    cinfo_phone_label:'전화', cinfo_email_label:'일반 문의', cinfo_franchise_label:'Franchise67 / 파트너십',
-    form_title:'// 새 요청', form_name:'이름', form_phone:'전화', form_direction:'방향', form_message:'메시지',
-    footer_copy:'&copy; 2026 LABS67 그룹<br>모든 권리 보유<br><span class="g">&#9679; ALL SYSTEMS ONLINE</span>',
-    chat_online:'&#9679; 온라인 &middot; 바로 응답',
+  { id:'admin', label:'Admin', color:'#5ec482', r:16, cat:'site',
+    desc:'Internal admin dashboard. Real-time system monitoring, PWA.',
+    tags:['dashboard','PWA','internal'],
+    links:[{icon:'&#128274;',text:'Admin Panel',url:'https://admin.labs67.com',note:'admin.labs67.com'}],
+    html:``
   },
-};
-
-const pageTitles = {
-  be: 'LABS67 — Тэхналагічны канцэрн',
-  uk: 'LABS67 — Технологічний концерн',
-  en: 'LABS67 — Technology Concern',
-  ru: 'LABS67 — Технологический концерн',
-  de: 'LABS67 — Technologiekonzern',
-  fr: 'LABS67 — Groupe Technologique',
-  es: 'LABS67 — Grupo Tecnologico',
-  it: 'LABS67 — Gruppo Tecnologico',
-  pt: 'LABS67 — Grupo Tecnologico',
-  ja: 'LABS67 — テクノロジーグループ',
-  ko: 'LABS67 — 기술 그룹',
-};
-
-let currentLang = localStorage.getItem('labs67_lang_main') || 'be';
-
-// ── LANG SWITCHER (11 languages) ──
-const LANGS = [
-  { code:'be', name:'Беларуская' },
-  { code:'en', name:'English' },
-  { code:'uk', name:'Українська' },
-  { code:'ru', name:'Русский' },
-  { code:'de', name:'Deutsch' },
-  { code:'fr', name:'Français' },
-  { code:'es', name:'Español' },
-  { code:'it', name:'Italiano' },
-  { code:'pt', name:'Português' },
-  { code:'ja', name:'日本語' },
-  { code:'ko', name:'한국어' },
 ];
 
-const FLAG_SVG = {
-  be: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="4.67" fill="#fff"/><rect y="4.67" width="20" height="4.67" fill="#CE1720"/><rect y="9.33" width="20" height="4.67" fill="#fff"/></svg>',
-  ru: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="4.67" fill="#fff"/><rect y="4.67" width="20" height="4.67" fill="#0039A6"/><rect y="9.33" width="20" height="4.67" fill="#fff"/></svg>',
-  en: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#012169"/><path d="M0,0L20,14M20,0L0,14" stroke="#fff" stroke-width="2.5"/><path d="M0,0L20,14M20,0L0,14" stroke="#C8102E" stroke-width="1.5"/><path d="M10,0V14M0,7H20" stroke="#fff" stroke-width="4"/><path d="M10,0V14M0,7H20" stroke="#C8102E" stroke-width="2.5"/></svg>',
-  uk: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="7" fill="#005BBB"/><rect y="7" width="20" height="7" fill="#FFD500"/></svg>',
-  de: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="4.67" fill="#000"/><rect y="4.67" width="20" height="4.67" fill="#DD0000"/><rect y="9.33" width="20" height="4.67" fill="#FFCC00"/></svg>',
-  fr: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="6.67" height="14" fill="#002395"/><rect x="6.67" width="6.67" height="14" fill="#fff"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></svg>',
-  es: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="3.5" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/><rect y="10.5" width="20" height="3.5" fill="#AA151B"/></svg>',
-  it: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="6.67" height="14" fill="#009246"/><rect x="6.67" width="6.67" height="14" fill="#fff"/><rect x="13.33" width="6.67" height="14" fill="#CE2B37"/></svg>',
-  pt: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="8" height="14" fill="#006600"/><rect x="8" width="12" height="14" fill="#FF0000"/><circle cx="8" cy="7" r="3" fill="#FFCC00"/></svg>',
-  ja: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#fff"/><circle cx="10" cy="7" r="4" fill="#BC002D"/></svg>',
-  ko: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#fff"/><circle cx="10" cy="7" r="3.5" fill="#CD2E3A"/><path d="M10,3.5a3.5,3.5 0 0,1 0,7" fill="#0047A0"/></svg>',
-};
+const EDGES = [
+  ['hub','scyra',1.3], ['hub','svyatlitsa',1.3], ['hub','academi',1],
+  ['hub','trade',0.7], ['hub','franchise',1], ['hub','agents',0.8],
+  ['hub','dragona',0.5], ['hub','admin',0.6], ['hub','upwork',0.6],
+  ['scyra','svyatlitsa',1.1], ['scyra','dental-ai',0.8], ['scyra','agents',0.4],
+  ['svyatlitsa','franchise',1], ['svyatlitsa','academi',0.7],
+  ['franchise','academi',0.6], ['dental-ai','svyatlitsa',0.5],
+];
 
-function renderLangDropdown() {
-  const dd = document.getElementById('langDD');
-  dd.innerHTML = LANGS.map(l =>
-    '<button class="lang-opt ' + (l.code === currentLang ? 'active' : '') + '" onclick="setLang(\'' + l.code + '\')">' +
-    '<span class="lf">' + (FLAG_SVG[l.code] || '') + '</span> ' + l.name + '</button>'
-  ).join('');
+// ===== GRAPH ENGINE =====
+const cv = document.getElementById('g');
+const c = cv.getContext('2d');
+let W, H, dpr;
+let camX = 0, camY = 0, zoom = 1;
+let targetCamX = 0, targetCamY = 0, targetZoom = 1;
+let drag = false, dragSX, dragSY, camSX, camSY;
+let hovered = null, selected = null;
+let t = 0;
+let particles = [];
+
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  W = window.innerWidth; H = window.innerHeight;
+  cv.width = W * dpr; cv.height = H * dpr;
+  cv.style.width = W + 'px'; cv.style.height = H + 'px';
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Initial positions — orbital
+const hub = NODES[0];
+hub.x = 0; hub.y = 0; hub.vx = 0; hub.vy = 0;
+const rest = NODES.slice(1);
+const aStep = Math.PI * 2 / rest.length;
+rest.forEach((n, i) => {
+  const a = aStep * i - Math.PI / 2;
+  const d = 160 + n.r * 2.5 + Math.random() * 40;
+  n.x = Math.cos(a) * d;
+  n.y = Math.sin(a) * d;
+  n.vx = 0; n.vy = 0;
+});
+
+function sim() {
+  const ns = NODES;
+  // Repulsion
+  for (let i = 0; i < ns.length; i++) {
+    for (let j = i+1; j < ns.length; j++) {
+      let dx = ns[j].x - ns[i].x, dy = ns[j].y - ns[i].y;
+      let d = Math.sqrt(dx*dx + dy*dy) || 1;
+      let f = 12000 / (d * d);
+      ns[i].vx -= (dx/d)*f; ns[i].vy -= (dy/d)*f;
+      ns[j].vx += (dx/d)*f; ns[j].vy += (dy/d)*f;
+    }
+  }
+  // Attraction
+  EDGES.forEach(([a,b,s]) => {
+    let na = ns.find(n=>n.id===a), nb = ns.find(n=>n.id===b);
+    if(!na||!nb) return;
+    let dx = nb.x-na.x, dy = nb.y-na.y;
+    let d = Math.sqrt(dx*dx+dy*dy)||1;
+    let ideal = (na.r+nb.r)*2.2 + 90;
+    let f = (d-ideal)*0.004*s;
+    na.vx += (dx/d)*f; na.vy += (dy/d)*f;
+    nb.vx -= (dx/d)*f; nb.vy -= (dy/d)*f;
+  });
+  // Center pull
+  ns.forEach(n => { n.vx -= n.x*0.0008; n.vy -= n.y*0.0008; });
+  hub.vx = -hub.x*0.15; hub.vy = -hub.y*0.15;
+  // Apply
+  ns.forEach(n => {
+    n.vx *= 0.82; n.vy *= 0.82;
+    n.x += n.vx; n.y += n.vy;
+  });
 }
 
-function updateFlag() {
-  const lang = LANGS.find(l => l.code === currentLang);
-  document.getElementById('langFlag').innerHTML = FLAG_SVG[currentLang] || '';
-  document.getElementById('langName').textContent = currentLang.toUpperCase();
+function w2s(wx,wy) { return [(wx-camX)*zoom+W/2, (wy-camY)*zoom+H/2]; }
+function s2w(sx,sy) { return [(sx-W/2)/zoom+camX, (sy-H/2)/zoom+camY]; }
+
+// Particles along edges
+function spawnParticle(x1,y1,x2,y2,col) {
+  particles.push({x1,y1,x2,y2,t:Math.random(),col,speed:0.003+Math.random()*0.004});
 }
 
-function setLang(code) {
-  if (!i18n[code]) return;
-  currentLang = code;
-  localStorage.setItem('labs67_lang_main', code);
-  document.documentElement.lang = code;
-  if (pageTitles[code]) document.title = pageTitles[code];
+function draw() {
+  t += 0.008;
+  sim();
 
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (i18n[code][key] !== undefined) el.innerHTML = i18n[code][key];
+  // Smooth camera
+  camX += (targetCamX - camX) * 0.06;
+  camY += (targetCamY - camY) * 0.06;
+  zoom += (targetZoom - zoom) * 0.06;
+
+  c.clearRect(0,0,W,H);
+
+  // Subtle radial gradient bg — uses theme colors
+  let bgGrd = c.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.7);
+  bgGrd.addColorStop(0, canvasBG.bg1);
+  bgGrd.addColorStop(1, canvasBG.bg2);
+  c.fillStyle = bgGrd;
+  c.fillRect(0,0,W,H);
+
+  // Grid dots
+  const gs = 50 * zoom;
+  const ox = (-camX*zoom+W/2)%gs, oy = (-camY*zoom+H/2)%gs;
+  c.fillStyle = canvasBG.dot;
+  for(let x=ox;x<W;x+=gs) for(let y=oy;y<H;y+=gs) { c.beginPath(); c.arc(x,y,0.5,0,Math.PI*2); c.fill(); }
+
+  // Edges
+  EDGES.forEach(([a,b,s]) => {
+    let na=NODES.find(n=>n.id===a), nb=NODES.find(n=>n.id===b);
+    if(!na||!nb) return;
+    let [x1,y1]=w2s(na.x,na.y), [x2,y2]=w2s(nb.x,nb.y);
+    let isH = hovered&&(hovered.id===a||hovered.id===b);
+    let isS = selected&&(selected.id===a||selected.id===b);
+    let alpha = isS ? 0.2 : isH ? 0.12 : 0.03;
+
+    c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2);
+    c.strokeStyle = isS ? na.color+'44' : isH ? `rgba(201,169,110,${alpha})` : `rgba(255,255,255,${alpha})`;
+    c.lineWidth = isS ? 1.5 : isH ? 1.5 : 0.5;
+    c.stroke();
+
+    // Particles on active edges
+    if(isS && Math.random()<0.02) spawnParticle(x1,y1,x2,y2,na.color);
   });
 
-  updateFlag();
-  renderLangDropdown();
-  document.getElementById('langWrap').classList.remove('open');
+  // Update particles
+  particles = particles.filter(p => {
+    p.t += p.speed;
+    if(p.t > 1) return false;
+    let px = p.x1+(p.x2-p.x1)*p.t;
+    let py = p.y1+(p.y2-p.y1)*p.t;
+    c.beginPath(); c.arc(px,py,1.5,0,Math.PI*2);
+    c.fillStyle = p.col + Math.round((1-Math.abs(p.t-0.5)*2)*80).toString(16).padStart(2,'0');
+    c.fill();
+    return true;
+  });
+
+  // Nodes
+  NODES.forEach(n => {
+    let [sx,sy] = w2s(n.x, n.y);
+    let r = n.r * zoom;
+    let isH = hovered && hovered.id === n.id;
+    let isS = selected && selected.id === n.id;
+
+    // Outer glow
+    if(isH || isS || n.id==='hub') {
+      let gr = c.createRadialGradient(sx,sy,r*0.3,sx,sy,r*(isS?3:2));
+      gr.addColorStop(0, n.color + (isS?'18':'10'));
+      gr.addColorStop(1, 'transparent');
+      c.beginPath(); c.arc(sx,sy,r*(isS?3:2),0,Math.PI*2); c.fillStyle=gr; c.fill();
+    }
+
+    // Pulse ring (hub + selected)
+    if(n.id==='hub' || isS) {
+      let pr = r + 6 + Math.sin(t*2.5)*3;
+      c.beginPath(); c.arc(sx,sy,pr,0,Math.PI*2);
+      c.strokeStyle = n.color + '18';
+      c.lineWidth = 1; c.stroke();
+      if(isS) {
+        let pr2 = r + 14 + Math.sin(t*1.8)*5;
+        c.beginPath(); c.arc(sx,sy,pr2,0,Math.PI*2);
+        c.strokeStyle = n.color + '0a'; c.stroke();
+      }
+    }
+
+    // Node body
+    c.beginPath(); c.arc(sx,sy,r,0,Math.PI*2);
+    let gr = c.createRadialGradient(sx-r*0.25,sy-r*0.25,0,sx,sy,r);
+    let baseAlpha = isS ? 'ee' : isH ? 'cc' : '55';
+    gr.addColorStop(0, n.color + baseAlpha);
+    gr.addColorStop(1, n.color + (isS?'88':isH?'66':'22'));
+    c.fillStyle = gr; c.fill();
+
+    // Border
+    c.beginPath(); c.arc(sx,sy,r,0,Math.PI*2);
+    c.strokeStyle = n.color + (isS?'88':isH?'55':'18');
+    c.lineWidth = isS ? 2 : 1; c.stroke();
+
+    // Label
+    if(r > 6) {
+      let fs = Math.max(7, Math.min(15, r*0.5));
+      c.font = `700 ${fs}px Inter,sans-serif`;
+      c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillStyle = '#fff';
+      c.fillText(n.label, sx, sy);
+
+      if(r > 14) {
+        c.font = `500 ${Math.max(6,fs*0.48)}px 'JetBrains Mono',monospace`;
+        c.fillStyle = currentTheme ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.2)';
+        c.fillText(n.cat.toUpperCase(), sx, sy + r + 8*zoom);
+      }
+    }
+  });
+
+  requestAnimationFrame(draw);
 }
 
-// Close dropdown on outside click
-document.addEventListener('click', e => {
-  const wrap = document.getElementById('langWrap');
-  if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
-});
-
-// Init
-document.addEventListener('DOMContentLoaded', () => {
-  renderLangDropdown();
-  updateFlag();
-  setLang(currentLang);
-});
-
-// ── SUPABASE ──
-const SB_URL = 'https://ctdleobjnzniqkqomlrq.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0ZGxlb2JqbnpuaXFrcW9tbHJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMzE4MTEsImV4cCI6MjA4NzgwNzgxMX0.AMHtY7zGPemKYCxMy2bqRTOEAp8trA_Slor9wmg7C38';
-
-async function sbInsertLead(data) {
-  try {
-    const res = await fetch(SB_URL + '/rest/v1/leads', {
-      method: 'POST',
-      headers: {'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
-    });
-    return res.ok;
-  } catch(e) { return false; }
+// ===== INTERACTION =====
+function nodeAt(mx,my) {
+  let [wx,wy] = s2w(mx,my);
+  for(let i=NODES.length-1;i>=0;i--) {
+    let n=NODES[i], dx=wx-n.x, dy=wy-n.y;
+    if(dx*dx+dy*dy < (n.r+8)*(n.r+8)) return n;
+  }
+  return null;
 }
 
-document.getElementById('formId').textContent = 'REQ_' + Math.random().toString(36).substr(2,6).toUpperCase();
-
-async function handleSubmit() {
-  const btn = document.querySelector('.fsubmit');
-  const name = document.getElementById('f_name')?.value.trim();
-  const phone = document.getElementById('f_phone')?.value.trim();
-  const email = document.getElementById('f_email')?.value.trim();
-  const direction = document.getElementById('f_direction')?.value;
-  const message = document.getElementById('f_message')?.value.trim();
-  if (!name || !phone || !email) { alert('Please fill in required fields'); return; }
-  btn.textContent = '// SENDING...';
-  const src = direction?.includes('Dental') ? 'dental' : direction?.includes('SCYRA') ? 'scyra' : direction?.includes('Academi') ? 'academi' : direction?.includes('Franchise') ? 'franchise' : direction?.includes('Trade') ? 'trade' : 'main';
-  const ok = await sbInsertLead({name, phone, email, source: src, message: message || direction, status: 'new', lang: currentLang || 'be'});
-  setTimeout(() => {
-    btn.textContent = ok ? '// REQUEST ACCEPTED' : '// SENT';
-    btn.style.background = 'var(--green)'; btn.style.color = '#fff';
-    document.getElementById('formId').textContent = 'REQ_' + Math.random().toString(36).substr(2,6).toUpperCase();
-    ['f_name','f_phone','f_email','f_message'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
-    setTimeout(() => { btn.textContent = '// SEND REQUEST'; btn.style.background=''; btn.style.color=''; }, 3000);
-  }, 800);
-}
-
-// ── CHAT ──
-let chatOpen = false;
-const chatData = {
-  dental: { answer:'SVYATLITSA — our flagship dental brand. Smart clinics where AI assists the doctor, recognises patients at entry, and maintains voice protocols.', follow:['How to book?','Clinic technologies','SVYATLITSA partnerships'] },
-  scyra: { answer:'SCYRA.AI — the world\'s first edge AI system for dental clinics. Runs on NVIDIA Jetson. Now live on Indiegogo with Early Bird from 499.', follow:['Back on Indiegogo','Hardware specs','How it works'] },
-  academi: { answer:'Academi67 — the institute of future clinical standards. All concern doctors undergo a complete clinical reboot here.', follow:['How to apply?','What\'s included?','Cost'] },
-  franchise: { answer:'Franchise67 — concern\'s scaling centre. We build turnkey clinics and seek strategic partners to grow the network.', follow:['Partnership formats','Master franchise','What\'s needed?'] },
-  trade: { answer:'TradeAI — concern\'s tech products on the open market. AI Core Kit, SmartRoom Module, Clinical Vision.', follow:['Product catalog','Pricing','Integration'] },
+// Theme map per node
+const THEMES = {
+  hub: '', svyatlitsa: 'theme-svyatlitsa', scyra: 'theme-scyra',
+  academi: 'theme-academi', trade: 'theme-trade', franchise: 'theme-franchise',
+  agents: 'theme-agents', dragona: 'theme-dragona',
+  'dental-ai': 'theme-scyra', upwork: 'theme-dark', admin: 'theme-dark'
 };
+// BG colors for canvas per theme
+const BG_COLORS = {
+  '': {bg1:'#f0ece6',bg2:'#e8e4de',dot:'rgba(184,134,11,0.04)',grid:'rgba(0,0,0,0.03)'},
+  'theme-svyatlitsa': {bg1:'#0a0808',bg2:'#080606',dot:'rgba(201,169,110,0.03)',grid:'rgba(201,169,110,0.015)'},
+  'theme-scyra': {bg1:'#080a10',bg2:'#060810',dot:'rgba(0,212,255,0.03)',grid:'rgba(0,212,255,0.015)'},
+  'theme-academi': {bg1:'#0a080e',bg2:'#08060c',dot:'rgba(164,139,250,0.03)',grid:'rgba(164,139,250,0.015)'},
+  'theme-trade': {bg1:'#0a080e',bg2:'#08060c',dot:'rgba(164,139,250,0.03)',grid:'rgba(164,139,250,0.015)'},
+  'theme-franchise': {bg1:'#0a080e',bg2:'#08060c',dot:'rgba(164,139,250,0.03)',grid:'rgba(164,139,250,0.015)'},
+  'theme-agents': {bg1:'#0e080a',bg2:'#0c0608',dot:'rgba(212,122,154,0.03)',grid:'rgba(212,122,154,0.015)'},
+  'theme-dragona': {bg1:'#080a08',bg2:'#060806',dot:'rgba(34,197,94,0.03)',grid:'rgba(34,197,94,0.015)'},
+  'theme-dark': {bg1:'#0a0a0a',bg2:'#080808',dot:'rgba(255,255,255,0.02)',grid:'rgba(255,255,255,0.015)'},
+};
+let currentTheme = '';
+let canvasBG = BG_COLORS[''];
 
-function toggleChat() { chatOpen=!chatOpen; document.getElementById('chatWin').classList.toggle('open',chatOpen); }
-
-function addMsg(text,isBot) {
-  const msgs=document.getElementById('chatMsgs');
-  const div=document.createElement('div');
-  div.className='msg '+(isBot?'msg-bot':'msg-user');
-  if(isBot) div.innerHTML='<span class="msg-sender">// LABS67 AI</span>'+text;
-  else div.textContent=text;
-  msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+function applyTheme(themeClass) {
+  document.body.className = themeClass;
+  currentTheme = themeClass;
+  canvasBG = BG_COLORS[themeClass] || BG_COLORS['theme-dark'];
 }
 
-function showOptions(opts) {
-  const el=document.getElementById('chatOpts'); el.innerHTML='';
-  opts.forEach(o => { const b=document.createElement('button'); b.className='chat-opt'; b.textContent=o; b.onclick=()=>sendChatMsg(o); el.appendChild(b); });
+function selectNode(n) {
+  selected = n;
+  if(!n) { goHome(); return; }
+  targetCamX = n.x + 120/zoom;
+  targetCamY = n.y;
+  targetZoom = 1.8;
+  document.getElementById('hero-overlay').classList.add('hidden');
+  document.getElementById('hint').classList.add('hidden');
+  applyTheme(THEMES[n.id] || 'theme-dark');
+  renderContent(n);
+  document.getElementById('content').classList.add('open');
 }
 
-function chatSelect(key) {
-  const d=chatData[key]; if(!d) return;
-  document.getElementById('chatOpts').innerHTML='';
-  addMsg(key.toUpperCase(), false);
-  setTimeout(() => { addMsg(d.answer, true); setTimeout(() => showOptions(d.follow||[]), 400); }, 500);
+function goHome() {
+  selected = null;
+  targetCamX = 0; targetCamY = 0; targetZoom = 1;
+  document.getElementById('content').classList.remove('open');
+  document.getElementById('hero-overlay').classList.remove('hidden');
+  document.getElementById('hint').classList.remove('hidden');
+  applyTheme('');
 }
 
-function sendChatMsg(text) {
-  document.getElementById('chatOpts').innerHTML='';
-  addMsg(text, false);
-  setTimeout(() => {
-    if(text.includes('Indiegogo')) addMsg('Visit <a href="https://scyra.labs67.com" target="_blank" style="color:var(--gold)">scyra.labs67.com</a> for full details and to back the project!', true);
-    else if(text.includes('book')||text.includes('apply')) addMsg('Fill out the form in the Contacts section or email hello@labs67.com. We respond within 1 hour.', true);
-    else addMsg('For detailed answers, contact us directly: +48 571 719 800 or hello@labs67.com', true);
-    showOptions(['Contact the team','Another direction','Thanks!']);
-  }, 600);
+function renderContent(n) {
+  let cp = document.getElementById('cp');
+  let statsHTML = '';
+  if(n.stats) {
+    statsHTML = '<div class="cp-stat-grid">' + n.stats.map(s =>
+      `<div class="cp-stat"><div class="cp-stat-val">${s.v}</div><div class="cp-stat-lbl">${s.l}</div></div>`
+    ).join('') + '</div>';
+  }
+  let tagsHTML = n.tags ? '<div class="cp-tags">' + n.tags.map(t=>`<span class="cp-tag">${t}</span>`).join('') + '</div>' : '';
+  let linksHTML = '';
+  if(n.links && n.links.length) {
+    linksHTML = '<div class="cp-links">' + n.links.map(l =>
+      `<a class="cp-link" href="${l.url}" target="_blank"><span class="cp-link-icon">${l.icon}</span><div><div class="cp-link-text">${l.text}</div><div class="cp-link-url">${l.note||l.url}</div></div></a>`
+    ).join('') + '</div>';
+  }
+  cp.innerHTML = `
+    <button class="cp-close" onclick="goHome()">&times;</button>
+    <div class="cp-cat">${n.cat}</div>
+    <div class="cp-title" style="color:${n.color}">${n.label}</div>
+    <div class="cp-desc">${n.desc}</div>
+    ${statsHTML}
+    ${tagsHTML}
+    <div class="cp-divider"></div>
+    ${n.html||''}
+    ${linksHTML ? '<div class="cp-divider"></div>' + linksHTML : ''}
+  `;
+  cp.parentElement.scrollTop = 0;
 }
 
-function sendChat() {
-  const inp=document.getElementById('chatInput'); const val=inp.value.trim(); if(!val) return; inp.value='';
-  document.getElementById('chatOpts').innerHTML=''; addMsg(val, false);
-  setTimeout(() => {
-    const low=val.toLowerCase();
-    if(low.includes('dental')||low.includes('стоматолог')||low.includes('svyatlitsa')) chatSelect('dental');
-    else if(low.includes('scyra')||low.includes('jetson')||low.includes('indiegogo')) chatSelect('scyra');
-    else if(low.includes('academi')||low.includes('обучен')) chatSelect('academi');
-    else if(low.includes('franchise')||low.includes('франш')) chatSelect('franchise');
-    else if(low.includes('trade')||low.includes('оборудование')) chatSelect('trade');
-    else addMsg('Please specify your question or choose a direction.', true);
-  }, 600);
-}
-
-// ── Scroll animations ──
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.brand-card, .feat, .track, .fr-card, .trade-item').forEach(el => {
-  el.classList.add('fade-in'); obs.observe(el);
+cv.addEventListener('mousedown', e => {
+  drag = true; dragSX = e.clientX; dragSY = e.clientY;
+  camSX = targetCamX; camSY = targetCamY;
 });
+cv.addEventListener('mousemove', e => {
+  if(drag) {
+    targetCamX = camSX - (e.clientX - dragSX) / zoom;
+    targetCamY = camSY - (e.clientY - dragSY) / zoom;
+    return;
+  }
+  hovered = nodeAt(e.clientX, e.clientY);
+  cv.style.cursor = hovered ? 'pointer' : 'grab';
+});
+cv.addEventListener('mouseup', e => {
+  let wasDrag = Math.abs(e.clientX-dragSX)>4 || Math.abs(e.clientY-dragSY)>4;
+  drag = false;
+  if(!wasDrag) {
+    let n = nodeAt(e.clientX, e.clientY);
+    if(n) selectNode(n);
+    else if(!document.getElementById('content').classList.contains('open')) goHome();
+  }
+});
+cv.addEventListener('wheel', e => {
+  e.preventDefault();
+  let f = e.deltaY > 0 ? 0.92 : 1.08;
+  let nz = Math.max(0.4, Math.min(4, targetZoom * f));
+  let [wx,wy] = s2w(e.clientX, e.clientY);
+  targetZoom = nz;
+  targetCamX = wx - (e.clientX - W/2) / nz;
+  targetCamY = wy - (e.clientY - H/2) / nz;
+}, {passive:false});
+
+// Touch
+let lastDist=0;
+cv.addEventListener('touchstart', e => {
+  if(e.touches.length===1) { drag=true; dragSX=e.touches[0].clientX; dragSY=e.touches[0].clientY; camSX=targetCamX; camSY=targetCamY; }
+  if(e.touches.length===2) { let dx=e.touches[1].clientX-e.touches[0].clientX, dy=e.touches[1].clientY-e.touches[0].clientY; lastDist=Math.sqrt(dx*dx+dy*dy); }
+},{passive:true});
+cv.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if(e.touches.length===1&&drag) { targetCamX=camSX-(e.touches[0].clientX-dragSX)/zoom; targetCamY=camSY-(e.touches[0].clientY-dragSY)/zoom; }
+  if(e.touches.length===2) { let dx=e.touches[1].clientX-e.touches[0].clientX, dy=e.touches[1].clientY-e.touches[0].clientY, d=Math.sqrt(dx*dx+dy*dy); if(lastDist>0) targetZoom=Math.max(0.4,Math.min(4,targetZoom*(d/lastDist))); lastDist=d; }
+},{passive:false});
+cv.addEventListener('touchend', e => {
+  drag=false; lastDist=0;
+  if(e.changedTouches.length===1) { let tt=e.changedTouches[0], n=nodeAt(tt.clientX,tt.clientY); if(n) selectNode(n); }
+});
+
+// Keyboard
+document.addEventListener('keydown', e => { if(e.key==='Escape') goHome(); });
+
+draw();
 </script>
 </body>
 </html>

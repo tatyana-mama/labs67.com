@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LABS67 — Ecosystem Graph</title>
+<meta name="description" content="LABS67 ecosystem — interactive project graph. SVYATLITSA, SCYRA.AI, Academi67, TradeAI, Franchise67.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --panel: #161616;
+  --gold: #B8860B;
+  --gold2: #D4A017;
+  --gold-glow: rgba(184,134,11,0.15);
+  --white: #ffffff;
+  --text: #e0e0e0;
+  --text2: #999999;
+  --muted: #555555;
+  --border: rgba(255,255,255,0.06);
+  --cyan: #00D4FF;
+  --green: #22C55E;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 52px;
+  background: rgba(10,10,10,0.85); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); }
+.logo-hex {
+  width: 30px; height: 30px; background: linear-gradient(135deg, var(--gold), var(--gold2));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 8px; font-weight: 600; color: #fff;
+}
+.logo-name { font-weight: 800; font-size: 15px; letter-spacing: 0.15em; }
+.logo-name em { color: var(--gold); font-style: normal; }
+.nav-links { display: flex; gap: 0; }
+.nav-links a {
+  padding: 6px 14px; font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  color: var(--text2); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-back {
+  padding: 6px 14px; font-size: 11px; font-weight: 500;
+  color: var(--text2); text-decoration: none; border: 1px solid var(--border);
+  border-radius: 4px; transition: all 0.2s;
+}
+.nav-back:hover { border-color: var(--gold); color: var(--gold); }
+@media(max-width: 768px) { .nav-links { display: none; } }
+
+/* CANVAS */
+canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+canvas:active { cursor: grabbing; }
+
+/* TOOLTIP */
+#tooltip {
+  position: fixed; pointer-events: none; z-index: 200;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 20px; max-width: 300px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  opacity: 0; transition: opacity 0.15s;
+  backdrop-filter: blur(12px);
+}
+#tooltip.show { opacity: 1; }
+#tooltip .tt-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+#tooltip .tt-name { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+#tooltip .tt-desc { font-size: 12px; line-height: 1.6; color: var(--text2); margin-bottom: 10px; }
+#tooltip .tt-url { font-family: var(--mono); font-size: 10px; color: var(--gold); }
+#tooltip .tt-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+#tooltip .tt-tag {
+  font-family: var(--mono); font-size: 9px; padding: 2px 8px;
+  border: 1px solid var(--border); border-radius: 3px; color: var(--muted);
+}
+
+/* INFO PANEL */
+#info {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  color: var(--muted); text-transform: uppercase;
+  background: rgba(10,10,10,0.7); padding: 8px 16px; border-radius: 20px;
+  border: 1px solid var(--border); backdrop-filter: blur(10px);
+}
+
+/* LEGEND */
+#legend {
+  position: fixed; bottom: 20px; right: 20px; z-index: 50;
+  display: flex; flex-direction: column; gap: 6px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-hex">L67</div>
+    <div><div class="logo-name"><em>LABS</em>67</div></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="graph.html" class="active">Graph</a>
+    <a href="brandbook.html">Brandbook</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="status.html">Status</a>
+  </div>
+  <a href="index.html" class="nav-back">&larr; Back</a>
+</nav>
+
+<canvas id="graph"></canvas>
+
+<div id="tooltip">
+  <div class="tt-label"></div>
+  <div class="tt-name"></div>
+  <div class="tt-desc"></div>
+  <div class="tt-url"></div>
+  <div class="tt-tags"></div>
+</div>
+
+<div id="info">Click a node to open &middot; Drag to pan &middot; Scroll to zoom</div>
+
+<div id="legend">
+  <div class="legend-item"><div class="legend-dot" style="background: #B8860B;"></div>HUB</div>
+  <div class="legend-item"><div class="legend-dot" style="background: #00D4FF;"></div>PRODUCT</div>
+  <div class="legend-item"><div class="legend-dot" style="background: #22C55E;"></div>SITE</div>
+  <div class="legend-item"><div class="legend-dot" style="background: #A78BFA;"></div>PLATFORM</div>
+  <div class="legend-item"><div class="legend-dot" style="background: #F472B6;"></div>SERVICE</div>
+</div>
+
+<script>
+const NODES = [
+  // HUB
+  { id: 'labs67', label: 'LABS67', cat: 'hub', color: '#B8860B', r: 42,
+    desc: 'Technology concern. 5 directions, AI-powered ecosystem for next-gen medicine.',
+    url: 'https://labs67.com', tags: ['concern', 'AI', 'medtech'] },
+
+  // PRODUCTS
+  { id: 'scyra', label: 'SCYRA.AI', cat: 'product', color: '#00D4FF', r: 32,
+    desc: 'Edge AI system for dental clinics. NVIDIA Jetson AGX Orin. No cloud — all local.',
+    url: 'https://scyra.labs67.com', tags: ['edge-ai', 'nvidia', 'dental'] },
+  { id: 'svyatlitsa', label: 'SVYATLITSA', cat: 'product', color: '#00D4FF', r: 30,
+    desc: 'Premium dental clinic. Ceiling-down system, smart glass, KYNOSYS storage, robot cleaning.',
+    url: 'https://svyatlitsa.com', tags: ['clinic', 'franchise', 'warsaw'],
+    sub: [
+      { id: 'sv-bp', label: 'Business Plan', url: 'https://academi67.com/business-plan.html' },
+      { id: 'sv-bb', label: 'Brandbook', url: 'https://academi67.com/brandbook.html' },
+    ]},
+  { id: 'dental-ai', label: 'Dental AI', cat: 'product', color: '#00D4FF', r: 22,
+    desc: 'Next.js diagnostic app. X-ray analysis, treatment planning, patient management.',
+    url: '#', tags: ['next.js', 'diagnostics'] },
+
+  // PLATFORMS
+  { id: 'academi', label: 'Academi67', cat: 'platform', color: '#A78BFA', r: 26,
+    desc: 'Education platform. Dental training standards, certification, franchise onboarding.',
+    url: 'https://academi67.com', tags: ['education', 'certification'] },
+  { id: 'trade', label: 'TradeAI', cat: 'platform', color: '#A78BFA', r: 22,
+    desc: 'AI-powered trading analytics and portfolio management.',
+    url: 'https://trade.labs67.com', tags: ['trading', 'analytics'] },
+  { id: 'franchise', label: 'Franchise67', cat: 'platform', color: '#A78BFA', r: 24,
+    desc: 'Franchise management system. Turnkey clinic deployment across EU.',
+    url: 'https://franchise.labs67.com', tags: ['franchise', 'EU', 'scaling'] },
+
+  // SITES
+  { id: 'dragona', label: 'DRAGONA', cat: 'site', color: '#22C55E', r: 20,
+    desc: 'DRAGONA.PL — Polish market presence.',
+    url: 'https://dragona.pl', tags: ['poland'] },
+  { id: 'admin', label: 'Admin Panel', cat: 'site', color: '#22C55E', r: 18,
+    desc: 'Internal admin dashboard. PWA, real-time monitoring.',
+    url: 'https://admin.labs67.com', tags: ['dashboard', 'PWA'] },
+
+  // SERVICES
+  { id: 'agents', label: 'Agent Hub', cat: 'service', color: '#F472B6', r: 22,
+    desc: 'Multi-agent AI chat. Kai, Stepa, Tatiana, Gennady, Alexei, Vitya.',
+    url: 'https://labs67.com/chat.html', tags: ['agents', 'AI-team'] },
+  { id: 'upwork', label: 'Upwork', cat: 'service', color: '#F472B6', r: 18,
+    desc: 'Freelance direction. AI/ML, web, automation services.',
+    url: 'https://labs67.com/portfolio.html', tags: ['freelance', 'revenue'] },
+  { id: 'indiegogo', label: 'Indiegogo', cat: 'service', color: '#F472B6', r: 20,
+    desc: 'Crowdfunding campaign for SCYRA.AI. Target: 50-150k EUR.',
+    url: '#', tags: ['crowdfunding', 'launch'] },
+];
+
+// EDGES: [from, to, strength]
+const EDGES = [
+  ['labs67', 'scyra', 1.2],
+  ['labs67', 'svyatlitsa', 1.2],
+  ['labs67', 'academi', 1],
+  ['labs67', 'trade', 0.8],
+  ['labs67', 'franchise', 1],
+  ['labs67', 'dragona', 0.6],
+  ['labs67', 'admin', 0.7],
+  ['labs67', 'agents', 0.9],
+  ['labs67', 'upwork', 0.7],
+  ['scyra', 'svyatlitsa', 1],
+  ['scyra', 'dental-ai', 0.9],
+  ['scyra', 'indiegogo', 0.8],
+  ['svyatlitsa', 'franchise', 0.9],
+  ['svyatlitsa', 'academi', 0.7],
+  ['franchise', 'academi', 0.6],
+  ['agents', 'scyra', 0.5],
+  ['dental-ai', 'svyatlitsa', 0.7],
+];
+
+// ---- PHYSICS ----
+const canvas = document.getElementById('graph');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+let W, H, dpr;
+let camX = 0, camY = 0, zoom = 1;
+let dragging = false, dragStartX, dragStartY, camStartX, camStartY;
+let hoveredNode = null;
+let time = 0;
+
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Position nodes in a force-directed layout (pre-computed initial positions)
+const cx = 0, cy = 0;
+const angleStep = (Math.PI * 2) / (NODES.length - 1);
+NODES.forEach((n, i) => {
+  if (n.id === 'labs67') { n.x = cx; n.y = cy; n.vx = 0; n.vy = 0; return; }
+  const a = angleStep * (i - 1) - Math.PI / 2;
+  const dist = 180 + n.r * 2 + Math.random() * 60;
+  n.x = cx + Math.cos(a) * dist;
+  n.y = cy + Math.sin(a) * dist;
+  n.vx = 0; n.vy = 0;
+});
+
+// Sub-nodes positioning
+NODES.forEach(n => {
+  if (!n.sub) return;
+  n.sub.forEach((s, i) => {
+    s.r = 12;
+    s.color = n.color;
+    s.cat = 'sub';
+    const a = Math.PI / 4 + (i / n.sub.length) * Math.PI * 0.5;
+    s.x = n.x + Math.cos(a) * (n.r + 40);
+    s.y = n.y + Math.sin(a) * (n.r + 40);
+    s.parent = n.id;
+  });
+});
+
+const allSub = NODES.flatMap(n => n.sub || []);
+
+function simulate() {
+  const nodes = NODES;
+  // Repulsion
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      let dx = nodes[j].x - nodes[i].x;
+      let dy = nodes[j].y - nodes[i].y;
+      let d = Math.sqrt(dx * dx + dy * dy) || 1;
+      let force = 8000 / (d * d);
+      let fx = (dx / d) * force;
+      let fy = (dy / d) * force;
+      nodes[i].vx -= fx; nodes[i].vy -= fy;
+      nodes[j].vx += fx; nodes[j].vy += fy;
+    }
+  }
+  // Attraction (edges)
+  EDGES.forEach(([a, b, s]) => {
+    let na = nodes.find(n => n.id === a);
+    let nb = nodes.find(n => n.id === b);
+    if (!na || !nb) return;
+    let dx = nb.x - na.x;
+    let dy = nb.y - na.y;
+    let d = Math.sqrt(dx * dx + dy * dy) || 1;
+    let ideal = (na.r + nb.r) * 2.5 + 80;
+    let force = (d - ideal) * 0.003 * s;
+    na.vx += (dx / d) * force;
+    na.vy += (dy / d) * force;
+    nb.vx -= (dx / d) * force;
+    nb.vy -= (dy / d) * force;
+  });
+  // Center gravity
+  nodes.forEach(n => {
+    n.vx -= n.x * 0.001;
+    n.vy -= n.y * 0.001;
+  });
+  // Hub stays centered
+  let hub = nodes.find(n => n.id === 'labs67');
+  hub.vx = -hub.x * 0.1;
+  hub.vy = -hub.y * 0.1;
+  // Damping + apply
+  nodes.forEach(n => {
+    n.vx *= 0.85; n.vy *= 0.85;
+    n.x += n.vx; n.y += n.vy;
+  });
+  // Sub-nodes follow parents
+  NODES.forEach(n => {
+    if (!n.sub) return;
+    n.sub.forEach((s, i) => {
+      const a = Math.PI * 0.3 + (i / n.sub.length) * Math.PI * 0.6;
+      const tx = n.x + Math.cos(a) * (n.r + 35);
+      const ty = n.y + Math.sin(a) * (n.r + 35);
+      s.x += (tx - s.x) * 0.1;
+      s.y += (ty - s.y) * 0.1;
+    });
+  });
+}
+
+function worldToScreen(wx, wy) {
+  return [(wx - camX) * zoom + W / 2, (wy - camY) * zoom + H / 2];
+}
+function screenToWorld(sx, sy) {
+  return [(sx - W / 2) / zoom + camX, (sy - H / 2) / zoom + camY];
+}
+
+function draw() {
+  time += 0.01;
+  simulate();
+  ctx.clearRect(0, 0, W, H);
+
+  // Background grid
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255,255,255,0.015)';
+  ctx.lineWidth = 1;
+  const gs = 60 * zoom;
+  const ox = (-camX * zoom + W / 2) % gs;
+  const oy = (-camY * zoom + H / 2) % gs;
+  for (let x = ox; x < W; x += gs) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (let y = oy; y < H; y += gs) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+  ctx.restore();
+
+  // Edges
+  EDGES.forEach(([a, b, s]) => {
+    let na = NODES.find(n => n.id === a);
+    let nb = NODES.find(n => n.id === b);
+    if (!na || !nb) return;
+    let [x1, y1] = worldToScreen(na.x, na.y);
+    let [x2, y2] = worldToScreen(nb.x, nb.y);
+    let isHovered = hoveredNode && (hoveredNode.id === a || hoveredNode.id === b);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = isHovered ? `rgba(184,134,11,${0.3 + Math.sin(time * 3) * 0.1})` : 'rgba(255,255,255,0.04)';
+    ctx.lineWidth = isHovered ? 2 : 1;
+    ctx.stroke();
+
+    // Animated particle on hovered edges
+    if (isHovered) {
+      let t = (time * 0.5) % 1;
+      let px = x1 + (x2 - x1) * t;
+      let py = y1 + (y2 - y1) * t;
+      ctx.beginPath();
+      ctx.arc(px, py, 2, 0, Math.PI * 2);
+      ctx.fillStyle = '#B8860B';
+      ctx.fill();
+    }
+  });
+
+  // Sub-node edges
+  allSub.forEach(s => {
+    let parent = NODES.find(n => n.id === s.parent);
+    if (!parent) return;
+    let [x1, y1] = worldToScreen(parent.x, parent.y);
+    let [x2, y2] = worldToScreen(s.x, s.y);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // Draw all nodes
+  const allNodes = [...NODES, ...allSub];
+  allNodes.forEach(n => {
+    let [sx, sy] = worldToScreen(n.x, n.y);
+    let r = n.r * zoom;
+    let isHovered = hoveredNode && hoveredNode.id === n.id;
+
+    // Glow
+    if (isHovered || n.id === 'labs67') {
+      let grd = ctx.createRadialGradient(sx, sy, r * 0.5, sx, sy, r * 2.5);
+      grd.addColorStop(0, n.color + '30');
+      grd.addColorStop(1, 'transparent');
+      ctx.beginPath();
+      ctx.arc(sx, sy, r * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+    }
+
+    // Pulse ring for hub
+    if (n.id === 'labs67') {
+      let pr = r + 8 + Math.sin(time * 2) * 4;
+      ctx.beginPath();
+      ctx.arc(sx, sy, pr, 0, Math.PI * 2);
+      ctx.strokeStyle = n.color + '20';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Node circle
+    ctx.beginPath();
+    ctx.arc(sx, sy, r, 0, Math.PI * 2);
+    let grd = ctx.createRadialGradient(sx - r * 0.3, sy - r * 0.3, 0, sx, sy, r);
+    grd.addColorStop(0, isHovered ? n.color : n.color + 'CC');
+    grd.addColorStop(1, isHovered ? n.color + 'DD' : n.color + '66');
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    // Border
+    ctx.beginPath();
+    ctx.arc(sx, sy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = isHovered ? n.color : n.color + '40';
+    ctx.lineWidth = isHovered ? 2 : 1;
+    ctx.stroke();
+
+    // Label
+    if (r > 8) {
+      let fs = Math.max(8, Math.min(14, r * 0.55));
+      ctx.font = `700 ${fs}px Inter, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#fff';
+      ctx.fillText(n.label, sx, sy);
+
+      // Category label below
+      if (n.cat !== 'sub' && r > 16) {
+        ctx.font = `500 ${Math.max(7, fs * 0.55)}px 'JetBrains Mono', monospace`;
+        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+        ctx.fillText(n.cat.toUpperCase(), sx, sy + r + 10 * zoom);
+      }
+    }
+  });
+
+  requestAnimationFrame(draw);
+}
+
+// ---- INTERACTION ----
+function getNodeAt(mx, my) {
+  let [wx, wy] = screenToWorld(mx, my);
+  let allNodes = [...NODES, ...allSub];
+  for (let i = allNodes.length - 1; i >= 0; i--) {
+    let n = allNodes[i];
+    let dx = wx - n.x, dy = wy - n.y;
+    if (dx * dx + dy * dy < (n.r + 5) * (n.r + 5)) return n;
+  }
+  return null;
+}
+
+canvas.addEventListener('mousedown', e => {
+  dragging = true;
+  dragStartX = e.clientX;
+  dragStartY = e.clientY;
+  camStartX = camX;
+  camStartY = camY;
+});
+
+canvas.addEventListener('mousemove', e => {
+  if (dragging) {
+    camX = camStartX - (e.clientX - dragStartX) / zoom;
+    camY = camStartY - (e.clientY - dragStartY) / zoom;
+    return;
+  }
+  let n = getNodeAt(e.clientX, e.clientY);
+  hoveredNode = n;
+  canvas.style.cursor = n ? 'pointer' : 'grab';
+
+  if (n && n.desc) {
+    tooltip.querySelector('.tt-label').textContent = (n.cat || '').toUpperCase();
+    tooltip.querySelector('.tt-name').textContent = n.label;
+    tooltip.querySelector('.tt-desc').textContent = n.desc || '';
+    tooltip.querySelector('.tt-url').textContent = n.url && n.url !== '#' ? n.url : '';
+    let tagsEl = tooltip.querySelector('.tt-tags');
+    tagsEl.innerHTML = (n.tags || []).map(t => `<span class="tt-tag">${t}</span>`).join('');
+    tooltip.style.left = Math.min(e.clientX + 16, W - 320) + 'px';
+    tooltip.style.top = Math.min(e.clientY + 16, H - 200) + 'px';
+    tooltip.classList.add('show');
+  } else {
+    tooltip.classList.remove('show');
+  }
+});
+
+canvas.addEventListener('mouseup', e => {
+  if (dragging && Math.abs(e.clientX - dragStartX) < 4 && Math.abs(e.clientY - dragStartY) < 4) {
+    let n = getNodeAt(e.clientX, e.clientY);
+    if (n && n.url && n.url !== '#') {
+      window.open(n.url, '_blank');
+    }
+  }
+  dragging = false;
+});
+
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  let factor = e.deltaY > 0 ? 0.92 : 1.08;
+  let newZoom = Math.max(0.3, Math.min(3, zoom * factor));
+  // Zoom toward cursor
+  let [wx, wy] = screenToWorld(e.clientX, e.clientY);
+  zoom = newZoom;
+  camX = wx - (e.clientX - W / 2) / zoom;
+  camY = wy - (e.clientY - H / 2) / zoom;
+}, { passive: false });
+
+// Touch support
+let lastTouchDist = 0;
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    dragging = true;
+    dragStartX = e.touches[0].clientX;
+    dragStartY = e.touches[0].clientY;
+    camStartX = camX; camStartY = camY;
+  }
+  if (e.touches.length === 2) {
+    let dx = e.touches[1].clientX - e.touches[0].clientX;
+    let dy = e.touches[1].clientY - e.touches[0].clientY;
+    lastTouchDist = Math.sqrt(dx * dx + dy * dy);
+  }
+}, { passive: true });
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (e.touches.length === 1 && dragging) {
+    camX = camStartX - (e.touches[0].clientX - dragStartX) / zoom;
+    camY = camStartY - (e.touches[0].clientY - dragStartY) / zoom;
+  }
+  if (e.touches.length === 2) {
+    let dx = e.touches[1].clientX - e.touches[0].clientX;
+    let dy = e.touches[1].clientY - e.touches[0].clientY;
+    let dist = Math.sqrt(dx * dx + dy * dy);
+    if (lastTouchDist > 0) {
+      zoom = Math.max(0.3, Math.min(3, zoom * (dist / lastTouchDist)));
+    }
+    lastTouchDist = dist;
+  }
+}, { passive: false });
+
+canvas.addEventListener('touchend', e => {
+  dragging = false;
+  lastTouchDist = 0;
+  if (e.changedTouches.length === 1) {
+    let t = e.changedTouches[0];
+    let n = getNodeAt(t.clientX, t.clientY);
+    if (n && n.url && n.url !== '#') window.open(n.url, '_blank');
+  }
+});
+
+// Start
+draw();
+</script>
+</body>
+</html>

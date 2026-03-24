@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVYATLITSA — Brand Guidelines</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg2: #0f0f0f;
+  --card: #131313;
+  --white: #fff;
+  --warm: #e8e0d4;
+  --gold: #c9a96e;
+  --gold-d: #a8884d;
+  --txt: #9e968a;
+  --dim: #5a5650;
+  --border: #1e1e1e;
+  --oak: #c4a882;
+  --concrete: #4a4a4a;
+  --steel: #8a8a8a;
+  --glass-blue: #a8c8d8;
+  --led-warm: #f5d6a0;
+  --led-cool: #d0e8f0;
+  --serif: 'EB Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--txt); font-family: var(--sans); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--gold); color: var(--bg); }
+a { color: var(--gold); text-decoration: none; }
+
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+
+.label { font-size: 0.6rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--white); font-weight: 400; letter-spacing: 0.15em; line-height: 1; }
+h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--white); font-weight: 400; line-height: 1.2; margin-bottom: 1rem; }
+h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--white); font-weight: 400; margin-bottom: 0.6rem; margin-top: 2rem; }
+p, li { font-size: 0.9rem; line-height: 1.8; }
+ul { list-style: none; padding: 0; }
+ul li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
+ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+/* Hero */
+.hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 3rem 2rem; border-bottom: 1px solid var(--border); }
+.hero h1 { margin-bottom: 0.5rem; }
+.hero-sub { font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+.hero-desc { font-family: var(--serif); font-size: 1.2rem; color: var(--warm); font-style: italic; max-width: 500px; }
+
+/* Color swatches */
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.swatch { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+.swatch-color { height: 100px; }
+.swatch-info { padding: 0.8rem; background: var(--card); }
+.swatch-name { font-size: 0.85rem; color: var(--white); margin-bottom: 0.2rem; }
+.swatch-hex { font-size: 0.7rem; color: var(--dim); font-family: monospace; }
+
+/* Material cards */
+.mat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.mat-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; }
+.mat-card h4 { font-family: var(--serif); font-size: 1.1rem; color: var(--white); font-weight: 400; margin-bottom: 0.5rem; }
+.mat-card p { font-size: 0.8rem; color: var(--dim); }
+
+/* Font specimens */
+.specimen { margin: 1.5rem 0; padding: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; }
+.specimen-serif { font-family: var(--serif); font-size: 2.5rem; color: var(--white); line-height: 1.2; margin-bottom: 0.5rem; }
+.specimen-sans { font-family: var(--sans); font-size: 1.8rem; color: var(--warm); font-weight: 300; line-height: 1.3; margin-bottom: 0.5rem; }
+.specimen-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+
+/* Logo box */
+.logo-box { display: inline-flex; align-items: center; justify-content: center; padding: 3rem 4rem; margin: 1rem 0; border: 1px solid var(--border); border-radius: 4px; }
+.logo-box.dark { background: var(--bg); }
+.logo-box.light { background: var(--white); }
+.logo-text { font-family: var(--serif); letter-spacing: 0.15em; font-weight: 400; }
+.logo-text.white { color: var(--white); font-size: 2.5rem; }
+.logo-text.dark { color: var(--bg); font-size: 2.5rem; }
+.logo-text.gold { color: var(--gold); font-size: 2.5rem; }
+
+/* Rule */
+.rule { margin: 2rem 0; padding: 1.5rem; border-left: 2px solid var(--gold); background: var(--card); }
+.rule-do { color: #4a9e6e; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.rule-dont { color: #c96e6e; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.rule p { font-size: 0.85rem; color: var(--warm); }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+th { text-align: left; padding: 0.7rem 1rem; border-bottom: 1px solid var(--gold-d); color: var(--gold); font-weight: 500; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
+td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); }
+
+/* Photo examples */
+.photo-example { margin: 1.5rem 0; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+.photo-example img { width: 100%; display: block; }
+.photo-caption { padding: 0.8rem 1rem; background: var(--card); font-size: 0.75rem; color: var(--dim); }
+.photo-caption strong { color: var(--gold); }
+
+.photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.photo-grid .photo-example { margin: 0; }
+
+.photo-hero { margin: 2rem 0; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+.photo-hero img { width: 100%; display: block; }
+
+@media (max-width: 700px) {
+  .swatch-grid, .mat-grid { grid-template-columns: 1fr 1fr; }
+  .logo-box { padding: 2rem; }
+  .photo-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>SVYATLITSA</h1>
+  <div class="hero-sub">Brand Guidelines &middot; v1.0</div>
+  <p class="hero-desc">Свод правил фирменного стиля. Для всех носителей: digital, print, interior, video.</p>
+</section>
+
+<!-- 1. BRAND ESSENCE -->
+<section>
+  <div class="wrap">
+    <div class="label">01 &middot; Brand Essence</div>
+    <h2>Кто мы</h2>
+    <p style="color: var(--warm); max-width: 700px;">SVYATLITSA — стоматология высшей категории с полной AI-интеграцией. Не салон. Не бюджетная клиника. Хирургическая точность в тёплых материалах. Один администратор. Ноль бумаг. Система управляет всем.</p>
+
+    <h3>Ценности бренда</h3>
+    <ul>
+      <li><strong style="color: var(--white);">Точность</strong> — каждая линия прямая, каждая деталь обоснована</li>
+      <li><strong style="color: var(--white);">Технологичность</strong> — edge AI, ceiling-down system, smart glass, автоматизация</li>
+      <li><strong style="color: var(--white);">Чистота</strong> — минимум на полу, максимум под потолком, робот убирает</li>
+      <li><strong style="color: var(--white);">Приватность</strong> — данные не покидают здание, электрохромное стекло</li>
+      <li><strong style="color: var(--white);">Тепло</strong> — дуб, тёплый свет, скандинавские материалы — не холодная больница</li>
+    </ul>
+
+    <h3>Позиционирование</h3>
+    <div class="rule">
+      <p><em style="color: var(--gold);">"Mayo Clinic meets Scandinavian architecture"</em><br>
+      Клиническая точность + натуральные материалы + AI = SVYATLITSA</p>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/gen/00-hero.jpg" alt="SVYATLITSA — главный коридор клиники">
+    </div>
+    <p style="font-size: 0.75rem; color: var(--dim); text-align: center; margin-top: 0.5rem;">Визуализация: главный коридор клиники — дубовые рейки, стеклянные блоки, потолочный свет</p>
+  </div>
+</section>
+
+<!-- 2. LOGO -->
+<section>
+  <div class="wrap">
+    <div class="label">02 &middot; Logo</div>
+    <h2>Логотип</h2>
+    <p>Логотип — наборный, шрифт EB Garamond, трекинг 0.15em. Без иконки, без символа. Только слово.</p>
+
+    <h3>Варианты</h3>
+    <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;">
+      <div>
+        <div class="logo-box dark"><span class="logo-text white">SVYATLITSA</span></div>
+        <p style="font-size: 0.7rem; color: var(--dim); margin-top: 0.5rem;">Белый на тёмном — основной</p>
+      </div>
+      <div>
+        <div class="logo-box light"><span class="logo-text dark">SVYATLITSA</span></div>
+        <p style="font-size: 0.7rem; color: var(--dim); margin-top: 0.5rem;">Тёмный на светлом</p>
+      </div>
+      <div>
+        <div class="logo-box dark"><span class="logo-text gold">SVYATLITSA</span></div>
+        <p style="font-size: 0.7rem; color: var(--dim); margin-top: 0.5rem;">Золотой — для премиум-носителей</p>
+      </div>
+    </div>
+
+    <h3>Защитное поле</h3>
+    <p>Минимальный отступ от логотипа до любого другого элемента = высота буквы "S" в логотипе, со всех четырёх сторон.</p>
+
+    <div class="rule">
+      <div class="rule-dont">Запрещено</div>
+      <p>Менять шрифт логотипа. Добавлять иконки. Использовать красный цвет. Наклонять. Обводить. Добавлять тень. Писать строчными буквами. Использовать кириллицу в логотипе (СВЯТЛИЦА — нет).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. COLORS -->
+<section>
+  <div class="wrap">
+    <div class="label">03 &middot; Colors</div>
+    <h2>Цветовая палитра</h2>
+
+    <h3>Основная палитра</h3>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: #0a0a0a;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Deep Black</div>
+          <div class="swatch-hex">#0A0A0A — фоны, основа</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #ffffff;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Pure White</div>
+          <div class="swatch-hex">#FFFFFF — текст, логотип</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #c9a96e;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warm Gold</div>
+          <div class="swatch-hex">#C9A96E — акценты, labels</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #e8e0d4;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warm Cream</div>
+          <div class="swatch-hex">#E8E0D4 — body text на тёмном</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Материалы (интерьер)</h3>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: #c4a882;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Natural Oak</div>
+          <div class="swatch-hex">#C4A882 — дуб, рейки, потолок</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #4a4a4a;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Dark Concrete</div>
+          <div class="swatch-hex">#4A4A4A — стены, колонны</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #8a8a8a;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brushed Steel</div>
+          <div class="swatch-hex">#8A8A8A — рельсы, механизмы</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #a8c8d8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Glass Blue</div>
+          <div class="swatch-hex">#A8C8D8 — стекло, LED индикаторы</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>LED освещение</h3>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: linear-gradient(135deg, #f5d6a0, #e8c080);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warm LED 3000K</div>
+          <div class="swatch-hex">#F5D6A0 — рейки, потолок, ниши</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: linear-gradient(135deg, #d0e8f0, #b0d0e0);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cool LED 5000K</div>
+          <div class="swatch-hex">#D0E8F0 — хирургические лампы</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-dont">Запрещено</div>
+      <p>Красный цвет в любом контексте (кроме индикатора "занято"). Яркие неоновые цвета. Градиенты в интерфейсах. Чёрно-жёлтые сочетания. Синий как основной.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. TYPOGRAPHY -->
+<section>
+  <div class="wrap">
+    <div class="label">04 &middot; Typography</div>
+    <h2>Типографика</h2>
+
+    <div class="specimen">
+      <div class="specimen-label">Display / Headlines</div>
+      <div class="specimen-serif">EB Garamond</div>
+      <div style="font-family: var(--serif); font-size: 1.1rem; color: var(--dim);">
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+        abcdefghijklmnopqrstuvwxyz<br>
+        0123456789
+      </div>
+    </div>
+
+    <div class="specimen">
+      <div class="specimen-label">Body / UI / Labels</div>
+      <div class="specimen-sans">Inter</div>
+      <div style="font-family: var(--sans); font-size: 0.9rem; color: var(--dim); font-weight: 300;">
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+        abcdefghijklmnopqrstuvwxyz<br>
+        0123456789
+      </div>
+    </div>
+
+    <h3>Иерархия</h3>
+    <table>
+      <tr><th>Элемент</th><th>Шрифт</th><th>Размер</th><th>Вес</th><th>Цвет</th></tr>
+      <tr><td>H1 / Логотип</td><td>EB Garamond</td><td>3–5.5rem</td><td>400</td><td>#FFFFFF</td></tr>
+      <tr><td>H2 / Заголовки секций</td><td>EB Garamond</td><td>1.8–2.8rem</td><td>400</td><td>#FFFFFF</td></tr>
+      <tr><td>H3 / Подзаголовки</td><td>EB Garamond</td><td>1.2–1.3rem</td><td>400</td><td>#FFFFFF</td></tr>
+      <tr><td>Labels / Категории</td><td>Inter</td><td>0.6–0.7rem</td><td>500</td><td>#C9A96E</td></tr>
+      <tr><td>Body текст</td><td>Inter</td><td>0.85–0.9rem</td><td>400</td><td>#9E968A</td></tr>
+      <tr><td>Цифры / Суммы</td><td>EB Garamond</td><td>1–2.5rem</td><td>400</td><td>#FFFFFF</td></tr>
+    </table>
+
+    <div class="rule">
+      <div class="rule-dont">Запрещено</div>
+      <p>Sans-serif в заголовках. Serif в UI-элементах. Bold > 600. Italic в навигации. Шрифты за пределами EB Garamond + Inter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. MATERIALS -->
+<section>
+  <div class="wrap">
+    <div class="label">05 &middot; Materials & Interior</div>
+    <h2>Материалы интерьера</h2>
+    <p style="color: var(--warm);">Фирменный стиль SVYATLITSA определяется не графикой, а пространством. Интерьер — это бренд.</p>
+
+    <div class="mat-grid">
+      <div class="mat-card">
+        <h4>Дубовые рейки</h4>
+        <p>Вертикальные рейки от пола до потолка без разрыва. Машинная нарезка, ровный шаг. Натуральный дуб, светлый тон. Основной визуальный элемент.</p>
+      </div>
+      <div class="mat-card">
+        <h4>Микроцемент</h4>
+        <p>Полы и акцентные стены. Светлый полированный — полы (отражающий). Тёмный серый — стены серверной, колонны.</p>
+      </div>
+      <div class="mat-card">
+        <h4>Стекло</h4>
+        <p>Электрохромное smart glass. Прозрачное ↔ матовое. Тонкие чёрные алюминиевые рамки. Раздвижные двери на верхнем рельсе.</p>
+      </div>
+      <div class="mat-card">
+        <h4>Матовая сталь</h4>
+        <p>Рельсы ceiling-down системы. Направляющие KYNOSYS. Раковины. Все механизмы — brushed steel finish.</p>
+      </div>
+      <div class="mat-card">
+        <h4>Бетон</h4>
+        <p>Структурные колонны между стеклянными боксами. Тёмно-серый, необработанный вид. Видимые крепления.</p>
+      </div>
+      <div class="mat-card">
+        <h4>LED-освещение</h4>
+        <p>Только встроенное. 3000K тёплое — рейки, потолок, ниши. 5000K холодное — хирургические лампы. Никаких подвесных ламп, люстр, декоративного света.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-example">
+        <img src="img/gen/02-corridor.jpg" alt="Коридор: стекло + дубовые рейки">
+        <div class="photo-caption"><strong>Коридор:</strong> слева — стеклянный кабинет, справа — дубовая реечная стена от пола до потолка</div>
+      </div>
+      <div class="photo-example">
+        <img src="img/gen/01-reception.jpg" alt="Ресепшн: стеклянные блоки">
+        <div class="photo-caption"><strong>Ресепшн-зона:</strong> стеклянные treatment blocks, по 1 креслу на блок, тёплый LED</div>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-dont">Запрещено в интерьере</div>
+      <p>Подвесные/декоративные лампы. Петлевые светильники. Обычные распашные двери. Деревянные шкафы на полу. Пластик. Линолеум. Плитка с рисунком. Ковры. Растения в кабинетах (только в зоне ожидания). Мебель IKEA.</p>
+    </div>
+
+    <div class="rule">
+      <div class="rule-do">Обязательно</div>
+      <p>Рейки от пола до потолка без разрыва. Отражающий пол. Пустой пол (всё хранение — под потолком). Раздвижные стеклянные двери. Синий LED на AI-камерах. Зелёный LED на замках KYNOSYS.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CEILING-DOWN SYSTEM -->
+<section>
+  <div class="wrap">
+    <div class="label">06 &middot; Ceiling-Down System</div>
+    <h2>Система вертикального хранения</h2>
+    <p style="color: var(--warm);">Ключевое конкурентное преимущество. Всё оборудование и хранение — под потолком. Пол свободен для робота-уборщика.</p>
+
+    <h3>Принцип</h3>
+    <ul>
+      <li>Шкафы и модули крепятся к потолку на вертикальных стальных рельсах</li>
+      <li>Спуск на пружинных балансирах (constant-force springs)</li>
+      <li>Фиксация в нижнем положении — магнитный замок с LED-индикатором</li>
+      <li>При поднятии — шкаф уходит заподлицо с потолком</li>
+      <li>Пол остаётся полностью свободным</li>
+    </ul>
+
+    <h3>Модули в кабинете</h3>
+    <table>
+      <tr><th>Модуль</th><th>Механизм</th><th>Крепление</th></tr>
+      <tr><td>Dental unit (турбина, микромотор)</td><td>Артикуляционная рука на рельсе</td><td>Потолок</td></tr>
+      <tr><td>Лоток инструментов</td><td>Вертикальные рельсы + пружины</td><td>Потолок</td></tr>
+      <tr><td>Модуль ассистента</td><td>Отдельная рука на рельсе</td><td>Потолок</td></tr>
+      <tr><td>Монитор диагностики</td><td>Шарнирный кронштейн</td><td>Потолок/стена</td></tr>
+      <tr><td>Бестеневая лампа</td><td>Шарнир</td><td>Потолок (фиксированный)</td></tr>
+      <tr><td>Микроскоп + видеокамера</td><td>Пружинный баланс</td><td>Потолок</td></tr>
+      <tr><td>AI-камера (SCYRA)</td><td>Фиксированный купол</td><td>Потолок, угол</td></tr>
+      <tr><td>Шкафы хранения</td><td>KYNOSYS рельсы + магнитный замок</td><td>Потолок</td></tr>
+    </table>
+
+    <h3>На полу (постоянно)</h3>
+    <table>
+      <tr><th>Элемент</th><th>Крепление</th></tr>
+      <tr><td>Кресло пациента</td><td>Болты в пол</td></tr>
+      <tr><td>Стул врача</td><td>Рельс под креслом</td></tr>
+      <tr><td>Стул ассистента</td><td>Настенный шарнир (складной)</td></tr>
+      <tr><td>Раковина</td><td>Стена</td></tr>
+    </table>
+
+    <div class="photo-grid">
+      <div class="photo-example">
+        <img src="img/gen/03-operatory.jpg" alt="Кабинет: потолочная система">
+        <div class="photo-caption"><strong>Кабинет:</strong> одно кресло, лампа и инструменты спускаются с потолка, дубовые рейки</div>
+      </div>
+      <div class="photo-example">
+        <img src="img/gen/04-storage.jpg" alt="KYNOSYS: вертикальное хранение">
+        <div class="photo-caption"><strong>KYNOSYS:</strong> шкафы на рельсах спускаются с потолка, пол свободен для робота-уборщика</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. PHOTOGRAPHY -->
+<section>
+  <div class="wrap">
+    <div class="label">07 &middot; Photography Style</div>
+    <h2>Фотографический стиль</h2>
+
+    <h3>Камера и настройки</h3>
+    <ul>
+      <li>Широкоугольный объектив 20–35mm для интерьеров</li>
+      <li>Диафрагма f/2.8–f/4 — мягкий боке на фоне</li>
+      <li>Естественный свет + LED — никакой вспышки</li>
+      <li>Eye-level перспектива — как реальный человек видит</li>
+      <li>Не идеально симметрично — лёгкий сдвиг от центра</li>
+    </ul>
+
+    <h3>Правила съёмки</h3>
+    <div class="rule">
+      <div class="rule-do">Делать</div>
+      <p>Тёплые тона. Отражения на полу. Глубина перспективы. Одно кресло в кадре. Видимые механизмы (рельсы, замки). Естественные тени. Один фокусный объект.</p>
+    </div>
+    <div class="rule">
+      <div class="rule-dont">Не делать</div>
+      <p>Много кресел в одном кадре. Симметричные зеркальные композиции. Зацикленные повторяющиеся паттерны. Студийный свет. HDR-обработку. Людей (для архитектурных фото). Декоративные предметы. "1000 стульев".</p>
+    </div>
+
+    <h3>Примеры фотографического стиля</h3>
+    <div class="photo-grid">
+      <div class="photo-example">
+        <img src="img/gen/05-cadcam.jpg" alt="CAD/CAM лаборатория">
+        <div class="photo-caption"><strong>Деталь:</strong> CAD/CAM лаборатория — фрезерный станок, тёплый свет, один фокусный объект</div>
+      </div>
+      <div class="photo-example">
+        <img src="img/gen/06-server.jpg" alt="Серверная SCYRA.AI">
+        <div class="photo-caption"><strong>Технологии:</strong> серверная SCYRA.AI — NVIDIA Jetson, растения, тёплый ambient</div>
+      </div>
+    </div>
+    <div class="photo-example">
+      <img src="img/gen/07-lounge.jpg" alt="Зона ожидания">
+      <div class="photo-caption"><strong>Зона ожидания:</strong> мягкий свет, натуральные материалы — единственное место где допустимы растения и мягкая мебель</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. TONE OF VOICE -->
+<section>
+  <div class="wrap">
+    <div class="label">08 &middot; Tone of Voice</div>
+    <h2>Голос бренда</h2>
+
+    <h3>Характер</h3>
+    <ul>
+      <li><strong style="color: var(--white);">Уверенный</strong> — мы знаем что делаем, не оправдываемся</li>
+      <li><strong style="color: var(--white);">Лаконичный</strong> — короткие предложения, без воды</li>
+      <li><strong style="color: var(--white);">Технический</strong> — конкретные цифры, модели, характеристики</li>
+      <li><strong style="color: var(--white);">Не высокомерный</strong> — премиум без снобизма</li>
+    </ul>
+
+    <h3>Примеры</h3>
+    <div class="rule">
+      <div class="rule-do">Так</div>
+      <p>"Ваши данные не покидают здание. Никогда."<br>
+      "Одно кресло. Одна лампа. Всё остальное — с потолка."<br>
+      "SCYRA видит то, что глаз может пропустить."</p>
+    </div>
+    <div class="rule">
+      <div class="rule-dont">Не так</div>
+      <p>"Мы рады предложить вам уникальный опыт посещения стоматолога!"<br>
+      "Наша инновационная клиника использует передовые технологии..."<br>
+      "Добро пожаловать в мир комфорта и заботы о вашей улыбке!"</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9. DIGITAL -->
+<section>
+  <div class="wrap">
+    <div class="label">09 &middot; Digital</div>
+    <h2>Digital-носители</h2>
+
+    <h3>Сайт</h3>
+    <ul>
+      <li>Тёмный фон (#0A0A0A) — основной</li>
+      <li>Полноширинные фото с overlay</li>
+      <li>Минимум анимаций — только fade-up при скролле</li>
+      <li>Никаких каруселей, слайдеров, попапов</li>
+    </ul>
+
+    <h3>Соцсети</h3>
+    <ul>
+      <li>Twitter: короткие утверждения, технические факты, #buildinpublic</li>
+      <li>Фото: только архитектурные визуализации или реальные фото стройки</li>
+      <li>Никаких стоковых улыбок, рук в перчатках, зубных щёток</li>
+    </ul>
+
+    <h3>Видео (Indiegogo)</h3>
+    <ul>
+      <li>Повествовательный формат — рассказ от первого лица</li>
+      <li>Спокойная камера — steadicam или gimbal</li>
+      <li>Тёплая цветокоррекция, естественный свет</li>
+      <li>Музыка: минималистичный ambient, без вокала</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10. PARTNERS -->
+<section>
+  <div class="wrap">
+    <div class="label">10 &middot; Technology Partners</div>
+    <h2>Технологические партнёры</h2>
+    <p>Логотипы партнёров используются только в контексте спецификаций. Не ставить в один ряд как "наши клиенты".</p>
+
+    <table>
+      <tr><th>Партнёр</th><th>Контекст использования</th></tr>
+      <tr><td>NVIDIA (Jetson AGX Orin)</td><td>AI / Edge computing</td></tr>
+      <tr><td>Synology (NAS)</td><td>Хранение данных</td></tr>
+      <tr><td>Aqara (Smart Home)</td><td>IoT сенсоры, камеры</td></tr>
+      <tr><td>Planmeca / A-dec / KaVo</td><td>Стоматологическое оборудование</td></tr>
+      <tr><td>Carl Zeiss / Leica</td><td>Микроскопы</td></tr>
+      <tr><td>Roland / Sirona</td><td>CAD/CAM фрезерные станки</td></tr>
+      <tr><td>KYNOSYS (концепция)</td><td>Вдохновение для системы вертикального хранения</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding: 3rem 0; text-align: center;">
+  <div style="font-family: var(--serif); font-size: 1.1rem; color: var(--white); letter-spacing: 0.15em;">SVYATLITSA</div>
+  <div style="font-size: 0.65rem; color: var(--dim); margin-top: 0.8rem;">Brand Guidelines v1.0 &middot; LABS67 &copy; 2026 &middot; Confidential</div>
+</footer>
+
+</body>
+</html>
