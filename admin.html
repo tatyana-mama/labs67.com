@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>labs67 — admin dashboard</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--bg2:#111118;--bg3:#1a1a24;--bg4:#22222e;
+  --text:#e8e6e2;--muted:#777;--dim:#555;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --gold:#C49A2D;--gold2:#D4A843;--gold-dim:rgba(196,154,45,0.15);
+  --green:#22c55e;--red:#ef4444;--yellow:#eab308;--blue:#3b82f6;--purple:#7F77DD;--cyan:#0891B2;
+  --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;display:flex}
+
+/* SIDEBAR */
+.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:50}
+.sidebar-logo{padding:16px 20px;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:0.08em;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.sidebar-logo em{color:var(--gold);font-style:normal}
+.sidebar-logo .dot{width:6px;height:6px;background:var(--green);border-radius:50%;margin-left:auto}
+.sidebar-section{padding:16px 12px 8px;font-family:var(--mono);font-size:8px;letter-spacing:0.2em;color:var(--dim);text-transform:uppercase}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:9px 20px;font-size:12px;color:var(--muted);cursor:pointer;transition:all 0.15s;border-left:2px solid transparent;text-decoration:none}
+.sidebar-item:hover{background:rgba(255,255,255,0.03);color:var(--text)}
+.sidebar-item.active{background:var(--gold-dim);color:var(--gold);border-left-color:var(--gold)}
+.sidebar-item .si-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sidebar-item .si-label{flex:1;font-family:var(--mono);font-size:11px;letter-spacing:0.04em}
+.sidebar-item .si-badge{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,0.06)}
+.sidebar-bottom{margin-top:auto;padding:12px;border-top:1px solid var(--border)}
+.sidebar-bottom a{display:block;padding:8px 12px;font-family:var(--mono);font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.15s}
+.sidebar-bottom a:hover{color:var(--gold)}
+
+/* MAIN */
+.main{margin-left:220px;flex:1;min-height:100vh}
+
+/* TOPBAR */
+.topbar{height:48px;background:rgba(10,10,15,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;position:sticky;top:0;z-index:40}
+.topbar-title{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--muted)}
+.topbar-title em{color:var(--gold);font-style:normal}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.topbar-time{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.topbar-refresh{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;padding:5px 12px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all 0.2s}
+.topbar-refresh:hover{border-color:var(--gold);color:var(--gold)}
+
+/* CONTENT */
+.content{padding:24px}
+.content-hidden{display:none}
+
+/* OVERVIEW CARDS */
+.overview-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px}
+.stat-card-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;margin-bottom:8px}
+.stat-card-num{font-size:28px;font-weight:700;color:var(--text)}
+.stat-card-num em{color:var(--gold);font-style:normal;font-size:14px;font-weight:400}
+.stat-card-change{font-family:var(--mono);font-size:10px;margin-top:4px}
+.stat-card-change.up{color:var(--green)}
+.stat-card-change.down{color:var(--red)}
+.stat-card-change.flat{color:var(--muted)}
+
+/* SITE TAB CONTENT */
+.site-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.site-header-dot{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(34,197,94,0.4)}
+.site-header-name{font-size:20px;font-weight:600;letter-spacing:0.02em}
+.site-header-url{font-family:var(--mono);font-size:11px;color:var(--gold);text-decoration:none;margin-left:auto}
+.site-header-url:hover{text-decoration:underline}
+
+/* METRICS GRID */
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.metric-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px}
+.metric-card-title{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;margin-bottom:12px}
+.metric-card-value{font-size:24px;font-weight:600}
+.metric-card-sub{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px}
+
+/* SEO PANEL */
+.seo-panel{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:24px}
+.seo-panel-title{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:var(--gold);margin-bottom:16px;text-transform:uppercase}
+.seo-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.seo-row:last-child{border-bottom:none}
+.seo-label{font-size:12px;color:var(--muted)}
+.seo-value{font-family:var(--mono);font-size:12px}
+.seo-ok{color:var(--green)}
+.seo-warn{color:var(--yellow)}
+.seo-bad{color:var(--red)}
+.seo-bar{width:120px;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.seo-bar-fill{height:100%;border-radius:3px;transition:width 0.6s ease}
+
+/* LEADS TABLE */
+.leads-panel{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:24px}
+.leads-panel-title{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:var(--gold);margin-bottom:16px;text-transform:uppercase}
+.leads-table{width:100%;border-collapse:collapse}
+.leads-table th{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:var(--dim);text-transform:uppercase;text-align:left;padding:8px 12px;border-bottom:1px solid var(--border)}
+.leads-table td{font-size:12px;padding:10px 12px;border-bottom:1px solid var(--border);color:var(--muted)}
+.leads-table tr:hover td{color:var(--text);background:rgba(255,255,255,0.02)}
+.leads-status{font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:3px;letter-spacing:0.06em}
+.leads-status.new{color:var(--green);background:rgba(34,197,94,0.1)}
+.leads-status.contacted{color:var(--blue);background:rgba(59,130,246,0.1)}
+.leads-status.closed{color:var(--muted);background:rgba(255,255,255,0.04)}
+
+/* CHART PLACEHOLDER */
+.chart-panel{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:24px}
+.chart-panel-title{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:var(--gold);margin-bottom:16px;text-transform:uppercase}
+.chart-area{height:200px;position:relative;display:flex;align-items:flex-end;gap:4px;padding-bottom:24px}
+.chart-bar{flex:1;background:var(--gold-dim);border-radius:3px 3px 0 0;transition:height 0.6s ease;position:relative;min-width:8px}
+.chart-bar:hover{background:var(--gold)}
+.chart-bar-label{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:8px;color:var(--dim);white-space:nowrap}
+.chart-bar-val{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:var(--muted);opacity:0;transition:opacity 0.2s}
+.chart-bar:hover .chart-bar-val{opacity:1}
+
+/* UPTIME */
+.uptime-row{display:flex;gap:2px;margin-top:8px}
+.uptime-cell{flex:1;height:24px;border-radius:2px;transition:opacity 0.2s;cursor:default}
+.uptime-cell.up{background:var(--green);opacity:0.7}
+.uptime-cell.up:hover{opacity:1}
+.uptime-cell.down{background:var(--red);opacity:0.8}
+.uptime-cell.down:hover{opacity:1}
+.uptime-cell.unknown{background:var(--bg3)}
+.uptime-label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:4px}
+
+/* MOBILE */
+@media(max-width:900px){
+  .sidebar{width:56px}
+  .sidebar-logo span,.sidebar-section,.sidebar-item .si-label,.sidebar-item .si-badge,.sidebar-bottom{display:none}
+  .sidebar-item{padding:12px 0;justify-content:center}
+  .sidebar-logo{padding:14px 0;justify-content:center}
+  .main{margin-left:56px}
+  .overview-stats{grid-template-columns:repeat(2,1fr)}
+  .metrics-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .overview-stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo"><span>LABS</span><em>67</em><span class="dot"></span></div>
+  <div class="sidebar-section">overview</div>
+  <a class="sidebar-item active" data-tab="overview">
+    <span class="si-dot" style="background:var(--gold)"></span>
+    <span class="si-label">Dashboard</span>
+  </a>
+
+  <div class="sidebar-section">sites</div>
+  <a class="sidebar-item" data-tab="svyatlitsa">
+    <span class="si-dot" style="background:#C49A2D"></span>
+    <span class="si-label">svyatlitsa</span>
+    <span class="si-badge">11</span>
+  </a>
+  <a class="sidebar-item" data-tab="scyra">
+    <span class="si-dot" style="background:#7F77DD"></span>
+    <span class="si-label">scyra.ai</span>
+    <span class="si-badge">3</span>
+  </a>
+  <a class="sidebar-item" data-tab="slyah">
+    <span class="si-dot" style="background:#2B7ACC"></span>
+    <span class="si-label">slyah.ai</span>
+    <span class="si-badge">11</span>
+  </a>
+  <a class="sidebar-item" data-tab="mreza">
+    <span class="si-dot" style="background:#0891B2"></span>
+    <span class="si-label">mreza.ai</span>
+    <span class="si-badge">11</span>
+  </a>
+  <a class="sidebar-item" data-tab="ladza">
+    <span class="si-dot" style="background:#BA7517"></span>
+    <span class="si-label">ladza.ai</span>
+    <span class="si-badge">11</span>
+  </a>
+  <a class="sidebar-item" data-tab="labs67">
+    <span class="si-dot" style="background:#B8860B"></span>
+    <span class="si-label">labs67.com</span>
+    <span class="si-badge">11</span>
+  </a>
+
+  <div class="sidebar-section">tools</div>
+  <a class="sidebar-item" data-tab="seo">
+    <span class="si-dot" style="background:var(--green)"></span>
+    <span class="si-label">SEO Audit</span>
+  </a>
+  <a class="sidebar-item" data-tab="leads">
+    <span class="si-dot" style="background:var(--blue)"></span>
+    <span class="si-label">All Leads</span>
+  </a>
+
+  <div class="sidebar-bottom">
+    <a href="index.html">← Home</a>
+    <a href="status.html">Status Page</a>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">admin <em>dashboard</em></div>
+    <div class="topbar-right">
+      <span class="topbar-time" id="clock"></span>
+      <button class="topbar-refresh" onclick="refreshAll()">↻ REFRESH</button>
+    </div>
+  </div>
+
+  <!-- OVERVIEW TAB -->
+  <div class="content" id="tab-overview">
+    <div class="overview-stats">
+      <div class="stat-card">
+        <div class="stat-card-label">Total Visitors (30d)</div>
+        <div class="stat-card-num" id="ov-visitors">—</div>
+        <div class="stat-card-change flat" id="ov-visitors-ch">loading...</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Total Leads (30d)</div>
+        <div class="stat-card-num" id="ov-leads">—</div>
+        <div class="stat-card-change flat" id="ov-leads-ch">loading...</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Avg Uptime</div>
+        <div class="stat-card-num" id="ov-uptime">—</div>
+        <div class="stat-card-change flat">across 6 domains</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">SEO Score (avg)</div>
+        <div class="stat-card-num" id="ov-seo">—</div>
+        <div class="stat-card-change flat" id="ov-seo-ch">lighthouse estimate</div>
+      </div>
+    </div>
+
+    <!-- Visitors chart -->
+    <div class="chart-panel">
+      <div class="chart-panel-title">// visitors — last 30 days</div>
+      <div class="chart-area" id="ov-chart"></div>
+    </div>
+
+    <!-- Uptime per site -->
+    <div class="chart-panel">
+      <div class="chart-panel-title">// uptime — last 30 days</div>
+      <div id="ov-uptime-grid"></div>
+    </div>
+
+    <!-- Recent leads -->
+    <div class="leads-panel">
+      <div class="leads-panel-title">// recent leads</div>
+      <table class="leads-table">
+        <thead><tr><th>Name</th><th>Phone</th><th>Site</th><th>Service</th><th>Date</th><th>Status</th></tr></thead>
+        <tbody id="ov-leads-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SITE TABS (generated by JS) -->
+  <div class="content content-hidden" id="tab-svyatlitsa"></div>
+  <div class="content content-hidden" id="tab-scyra"></div>
+  <div class="content content-hidden" id="tab-slyah"></div>
+  <div class="content content-hidden" id="tab-mreza"></div>
+  <div class="content content-hidden" id="tab-ladza"></div>
+  <div class="content content-hidden" id="tab-labs67"></div>
+
+  <!-- SEO TAB -->
+  <div class="content content-hidden" id="tab-seo"></div>
+
+  <!-- LEADS TAB -->
+  <div class="content content-hidden" id="tab-leads"></div>
+</div>
+
+<script>
+// ============================================
+// SITES CONFIGURATION
+// ============================================
+const SITES = {
+  svyatlitsa: { name:'svyatlitsa', url:'https://svyatlitsa.com', color:'#C49A2D', desc:'Aesthetic dentistry clinic', langs:11 },
+  scyra: { name:'scyra.ai', url:'https://scyra.labs67.com', color:'#7F77DD', desc:'Edge AI for dental clinics', langs:3 },
+  slyah: { name:'slyah.ai', url:'https://academi67.com', color:'#2B7ACC', desc:'Clinical education institute', langs:11 },
+  mreza: { name:'mreza.ai', url:'https://trade.labs67.com', color:'#0891B2', desc:'Technology marketplace', langs:11 },
+  ladza: { name:'ladza.ai', url:'https://franchise.labs67.com', color:'#BA7517', desc:'Franchise & scaling centre', langs:11 },
+  labs67: { name:'labs67.com', url:'https://labs67.com', color:'#B8860B', desc:'Corporate hub', langs:11 }
+};
+
+// API base — will connect to real backend later
+const API = 'https://labs67.com/api';
+
+// ============================================
+// CLOCK
+// ============================================
+function updateClock(){
+  const d=new Date();
+  document.getElementById('clock').textContent=d.toISOString().slice(0,19).replace('T',' ')+' UTC';
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// ============================================
+// TAB SWITCHING
+// ============================================
+document.querySelectorAll('.sidebar-item[data-tab]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.sidebar-item').forEach(s=>s.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.content').forEach(c=>c.classList.add('content-hidden'));
+    const tab=document.getElementById('tab-'+el.dataset.tab);
+    if(tab)tab.classList.remove('content-hidden');
+  });
+});
+
+// ============================================
+// DEMO DATA (replace with real API calls)
+// ============================================
+function genDemoVisitors(days=30){
+  return Array.from({length:days},(_,i)=>({
+    date:new Date(Date.now()-(days-1-i)*86400000).toLocaleDateString('en',{month:'short',day:'numeric'}),
+    count:Math.floor(Math.random()*120+20)
+  }));
+}
+
+function genDemoLeads(count=10){
+  const names=['Аляксей','Марыя','Кацярына','Дзмітрый','Анна','Сяргей','Наталля','Іван','Вольга','Андрэй'];
+  const sites=['svyatlitsa','slyah.ai','ladza.ai','mreza.ai'];
+  const services=['Тэрапія','Артапедыя','Кансультацыя','Хірургія','Прафілактыка'];
+  const statuses=['new','contacted','closed'];
+  return Array.from({length:count},(_,i)=>{
+    const d=new Date(Date.now()-Math.random()*7*86400000);
+    return {
+      name:names[Math.floor(Math.random()*names.length)],
+      phone:'+48 '+Math.floor(100000000+Math.random()*900000000),
+      site:sites[Math.floor(Math.random()*sites.length)],
+      service:services[Math.floor(Math.random()*services.length)],
+      date:d.toLocaleDateString('en',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),
+      status:statuses[Math.floor(Math.random()*statuses.length)]
+    };
+  });
+}
+
+function genDemoSEO(site){
+  const r=(min,max)=>Math.floor(Math.random()*(max-min)+min);
+  return {
+    performance:r(65,98), accessibility:r(80,100), bestPractices:r(75,100), seo:r(70,100),
+    title:site.name+' — ok', metaDesc:r(0,1)?'ok':'missing',
+    h1Count:r(1,3), imgAlt:r(80,100)+'%', https:true,
+    mobileReady:true, sitemap:r(0,1)?true:false,
+    loadTime:(Math.random()*2+0.5).toFixed(2)+'s',
+    fcp:(Math.random()*1.5+0.3).toFixed(2)+'s',
+    lcp:(Math.random()*2+0.5).toFixed(2)+'s',
+    cls:(Math.random()*0.1).toFixed(3)
+  };
+}
+
+// ============================================
+// RENDER OVERVIEW
+// ============================================
+function renderOverview(){
+  const visitors=genDemoVisitors(30);
+  const totalV=visitors.reduce((a,b)=>a+b.count,0);
+  document.getElementById('ov-visitors').textContent=totalV.toLocaleString();
+  document.getElementById('ov-visitors-ch').textContent='↑ +12% vs prev 30d';
+  document.getElementById('ov-visitors-ch').className='stat-card-change up';
+
+  const leads=genDemoLeads(15);
+  document.getElementById('ov-leads').textContent=leads.length;
+  document.getElementById('ov-leads-ch').textContent='↑ +3 this week';
+  document.getElementById('ov-leads-ch').className='stat-card-change up';
+
+  document.getElementById('ov-uptime').innerHTML='99.8<em>%</em>';
+  document.getElementById('ov-seo').innerHTML='82<em>/100</em>';
+
+  // Chart
+  const maxV=Math.max(...visitors.map(v=>v.count));
+  const chart=document.getElementById('ov-chart');
+  chart.innerHTML='';
+  visitors.forEach(v=>{
+    const h=Math.max(10,(v.count/maxV)*180);
+    chart.innerHTML+=`<div class="chart-bar" style="height:${h}px"><span class="chart-bar-val">${v.count}</span><span class="chart-bar-label">${v.date.split(' ')[1]}</span></div>`;
+  });
+
+  // Uptime grid
+  const uptimeGrid=document.getElementById('ov-uptime-grid');
+  uptimeGrid.innerHTML='';
+  Object.entries(SITES).forEach(([key,site])=>{
+    const row=document.createElement('div');
+    row.style.marginBottom='12px';
+    row.innerHTML=`<div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px;display:flex;justify-content:space-between"><span style="color:${site.color}">${site.name}</span><span>99.${Math.floor(Math.random()*9)+1}%</span></div>`;
+    const cells=document.createElement('div');
+    cells.className='uptime-row';
+    for(let i=0;i<30;i++){
+      const up=Math.random()>0.03;
+      cells.innerHTML+=`<div class="uptime-cell ${up?'up':'down'}" title="Day ${30-i}: ${up?'100%':'0%'}"></div>`;
+    }
+    row.appendChild(cells);
+    uptimeGrid.appendChild(row);
+  });
+
+  // Recent leads table
+  const tbody=document.getElementById('ov-leads-table');
+  tbody.innerHTML='';
+  leads.slice(0,8).forEach(l=>{
+    tbody.innerHTML+=`<tr><td>${l.name}</td><td style="font-family:var(--mono);font-size:11px">${l.phone}</td><td style="color:var(--gold)">${l.site}</td><td>${l.service}</td><td style="font-family:var(--mono);font-size:11px">${l.date}</td><td><span class="leads-status ${l.status}">${l.status.toUpperCase()}</span></td></tr>`;
+  });
+}
+
+// ============================================
+// RENDER SITE TAB
+// ============================================
+function renderSiteTab(key){
+  const site=SITES[key];
+  const tab=document.getElementById('tab-'+key);
+  const visitors=genDemoVisitors(30);
+  const totalV=visitors.reduce((a,b)=>a+b.count,0);
+  const seo=genDemoSEO(site);
+  const leads=genDemoLeads(5);
+  const maxV=Math.max(...visitors.map(v=>v.count));
+
+  tab.innerHTML=`
+    <div class="site-header">
+      <span class="site-header-dot" style="background:${site.color}"></span>
+      <span class="site-header-name">${site.name}</span>
+      <a class="site-header-url" href="${site.url}" target="_blank">${site.url.replace('https://','')}</a>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-card-title">visitors (30d)</div>
+        <div class="metric-card-value">${totalV.toLocaleString()}</div>
+        <div class="metric-card-sub">↑ +8% vs prev period</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card-title">leads (30d)</div>
+        <div class="metric-card-value">${leads.length}</div>
+        <div class="metric-card-sub">${leads.filter(l=>l.status==='new').length} new</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card-title">languages</div>
+        <div class="metric-card-value">${site.langs}</div>
+        <div class="metric-card-sub">i18n active</div>
+      </div>
+    </div>
+
+    <div class="chart-panel">
+      <div class="chart-panel-title">// visitors — 30 days</div>
+      <div class="chart-area">${visitors.map(v=>{
+        const h=Math.max(10,(v.count/maxV)*180);
+        return `<div class="chart-bar" style="height:${h}px;background:${site.color}33"><span class="chart-bar-val">${v.count}</span><span class="chart-bar-label">${v.date.split(' ')[1]}</span></div>`;
+      }).join('')}</div>
+    </div>
+
+    <div class="seo-panel">
+      <div class="seo-panel-title">// seo audit</div>
+      <div class="seo-row"><span class="seo-label">Performance</span><span class="seo-value ${seo.performance>=90?'seo-ok':seo.performance>=60?'seo-warn':'seo-bad'}">${seo.performance}/100</span></div>
+      <div class="seo-row"><span class="seo-label">Accessibility</span><span class="seo-value ${seo.accessibility>=90?'seo-ok':'seo-warn'}">${seo.accessibility}/100</span></div>
+      <div class="seo-row"><span class="seo-label">Best Practices</span><span class="seo-value ${seo.bestPractices>=90?'seo-ok':'seo-warn'}">${seo.bestPractices}/100</span></div>
+      <div class="seo-row"><span class="seo-label">SEO</span><span class="seo-value ${seo.seo>=90?'seo-ok':seo.seo>=60?'seo-warn':'seo-bad'}">${seo.seo}/100</span></div>
+      <div class="seo-row"><span class="seo-label">Meta Description</span><span class="seo-value ${seo.metaDesc==='ok'?'seo-ok':'seo-bad'}">${seo.metaDesc}</span></div>
+      <div class="seo-row"><span class="seo-label">H1 Count</span><span class="seo-value ${seo.h1Count===1?'seo-ok':'seo-warn'}">${seo.h1Count}</span></div>
+      <div class="seo-row"><span class="seo-label">Images with Alt</span><span class="seo-value seo-ok">${seo.imgAlt}</span></div>
+      <div class="seo-row"><span class="seo-label">HTTPS</span><span class="seo-value seo-ok">✓</span></div>
+      <div class="seo-row"><span class="seo-label">Mobile Ready</span><span class="seo-value seo-ok">✓</span></div>
+      <div class="seo-row"><span class="seo-label">Sitemap</span><span class="seo-value ${seo.sitemap?'seo-ok':'seo-bad'}">${seo.sitemap?'✓':'missing'}</span></div>
+      <div class="seo-row"><span class="seo-label">FCP</span><span class="seo-value seo-ok">${seo.fcp}</span></div>
+      <div class="seo-row"><span class="seo-label">LCP</span><span class="seo-value ${parseFloat(seo.lcp)<2?'seo-ok':'seo-warn'}">${seo.lcp}</span></div>
+      <div class="seo-row"><span class="seo-label">CLS</span><span class="seo-value ${parseFloat(seo.cls)<0.1?'seo-ok':'seo-warn'}">${seo.cls}</span></div>
+      <div class="seo-row"><span class="seo-label">Load Time</span><span class="seo-value seo-ok">${seo.loadTime}</span></div>
+    </div>
+
+    <div class="leads-panel">
+      <div class="leads-panel-title">// recent leads</div>
+      <table class="leads-table">
+        <thead><tr><th>Name</th><th>Phone</th><th>Service</th><th>Date</th><th>Status</th></tr></thead>
+        <tbody>${leads.map(l=>`<tr><td>${l.name}</td><td style="font-family:var(--mono);font-size:11px">${l.phone}</td><td>${l.service}</td><td style="font-family:var(--mono);font-size:11px">${l.date}</td><td><span class="leads-status ${l.status}">${l.status.toUpperCase()}</span></td></tr>`).join('')}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+// ============================================
+// RENDER SEO OVERVIEW
+// ============================================
+function renderSEO(){
+  const tab=document.getElementById('tab-seo');
+  let html='<div style="margin-bottom:24px"><div style="font-size:18px;font-weight:600;margin-bottom:4px">SEO Audit — All Sites</div><div style="font-family:var(--mono);font-size:11px;color:var(--muted)">Lighthouse-based estimates for all domains</div></div>';
+
+  Object.entries(SITES).forEach(([key,site])=>{
+    const seo=genDemoSEO(site);
+    const avg=Math.round((seo.performance+seo.accessibility+seo.bestPractices+seo.seo)/4);
+    html+=`
+    <div class="seo-panel" style="border-left:3px solid ${site.color}">
+      <div class="seo-panel-title" style="display:flex;align-items:center;gap:12px">
+        <span style="color:${site.color}">${site.name}</span>
+        <span style="margin-left:auto;font-size:16px;font-weight:600;color:${avg>=80?'var(--green)':avg>=60?'var(--yellow)':'var(--red)'}">${avg}/100</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:12px">
+        <div><div style="font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:0.1em;margin-bottom:4px">PERF</div><div class="seo-bar"><div class="seo-bar-fill" style="width:${seo.performance}%;background:${seo.performance>=90?'var(--green)':seo.performance>=60?'var(--yellow)':'var(--red)'}"></div></div><div style="font-family:var(--mono);font-size:11px;margin-top:4px">${seo.performance}</div></div>
+        <div><div style="font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:0.1em;margin-bottom:4px">A11Y</div><div class="seo-bar"><div class="seo-bar-fill" style="width:${seo.accessibility}%;background:${seo.accessibility>=90?'var(--green)':'var(--yellow)'}"></div></div><div style="font-family:var(--mono);font-size:11px;margin-top:4px">${seo.accessibility}</div></div>
+        <div><div style="font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:0.1em;margin-bottom:4px">BP</div><div class="seo-bar"><div class="seo-bar-fill" style="width:${seo.bestPractices}%;background:${seo.bestPractices>=90?'var(--green)':'var(--yellow)'}"></div></div><div style="font-family:var(--mono);font-size:11px;margin-top:4px">${seo.bestPractices}</div></div>
+        <div><div style="font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:0.1em;margin-bottom:4px">SEO</div><div class="seo-bar"><div class="seo-bar-fill" style="width:${seo.seo}%;background:${seo.seo>=90?'var(--green)':seo.seo>=60?'var(--yellow)':'var(--red)'}"></div></div><div style="font-family:var(--mono);font-size:11px;margin-top:4px">${seo.seo}</div></div>
+      </div>
+    </div>`;
+  });
+  tab.innerHTML=html;
+}
+
+// ============================================
+// RENDER ALL LEADS
+// ============================================
+function renderAllLeads(){
+  const tab=document.getElementById('tab-leads');
+  const leads=genDemoLeads(30);
+  tab.innerHTML=`
+    <div style="margin-bottom:24px"><div style="font-size:18px;font-weight:600;margin-bottom:4px">All Leads</div><div style="font-family:var(--mono);font-size:11px;color:var(--muted)">${leads.length} leads across all sites</div></div>
+    <div class="leads-panel">
+      <table class="leads-table">
+        <thead><tr><th>Name</th><th>Phone</th><th>Site</th><th>Service</th><th>Date</th><th>Status</th></tr></thead>
+        <tbody>${leads.map(l=>`<tr><td>${l.name}</td><td style="font-family:var(--mono);font-size:11px">${l.phone}</td><td style="color:var(--gold)">${l.site}</td><td>${l.service}</td><td style="font-family:var(--mono);font-size:11px">${l.date}</td><td><span class="leads-status ${l.status}">${l.status.toUpperCase()}</span></td></tr>`).join('')}</tbody>
+      </table>
+    </div>`;
+}
+
+// ============================================
+// REFRESH
+// ============================================
+function refreshAll(){
+  renderOverview();
+  Object.keys(SITES).forEach(renderSiteTab);
+  renderSEO();
+  renderAllLeads();
+}
+
+// Init
+refreshAll();
+
+// Auto-refresh every 60s
+setInterval(refreshAll,60000);
+</script>
+</body>
+</html>
