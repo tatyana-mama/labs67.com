@@ -17,14 +17,21 @@
 }
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
-.dash-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 40px;height:48px;display:flex;align-items:center;gap:24px}
-.dash-nav-logo{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:0.08em;color:var(--text)}
-.dash-nav-logo em{color:var(--gold);font-style:normal}
-.dash-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
-.dash-nav a:hover{color:var(--gold)}
-.dash-nav-right{margin-left:auto;display:flex;align-items:center;gap:16px}
-.dash-nav-status{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--green)}
-.dash-nav-time{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.06em}
+/* COMMON TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:48px;background:rgba(10,10,15,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+.tb-hex{width:28px;height:28px;background:linear-gradient(135deg,var(--gold),var(--gold2));clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:7px;font-weight:600;color:#fff}
+.tb-name{font-weight:800;font-size:14px;letter-spacing:0.15em}
+.tb-name em{color:var(--gold);font-style:normal}
+.tb-links{display:flex;gap:2px}
+.tb-links a{padding:5px 12px;font-size:10px;font-weight:500;letter-spacing:0.06em;color:var(--muted);text-decoration:none;border-radius:4px;transition:all 0.3s;font-family:var(--mono)}
+.tb-links a:hover{color:var(--gold);background:rgba(184,134,11,0.1)}
+.tb-links a.active{color:var(--gold);background:rgba(184,134,11,0.1)}
+.tb-right{display:flex;align-items:center;gap:16px}
+.tb-ver{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:0.1em;opacity:0.5}
+.tb-status{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--green)}
+.tb-time{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.06em}
+@media(max-width:768px){.topbar{padding:0 16px}.tb-links{display:none}}
 
 .dash-hero{padding:100px 40px 60px;text-align:center}
 .dash-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
@@ -78,16 +85,25 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </head>
 <body>
 
-<nav class="dash-nav">
-  <div class="dash-nav-logo">LABS<em>67</em></div>
-  <a href="index.html">Home</a>
-  <a href="brandbook.html">Brand Book</a>
-  <a href="chat.html">Agent Hub</a>
-  <div class="dash-nav-right">
-    <span class="dash-nav-status" id="globalStatus">● ALL SYSTEMS OPERATIONAL</span>
-    <span class="dash-nav-time" id="dashTime"></span>
+<div class="topbar">
+  <a href="index.html" class="tb-logo">
+    <div class="tb-hex">L67</div>
+    <div><div class="tb-name"><em>LABS</em>67</div></div>
+  </a>
+  <div class="tb-links">
+    <a href="index.html">Graph</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="brandbook.html">Brand Book</a>
+    <a href="model.html">Model</a>
+    <a href="status.html" class="active">Status</a>
+    <a href="admin.html">Admin</a>
   </div>
-</nav>
+  <div class="tb-right">
+    <span class="tb-status" id="globalStatus">● ALL SYSTEMS OPERATIONAL</span>
+    <span class="tb-time" id="dashTime"></span>
+    <div class="tb-ver">v1.0 | 2026-03-25</div>
+  </div>
+</div>
 
 <div class="dash-hero">
   <div class="dash-eyebrow">// LABS67 Infrastructure</div>

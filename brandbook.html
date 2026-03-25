@@ -20,13 +20,22 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}
 
-/* NAV */
-.bb-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,5,8,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 40px;height:48px;display:flex;align-items:center;gap:32px}
-.bb-nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:0.08em;color:#fff}
-.bb-nav-logo em{color:var(--gold);font-style:normal}
-.bb-nav a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
-.bb-nav a:hover{color:var(--gold)}
-.bb-nav-ver{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em}
+/* COMMON TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:48px;background:rgba(5,5,8,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+.tb-hex{width:28px;height:28px;background:linear-gradient(135deg,var(--gold),var(--gold-light));clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:600;color:#fff}
+.tb-name{font-weight:800;font-size:14px;letter-spacing:0.15em}
+.tb-name em{color:var(--gold);font-style:normal}
+.tb-links{display:flex;gap:2px}
+.tb-links a{padding:5px 12px;font-size:10px;font-weight:500;letter-spacing:0.06em;color:var(--muted);text-decoration:none;border-radius:4px;transition:all 0.3s;font-family:'JetBrains Mono',monospace}
+.tb-links a:hover{color:var(--gold);background:rgba(184,134,11,0.1)}
+.tb-links a.active{color:var(--gold);background:rgba(184,134,11,0.1)}
+.tb-right{display:flex;align-items:center;gap:10px}
+.tb-ver{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;opacity:0.5}
+/* SECTION SUBNAV */
+.bb-subnav{position:fixed;top:48px;left:0;right:0;z-index:99;display:flex;align-items:center;gap:16px;padding:0 40px;height:36px;background:rgba(5,5,8,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.bb-subnav a{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.bb-subnav a:hover{color:var(--gold)}
 .bb-lang-wrap{margin-left:auto;display:flex;gap:4px;align-items:center}
 .bb-lang{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.04em;padding:3px 6px;border:1px solid var(--border);border-radius:4px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s}
 .bb-lang:hover{color:var(--gold);border-color:var(--gold)}
@@ -156,7 +165,10 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .bb-nav{padding:0 16px;gap:16px}
+  .topbar{padding:0 16px}
+  .tb-links{display:none}
+  .bb-subnav{padding:0 16px;gap:8px;overflow-x:auto}
+  .bb-subnav a{white-space:nowrap}
   .bb-section,.bb-section-dark,.bb-section-gray{padding:60px 20px}
   .arch-children{grid-template-columns:repeat(2,1fr)}
   .type-row{grid-template-columns:1fr;gap:12px}
@@ -168,9 +180,39 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="bb-nav">
-  <div class="bb-nav-logo"><em>LABS</em>67</div>
+<!-- COMMON HEADER -->
+<div class="topbar">
+  <a href="index.html" class="tb-logo">
+    <div class="tb-hex">L67</div>
+    <div><div class="tb-name"><em>LABS</em>67</div></div>
+  </a>
+  <div class="tb-links">
+    <a href="index.html">Graph</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="brandbook.html" class="active">Brand Book</a>
+    <a href="model.html">Model</a>
+    <a href="status.html">Status</a>
+    <a href="admin.html">Admin</a>
+  </div>
+  <div class="tb-right">
+    <div class="bb-lang-wrap">
+      <button class="bb-lang" onclick="setBBLang('be')">BY</button>
+      <button class="bb-lang active" onclick="setBBLang('en')">EN</button>
+      <button class="bb-lang" onclick="setBBLang('uk')">UK</button>
+      <button class="bb-lang" onclick="setBBLang('ru')">RU</button>
+      <button class="bb-lang" onclick="setBBLang('de')">DE</button>
+      <button class="bb-lang" onclick="setBBLang('fr')">FR</button>
+      <button class="bb-lang" onclick="setBBLang('es')">ES</button>
+      <button class="bb-lang" onclick="setBBLang('it')">IT</button>
+      <button class="bb-lang" onclick="setBBLang('pt')">PT</button>
+      <button class="bb-lang" onclick="setBBLang('ja')">JA</button>
+      <button class="bb-lang" onclick="setBBLang('ko')">KO</button>
+    </div>
+    <div class="tb-ver">v1.2 | 2026-03-25</div>
+  </div>
+</div>
+<!-- SECTION NAV -->
+<nav class="bb-subnav">
   <a href="#architecture" data-i18n="nav_arch">Architecture</a>
   <a href="#colors" data-i18n="nav_colors">Colors</a>
   <a href="#typography" data-i18n="nav_typo">Typography</a>
@@ -181,20 +223,6 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
   <a href="#guidelines" data-i18n="nav_guidelines">Guidelines</a>
   <a href="#graph" data-i18n="nav_graph">Graph</a>
   <a href="#favicon" data-i18n="nav_favicon">Favicon</a>
-  <div class="bb-lang-wrap">
-    <button class="bb-lang" onclick="setBBLang('be')">BY</button>
-    <button class="bb-lang active" onclick="setBBLang('en')">EN</button>
-    <button class="bb-lang" onclick="setBBLang('uk')">UK</button>
-    <button class="bb-lang" onclick="setBBLang('ru')">RU</button>
-    <button class="bb-lang" onclick="setBBLang('de')">DE</button>
-    <button class="bb-lang" onclick="setBBLang('fr')">FR</button>
-    <button class="bb-lang" onclick="setBBLang('es')">ES</button>
-    <button class="bb-lang" onclick="setBBLang('it')">IT</button>
-    <button class="bb-lang" onclick="setBBLang('pt')">PT</button>
-    <button class="bb-lang" onclick="setBBLang('ja')">JA</button>
-    <button class="bb-lang" onclick="setBBLang('ko')">KO</button>
-  </div>
-  <div class="bb-nav-ver">v1.2 // 2026-03-25</div>
 </nav>
 
 <!-- HERO -->

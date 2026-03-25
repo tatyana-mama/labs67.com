@@ -47,12 +47,19 @@ ul { list-style: none; padding: 0; }
 ul li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
 ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
 
-/* NAV */
-.bb-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 40px;height:48px;display:flex;align-items:center;gap:24px}
-.bb-nav-logo{font-family:var(--serif);font-weight:400;font-size:16px;letter-spacing:0.15em;color:var(--white);text-decoration:none}
-.bb-nav a{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
-.bb-nav a:hover{color:var(--gold)}
-.bb-nav-right{margin-left:auto}
+/* COMMON TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:48px;background:rgba(10,10,10,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white)}
+.tb-hex{width:28px;height:28px;background:linear-gradient(135deg,var(--gold),var(--gold-d));clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:7px;font-weight:600;color:#fff}
+.tb-name{font-weight:800;font-size:14px;letter-spacing:0.15em}
+.tb-name em{color:var(--gold);font-style:normal}
+.tb-links{display:flex;gap:2px}
+.tb-links a{padding:5px 12px;font-size:10px;font-weight:500;letter-spacing:0.06em;color:var(--dim);text-decoration:none;border-radius:4px;transition:all 0.3s}
+.tb-links a:hover{color:var(--gold);background:rgba(201,169,110,0.1)}
+.tb-links a.active{color:var(--gold);background:rgba(201,169,110,0.1)}
+.tb-right{display:flex;align-items:center;gap:10px}
+.tb-ver{font-family:monospace;font-size:9px;color:var(--dim);letter-spacing:0.1em;opacity:0.5}
+@media(max-width:768px){.topbar{padding:0 16px}.tb-links{display:none}}
 
 /* Hero */
 .hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 2rem 3rem; border-bottom: 1px solid var(--border); }
@@ -121,14 +128,25 @@ td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); }
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="bb-nav">
-  <a href="index.html" class="bb-nav-logo">SVYATLITSA</a>
-  <a href="index.html">Home</a>
-  <a href="brandbook.html">LABS67 Brand</a>
-  <a href="svyatlitsa-brand.html" style="color:var(--gold)">SVYATLITSA Brand</a>
-  <div class="bb-nav-right"><a href="index.html">← LABS67</a></div>
-</nav>
+<!-- COMMON HEADER -->
+<div class="topbar">
+  <a href="index.html" class="tb-logo">
+    <div class="tb-hex">L67</div>
+    <div><div class="tb-name"><em>LABS</em>67</div></div>
+  </a>
+  <div class="tb-links">
+    <a href="index.html">Graph</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="brandbook.html">Brand Book</a>
+    <a href="svyatlitsa-brand.html" class="active">SVYATLITSA Brand</a>
+    <a href="model.html">Model</a>
+    <a href="status.html">Status</a>
+    <a href="admin.html">Admin</a>
+  </div>
+  <div class="tb-right">
+    <div class="tb-ver">v1.0 | 2026-03-25</div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
