@@ -269,7 +269,7 @@ const NODES = [
   { id:'svyatlitsa', label:'SVYATLITSA', color:'#c9a96e', r:34, cat:'clinic',
     site:'https://svyatlitsa.com',
     desc:'Premium dental clinic. Ceiling-down system — all equipment mounted above. Smart glass. KYNOSYS vertical storage. Robot cleaning. Zero clutter.',
-    tags:['clinic','warsaw','franchise','ceiling-down','smart-glass'],
+    tags:['clinic','warsaw','franchise','ceiling-down','smart-glass','dental-ai','diagnostics'],
     stats:[{v:'1.7M',l:'PLN Budget'},{v:'Q3',l:'2026 Open'},{v:'35-75k',l:'PLN/month'}],
     links:[
       {icon:'&#9968;',text:'Business Plan',url:'https://academi67.com/business-plan.html',note:'Full financial model'},
@@ -284,6 +284,7 @@ const NODES = [
       <li>KYNOSYS storage — descending cabinets on steel rails</li>
       <li>AI camera (SCYRA) — fixed dome, ceiling corner</li>
     </ul></div>
+    <div class="cp-section"><h3>Dental AI</h3><p>Built-in diagnostic platform: Next.js + TypeScript, Supabase backend, SCYRA.AI integration via local API, DICOM X-ray viewer, treatment planning.</p></div>
     <div class="cp-section"><h3>4 Phases</h3><ul>
       <li><strong style="color:var(--white)">Phase 1:</strong> Flagship clinic, Warsaw — 1.38M PLN</li>
       <li><strong style="color:var(--white)">Phase 2:</strong> Franchise package — 106k PLN</li>
@@ -339,13 +340,6 @@ const NODES = [
     </ul></div>
     <div class="cp-section"><h3>Investment</h3><p>Master franchise: 50-200k EUR per country. Individual clinic franchise: from 150k EUR including equipment leasing.</p></div>`
   },
-  { id:'dental-ai', label:'Dental AI', color:'#5ec4d4', r:20, cat:'product',
-    site:null,
-    desc:'Next.js diagnostic application. X-ray analysis, treatment planning, patient management.',
-    tags:['next.js','diagnostics','web-app'],
-    links:[],
-    html:`<div class="cp-section"><h3>Stack</h3><ul><li>Next.js + TypeScript</li><li>Supabase backend</li><li>SCYRA.AI integration via local API</li><li>DICOM viewer</li></ul></div>`
-  },
   { id:'agents', label:'Agent Hub', color:'#d47a9a', r:22, cat:'service',
     site:'https://labs67.com/chat.html',
     desc:'Multi-agent AI team. Each agent has a role, personality, and specialization.',
@@ -365,9 +359,9 @@ const NODES = [
 const EDGES = [
   ['hub','scyra',1.3], ['hub','svyatlitsa',1.3], ['hub','academi',1],
   ['hub','trade',0.7], ['hub','franchise',1], ['hub','agents',0.8],
-  ['scyra','svyatlitsa',1.1], ['scyra','dental-ai',0.8], ['scyra','agents',0.4],
+  ['scyra','svyatlitsa',1.1], ['scyra','agents',0.4],
   ['svyatlitsa','franchise',1], ['svyatlitsa','academi',0.7],
-  ['franchise','academi',0.6], ['dental-ai','svyatlitsa',0.5],
+  ['franchise','academi',0.6],
 ];
 
 // ===== GRAPH ENGINE =====
@@ -589,7 +583,6 @@ const THEMES = {
   hub: '', svyatlitsa: 'theme-svyatlitsa', scyra: 'theme-scyra',
   academi: 'theme-academi', trade: 'theme-trade', franchise: 'theme-franchise',
   agents: 'theme-agents',
-  'dental-ai': 'theme-scyra'
 };
 // BG colors for canvas per theme
 const BG_COLORS = {
