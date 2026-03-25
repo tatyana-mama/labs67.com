@@ -207,7 +207,68 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
     <span><em>5</em><span data-i18n="hero_subbrands">Sub-Brands</span></span>
     <span><em>11</em><span data-i18n="hero_languages">Languages</span></span>
     <span><em>4</em><span data-i18n="hero_fonts">Font Families</span></span>
-    <span><em>10</em><span data-i18n="hero_sections">Sections</span></span>
+    <span><em>11</em><span data-i18n="hero_sections">Sections</span></span>
+  </div>
+</section>
+
+<!-- 00 FOUNDATION RULES — THE 4 PILLARS -->
+<section class="bb-section-dark" id="foundation" style="border-bottom:2px solid var(--gold)">
+  <div class="bb-section-inner">
+    <div class="bb-label" style="color:var(--gold)">// 00 Foundation Rules</div>
+    <div class="bb-title" style="color:#fff">The 4 Pillars</div>
+    <p class="bb-subtitle" style="color:rgba(255,255,255,0.5)">Every page in the LABS67 ecosystem MUST implement these 4 structural rules. No exceptions. These are the absolute foundation — everything else in this brand book is built on top of them.</p>
+
+    <!-- PILLAR 1: HEADER -->
+    <div class="spec-block" style="background:var(--dark2);border-color:var(--gold);border-width:2px;margin-top:40px">
+      <h4 style="color:var(--gold);border-color:rgba(184,134,11,0.3)">PILLAR 01 — HEADER (Topbar)</h4>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Height</div><div class="spec-val" style="color:#fff"><span class="spec-code">48px</span> — FIXED. Never 52, 56, 58. Exactly 48.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Position</div><div class="spec-val" style="color:#fff"><span class="spec-code">position: fixed; top: 0; left: 0; right: 0; z-index: 999</span></div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Background</div><div class="spec-val" style="color:#fff"><span class="spec-code">rgba({brand-bg}, 0.92)</span> + <span class="spec-code">backdrop-filter: blur(24px)</span>. Blur is always 24px.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Border</div><div class="spec-val" style="color:#fff"><span class="spec-code">border-bottom: 1px solid rgba(255,255,255,0.06)</span></div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Logo</div><div class="spec-val" style="color:#fff">Brand mark (28-32px) + Brand name (font-weight 800, 1rem) + <span class="spec-code">"Канцэрн LABS67"</span> subtitle in JetBrains Mono</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Navigation</div><div class="spec-val" style="color:#fff">JetBrains Mono, <span class="spec-code">10px / 0.56rem</span>, letter-spacing <span class="spec-code">0.12-0.14em</span>, uppercase, color <span class="spec-code">var(--muted)</span>, hover <span class="spec-code">var(--accent)</span></div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Right side</div><div class="spec-val" style="color:#fff">← LABS67 back link + Language switcher + CTA button</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Padding</div><div class="spec-val" style="color:#fff"><span class="spec-code">0 40px</span> desktop, <span class="spec-code">0 20px</span> mobile</div></div>
+    </div>
+
+    <!-- PILLAR 2: BODY -->
+    <div class="spec-block" style="background:var(--dark2);border-color:var(--gold);border-width:2px">
+      <h4 style="color:var(--gold);border-color:rgba(184,134,11,0.3)">PILLAR 02 — BODY</h4>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Background</div><div class="spec-val" style="color:#fff">Dark theme ONLY. Brand-specific dark bg: <span class="spec-code">#050508</span> (labs67), <span class="spec-code">#030a05</span> (academi), <span class="spec-code">#0a0808</span> (svyatlitsa), etc.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Text color</div><div class="spec-val" style="color:#fff">Primary: <span class="spec-code">#e8e6e2</span> or brand warm equivalent. Muted: <span class="spec-code">rgba()</span> at 45% opacity.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Typography</div><div class="spec-val" style="color:#fff">Brand font for headlines (Syne/EB Garamond/Inter). <span class="spec-code">line-height: 1.7</span> body, <span class="spec-code">1.05</span> headlines</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Max width</div><div class="spec-val" style="color:#fff"><span class="spec-code">1100-1200px</span> centered content. Hero can be full-width.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Section padding</div><div class="spec-val" style="color:#fff"><span class="spec-code">100px 40px</span> desktop, <span class="spec-code">60px 20px</span> mobile</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Gold mandatory</div><div class="spec-val" style="color:#fff">LABS67 Gold <span class="spec-code">#B8860B</span> MUST appear on every page — links, hover states, or parent badge. NEVER <span class="spec-code">#e8b840</span>.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Grid pattern</div><div class="spec-val" style="color:#fff">Optional: subtle CSS grid overlay with <span class="spec-code">rgba(accent, 0.02)</span> lines, 80px spacing</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Borders</div><div class="spec-val" style="color:#fff"><span class="spec-code">rgba(255,255,255,0.06-0.07)</span> for section dividers and card borders</div></div>
+    </div>
+
+    <!-- PILLAR 3: SIDEBAR -->
+    <div class="spec-block" style="background:var(--dark2);border-color:var(--gold);border-width:2px">
+      <h4 style="color:var(--gold);border-color:rgba(184,134,11,0.3)">PILLAR 03 — SIDEBAR</h4>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Purpose</div><div class="spec-val" style="color:#fff">Supplementary navigation or content panel. Used on labs67.com (graph panel), brandbook (TOC), and any page with complex navigation.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Position</div><div class="spec-val" style="color:#fff"><span class="spec-code">position: fixed</span> or <span class="spec-code">sticky; top: 48px</span> (below header)</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Background</div><div class="spec-val" style="color:#fff"><span class="spec-code">rgba({brand-bg}, 0.95)</span> + <span class="spec-code">backdrop-filter: blur(30px)</span></div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Border</div><div class="spec-val" style="color:#fff"><span class="spec-code">1px solid rgba(255,255,255,0.06)</span> on the edge facing content</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Width</div><div class="spec-val" style="color:#fff"><span class="spec-code">min(520px, 85vw)</span> for content panels. <span class="spec-code">240-280px</span> for navigation sidebars.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Animation</div><div class="spec-val" style="color:#fff">Slide transition: <span class="spec-code">transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)</span>. Default hidden via <span class="spec-code">translateX(-100%)</span> or <span class="spec-code">translateX(100%)</span>.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Scrollbar</div><div class="spec-val" style="color:#fff"><span class="spec-code">4px</span> thin, muted thumb, transparent track. <span class="spec-code">overflow-y: auto</span>.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Mobile</div><div class="spec-val" style="color:#fff">Full-width overlay below 768px. Close button 32×32px top-right.</div></div>
+    </div>
+
+    <!-- PILLAR 4: FOOTER -->
+    <div class="spec-block" style="background:var(--dark2);border-color:var(--gold);border-width:2px">
+      <h4 style="color:var(--gold);border-color:rgba(184,134,11,0.3)">PILLAR 04 — FOOTER</h4>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Border</div><div class="spec-val" style="color:#fff"><span class="spec-code">border-top: 1px solid rgba(255,255,255,0.06)</span></div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Padding</div><div class="spec-val" style="color:#fff"><span class="spec-code">34-40px</span> vertical</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Layout</div><div class="spec-val" style="color:#fff">3-column grid: Brand logo + subtitle | Copyright + status | Contact info. Centered on mobile.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Copyright</div><div class="spec-val" style="color:#fff"><span class="spec-code">© 2026 {Brand} · LABS67</span>. Year MUST be 2026. Dynamic via JS preferred.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Cross-links</div><div class="spec-val" style="color:#fff">MANDATORY row with links to ALL ecosystem domains: LABS67 · SVYATLITSA · SCYRA.AI · TradeAI · Franchise67 | Privacy · Terms</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Link style</div><div class="spec-val" style="color:#fff">JetBrains Mono 11px, <span class="spec-code">rgba(255,255,255,0.35)</span> default, hover: <span class="spec-code">var(--accent)</span>. Separator: <span class="spec-code">·</span> (middot) and <span class="spec-code">|</span> before legal links.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Font</div><div class="spec-val" style="color:#fff">JetBrains Mono for all footer text. Logo: brand font weight 800.</div></div>
+      <div class="spec-row" style="border-color:rgba(255,255,255,0.04)"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Status indicator</div><div class="spec-val" style="color:#fff">Optional: <span class="spec-code" style="color:#22c55e">● НАБОР ОТКРЫТ</span> or <span class="spec-code" style="color:#22c55e">● ONLINE</span> in brand accent color</div></div>
+    </div>
   </div>
 </section>
 
