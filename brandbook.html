@@ -36,10 +36,17 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
 .bb-subnav{position:fixed;top:48px;left:0;right:0;z-index:99;display:flex;align-items:center;gap:16px;padding:0 40px;height:36px;background:rgba(5,5,8,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .bb-subnav a{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
 .bb-subnav a:hover{color:var(--gold)}
-.bb-lang-wrap{margin-left:auto;display:flex;gap:4px;align-items:center}
-.bb-lang{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.04em;padding:3px 6px;border:1px solid var(--border);border-radius:4px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s}
-.bb-lang:hover{color:var(--gold);border-color:var(--gold)}
-.bb-lang.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+/* LANG DROPDOWN */
+.lang-switcher{position:relative;margin-left:auto}
+.lang-current{display:flex;align-items:center;gap:6px;padding:4px 10px;background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.04em;transition:all 0.2s}
+.lang-current:hover{color:var(--gold);border-color:var(--gold)}
+.lang-arrow{font-size:8px;transition:transform 0.2s}
+.lang-switcher.open .lang-arrow{transform:rotate(180deg)}
+.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:rgba(5,5,8,0.96);border:1px solid var(--border);min-width:140px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all 0.25s;z-index:200;max-height:300px;overflow-y:auto;backdrop-filter:blur(20px)}
+.lang-switcher.open .lang-dropdown{opacity:1;pointer-events:auto;transform:translateY(0)}
+.lang-opt{display:block;width:100%;padding:6px 12px;background:none;border:none;color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.04em;text-align:left;transition:all 0.15s}
+.lang-opt:hover{color:var(--gold);background:rgba(184,134,11,0.08)}
+.lang-opt.active{color:var(--gold)}
 
 /* HERO */
 .bb-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:120px 40px 80px;text-align:center;background:var(--dark);color:#fff;position:relative;overflow:hidden}
@@ -195,18 +202,21 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
     <a href="admin.html">Admin</a>
   </div>
   <div class="tb-right">
-    <div class="bb-lang-wrap">
-      <button class="bb-lang" onclick="setBBLang('be')">BY</button>
-      <button class="bb-lang active" onclick="setBBLang('en')">EN</button>
-      <button class="bb-lang" onclick="setBBLang('uk')">UK</button>
-      <button class="bb-lang" onclick="setBBLang('ru')">RU</button>
-      <button class="bb-lang" onclick="setBBLang('de')">DE</button>
-      <button class="bb-lang" onclick="setBBLang('fr')">FR</button>
-      <button class="bb-lang" onclick="setBBLang('es')">ES</button>
-      <button class="bb-lang" onclick="setBBLang('it')">IT</button>
-      <button class="bb-lang" onclick="setBBLang('pt')">PT</button>
-      <button class="bb-lang" onclick="setBBLang('ja')">JA</button>
-      <button class="bb-lang" onclick="setBBLang('ko')">KO</button>
+    <div class="lang-switcher" id="langSwitcher" onclick="this.classList.toggle('open')">
+      <button class="lang-current"><span id="langFlag">EN</span> <span class="lang-arrow">▾</span></button>
+      <div class="lang-dropdown" id="langDrop">
+        <button class="lang-opt" onclick="setBBLang('be')">🇧🇾 BY</button>
+        <button class="lang-opt active" onclick="setBBLang('en')">🇬🇧 EN</button>
+        <button class="lang-opt" onclick="setBBLang('uk')">🇺🇦 UK</button>
+        <button class="lang-opt" onclick="setBBLang('ru')">🇷🇺 RU</button>
+        <button class="lang-opt" onclick="setBBLang('de')">🇩🇪 DE</button>
+        <button class="lang-opt" onclick="setBBLang('fr')">🇫🇷 FR</button>
+        <button class="lang-opt" onclick="setBBLang('es')">🇪🇸 ES</button>
+        <button class="lang-opt" onclick="setBBLang('it')">🇮🇹 IT</button>
+        <button class="lang-opt" onclick="setBBLang('pt')">🇵🇹 PT</button>
+        <button class="lang-opt" onclick="setBBLang('ja')">🇯🇵 JA</button>
+        <button class="lang-opt" onclick="setBBLang('ko')">🇰🇷 KO</button>
+      </div>
     </div>
     <div class="tb-ver">v1.2 | 2026-03-25</div>
   </div>
@@ -1466,10 +1476,15 @@ var bbCurrentLang = 'en';
 function setBBLang(lang) {
   if (!BBT[lang]) return;
   bbCurrentLang = lang;
-  // Update active button
-  document.querySelectorAll('.bb-lang').forEach(function(btn) {
-    btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase() || (lang === 'be' && btn.textContent.trim() === 'BY'));
+  // Update dropdown
+  var flags = {be:'🇧🇾 BY',en:'🇬🇧 EN',uk:'🇺🇦 UK',ru:'🇷🇺 RU',de:'🇩🇪 DE',fr:'🇫🇷 FR',es:'🇪🇸 ES',it:'🇮🇹 IT',pt:'🇵🇹 PT',ja:'🇯🇵 JA',ko:'🇰🇷 KO'};
+  var lf = document.getElementById('langFlag');
+  if(lf) lf.textContent = flags[lang] || lang.toUpperCase();
+  document.querySelectorAll('.lang-opt').forEach(function(btn) {
+    btn.classList.toggle('active', btn.textContent.trim().endsWith(lang.toUpperCase()) || (lang === 'be' && btn.textContent.includes('BY')));
   });
+  var sw = document.getElementById('langSwitcher');
+  if(sw) sw.classList.remove('open');
   // Apply text translations
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var key = el.getAttribute('data-i18n');
@@ -1488,6 +1503,11 @@ function setBBLang(lang) {
   try { localStorage.setItem('bb_lang', lang); } catch(e) {}
 }
 
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+  var sw = document.getElementById('langSwitcher');
+  if (sw && !sw.contains(e.target)) sw.classList.remove('open');
+});
 // Init: restore saved language or default to English
 (function() {
   var saved = null;

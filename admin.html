@@ -45,6 +45,17 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .topbar-time{font-family:var(--mono);font-size:10px;color:var(--dim)}
 .topbar-refresh{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;padding:5px 12px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all 0.2s}
 .topbar-refresh:hover{border-color:var(--gold);color:var(--gold)}
+/* LANG DROPDOWN */
+.lang-switcher{position:relative}
+.lang-current{display:flex;align-items:center;gap:6px;padding:4px 10px;background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:9px;letter-spacing:0.04em;transition:all 0.2s}
+.lang-current:hover{color:var(--gold);border-color:var(--gold)}
+.lang-arrow{font-size:8px;transition:transform 0.2s}
+.lang-switcher.open .lang-arrow{transform:rotate(180deg)}
+.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:rgba(10,10,15,0.96);border:1px solid var(--border);min-width:140px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all 0.25s;z-index:200;max-height:300px;overflow-y:auto;backdrop-filter:blur(20px)}
+.lang-switcher.open .lang-dropdown{opacity:1;pointer-events:auto;transform:translateY(0)}
+.lang-opt{display:block;width:100%;padding:6px 12px;background:none;border:none;color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:9px;text-align:left;transition:all 0.15s}
+.lang-opt:hover{color:var(--gold);background:rgba(184,134,11,0.08)}
+.lang-opt.active{color:var(--gold)}
 
 /* CONTENT */
 .content{padding:24px}
@@ -199,6 +210,22 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <div class="topbar">
     <div class="topbar-title">admin <em>dashboard</em></div>
     <div class="topbar-right">
+      <div class="lang-switcher" onclick="event.stopPropagation();this.classList.toggle('open')">
+        <button class="lang-current"><span>🇬🇧 EN</span> <span class="lang-arrow">▾</span></button>
+        <div class="lang-dropdown">
+          <button class="lang-opt" data-lang="be">🇧🇾 BY</button>
+          <button class="lang-opt active" data-lang="en">🇬🇧 EN</button>
+          <button class="lang-opt" data-lang="uk">🇺🇦 UK</button>
+          <button class="lang-opt" data-lang="ru">🇷🇺 RU</button>
+          <button class="lang-opt" data-lang="de">🇩🇪 DE</button>
+          <button class="lang-opt" data-lang="fr">🇫🇷 FR</button>
+          <button class="lang-opt" data-lang="es">🇪🇸 ES</button>
+          <button class="lang-opt" data-lang="it">🇮🇹 IT</button>
+          <button class="lang-opt" data-lang="pt">🇵🇹 PT</button>
+          <button class="lang-opt" data-lang="ja">🇯🇵 JA</button>
+          <button class="lang-opt" data-lang="ko">🇰🇷 KO</button>
+        </div>
+      </div>
       <span class="topbar-time" id="clock"></span>
       <button class="topbar-refresh" onclick="refreshAll()">↻ REFRESH</button>
     </div>
