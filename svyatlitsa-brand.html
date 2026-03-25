@@ -47,8 +47,15 @@ ul { list-style: none; padding: 0; }
 ul li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
 ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
 
+/* NAV */
+.bb-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 40px;height:48px;display:flex;align-items:center;gap:24px}
+.bb-nav-logo{font-family:var(--serif);font-weight:400;font-size:16px;letter-spacing:0.15em;color:var(--white);text-decoration:none}
+.bb-nav a{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
+.bb-nav a:hover{color:var(--gold)}
+.bb-nav-right{margin-left:auto}
+
 /* Hero */
-.hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 3rem 2rem; border-bottom: 1px solid var(--border); }
+.hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 2rem 3rem; border-bottom: 1px solid var(--border); }
 .hero h1 { margin-bottom: 0.5rem; }
 .hero-sub { font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
 .hero-desc { font-family: var(--serif); font-size: 1.2rem; color: var(--warm); font-style: italic; max-width: 500px; }
@@ -113,6 +120,15 @@ td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); }
 </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav class="bb-nav">
+  <a href="index.html" class="bb-nav-logo">SVYATLITSA</a>
+  <a href="index.html">Home</a>
+  <a href="brandbook.html">LABS67 Brand</a>
+  <a href="svyatlitsa-brand.html" style="color:var(--gold)">SVYATLITSA Brand</a>
+  <div class="bb-nav-right"><a href="index.html">← LABS67</a></div>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
