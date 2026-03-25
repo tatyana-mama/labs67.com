@@ -182,14 +182,30 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
 .ho-sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); opacity: 0.4; margin-top: 8px; transition: color 0.6s; }
 
 /* LANG SWITCHER */
-.tb-langs{display:flex;gap:2px;align-items:center}
-.tb-lang{
-  font-family:var(--mono);font-size:8px;letter-spacing:0.04em;
-  padding:3px 5px;border:1px solid var(--border);border-radius:3px;
+.tb-langs{position:relative}
+.tb-lang-current{
+  font-family:var(--mono);font-size:9px;letter-spacing:0.06em;
+  padding:4px 10px;border:1px solid var(--border);border-radius:3px;
   background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;gap:6px;
 }
-.tb-lang:hover{color:var(--accent);border-color:var(--accent)}
-.tb-lang.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tb-lang-current:hover{color:var(--accent);border-color:var(--accent)}
+.tb-lang-arrow{font-size:7px;transition:transform 0.2s}
+.tb-langs.open .tb-lang-arrow{transform:rotate(180deg)}
+.tb-lang-dropdown{
+  position:absolute;top:calc(100% + 6px);right:0;
+  background:var(--bg2,#111118);border:1px solid var(--border);border-radius:6px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);min-width:140px;max-height:300px;overflow-y:auto;
+  opacity:0;pointer-events:none;transform:translateY(-8px);transition:all 0.25s ease;z-index:200;
+}
+.tb-langs.open .tb-lang-dropdown{opacity:1;pointer-events:auto;transform:translateY(0)}
+.tb-lang-opt{
+  display:block;width:100%;padding:8px 14px;border:none;background:none;
+  font-family:var(--mono);font-size:10px;letter-spacing:0.04em;
+  color:var(--muted);cursor:pointer;text-align:left;transition:all 0.15s;
+}
+.tb-lang-opt:hover{background:rgba(255,255,255,0.04);color:var(--accent)}
+.tb-lang-opt.active{color:var(--accent);font-weight:500}
 
 /* BOTTOM HINT */
 #hint {
@@ -219,7 +235,10 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
     <a href="status.html">Status</a>
   </div>
   <div class="tb-right">
-    <div class="tb-langs" id="lang-bar"></div>
+    <div class="tb-langs" id="lang-bar" onclick="this.classList.toggle('open')">
+      <button class="tb-lang-current" id="lang-current-btn"><span id="lang-current-label">EN</span><span class="tb-lang-arrow">▾</span></button>
+      <div class="tb-lang-dropdown" id="lang-dropdown"></div>
+    </div>
     <div class="tb-status"><div class="tb-dot"></div> ONLINE</div>
   </div>
 </div>
@@ -862,7 +881,8 @@ function applyLang(lang){
   document.querySelector('.ho-sub').textContent = tr('hero_sub');
   document.getElementById('hint').textContent = tr('hint');
   // Update lang buttons
-  document.querySelectorAll('.tb-lang').forEach(b => b.classList.toggle('active', b.dataset.lang===lang));
+  document.getElementById('lang-current-label').textContent = LANG_LABELS[lang] || lang.toUpperCase();
+  document.querySelectorAll('.tb-lang-opt').forEach(b => b.classList.toggle('active', b.dataset.lang===lang));
   // Update html lang
   document.documentElement.lang = lang;
   // Re-render content panel if open
@@ -870,8 +890,11 @@ function applyLang(lang){
 }
 
 function buildLangBar(){
-  const bar = document.getElementById('lang-bar');
-  bar.innerHTML = LANGS.map(l => `<button class="tb-lang${l===curLang?' active':''}" data-lang="${l}" onclick="applyLang('${l}')">${LANG_LABELS[l]}</button>`).join('');
+  const dd = document.getElementById('lang-dropdown');
+  dd.innerHTML = LANGS.map(l => `<button class="tb-lang-opt${l===curLang?' active':''}" data-lang="${l}" onclick="event.stopPropagation();applyLang('${l}');document.getElementById('lang-bar').classList.remove('open')">${LANG_LABELS[l]}</button>`).join('');
+  document.getElementById('lang-current-label').textContent = LANG_LABELS[curLang] || curLang.toUpperCase();
+  // Close dropdown on outside click
+  document.addEventListener('click', e => { if(!e.target.closest('.tb-langs')) document.getElementById('lang-bar').classList.remove('open'); });
 }
 
 // Override renderContent to use i18n descriptions
