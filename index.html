@@ -17,22 +17,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f5f2ed;
-  --panel: rgba(255,255,255,0.94);
-  --card: rgba(245,242,237,0.95);
+  --bg: #050508;
+  --panel: rgba(8,8,14,0.95);
+  --card: rgba(18,18,26,0.95);
   --accent: #B8860B;
   --accent2: #D4A017;
-  --accent-dim: rgba(184,134,11,0.08);
-  --accent-glow: rgba(184,134,11,0.04);
-  --white: #1a1a1a;
-  --text: #555555;
-  --muted: #999999;
-  --border: rgba(0,0,0,0.06);
-  --border2: rgba(0,0,0,0.1);
-  --cyan: #0891B2;
-  --green: #16a34a;
-  --purple: #7c3aed;
-  --pink: #db2777;
+  --accent-dim: rgba(184,134,11,0.1);
+  --accent-glow: rgba(184,134,11,0.06);
+  --white: #f0ece4;
+  --text: #a09888;
+  --muted: #555;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.1);
+  --cyan: #30dcff;
+  --green: #1df59a;
+  --purple: #a855f7;
+  --pink: #ec4899;
   --serif: 'EB Garamond', Georgia, serif;
   --sans: 'Inter', sans-serif;
   --mono: 'JetBrains Mono', monospace;
@@ -96,11 +96,11 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
 
 /* CONTENT PANEL — slides from right */
 #content {
-  position: fixed; top: 48px; right: 0; bottom: 0;
+  position: fixed; top: 48px; left: 0; bottom: 0;
   width: min(520px, 85vw); z-index: 50;
-  background: var(--panel); border-left: 1px solid var(--border);
+  background: var(--panel); border-right: 1px solid var(--border);
   backdrop-filter: blur(30px);
-  transform: translateX(100%);
+  transform: translateX(-100%);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s, border-color 0.6s;
   overflow-y: auto; overflow-x: hidden;
   scrollbar-width: thin; scrollbar-color: var(--muted) transparent;
@@ -189,10 +189,11 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
     <div><div class="tb-name"><em>LABS</em>67</div></div>
   </div>
   <div class="tb-links">
-    <a href="portfolio.html">Portfolio</a>
-    <a href="chat.html">Agent Hub</a>
-    <a href="brandbook.html">LABS67 Brand</a>
+    <a href="brandbook.html">Brand Book</a>
     <a href="svyatlitsa-brand.html">SVYATLITSA Brand</a>
+    <a href="https://academi67.com/business-plan.html">Business Plan</a>
+    <a href="model.html">Model</a>
+    <a href="portfolio.html">Portfolio</a>
     <a href="status.html">Status</a>
   </div>
   <div class="tb-right">
@@ -481,7 +482,7 @@ function draw() {
   const gs = 50 * zoom;
   const ox = (-camX*zoom+W/2)%gs, oy = (-camY*zoom+H/2)%gs;
   c.fillStyle = canvasBG.dot;
-  for(let x=ox;x<W;x+=gs) for(let y=oy;y<H;y+=gs) { c.beginPath(); c.arc(x,y,0.5,0,Math.PI*2); c.fill(); }
+  for(let x=ox;x<W;x+=gs) for(let y=oy;y<H;y+=gs) { c.beginPath(); c.arc(x,y,0.7,0,Math.PI*2); c.fill(); }
 
   // Edges
   EDGES.forEach(([a,b,s]) => {
@@ -490,11 +491,11 @@ function draw() {
     let [x1,y1]=w2s(na.x,na.y), [x2,y2]=w2s(nb.x,nb.y);
     let isH = hovered&&(hovered.id===a||hovered.id===b);
     let isS = selected&&(selected.id===a||selected.id===b);
-    let alpha = isS ? 0.2 : isH ? 0.12 : 0.03;
+    let alpha = isS ? 0.3 : isH ? 0.2 : 0.1;
 
     c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2);
-    c.strokeStyle = isS ? na.color+'44' : isH ? `rgba(201,169,110,${alpha})` : `rgba(255,255,255,${alpha})`;
-    c.lineWidth = isS ? 1.5 : isH ? 1.5 : 0.5;
+    c.strokeStyle = isS ? na.color+'55' : isH ? `rgba(201,169,110,${alpha})` : `rgba(255,255,255,${alpha})`;
+    c.lineWidth = isS ? 2 : isH ? 1.5 : 0.8;
     c.stroke();
 
     // Particles on active edges
@@ -523,7 +524,7 @@ function draw() {
     // Outer glow
     if(isH || isS || n.id==='hub') {
       let gr = c.createRadialGradient(sx,sy,r*0.3,sx,sy,r*(isS?3:2));
-      gr.addColorStop(0, n.color + (isS?'18':'10'));
+      gr.addColorStop(0, n.color + (isS?'28':'18'));
       gr.addColorStop(1, 'transparent');
       c.beginPath(); c.arc(sx,sy,r*(isS?3:2),0,Math.PI*2); c.fillStyle=gr; c.fill();
     }
@@ -532,26 +533,26 @@ function draw() {
     if(n.id==='hub' || isS) {
       let pr = r + 6 + Math.sin(t*2.5)*3;
       c.beginPath(); c.arc(sx,sy,pr,0,Math.PI*2);
-      c.strokeStyle = n.color + '18';
+      c.strokeStyle = n.color + '30';
       c.lineWidth = 1; c.stroke();
       if(isS) {
         let pr2 = r + 14 + Math.sin(t*1.8)*5;
         c.beginPath(); c.arc(sx,sy,pr2,0,Math.PI*2);
-        c.strokeStyle = n.color + '0a'; c.stroke();
+        c.strokeStyle = n.color + '18'; c.stroke();
       }
     }
 
     // Node body
     c.beginPath(); c.arc(sx,sy,r,0,Math.PI*2);
     let gr = c.createRadialGradient(sx-r*0.25,sy-r*0.25,0,sx,sy,r);
-    let baseAlpha = isS ? 'ee' : isH ? 'cc' : '55';
+    let baseAlpha = isS ? 'ff' : isH ? 'dd' : 'aa';
     gr.addColorStop(0, n.color + baseAlpha);
-    gr.addColorStop(1, n.color + (isS?'88':isH?'66':'22'));
+    gr.addColorStop(1, n.color + (isS?'99':isH?'77':'55'));
     c.fillStyle = gr; c.fill();
 
     // Border
     c.beginPath(); c.arc(sx,sy,r,0,Math.PI*2);
-    c.strokeStyle = n.color + (isS?'88':isH?'55':'18');
+    c.strokeStyle = n.color + (isS?'cc':isH?'99':'55');
     c.lineWidth = isS ? 2 : 1; c.stroke();
 
     // Label
@@ -564,7 +565,7 @@ function draw() {
 
       if(r > 14) {
         c.font = `500 ${Math.max(6,fs*0.48)}px 'JetBrains Mono',monospace`;
-        c.fillStyle = currentTheme ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.2)';
+        c.fillStyle = 'rgba(255,255,255,0.45)';
         c.fillText(n.cat.toUpperCase(), sx, sy + r + 8*zoom);
       }
     }
@@ -592,7 +593,7 @@ const THEMES = {
 };
 // BG colors for canvas per theme
 const BG_COLORS = {
-  '': {bg1:'#f0ece6',bg2:'#e8e4de',dot:'rgba(184,134,11,0.04)',grid:'rgba(0,0,0,0.03)'},
+  '': {bg1:'#060608',bg2:'#030305',dot:'rgba(184,134,11,0.06)',grid:'rgba(184,134,11,0.03)'},
   'theme-svyatlitsa': {bg1:'#0a0808',bg2:'#080606',dot:'rgba(201,169,110,0.03)',grid:'rgba(201,169,110,0.015)'},
   'theme-scyra': {bg1:'#080a10',bg2:'#060810',dot:'rgba(0,212,255,0.03)',grid:'rgba(0,212,255,0.015)'},
   'theme-academi': {bg1:'#0a080e',bg2:'#08060c',dot:'rgba(164,139,250,0.03)',grid:'rgba(164,139,250,0.015)'},
@@ -614,8 +615,8 @@ function applyTheme(themeClass) {
 function selectNode(n) {
   selected = n;
   if(!n) { goHome(); return; }
-  // Pan camera so selected node is left-of-center (panel opens right)
-  targetCamX = n.x + 100;
+  // Pan camera so selected node is right-of-center (panel opens left)
+  targetCamX = n.x - 120;
   targetCamY = n.y;
   document.getElementById('hero-overlay').classList.add('hidden');
   document.getElementById('hint').classList.add('hidden');

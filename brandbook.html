@@ -179,6 +179,8 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
   <a href="#components" data-i18n="nav_components">Components</a>
   <a href="#issues" data-i18n="nav_issues">Issues</a>
   <a href="#guidelines" data-i18n="nav_guidelines">Guidelines</a>
+  <a href="#graph" data-i18n="nav_graph">Graph</a>
+  <a href="#favicon" data-i18n="nav_favicon">Favicon</a>
   <div class="bb-lang-wrap">
     <button class="bb-lang" onclick="setBBLang('be')">BY</button>
     <button class="bb-lang active" onclick="setBBLang('en')">EN</button>
@@ -192,7 +194,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
     <button class="bb-lang" onclick="setBBLang('ja')">JA</button>
     <button class="bb-lang" onclick="setBBLang('ko')">KO</button>
   </div>
-  <div class="bb-nav-ver">v1.0 // 2026-03-23</div>
+  <div class="bb-nav-ver">v1.1 // 2026-03-24</div>
 </nav>
 
 <!-- HERO -->
@@ -205,7 +207,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
     <span><em>5</em><span data-i18n="hero_subbrands">Sub-Brands</span></span>
     <span><em>11</em><span data-i18n="hero_languages">Languages</span></span>
     <span><em>4</em><span data-i18n="hero_fonts">Font Families</span></span>
-    <span><em>1</em><span data-i18n="hero_system">System</span></span>
+    <span><em>10</em><span data-i18n="hero_sections">Sections</span></span>
   </div>
 </section>
 
@@ -222,6 +224,8 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
     <a href="#components" class="toc-item"><div class="toc-num">06</div><div class="toc-name" data-i18n="toc_components">UI Components</div><div class="toc-desc" data-i18n="toc_components_desc">Buttons, forms, cards, navigation specs</div></a>
     <a href="#issues" class="toc-item"><div class="toc-num">07</div><div class="toc-name" data-i18n="toc_issues">Inconsistencies</div><div class="toc-desc" data-i18n="toc_issues_desc">Found problems and required fixes</div></a>
     <a href="#guidelines" class="toc-item"><div class="toc-num">08</div><div class="toc-name" data-i18n="toc_guidelines">Developer Guidelines</div><div class="toc-desc" data-i18n="toc_guidelines_desc">Rules for developers implementing changes</div></a>
+    <a href="#graph" class="toc-item"><div class="toc-num">09</div><div class="toc-name" data-i18n="toc_graph">Graph Navigator</div><div class="toc-desc" data-i18n="toc_graph_desc">Landing page force-graph, themes, content panel, topbar</div></a>
+    <a href="#favicon" class="toc-item"><div class="toc-num">10</div><div class="toc-name" data-i18n="toc_favicon">Favicon Standard</div><div class="toc-desc" data-i18n="toc_favicon_desc">Icon format, sizes, construction rules</div></a>
   </div>
 </section>
 
@@ -759,10 +763,157 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-
   </div>
 </section>
 
+<!-- 09 GRAPH NAVIGATOR -->
+<section class="bb-section-dark" id="graph">
+  <div class="bb-section-inner">
+    <div class="bb-label" data-i18n="s09_label">// 09 Graph Navigator &amp; Landing Page</div>
+    <div class="bb-title" data-i18n="s09_title">Interactive Graph System</div>
+    <p class="bb-subtitle" style="color:rgba(255,255,255,0.5)" data-i18n="s09_sub">The labs67.com landing page is a fullscreen force-directed graph navigator. Every project is a clickable node. The graph is the primary navigation interface.</p>
+
+    <div class="spec-block" style="background:var(--dark2);border-color:rgba(255,255,255,0.06)">
+      <h4 style="color:#fff;border-color:rgba(255,255,255,0.08)">Topbar</h4>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Height</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">48px</span> fixed. NEVER change.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Background</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">var(--panel)</span> + <span class="spec-code">backdrop-filter: blur(24px)</span></div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Layout</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Logo (left) &rarr; Links (center) &rarr; Status dot + ONLINE (right)</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Logo</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Hexagon badge <span class="spec-code">28&times;28px</span> with gradient <span class="spec-code">var(--accent) &rarr; var(--accent2)</span> + clip-path polygon. Text "L67" 7px JetBrains Mono 600.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Brand text</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">LABS</span> in <span class="spec-code">var(--accent)</span>, <span class="spec-code">67</span> in <span class="spec-code">var(--white)</span>. Font: Inter 800, 14px, letter-spacing 0.15em.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Links</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">10px Inter 500, <span class="spec-code">var(--muted)</span>. Hover: <span class="spec-code">var(--accent)</span> + <span class="spec-code">var(--accent-dim)</span> bg. Border-radius 4px.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Required links</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Portfolio, Agent Hub, LABS67 Brand, SVYATLITSA Brand, Status</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Status</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Green dot 5px pulsing (blink 2s), JetBrains Mono 9px "ONLINE"</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Mobile</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Links hidden below 768px. Logo + status remain.</div></div>
+    </div>
+
+    <div class="spec-block" style="background:var(--dark2);border-color:rgba(255,255,255,0.06)">
+      <h4 style="color:#fff;border-color:rgba(255,255,255,0.08)">Canvas &amp; Physics</h4>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Renderer</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Canvas 2D, fullscreen <span class="spec-code">position: fixed</span>, z-index 1, devicePixelRatio aware</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Zoom</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">FIXED to <span class="spec-code">Math.min(W, H) / 900</span>. No scroll zoom, no pinch zoom. Recalculates on resize.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Node bounds</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">BOUND = 400px</span> radius from center. Nodes clamped with velocity dampening &times;0.3.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Camera bounds</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">CAM_BOUND = 500px</span>. Camera x/y clamped to &plusmn;500.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Physics</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Repulsion 12000/d&sup2;, attraction (d&minus;ideal)&times;0.004&times;strength, center pull 0.003, damping 0.82</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Background</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Radial gradient (theme-aware). Grid dots every 50px &times; zoom, 0.5px radius.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Graph position</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Graph renders right of center. Camera offset on select: <span class="spec-code">targetCamX = node.x &minus; 120</span>, giving more space on the left side for the content panel.</div></div>
+    </div>
+
+    <div class="spec-block" style="background:var(--dark2);border-color:rgba(255,255,255,0.06)">
+      <h4 style="color:#fff;border-color:rgba(255,255,255,0.08)">Nodes</h4>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Hub node</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">r: 48</span>, label "LABS67", color #c9a96e. Pinned to center (strong pull 0.15). Pulse ring.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Primary nodes</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">SCYRA (<span class="spec-code">r:36</span>, #5ec4d4), SVYATLITSA (<span class="spec-code">r:34</span>, #c9a96e)</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Secondary nodes</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Academi (<span class="spec-code">r:26</span>, #a48bfa), Franchise (<span class="spec-code">r:24</span>, #a48bfa), Agent Hub (<span class="spec-code">r:22</span>, #d47a9a)</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Tertiary nodes</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">TradeAI (<span class="spec-code">r:20</span>, #a48bfa), Dental AI (<span class="spec-code">r:20</span>, #5ec4d4)</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Visual style</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Radial gradient fill, 1px stroke. Hover: opacity up. Selected: glow rings + stronger alpha. Labels: Inter 700, size auto r&times;0.5 (7&ndash;15px), white.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Category label</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Below node, JetBrains Mono 500, size r&times;0.48, uppercase, 25% white alpha. Only if r&gt;14.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Edge particles</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Spawn 2% per frame on selected edges. 1.5px radius, node color with fade alpha.</div></div>
+    </div>
+
+    <div class="spec-block" style="background:var(--dark2);border-color:rgba(255,255,255,0.06)">
+      <h4 style="color:#fff;border-color:rgba(255,255,255,0.08)">Content Panel</h4>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Position</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Fixed, <span class="spec-code">left: 0</span>, <span class="spec-code">top: 48px</span>, <span class="spec-code">bottom: 0</span>. Slides from left with <span class="spec-code">translateX(-100%)</span>.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Width</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">min(520px, 85vw)</span></div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Background</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">var(--panel)</span> + <span class="spec-code">backdrop-filter: blur(30px)</span> + <span class="spec-code">border-right: 1px solid var(--border)</span></div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Animation</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)</span></div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Content order</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Close btn &rarr; Category label &rarr; Title (EB Garamond 2.2rem) &rarr; Description &rarr; Site button &rarr; Stats grid (3 col) &rarr; Tags &rarr; Custom HTML &rarr; Links</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Close button</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">32&times;32px, top-right, <span class="spec-code">&times;</span> symbol, 1px border var(--border). Hover: accent color.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Site button</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">cp-btn</span>: 1px accent border, accent color text, 6px radius. Hover: fill accent, text becomes bg color. Shows URL text.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Scrollbar</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">4px thin, muted thumb, transparent track.</div></div>
+    </div>
+
+    <div class="spec-block" style="background:var(--dark2);border-color:rgba(255,255,255,0.06)">
+      <h4 style="color:#fff;border-color:rgba(255,255,255,0.08)">Theme Switching</h4>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Mechanism</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">CSS class on <span class="spec-code">&lt;body&gt;</span>: <span class="spec-code">theme-svyatlitsa</span>, <span class="spec-code">theme-scyra</span>, <span class="spec-code">theme-academi</span>, etc.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Default</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">No class = light LABS67 theme (warm cream <span class="spec-code">#f5f2ed</span>, gold accents)</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">SVYATLITSA</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Dark warm: bg <span class="spec-code">#0a0808</span>, accent <span class="spec-code">#c9a96e</span></div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">SCYRA</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Dark cold: bg <span class="spec-code">#080a10</span>, accent <span class="spec-code">#00D4FF</span></div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Academi</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Dark purple: bg <span class="spec-code">#0a080e</span>, accent <span class="spec-code">#a48bfa</span></div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Agents</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Dark pink: bg <span class="spec-code">#0e080a</span>, accent <span class="spec-code">#d47a9a</span></div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Transition</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">0.8s ease</span> on body background. Canvas BG interpolated per-frame from <span class="spec-code">BG_COLORS</span> map.</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">CSS variables</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">ALL colors use <span class="spec-code">var(--accent)</span>, <span class="spec-code">var(--bg)</span>, etc. NEVER hardcode colors in components.</div></div>
+    </div>
+
+    <div class="spec-block" style="background:var(--dark2);border-color:rgba(255,255,255,0.06)">
+      <h4 style="color:#fff;border-color:rgba(255,255,255,0.08)">Hero Overlay</h4>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Position</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Fixed center, z-index 20, pointer-events: none</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Text</div><div class="spec-val" style="color:rgba(255,255,255,0.8)"><span class="spec-code">LABS67</span> — Inter 800, clamp(36px, 7vw, 72px), 0.12em spacing, 8% white opacity</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Subtitle</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">JetBrains Mono 10px, 0.3em spacing, accent color, 40% opacity. "Technology Concern &middot; Click a node"</div></div>
+      <div class="spec-row"><div class="spec-key" style="color:rgba(255,255,255,0.4)">Behavior</div><div class="spec-val" style="color:rgba(255,255,255,0.8)">Fades to <span class="spec-code">opacity: 0</span> when any node is selected. Class <span class="spec-code">.hidden</span>.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 FAVICON STANDARD -->
+<section class="bb-section" id="favicon">
+  <div class="bb-label" data-i18n="s10_label">// 10 Favicon Standard</div>
+  <div class="bb-title" data-i18n="s10_title">Favicon &amp; App Icons</div>
+  <p class="bb-subtitle" data-i18n="s10_sub">Every LABS67 ecosystem domain must have a consistent favicon. SVG is the primary format. PNG fallbacks required for legacy browsers and app manifests.</p>
+
+  <div class="spec-block">
+    <h4>Construction</h4>
+    <div class="spec-row"><div class="spec-key">Shape</div><div class="spec-val">Rounded square. <span class="spec-code">viewBox="0 0 32 32"</span>, corner radius <span class="spec-code">rx="5"</span> (15.6%).</div></div>
+    <div class="spec-row"><div class="spec-key">Background</div><div class="spec-val">Brand accent color fill. LABS67 parent: <span class="spec-code">#B8860B</span> (gold). Sub-brands use their own accent.</div></div>
+    <div class="spec-row"><div class="spec-key">Text</div><div class="spec-val"><span class="spec-code">L67</span> — centered, white (#ffffff), bold sans-serif, 14px within 32px viewBox. <span class="spec-code">text-anchor="middle"</span>, x=16, y=22.</div></div>
+    <div class="spec-row"><div class="spec-key">Clearance</div><div class="spec-val">Minimum 3px padding from text to edge on all sides.</div></div>
+  </div>
+
+  <!-- Live preview -->
+  <div style="display:flex;gap:24px;align-items:center;margin-top:32px;padding:24px;border:1px solid var(--border);border-radius:12px;background:var(--bg2)">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <svg viewBox="0 0 32 32" width="64" height="64" style="border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.1)"><rect width="32" height="32" rx="5" fill="#B8860B"/><text x="16" y="22" font-family="sans-serif" font-weight="bold" font-size="14" fill="#fff" text-anchor="middle">L67</text></svg>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">LABS67</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <svg viewBox="0 0 32 32" width="64" height="64" style="border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.1)"><rect width="32" height="32" rx="5" fill="#c9a96e"/><text x="16" y="22" font-family="sans-serif" font-weight="bold" font-size="14" fill="#fff" text-anchor="middle">SVT</text></svg>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">SVYATLITSA</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <svg viewBox="0 0 32 32" width="64" height="64" style="border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.1)"><rect width="32" height="32" rx="5" fill="#00D4FF"/><text x="16" y="22" font-family="sans-serif" font-weight="bold" font-size="14" fill="#fff" text-anchor="middle">SCY</text></svg>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">SCYRA.AI</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <svg viewBox="0 0 32 32" width="64" height="64" style="border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.1)"><rect width="32" height="32" rx="5" fill="#a48bfa"/><text x="16" y="22" font-family="sans-serif" font-weight="bold" font-size="14" fill="#fff" text-anchor="middle">A67</text></svg>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">Academi67</span>
+    </div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Required Formats</h4>
+    <div class="spec-row"><div class="spec-key">Primary</div><div class="spec-val"><span class="spec-code">favicon.svg</span> — linked via <span class="spec-code">&lt;link rel="icon" type="image/svg+xml" href="favicon.svg"&gt;</span></div></div>
+    <div class="spec-row"><div class="spec-key">PNG fallback</div><div class="spec-val"><span class="spec-code">favicon-32.png</span> (32&times;32) and <span class="spec-code">favicon-16.png</span> (16&times;16) for legacy browsers</div></div>
+    <div class="spec-row"><div class="spec-key">Apple touch</div><div class="spec-val"><span class="spec-code">apple-touch-icon.png</span> (180&times;180). Same rounded square, no extra padding.</div></div>
+    <div class="spec-row"><div class="spec-key">Manifest</div><div class="spec-val"><span class="spec-code">site.webmanifest</span> with 192&times;192 and 512&times;512 PNG icons for PWA installs</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Per-Domain Favicons</h4>
+    <div class="spec-row"><div class="spec-key">labs67.com</div><div class="spec-val">Gold <span class="spec-code">#B8860B</span>, text <span class="spec-code">L67</span></div></div>
+    <div class="spec-row"><div class="spec-key">svyatlitsa.com</div><div class="spec-val">Warm gold <span class="spec-code">#c9a96e</span>, text <span class="spec-code">SVT</span></div></div>
+    <div class="spec-row"><div class="spec-key">scyra.labs67.com</div><div class="spec-val">Cyan <span class="spec-code">#00D4FF</span>, text <span class="spec-code">SCY</span></div></div>
+    <div class="spec-row"><div class="spec-key">academi67.com</div><div class="spec-val">Purple <span class="spec-code">#a48bfa</span>, text <span class="spec-code">A67</span></div></div>
+    <div class="spec-row"><div class="spec-key">trade.labs67.com</div><div class="spec-val">Purple <span class="spec-code">#a48bfa</span>, text <span class="spec-code">TRD</span></div></div>
+    <div class="spec-row"><div class="spec-key">franchise.labs67.com</div><div class="spec-val">Purple <span class="spec-code">#a48bfa</span>, text <span class="spec-code">F67</span></div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>Rules</h4>
+    <div class="spec-row"><div class="spec-key">DO</div><div class="spec-val">Use SVG as primary. Keep 3-char abbreviation. Use brand accent color background. White text only.</div></div>
+    <div class="spec-row"><div class="spec-key">DO NOT</div><div class="spec-val">Use gradients in favicon. Use images/logos instead of text. Use .ico format. Add borders or outlines.</div></div>
+    <div class="spec-row"><div class="spec-key">Testing</div><div class="spec-val">Verify at 16px, 32px, and 180px. Text must remain legible at 16px. Background color must be distinguishable from browser chrome in both light and dark modes.</div></div>
+  </div>
+
+  <div class="spec-block">
+    <h4>SVG Template</h4>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--dark);color:#1df59a;padding:20px;border-radius:8px;margin-top:12px;overflow-x:auto;line-height:1.8">
+      &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"&gt;<br>
+      &nbsp;&nbsp;&lt;rect width="32" height="32" rx="5" fill="<span style="color:var(--gold)">{ACCENT_COLOR}</span>"/&gt;<br>
+      &nbsp;&nbsp;&lt;text x="16" y="22" font-family="sans-serif" font-weight="bold"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;font-size="14" fill="#ffffff" text-anchor="middle"&gt;<span style="color:var(--gold)">{ABBR}</span>&lt;/text&gt;<br>
+      &lt;/svg&gt;
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer style="background:var(--dark);color:rgba(255,255,255,0.4);padding:40px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em">
   <div style="color:var(--gold);font-size:14px;font-weight:700;margin-bottom:8px;font-family:'Syne',sans-serif">LABS<span style="opacity:0.6">67</span></div>
-  <div data-i18n="footer_version">Brand Book v1.0 // Generated 2026-03-23</div>
+  <div data-i18n="footer_version">Brand Book v1.1 // Updated 2026-03-24</div>
   <div style="margin-top:8px" data-i18n-html="footer_copy">&copy; 2026 LABS67 Concern // Confidential</div>
 </footer>
 

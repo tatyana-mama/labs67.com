@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LABS67 — Ecosystem Model</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Syne:wght@400;600;700;800&family=EB+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0e;--bg2:#101016;--bg3:#16161e;
+  --text:#e8e6e2;--muted:#666;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --gold:#B8860B;--gold2:#D4A017;--gold-dim:rgba(184,134,11,0.1);
+  --cyan:#30dcff;--green:#1df59a;--purple:#a48bfa;--pink:#d47a9a;--red:#CF101A;
+  --serif:'EB Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --head:'Syne',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(184,134,11,0.3)}
+
+/* TOPBAR — 48px, matches index.html */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:48px;
+  background:rgba(10,10,14,0.92);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+.tb-hex{
+  width:28px;height:28px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:7px;font-weight:600;color:#fff;
+}
+.tb-name{font-weight:800;font-size:14px;letter-spacing:0.15em}
+.tb-name em{color:var(--gold);font-style:normal}
+.tb-links{display:flex;gap:2px}
+.tb-links a{
+  padding:5px 12px;font-size:10px;font-weight:500;letter-spacing:0.06em;
+  color:var(--muted);text-decoration:none;border-radius:4px;transition:all 0.3s;
+}
+.tb-links a:hover{color:var(--gold);background:var(--gold-dim)}
+.tb-links a.active{color:var(--gold);background:var(--gold-dim)}
+.tb-right{display:flex;align-items:center;gap:10px}
+.tb-status{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:var(--muted);display:flex;align-items:center;gap:6px}
+.tb-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@media(max-width:768px){.tb-links{display:none}}
+
+/* LAYOUT */
+.page{padding:80px 40px 60px;max-width:1200px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.page-title{font-family:var(--head);font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.1;margin-bottom:16px}
+.page-sub{font-size:16px;color:var(--muted);max-width:700px;line-height:1.8;margin-bottom:48px}
+
+/* SECTION */
+.ms{margin-bottom:64px}
+.ms-label{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.ms-label::before{content:'//';opacity:0.4}
+.ms-title{font-family:var(--head);font-size:clamp(22px,3vw,32px);font-weight:700;margin-bottom:8px}
+.ms-desc{font-size:14px;color:var(--muted);max-width:600px;margin-bottom:24px}
+
+/* HUB DIAGRAM */
+.hub-diagram{position:relative;width:100%;max-width:800px;margin:0 auto 48px;aspect-ratio:4/3}
+.hub-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,134,11,0.2),rgba(184,134,11,0.05));
+  border:2px solid rgba(184,134,11,0.3);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:2;
+}
+.hub-center-name{font-family:var(--head);font-weight:800;font-size:16px;letter-spacing:0.1em}
+.hub-center-name em{color:var(--gold);font-style:normal}
+.hub-center-sub{font-family:var(--mono);font-size:7px;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase}
+.sat{
+  position:absolute;width:90px;height:90px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:1px solid var(--border2);z-index:2;cursor:default;transition:all 0.3s;
+}
+.sat:hover{transform:scale(1.08);border-color:currentColor}
+.sat-name{font-size:10px;font-weight:700;letter-spacing:0.04em}
+.sat-role{font-family:var(--mono);font-size:7px;color:var(--muted);letter-spacing:0.06em}
+.sat-line{position:absolute;z-index:1;pointer-events:none}
+
+/* DATA FLOW TABLE */
+.flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:24px}
+.flow-card{
+  padding:20px;border:1px solid var(--border);border-radius:12px;background:var(--bg2);
+  transition:border-color 0.2s;
+}
+.flow-card:hover{border-color:var(--gold)}
+.flow-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.flow-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.flow-name{font-weight:700;font-size:14px}
+.flow-domain{font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:0.04em}
+.flow-body{font-size:12px;color:var(--muted);line-height:1.7}
+.flow-body ul{list-style:none;margin:0;padding:0}
+.flow-body li{padding:4px 0 4px 16px;position:relative;border-bottom:1px solid rgba(255,255,255,0.02)}
+.flow-body li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:11px}
+
+/* STANDARD SPEC */
+.spec{margin-top:24px;padding:24px;border:1px solid var(--border);border-radius:12px;background:var(--bg2)}
+.spec h4{font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.spec-row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.02);font-size:12px}
+.spec-key{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.spec-val{color:var(--text)}
+.spec-code{font-family:var(--mono);font-size:10px;background:rgba(255,255,255,0.04);padding:2px 6px;border-radius:3px}
+
+/* THEME PALETTE */
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:24px}
+.theme-card{border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.theme-swatch{height:60px;display:flex;align-items:flex-end;padding:8px}
+.theme-swatch span{font-family:var(--mono);font-size:8px;padding:3px 6px;border-radius:3px;background:rgba(0,0,0,0.4);color:#fff}
+.theme-info{padding:12px}
+.theme-info h5{font-size:11px;font-weight:700;margin-bottom:2px}
+.theme-info p{font-family:var(--mono);font-size:9px;color:var(--muted)}
+
+/* ELEMENT MATRIX */
+.matrix{width:100%;border-collapse:collapse;margin-top:24px;font-size:11px}
+.matrix th{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);position:sticky;top:48px;background:var(--bg)}
+.matrix td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.matrix tr:hover td{background:rgba(184,134,11,0.02)}
+.tag{display:inline-block;padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:8px;letter-spacing:0.04em;margin:1px}
+.tag-yes{background:rgba(29,245,154,0.1);color:var(--green)}
+.tag-no{background:rgba(239,68,68,0.1);color:#ef4444}
+.tag-plan{background:rgba(234,179,8,0.1);color:#eab308}
+.tag-shared{background:var(--gold-dim);color:var(--gold)}
+
+/* FOOTER */
+.footer{text-align:center;padding:40px;border-top:1px solid var(--border);font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;margin-top:60px}
+
+@media(max-width:768px){
+  .page{padding:60px 20px 40px}
+  .spec-row{grid-template-columns:1fr;gap:4px}
+  .matrix{font-size:9px}
+  .matrix th,.matrix td{padding:6px 8px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="index.html" class="tb-logo">
+    <div class="tb-hex">L67</div>
+    <div><div class="tb-name"><em>LABS</em>67</div></div>
+  </a>
+  <div class="tb-links">
+    <a href="index.html">Graph</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="brandbook.html">Brand Book</a>
+    <a href="model.html" class="active">Model</a>
+    <a href="status.html">Status</a>
+  </div>
+  <div class="tb-right">
+    <div class="tb-status"><div class="tb-dot"></div> LIVE MODEL</div>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="eyebrow">// Ecosystem Architecture</div>
+  <h1 class="page-title">LABS67 <em style="color:var(--gold);font-style:normal">Model</em></h1>
+  <p class="page-sub">Central structural model of the LABS67 ecosystem. Defines cross-site standards, element interchange, data flow, and the relationship between the graph hub and all sub-sites.</p>
+
+  <!-- 01 HUB PRINCIPLE -->
+  <section class="ms" id="hub">
+    <div class="ms-label">01 Hub Principle</div>
+    <div class="ms-title">labs67.com = Центральный хаб</div>
+    <div class="ms-desc">Граф-навигатор на labs67.com — единая точка входа. Каждая нода графа — мини-сайт оригинала. Контент-панель слева показывает сжатую версию суб-сайта.</div>
+
+    <div class="spec">
+      <h4>Architecture Rule</h4>
+      <div class="spec-row"><div class="spec-key">Single entry</div><div class="spec-val">labs67.com/index.html — fullscreen graph. All projects accessible through node clicks.</div></div>
+      <div class="spec-row"><div class="spec-key">Content panel</div><div class="spec-val">Left-side slide panel (<span class="spec-code">520px</span>) = mini-site of the original. Same data, condensed layout.</div></div>
+      <div class="spec-row"><div class="spec-key">Deep link</div><div class="spec-val">Each node card contains <span class="spec-code">cp-btn</span> linking to the full sub-site.</div></div>
+      <div class="spec-row"><div class="spec-key">Theme sync</div><div class="spec-val">Selecting a node applies that project's theme to the entire page via CSS class on <span class="spec-code">&lt;body&gt;</span>.</div></div>
+      <div class="spec-row"><div class="spec-key">Data source</div><div class="spec-val">Node data (NODES array in index.html) is the single source of truth for: name, color, description, stats, tags, links, HTML content.</div></div>
+      <div class="spec-row"><div class="spec-key">Sync rule</div><div class="spec-val">When a sub-site updates its content, the corresponding NODES entry in index.html MUST be updated to match.</div></div>
+    </div>
+  </section>
+
+  <!-- 02 SITE REGISTRY -->
+  <section class="ms" id="registry">
+    <div class="ms-label">02 Site Registry</div>
+    <div class="ms-title">All Domains</div>
+    <div class="ms-desc">Complete registry of all LABS67 ecosystem sites with their status, theme, and role.</div>
+
+    <div class="flow-grid">
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-dot" style="background:var(--gold)"></div>
+          <div><div class="flow-name">labs67.com</div><div class="flow-domain">Graph Hub — Central Navigator</div></div>
+        </div>
+        <div class="flow-body">
+          <ul>
+            <li>Fullscreen force-directed graph</li>
+            <li>Theme: dark default (#0a0a0e), gold accents</li>
+            <li>Content panel shows mini-sites</li>
+            <li>All sub-sites accessible via nodes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-dot" style="background:#c9a96e"></div>
+          <div><div class="flow-name">svyatlitsa.com</div><div class="flow-domain">Premium Dental Clinic</div></div>
+        </div>
+        <div class="flow-body">
+          <ul>
+            <li>Theme: dark warm (#0a0a0a), gold #c9a96e</li>
+            <li>EB Garamond serif headings</li>
+            <li>Ceiling-down, smart glass concept</li>
+            <li>Graph node: r:34, color #c9a96e</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-dot" style="background:#00D4FF"></div>
+          <div><div class="flow-name">scyra.labs67.com</div><div class="flow-domain">Edge AI System</div></div>
+        </div>
+        <div class="flow-body">
+          <ul>
+            <li>Theme: dark cold (#080a10), cyan #00D4FF</li>
+            <li>Tech/terminal aesthetic</li>
+            <li>NVIDIA Jetson hardware focus</li>
+            <li>Graph node: r:36, color #5ec4d4</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-dot" style="background:var(--green)"></div>
+          <div><div class="flow-name">academi67.com</div><div class="flow-domain">Clinical Education Institute</div></div>
+        </div>
+        <div class="flow-body">
+          <ul>
+            <li>Theme: dark green (#030a05), green #1df59a</li>
+            <li>Syne headings, matrix grid BG</li>
+            <li>Certification platform</li>
+            <li>Graph node: r:26, color #a48bfa</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-dot" style="background:var(--purple)"></div>
+          <div><div class="flow-name">trade.labs67.com</div><div class="flow-domain">AI Trading Analytics</div></div>
+        </div>
+        <div class="flow-body">
+          <ul>
+            <li>Theme: dark purple (#0a080e), purple #a48bfa</li>
+            <li>Charts, signals, portfolio</li>
+            <li>Graph node: r:20, color #a48bfa</li>
+            <li>Status: planned</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-dot" style="background:var(--purple)"></div>
+          <div><div class="flow-name">franchise.labs67.com</div><div class="flow-domain">EU Franchise System</div></div>
+        </div>
+        <div class="flow-body">
+          <ul>
+            <li>Theme: dark purple (#0a080e), purple #a48bfa</li>
+            <li>Franchise packages, ROI calc</li>
+            <li>Graph node: r:24, color #a48bfa</li>
+            <li>Status: planned</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 SHARED ELEMENTS -->
+  <section class="ms" id="elements">
+    <div class="ms-label">03 Shared Elements</div>
+    <div class="ms-title">Cross-Site Element Standard</div>
+    <div class="ms-desc">Every LABS67 site MUST implement these shared elements. Elements are interchangeable across the ecosystem.</div>
+
+    <div class="spec">
+      <h4>Topbar (mandatory)</h4>
+      <div class="spec-row"><div class="spec-key">Height</div><div class="spec-val"><span class="spec-code">48px</span> — all sites, no exceptions</div></div>
+      <div class="spec-row"><div class="spec-key">Background</div><div class="spec-val"><span class="spec-code">rgba(bg,0.92)</span> + <span class="spec-code">backdrop-filter:blur(24px)</span></div></div>
+      <div class="spec-row"><div class="spec-key">Left</div><div class="spec-val">Hexagon badge 28px + brand name. Clicks → index.html (graph hub)</div></div>
+      <div class="spec-row"><div class="spec-key">Center</div><div class="spec-val">Section links. 10px Inter 500, uppercase. Hover: accent color + dim bg.</div></div>
+      <div class="spec-row"><div class="spec-key">Right</div><div class="spec-val">Status indicator or Back link. JetBrains Mono 9px.</div></div>
+      <div class="spec-row"><div class="spec-key">Mobile</div><div class="spec-val">Links hidden below 768px. Logo + right element remain.</div></div>
+    </div>
+
+    <div class="spec">
+      <h4>Footer (mandatory)</h4>
+      <div class="spec-row"><div class="spec-key">Content</div><div class="spec-val">Brand name + "Concern LABS67" + copyright + links to all sister sites</div></div>
+      <div class="spec-row"><div class="spec-key">Style</div><div class="spec-val">JetBrains Mono 10px, muted color, border-top 1px solid var(--border)</div></div>
+      <div class="spec-row"><div class="spec-key">Cross-links</div><div class="spec-val">Every footer links to: labs67.com, svyatlitsa.com, scyra.labs67.com, academi67.com</div></div>
+    </div>
+
+    <div class="spec">
+      <h4>Favicon (mandatory)</h4>
+      <div class="spec-row"><div class="spec-key">Format</div><div class="spec-val">SVG primary. 32×32 viewBox, rx=5, accent bg, white 3-char text.</div></div>
+      <div class="spec-row"><div class="spec-key">Reference</div><div class="spec-val">See <a href="brandbook.html#favicon" style="color:var(--gold)">Brand Book § 10</a></div></div>
+    </div>
+
+    <div class="spec">
+      <h4>Color Variables (mandatory)</h4>
+      <div class="spec-row"><div class="spec-key">Naming</div><div class="spec-val">All sites use CSS custom properties: <span class="spec-code">--bg, --bg2, --text, --muted, --border, --accent</span></div></div>
+      <div class="spec-row"><div class="spec-key">Dark default</div><div class="spec-val">All sites default to dark theme. Background range: <span class="spec-code">#030a05</span> to <span class="spec-code">#0a0a0e</span>.</div></div>
+      <div class="spec-row"><div class="spec-key">LABS67 gold</div><div class="spec-val"><span class="spec-code">#B8860B</span> — present on ALL sites as parent brand indicator</div></div>
+      <div class="spec-row"><div class="spec-key">Sub-brand accent</div><div class="spec-val">Each sub-brand has its own accent: SVYATLITSA #c9a96e, SCYRA #00D4FF, Academi #1df59a, etc.</div></div>
+    </div>
+
+    <div class="spec">
+      <h4>Typography (mandatory)</h4>
+      <div class="spec-row"><div class="spec-key">Body</div><div class="spec-val">Inter — used on all sites for body text</div></div>
+      <div class="spec-row"><div class="spec-key">Code/mono</div><div class="spec-val">JetBrains Mono — used on all sites for labels, metadata, code</div></div>
+      <div class="spec-row"><div class="spec-key">Headings</div><div class="spec-val">Syne (default) or EB Garamond (SVYATLITSA). Sub-brand can choose.</div></div>
+    </div>
+
+    <div class="spec">
+      <h4>Language System</h4>
+      <div class="spec-row"><div class="spec-key">Standard</div><div class="spec-val">11 languages: BE, EN, UK, RU, DE, FR, ES, IT, PT, JA, KO</div></div>
+      <div class="spec-row"><div class="spec-key">Default</div><div class="spec-val">Belarusian (be) — set in <span class="spec-code">&lt;html lang="be"&gt;</span></div></div>
+      <div class="spec-row"><div class="spec-key">i18n method</div><div class="spec-val"><span class="spec-code">data-i18n</span> attribute + JS translations object. Same keys across all sites.</div></div>
+    </div>
+  </section>
+
+  <!-- 04 ELEMENT INTERCHANGE MATRIX -->
+  <section class="ms" id="matrix">
+    <div class="ms-label">04 Element Matrix</div>
+    <div class="ms-title">Cross-Site Compatibility</div>
+    <div class="ms-desc">Which shared elements are implemented on which site. Green = live, Yellow = planned, Red = missing.</div>
+
+    <div style="overflow-x:auto">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>labs67.com</th>
+          <th>svyatlitsa.com</th>
+          <th>scyra.labs67</th>
+          <th>academi67.com</th>
+          <th>trade.labs67</th>
+          <th>franchise.labs67</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>48px Topbar</strong></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-no">58px</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+        </tr>
+        <tr>
+          <td><strong>Dark Theme</strong></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+        </tr>
+        <tr>
+          <td><strong>SVG Favicon</strong></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+        </tr>
+        <tr>
+          <td><strong>11 Languages</strong></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-yes">11 langs</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-yes">11 langs</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+        </tr>
+        <tr>
+          <td><strong>Cross-link Footer</strong></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+        </tr>
+        <tr>
+          <td><strong>Gold #B8860B</strong></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-plan">TODO</span></td>
+          <td><span class="tag tag-no">#e8b840</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+          <td><span class="tag tag-plan">PLAN</span></td>
+        </tr>
+        <tr>
+          <td><strong>Graph Node</strong></td>
+          <td><span class="tag tag-shared">HUB</span></td>
+          <td><span class="tag tag-yes">r:34</span></td>
+          <td><span class="tag tag-yes">r:36</span></td>
+          <td><span class="tag tag-yes">r:26</span></td>
+          <td><span class="tag tag-yes">r:20</span></td>
+          <td><span class="tag tag-yes">r:24</span></td>
+        </tr>
+        <tr>
+          <td><strong>Theme Class</strong></td>
+          <td><span class="tag tag-shared">default</span></td>
+          <td><span class="tag tag-yes">theme-svyatlitsa</span></td>
+          <td><span class="tag tag-yes">theme-scyra</span></td>
+          <td><span class="tag tag-yes">theme-academi</span></td>
+          <td><span class="tag tag-yes">theme-trade</span></td>
+          <td><span class="tag tag-yes">theme-franchise</span></td>
+        </tr>
+        <tr>
+          <td><strong>Privacy Policy</strong></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+        </tr>
+        <tr>
+          <td><strong>Terms of Service</strong></td>
+          <td><span class="tag tag-yes">LIVE</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+          <td><span class="tag tag-shared">→ labs67</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- 05 THEME PALETTE -->
+  <section class="ms" id="themes">
+    <div class="ms-label">05 Theme Palette Map</div>
+    <div class="ms-title">Per-Project Themes</div>
+    <div class="ms-desc">Each project node triggers a full theme switch. These are the canonical theme values.</div>
+
+    <div class="theme-grid">
+      <div class="theme-card">
+        <div class="theme-swatch" style="background:linear-gradient(135deg,#0a0a0e,#101016)"><span>Default</span></div>
+        <div class="theme-info"><h5>LABS67 Hub</h5><p>--bg:#0a0a0e --accent:#B8860B</p></div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-swatch" style="background:linear-gradient(135deg,#0a0808,#140e08)"><span>SVYATLITSA</span></div>
+        <div class="theme-info"><h5>Warm Dark</h5><p>--bg:#0a0808 --accent:#c9a96e</p></div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-swatch" style="background:linear-gradient(135deg,#080a10,#0a0e18)"><span>SCYRA</span></div>
+        <div class="theme-info"><h5>Cold Tech</h5><p>--bg:#080a10 --accent:#00D4FF</p></div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-swatch" style="background:linear-gradient(135deg,#0a080e,#100c16)"><span>Academi</span></div>
+        <div class="theme-info"><h5>Purple Edu</h5><p>--bg:#0a080e --accent:#a48bfa</p></div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-swatch" style="background:linear-gradient(135deg,#0e080a,#160c10)"><span>Agents</span></div>
+        <div class="theme-info"><h5>Pink AI</h5><p>--bg:#0e080a --accent:#d47a9a</p></div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-swatch" style="background:linear-gradient(135deg,#030a05,#051007)"><span>Academi Site</span></div>
+        <div class="theme-info"><h5>Green Matrix</h5><p>--bg:#030a05 --accent:#1df59a</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 DATA FLOW -->
+  <section class="ms" id="dataflow">
+    <div class="ms-label">06 Data Flow</div>
+    <div class="ms-title">Information Architecture</div>
+    <div class="ms-desc">How data moves between labs67.com hub and sub-sites.</div>
+
+    <div class="spec">
+      <h4>Hub → Sub-site</h4>
+      <div class="spec-row"><div class="spec-key">Graph node</div><div class="spec-val">Contains condensed version: title, description, stats, tags, links, HTML content</div></div>
+      <div class="spec-row"><div class="spec-key">Site button</div><div class="spec-val"><span class="spec-code">cp-btn</span> links to full sub-site URL</div></div>
+      <div class="spec-row"><div class="spec-key">Theme</div><div class="spec-val">Hub applies sub-brand theme when node is selected</div></div>
+    </div>
+
+    <div class="spec">
+      <h4>Sub-site → Hub</h4>
+      <div class="spec-row"><div class="spec-key">Back link</div><div class="spec-val">Every sub-site topbar logo links back to labs67.com</div></div>
+      <div class="spec-row"><div class="spec-key">Parent badge</div><div class="spec-val">"Concern LABS67" visible on every sub-site</div></div>
+      <div class="spec-row"><div class="spec-key">Sync rule</div><div class="spec-val">When sub-site content changes, update corresponding NODES entry in index.html</div></div>
+    </div>
+
+    <div class="spec">
+      <h4>Sub-site ↔ Sub-site</h4>
+      <div class="spec-row"><div class="spec-key">Cross-links</div><div class="spec-val">Footer links to sister brands. SVYATLITSA ↔ SCYRA ↔ Academi ↔ Franchise.</div></div>
+      <div class="spec-row"><div class="spec-key">Shared pages</div><div class="spec-val">Privacy Policy, Terms of Service hosted on labs67.com — all sites link there.</div></div>
+      <div class="spec-row"><div class="spec-key">Chat widget</div><div class="spec-val">All sites embed Agent Hub chat (planned).</div></div>
+    </div>
+  </section>
+
+  <!-- 07 FILE STRUCTURE -->
+  <section class="ms" id="files">
+    <div class="ms-label">07 File Structure</div>
+    <div class="ms-title">Repository Map</div>
+
+    <div class="spec">
+      <h4>labs67.com (hub repository)</h4>
+      <div class="spec-row"><div class="spec-key">index.html</div><div class="spec-val">Graph navigator — landing page, NODES data, themes, physics engine</div></div>
+      <div class="spec-row"><div class="spec-key">model.html</div><div class="spec-val">This page — ecosystem model, standards, element matrix</div></div>
+      <div class="spec-row"><div class="spec-key">brandbook.html</div><div class="spec-val">LABS67 brand book — 10 sections, all visual standards</div></div>
+      <div class="spec-row"><div class="spec-key">svyatlitsa-brand.html</div><div class="spec-val">SVYATLITSA brand guidelines — 10 sections + photos</div></div>
+      <div class="spec-row"><div class="spec-key">portfolio.html</div><div class="spec-val">Artsiom Veyalka portfolio — services, projects, contact</div></div>
+      <div class="spec-row"><div class="spec-key">chat.html</div><div class="spec-val">Agent Hub — multi-agent chat interface</div></div>
+      <div class="spec-row"><div class="spec-key">status.html</div><div class="spec-val">Status dashboard — all domains health check</div></div>
+      <div class="spec-row"><div class="spec-key">cv.html</div><div class="spec-val">CV/resume — print-optimized (white theme exception)</div></div>
+      <div class="spec-row"><div class="spec-key">privacy.html</div><div class="spec-val">Privacy policy — shared across all domains</div></div>
+      <div class="spec-row"><div class="spec-key">terms.html</div><div class="spec-val">Terms of service — shared across all domains</div></div>
+      <div class="spec-row"><div class="spec-key">favicon.svg</div><div class="spec-val">Gold #B8860B, text "L67"</div></div>
+    </div>
+
+    <div class="spec">
+      <h4>Sub-site Repositories</h4>
+      <div class="spec-row"><div class="spec-key">svyatlitsa-landing</div><div class="spec-val">index.html, brandbook.html, business-plan.html → svyatlitsa.com</div></div>
+      <div class="spec-row"><div class="spec-key">academi67.com</div><div class="spec-val">index.html, svyatlitsa-brand.html, business-plan.html → academi67.com</div></div>
+      <div class="spec-row"><div class="spec-key">GitHub org</div><div class="spec-val"><span class="spec-code">tatyana-mama</span> — all repos, GitHub Pages auto-deploy on push to main</div></div>
+    </div>
+  </section>
+
+  <!-- 08 TEMPLATE -->
+  <section class="ms" id="template">
+    <div class="ms-label">08 Page Template</div>
+    <div class="ms-title">Standard Page Skeleton</div>
+    <div class="ms-desc">Every new page in the LABS67 ecosystem MUST start from this skeleton.</div>
+
+    <div style="font-family:var(--mono);font-size:11px;background:var(--bg2);color:var(--green);padding:24px;border-radius:12px;border:1px solid var(--border);line-height:2;overflow-x:auto">
+<span style="color:var(--muted)">&lt;!-- LABS67 Page Template v1.0 --&gt;</span><br>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="be"&gt;<br>
+&lt;head&gt;<br>
+&nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+&nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+&nbsp;&nbsp;&lt;title&gt;<span style="color:var(--gold)">{PAGE_TITLE}</span> — LABS67&lt;/title&gt;<br>
+&nbsp;&nbsp;&lt;link rel="icon" type="image/svg+xml" href="favicon.svg"&gt;<br>
+&nbsp;&nbsp;&lt;link href="fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&amp;family=JetBrains+Mono:wght@400;500&amp;family=Syne:wght@400;700;800&amp;display=swap" rel="stylesheet"&gt;<br>
+&nbsp;&nbsp;&lt;style&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:root {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--bg: <span style="color:var(--gold)">#0a0a0e</span>; --bg2: #12121a;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--text: #e8e6e2; --muted: #888;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--border: rgba(255,255,255,0.06);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--gold: <span style="color:var(--gold)">#B8860B</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--accent: <span style="color:var(--gold)">{BRAND_ACCENT}</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&lt;/style&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&nbsp;&nbsp;<span style="color:var(--muted)">&lt;!-- 48px TOPBAR --&gt;</span><br>
+&nbsp;&nbsp;&lt;div class="topbar"&gt;...&lt;/div&gt;<br>
+&nbsp;&nbsp;<span style="color:var(--muted)">&lt;!-- CONTENT --&gt;</span><br>
+&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;<span style="color:var(--muted)">&lt;!-- FOOTER with cross-links --&gt;</span><br>
+&nbsp;&nbsp;&lt;footer&gt;...&lt;/footer&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  <div style="color:var(--gold);font-size:14px;font-weight:700;margin-bottom:8px;font-family:var(--head)">LABS<span style="opacity:0.6">67</span></div>
+  Ecosystem Model v1.0 // 2026-03-25<br>
+  <div style="margin-top:8px">&copy; 2026 LABS67 Concern // Structural Reference</div>
+</div>
+
+</body>
+</html>
