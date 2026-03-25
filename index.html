@@ -853,14 +853,14 @@ const I18N = {
 // Map node id → i18n desc key
 const DESC_MAP = {hub:'hub_desc',scyra:'scyra_desc',svyatlitsa:'svt_desc',academi:'academi_desc',trade:'trade_desc',franchise:'franchise_desc',agents:'agents_desc'};
 
-function t(key){ return (I18N[key]&&I18N[key][curLang]) || (I18N[key]&&I18N[key]['en']) || ''; }
+function tr(key){ return (I18N[key]&&I18N[key][curLang]) || (I18N[key]&&I18N[key]['en']) || ''; }
 
 function applyLang(lang){
   curLang = lang;
   localStorage.setItem('labs67lang', lang);
   // Update static UI
-  document.querySelector('.ho-sub').textContent = t('hero_sub');
-  document.getElementById('hint').textContent = t('hint');
+  document.querySelector('.ho-sub').textContent = tr('hero_sub');
+  document.getElementById('hint').textContent = tr('hint');
   // Update lang buttons
   document.querySelectorAll('.tb-lang').forEach(b => b.classList.toggle('active', b.dataset.lang===lang));
   // Update html lang
@@ -879,7 +879,7 @@ const origRenderContent = renderContent;
 // Patch node desc on render
 function renderContent(n){
   const dk = DESC_MAP[n.id];
-  const localDesc = dk ? t(dk) : n.desc;
+  const localDesc = dk ? tr(dk) : n.desc;
   const patched = Object.assign({}, n, {desc: localDesc});
   // call original logic inline
   let cp = document.getElementById('cp');
