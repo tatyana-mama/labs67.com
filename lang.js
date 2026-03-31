@@ -45,6 +45,7 @@ const I18N = {
     pt:'Grupo tecnológico construindo um ecossistema de IA para a odontologia de próxima geração.',
     ja:'次世代歯科医療のためのAIエコシステムを構築するテクノロジーコンツェルン。',
     ko:'차세대 치과 의료를 위한 AI 생태계를 구축하는 기술 콘체른.',
+    pl:'Koncern technologiczny budujący ekosystem AI dla stomatologii nowej generacji.',
   },
   scyra_desc: {
     be:'Першая Edge AI сістэма для стаматалагічных клінік. NVIDIA Jetson AGX Orin 64GB. Без воблака — усе дадзеныя застаюцца ў будынку.',
@@ -58,6 +59,7 @@ const I18N = {
     pt:'Primeiro sistema Edge AI para clínicas odontológicas. NVIDIA Jetson AGX Orin 64GB. Sem nuvem — todos os dados ficam no edifício.',
     ja:'歯科クリニック初のエッジAIシステム。NVIDIA Jetson AGX Orin 64GB。クラウド不要 — 全データは院内に。',
     ko:'치과 클리닉을 위한 최초의 엣지 AI 시스템. NVIDIA Jetson AGX Orin 64GB. 클라우드 없음 — 모든 데이터는 건물 내에.',
+    pl:'Pierwszy system Edge AI dla klinik stomatologicznych. NVIDIA Jetson AGX Orin 64GB. Bez chmury — wszystkie dane pozostają w budynku.',
   },
   svt_desc: {
     be:'Прэміум стаматалагічная клініка. Столевая сістэма — усё абсталяванне зверху. Разумнае шкло. KYNOSYS. Робат-прыбіранне.',
@@ -71,6 +73,7 @@ const I18N = {
     pt:'Clínica odontológica premium. Sistema de teto — todos os equipamentos montados acima. Vidro inteligente. KYNOSYS. Robô de limpeza.',
     ja:'プレミアム歯科クリニック。天井ダウンシステム — 全機器は上部に。スマートガラス。KYNOSYS。ロボット清掃。',
     ko:'프리미엄 치과 클리닉. 천장 하강 시스템 — 모든 장비는 위에. 스마트 글래스. KYNOSYS. 로봇 청소.',
+    pl:'Premiumowa klinika stomatologiczna. System sufitowy — cały sprzęt zamontowany u góry. Inteligentne szkło. KYNOSYS. Robot sprzątający.',
   },
   academi_desc:{
     be:'Адукацыйная і сертыфікацыйная платформа. Стандарты навучання для франчайзінгавых клінік.',
@@ -84,6 +87,7 @@ const I18N = {
     pt:'Plataforma de educação e certificação. Padrões de treinamento para clínicas de franquia.',
     ja:'教育・認定プラットフォーム。フランチャイズクリニックの研修基準。',
     ko:'교육 및 인증 플랫폼. 프랜차이즈 클리닉을 위한 교육 표준.',
+    pl:'Platforma edukacji i certyfikacji. Standardy szkoleniowe dla klinik franczyzowych.',
   },
   trade_desc:{
     be:'AI-аналітыка для трэйдынгу. Кіраванне партфелем, аналіз рынку, аўтаматычныя стратэгіі.',
@@ -97,6 +101,7 @@ const I18N = {
     pt:'Análise de trading com IA. Gestão de portfólio, análise de mercado, estratégias automatizadas.',
     ja:'AI搭載トレーディング分析。ポートフォリオ管理、市場分析、自動戦略。',
     ko:'AI 기반 트레이딩 분석. 포트폴리오 관리, 시장 분석, 자동화 전략.',
+    pl:'Analityka tradingowa oparta na AI. Zarządzanie portfelem, analiza rynku, zautomatyzowane strategie.',
   },
   franchise_desc:{
     be:'Сістэма кіравання франшызай. Разгортванне клінік SVYATLITSA па ўсёй ЕС.',
@@ -110,6 +115,7 @@ const I18N = {
     pt:'Sistema de gestão de franquias. Implantação turnkey de clínicas SVYATLITSA nos mercados da UE.',
     ja:'フランチャイズ管理システム。EU市場全域でのSVYATLITSAクリニック展開。',
     ko:'프랜차이즈 관리 시스템. EU 시장 전역에 SVYATLITSA 클리닉 배포.',
+    pl:'System zarządzania franczyzą. Wdrażanie klinik SVYATLITSA na rynkach UE pod klucz.',
   },
   agents_desc:{
     be:'Мульці-агентная AI каманда. Кожны агент мае ролю, характар і спецыялізацыю.',
@@ -123,6 +129,7 @@ const I18N = {
     pt:'Equipe de IA multi-agente. Cada agente tem um papel, personalidade e especialização.',
     ja:'マルチエージェントAIチーム。各エージェントに役割、個性、専門性。',
     ko:'멀티 에이전트 AI 팀. 각 에이전트는 역할, 성격, 전문 분야를 갖습니다.',
+    pl:'Wieloagentowy zespół AI. Każdy agent ma rolę, osobowość i specjalizację.',
   },
 };
 
