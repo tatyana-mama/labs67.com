@@ -10,7 +10,7 @@
 @media print{.slide{page-break-after:always;display:flex!important}.nav,.counter{display:none!important}}
 :root{--bg:#0a0a0a;--fg:#f0f0f0;--acc:#d4a44c;--acc2:#4a9e7d;--dim:#777;--card:#161616;--border:#252525}
 body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);height:100vh;overflow:hidden}
-.slide{display:none;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;max-height:100vh;padding:4vh 8vw;text-align:center;animation:fadeIn .35s;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.slide{display:none;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh;max-height:100vh;padding:6vh 8vw 4vh;text-align:center;animation:fadeIn .35s;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
 .slide::-webkit-scrollbar{display:none}
 .slide.active{display:flex}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -299,7 +299,7 @@ ul li::before{content:'';position:absolute;left:0;top:.7rem;width:6px;height:6px
 
 <script>
 const sl=document.querySelectorAll('.slide');let c=0;
-function go(d){sl[c].classList.remove('active');c=Math.max(0,Math.min(sl.length-1,c+d));sl[c].classList.add('active');document.querySelector('.counter').textContent=(c+1)+' / '+sl.length}
+function go(d){sl[c].classList.remove('active');c=Math.max(0,Math.min(sl.length-1,c+d));sl[c].classList.add('active');sl[c].scrollTop=0;document.querySelector('.counter').textContent=(c+1)+' / '+sl.length}
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')go(1);if(e.key==='ArrowLeft')go(-1)});
 let tx=0;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
 document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?go(1):go(-1)}},{passive:true});
