@@ -227,18 +227,15 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
     <div><div class="tb-name"><em>LABS</em>67</div></div>
   </div>
   <div class="tb-links">
-    <a href="brandbook.html">Brand Book</a>
-    <a href="svyatlitsa-brand.html">SVYATLITSA Brand</a>
-    <a href="https://academi67.com/business-plan.html">Business Plan</a>
-    <a href="model.html">Model</a>
+    <a href="index.html" class="active">Graph</a>
     <a href="portfolio.html">Portfolio</a>
+    <a href="brandbook.html">Brand Book</a>
+    <a href="model.html">Model</a>
     <a href="status.html">Status</a>
+    <a href="admin.html">Admin</a>
   </div>
   <div class="tb-right">
-    <div class="tb-langs" id="lang-bar" onclick="this.classList.toggle('open')">
-      <button class="tb-lang-current" id="lang-current-btn"><span id="lang-current-label">EN</span><span class="tb-lang-arrow">▾</span></button>
-      <div class="tb-lang-dropdown" id="lang-dropdown"></div>
-    </div>
+    <div class="lang-switcher" id="lang-bar"></div>
     <div class="tb-status"><div class="tb-dot"></div> ONLINE</div>
   </div>
 </div>
@@ -261,10 +258,12 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
 <!-- HINT -->
 <div id="hint">CLICK NODE TO EXPLORE &middot; SCROLL TO ZOOM &middot; DRAG TO PAN</div>
 
+<script src="lang.js"></script>
+<script src="labs67-i18n.js"></script>
 <script>
 // ===== DATA =====
 const NODES = [
-  { id:'hub', label:'LABS67', color:'#c9a96e', r:48, cat:'concern',
+  { id:'hub', label:'LABS67', color:'#c9a96e', r:88, cat:'concern',
     site:'https://labs67.com',
     desc:'Technology concern building an AI-powered ecosystem for next-gen dental medicine.',
     tags:['medtech','AI','franchise','edge-computing'],
@@ -283,7 +282,7 @@ const NODES = [
       <li><strong style="color:var(--purple)">LADZA.AI</strong> — EU franchise system</li>
     </ul></div>`
   },
-  { id:'scyra', label:'SCYRA.AI', color:'#5ec4d4', r:36, cat:'product',
+  { id:'scyra', label:'SCYRA.AI', color:'#5ec4d4', r:66, cat:'product',
     site:'https://scyra.labs67.com',
     desc:'First edge AI system for dental clinics. NVIDIA Jetson AGX Orin 64GB. No cloud — all data stays in the building.',
     tags:['nvidia','jetson','edge-ai','dental','HIPAA','local'],
@@ -308,7 +307,7 @@ const NODES = [
     </ul></div>
     <div class="cp-section"><h3>ML Pipeline</h3><p>3-stage strategy: (1) off-the-shelf models at launch, (2) data collection via Label Studio, (3) fine-tune custom models on real clinical data. PyTorch + TensorRT + DeepStream.</p></div>`
   },
-  { id:'svyatlitsa', label:'SVYATLITSA', color:'#c9a96e', r:34, cat:'clinic',
+  { id:'svyatlitsa', label:'SVYATLITSA', color:'#c9a96e', r:64, cat:'clinic',
     site:'https://svyatlitsa.com',
     desc:'Premium dental clinic. Ceiling-down system — all equipment mounted above. Smart glass. KYNOSYS vertical storage. Robot cleaning. Zero clutter.',
     tags:['clinic','warsaw','franchise','ceiling-down','smart-glass','dental-ai','diagnostics'],
@@ -334,7 +333,7 @@ const NODES = [
       <li><strong style="color:var(--white)">Phase 4:</strong> LABS67 divisions — 73k PLN</li>
     </ul></div>`
   },
-  { id:'academi', label:'SLYAH.AI', color:'#a48bfa', r:26, cat:'platform',
+  { id:'academi', label:'SLYAH.AI', color:'#a48bfa', r:58, cat:'platform',
     site:'https://academi67.com',
     desc:'Education and certification platform. Training standards for franchise clinics. Digital learning, practical assessments.',
     tags:['education','certification','e-learning'],
@@ -350,7 +349,7 @@ const NODES = [
       <li>Equipment maintenance — ceiling-down, KYNOSYS</li>
     </ul></div>`
   },
-  { id:'trade', label:'MREZA.AI', color:'#a48bfa', r:20, cat:'platform',
+  { id:'trade', label:'MREZA.AI', color:'#a48bfa', r:54, cat:'platform',
     site:'https://trade.labs67.com',
     desc:'AI-powered trading analytics. Portfolio management, market analysis, automated strategies.',
     tags:['trading','analytics','AI'],
@@ -365,7 +364,7 @@ const NODES = [
       <li>Risk management automation</li>
     </ul></div>`
   },
-  { id:'franchise', label:'LADZA.AI', color:'#a48bfa', r:24, cat:'platform',
+  { id:'franchise', label:'LADZA.AI', color:'#a48bfa', r:56, cat:'platform',
     site:'https://franchise.labs67.com',
     desc:'Franchise management system. Turnkey SVYATLITSA clinic deployment across EU markets.',
     tags:['franchise','EU','scaling','turnkey'],
@@ -382,7 +381,7 @@ const NODES = [
     </ul></div>
     <div class="cp-section"><h3>Investment</h3><p>Master franchise: 50-200k EUR per country. Individual clinic franchise: from 150k EUR including equipment leasing.</p></div>`
   },
-  { id:'agents', label:'Agent Hub', color:'#d47a9a', r:22, cat:'service',
+  { id:'agents', label:'Agent Hub', color:'#d47a9a', r:54, cat:'service',
     site:'https://labs67.com/chat.html',
     desc:'Multi-agent AI team. Each agent has a role, personality, and specialization.',
     tags:['AI-agents','automation','team'],
@@ -424,22 +423,21 @@ function resize() {
   cv.style.width = W + 'px'; cv.style.height = H + 'px';
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
   // Fit graph to screen — scale based on smallest dimension
-  let fitZoom = Math.min(W, H) / 900;
+  let fitZoom = Math.min(W, H) / 1200;
   zoom = fitZoom; targetZoom = fitZoom;
 }
 window.addEventListener('resize', resize);
 resize();
 
-// Initial positions — orbital
+// Initial positions — perfect hexagon
 const hub = NODES[0];
 hub.x = 0; hub.y = 0; hub.vx = 0; hub.vy = 0;
 const rest = NODES.slice(1);
-const aStep = Math.PI * 2 / rest.length;
+const hexR = 340; // hexagon radius
 rest.forEach((n, i) => {
-  const a = aStep * i - Math.PI / 2;
-  const d = 160 + n.r * 2.5 + Math.random() * 40;
-  n.x = Math.cos(a) * d;
-  n.y = Math.sin(a) * d;
+  const a = (Math.PI * 2 / 6) * i - Math.PI / 2;
+  n.x = Math.cos(a) * hexR;
+  n.y = Math.sin(a) * hexR;
   n.vx = 0; n.vy = 0;
 });
 
@@ -450,7 +448,7 @@ function sim() {
     for (let j = i+1; j < ns.length; j++) {
       let dx = ns[j].x - ns[i].x, dy = ns[j].y - ns[i].y;
       let d = Math.sqrt(dx*dx + dy*dy) || 1;
-      let f = 12000 / (d * d);
+      let f = 22000 / (d * d);
       ns[i].vx -= (dx/d)*f; ns[i].vy -= (dy/d)*f;
       ns[j].vx += (dx/d)*f; ns[j].vy += (dy/d)*f;
     }
@@ -461,7 +459,7 @@ function sim() {
     if(!na||!nb) return;
     let dx = nb.x-na.x, dy = nb.y-na.y;
     let d = Math.sqrt(dx*dx+dy*dy)||1;
-    let ideal = (na.r+nb.r)*2.2 + 90;
+    let ideal = (na.r+nb.r)*2.4 + 120;
     let f = (d-ideal)*0.004*s;
     na.vx += (dx/d)*f; na.vy += (dy/d)*f;
     nb.vx -= (dx/d)*f; nb.vy -= (dy/d)*f;
@@ -469,8 +467,8 @@ function sim() {
   // Center pull (stronger to keep compact)
   ns.forEach(n => { n.vx -= n.x*0.003; n.vy -= n.y*0.003; });
   hub.vx = -hub.x*0.15; hub.vy = -hub.y*0.15;
-  // Apply + boundary clamp (nodes stay within 400px radius)
-  const BOUND = 400;
+  // Apply + boundary clamp (nodes stay within 560px radius)
+  const BOUND = 560;
   ns.forEach(n => {
     n.vx *= 0.82; n.vy *= 0.82;
     n.x += n.vx; n.y += n.vy;
@@ -499,7 +497,7 @@ function draw() {
   camY += (targetCamY - camY) * 0.06;
   zoom += (targetZoom - zoom) * 0.06;
   // Clamp camera so graph doesn't fly off screen
-  const CAM_BOUND = 500;
+  const CAM_BOUND = 700;
   camX = Math.max(-CAM_BOUND, Math.min(CAM_BOUND, camX));
   camY = Math.max(-CAM_BOUND, Math.min(CAM_BOUND, camY));
   targetCamX = Math.max(-CAM_BOUND, Math.min(CAM_BOUND, targetCamX));
@@ -593,7 +591,7 @@ function draw() {
 
     // Label
     if(r > 6) {
-      let fs = Math.max(7, Math.min(15, r*0.5));
+      let fs = Math.max(8, Math.min(20, r*0.45));
       c.font = `700 ${fs}px Inter,sans-serif`;
       c.textAlign = 'center'; c.textBaseline = 'middle';
       c.fillStyle = '#fff';
@@ -743,159 +741,21 @@ cv.addEventListener('touchend', e => {
 // Keyboard
 document.addEventListener('keydown', e => { if(e.key==='Escape') goHome(); });
 
-// ===== i18n — 11 LANGUAGES =====
-const LANGS = ['be','en','uk','ru','de','fr','es','it','pt','ja','ko'];
-const LANG_LABELS = {be:'BY',en:'EN',uk:'UK',ru:'RU',de:'DE',fr:'FR',es:'ES',it:'IT',pt:'PT',ja:'JA',ko:'KO'};
-let curLang = localStorage.getItem('labs67lang') || 'be';
-
-const I18N = {
-  hero_sub: {
-    be:'Тэхналагічны канцэрн · Клікні ноду',
-    en:'Technology Concern · Click a node',
-    uk:'Технологічний концерн · Натисніть вузол',
-    ru:'Технологический концерн · Нажмите на узел',
-    de:'Technologiekonzern · Knoten anklicken',
-    fr:'Groupe technologique · Cliquez sur un nœud',
-    es:'Grupo tecnológico · Haz clic en un nodo',
-    it:'Gruppo tecnologico · Clicca su un nodo',
-    pt:'Grupo tecnológico · Clique em um nó',
-    ja:'テクノロジーコンツェルン · ノードをクリック',
-    ko:'기술 콘체른 · 노드를 클릭하세요',
-  },
-  hint: {
-    be:'КЛІКНІ НОДУ · ПЕРАЦЯГНІ ДЛЯ РУХУ',
-    en:'CLICK NODE TO EXPLORE · DRAG TO PAN',
-    uk:'НАТИСНІТЬ ВУЗОЛ · ПЕРЕТЯГНІТЬ ДЛЯ РУХУ',
-    ru:'НАЖМИТЕ НА УЗЕЛ · ПЕРЕТАЩИТЕ ДЛЯ ПЕРЕМЕЩЕНИЯ',
-    de:'KNOTEN KLICKEN · ZIEHEN ZUM VERSCHIEBEN',
-    fr:'CLIQUER SUR UN NŒUD · GLISSER POUR DÉPLACER',
-    es:'HAZ CLIC EN UN NODO · ARRASTRA PARA MOVER',
-    it:'CLICCA SU UN NODO · TRASCINA PER SPOSTARE',
-    pt:'CLIQUE EM UM NÓ · ARRASTE PARA MOVER',
-    ja:'ノードをクリック · ドラッグで移動',
-    ko:'노드 클릭 · 드래그로 이동',
-  },
-  // Node descriptions
-  hub_desc: {
-    be:'Тэхналагічны канцэрн, які будуе AI-экасістэму для стаматалогіі наступнага пакалення.',
-    en:'Technology concern building an AI-powered ecosystem for next-gen dental medicine.',
-    uk:'Технологічний концерн, що будує AI-екосистему для стоматології наступного покоління.',
-    ru:'Технологический концерн, строящий AI-экосистему для стоматологии нового поколения.',
-    de:'Technologiekonzern, der ein KI-gestütztes Ökosystem für die Zahnmedizin der nächsten Generation aufbaut.',
-    fr:'Groupe technologique construisant un écosystème IA pour la médecine dentaire de nouvelle génération.',
-    es:'Grupo tecnológico que construye un ecosistema de IA para la odontología de próxima generación.',
-    it:'Gruppo tecnologico che costruisce un ecosistema AI per l\'odontoiatria di nuova generazione.',
-    pt:'Grupo tecnológico construindo um ecossistema de IA para a odontologia de próxima geração.',
-    ja:'次世代歯科医療のためのAIエコシステムを構築するテクノロジーコンツェルン。',
-    ko:'차세대 치과 의료를 위한 AI 생태계를 구축하는 기술 콘체른.',
-  },
-  scyra_desc: {
-    be:'Першая Edge AI сістэма для стаматалагічных клінік. NVIDIA Jetson AGX Orin 64GB. Без воблака — усе дадзеныя застаюцца ў будынку.',
-    en:'First edge AI system for dental clinics. NVIDIA Jetson AGX Orin 64GB. No cloud — all data stays in the building.',
-    uk:'Перша Edge AI система для стоматологічних клінік. NVIDIA Jetson AGX Orin 64GB. Без хмари — всі дані залишаються в будівлі.',
-    ru:'Первая Edge AI система для стоматологических клиник. NVIDIA Jetson AGX Orin 64GB. Без облака — все данные остаются в здании.',
-    de:'Erstes Edge-KI-System für Zahnarztpraxen. NVIDIA Jetson AGX Orin 64GB. Keine Cloud — alle Daten bleiben im Gebäude.',
-    fr:'Premier système Edge AI pour cliniques dentaires. NVIDIA Jetson AGX Orin 64GB. Sans cloud — toutes les données restent dans le bâtiment.',
-    es:'Primer sistema Edge AI para clínicas dentales. NVIDIA Jetson AGX Orin 64GB. Sin nube — todos los datos permanecen en el edificio.',
-    it:'Primo sistema Edge AI per cliniche dentali. NVIDIA Jetson AGX Orin 64GB. Nessun cloud — tutti i dati restano nell\'edificio.',
-    pt:'Primeiro sistema Edge AI para clínicas odontológicas. NVIDIA Jetson AGX Orin 64GB. Sem nuvem — todos os dados ficam no edifício.',
-    ja:'歯科クリニック初のエッジAIシステム。NVIDIA Jetson AGX Orin 64GB。クラウド不要 — 全データは院内に。',
-    ko:'치과 클리닉을 위한 최초의 엣지 AI 시스템. NVIDIA Jetson AGX Orin 64GB. 클라우드 없음 — 모든 데이터는 건물 내에.',
-  },
-  svt_desc: {
-    be:'Прэміум стаматалагічная клініка. Столевая сістэма — усё абсталяванне зверху. Разумнае шкло. KYNOSYS. Робат-прыбіранне.',
-    en:'Premium dental clinic. Ceiling-down system — all equipment mounted above. Smart glass. KYNOSYS vertical storage. Robot cleaning. Zero clutter.',
-    uk:'Преміум стоматологічна клініка. Стельова система — все обладнання зверху. Розумне скло. KYNOSYS. Робот-прибирання.',
-    ru:'Премиум стоматологическая клиника. Потолочная система — всё оборудование сверху. Умное стекло. KYNOSYS. Робот-уборка.',
-    de:'Premium-Zahnklinik. Deckensystem — alle Geräte oben montiert. Smart Glass. KYNOSYS. Roboter-Reinigung.',
-    fr:'Clinique dentaire premium. Système plafond — tout l\'équipement monté en haut. Verre intelligent. KYNOSYS. Robot nettoyeur.',
-    es:'Clínica dental premium. Sistema de techo — todo el equipamiento montado arriba. Vidrio inteligente. KYNOSYS. Robot de limpieza.',
-    it:'Clinica dentale premium. Sistema a soffitto — tutte le attrezzature montate in alto. Vetro smart. KYNOSYS. Robot pulizia.',
-    pt:'Clínica odontológica premium. Sistema de teto — todos os equipamentos montados acima. Vidro inteligente. KYNOSYS. Robô de limpeza.',
-    ja:'プレミアム歯科クリニック。天井ダウンシステム — 全機器は上部に。スマートガラス。KYNOSYS。ロボット清掃。',
-    ko:'프리미엄 치과 클리닉. 천장 하강 시스템 — 모든 장비는 위에. 스마트 글래스. KYNOSYS. 로봇 청소.',
-  },
-  academi_desc:{
-    be:'Адукацыйная і сертыфікацыйная платформа. Стандарты навучання для франчайзінгавых клінік.',
-    en:'Education and certification platform. Training standards for franchise clinics. Digital learning, practical assessments.',
-    uk:'Освітня та сертифікаційна платформа. Стандарти навчання для франчайзингових клінік.',
-    ru:'Образовательная и сертификационная платформа. Стандарты обучения для франчайзинговых клиник.',
-    de:'Bildungs- und Zertifizierungsplattform. Schulungsstandards für Franchise-Kliniken.',
-    fr:'Plateforme d\'éducation et certification. Standards de formation pour cliniques franchisées.',
-    es:'Plataforma de educación y certificación. Estándares de formación para clínicas de franquicia.',
-    it:'Piattaforma di formazione e certificazione. Standard di formazione per cliniche in franchising.',
-    pt:'Plataforma de educação e certificação. Padrões de treinamento para clínicas de franquia.',
-    ja:'教育・認定プラットフォーム。フランチャイズクリニックの研修基準。',
-    ko:'교육 및 인증 플랫폼. 프랜차이즈 클리닉을 위한 교육 표준.',
-  },
-  trade_desc:{
-    be:'AI-аналітыка для трэйдынгу. Кіраванне партфелем, аналіз рынку, аўтаматычныя стратэгіі.',
-    en:'AI-powered trading analytics. Portfolio management, market analysis, automated strategies.',
-    uk:'AI-аналітика для трейдингу. Управління портфелем, аналіз ринку, автоматичні стратегії.',
-    ru:'AI-аналитика для трейдинга. Управление портфелем, анализ рынка, автоматические стратегии.',
-    de:'KI-gestützte Handelsanalytik. Portfoliomanagement, Marktanalyse, automatisierte Strategien.',
-    fr:'Analyse de trading alimentée par l\'IA. Gestion de portefeuille, analyse de marché, stratégies automatisées.',
-    es:'Analítica de trading con IA. Gestión de cartera, análisis de mercado, estrategias automatizadas.',
-    it:'Analisi di trading basata su AI. Gestione portafoglio, analisi di mercato, strategie automatizzate.',
-    pt:'Análise de trading com IA. Gestão de portfólio, análise de mercado, estratégias automatizadas.',
-    ja:'AI搭載トレーディング分析。ポートフォリオ管理、市場分析、自動戦略。',
-    ko:'AI 기반 트레이딩 분석. 포트폴리오 관리, 시장 분석, 자동화 전략.',
-  },
-  franchise_desc:{
-    be:'Сістэма кіравання франшызай. Разгортванне клінік SVYATLITSA па ўсёй ЕС.',
-    en:'Franchise management system. Turnkey SVYATLITSA clinic deployment across EU markets.',
-    uk:'Система управління франшизою. Розгортання клінік SVYATLITSA по всьому ЄС.',
-    ru:'Система управления франшизой. Развёртывание клиник SVYATLITSA по всему ЕС.',
-    de:'Franchise-Management-System. Schlüsselfertige SVYATLITSA-Klinikbereitstellung in EU-Märkten.',
-    fr:'Système de gestion de franchise. Déploiement clé en main de cliniques SVYATLITSA sur les marchés européens.',
-    es:'Sistema de gestión de franquicias. Despliegue llave en mano de clínicas SVYATLITSA en mercados de la UE.',
-    it:'Sistema di gestione franchising. Implementazione chiavi in mano di cliniche SVYATLITSA nei mercati UE.',
-    pt:'Sistema de gestão de franquias. Implantação turnkey de clínicas SVYATLITSA nos mercados da UE.',
-    ja:'フランチャイズ管理システム。EU市場全域でのSVYATLITSAクリニック展開。',
-    ko:'프랜차이즈 관리 시스템. EU 시장 전역에 SVYATLITSA 클리닉 배포.',
-  },
-  agents_desc:{
-    be:'Мульці-агентная AI каманда. Кожны агент мае ролю, характар і спецыялізацыю.',
-    en:'Multi-agent AI team. Each agent has a role, personality, and specialization.',
-    uk:'Мульти-агентна AI команда. Кожен агент має роль, характер та спеціалізацію.',
-    ru:'Мульти-агентная AI команда. Каждый агент имеет роль, характер и специализацию.',
-    de:'Multi-Agenten KI-Team. Jeder Agent hat eine Rolle, Persönlichkeit und Spezialisierung.',
-    fr:'Équipe IA multi-agents. Chaque agent a un rôle, une personnalité et une spécialisation.',
-    es:'Equipo de IA multi-agente. Cada agente tiene un rol, personalidad y especialización.',
-    it:'Team AI multi-agente. Ogni agente ha un ruolo, personalità e specializzazione.',
-    pt:'Equipe de IA multi-agente. Cada agente tem um papel, personalidade e especialização.',
-    ja:'マルチエージェントAIチーム。各エージェントに役割、個性、専門性。',
-    ko:'멀티 에이전트 AI 팀. 각 에이전트는 역할, 성격, 전문 분야를 갖습니다.',
-  },
-};
-
-// Map node id → i18n desc key
-const DESC_MAP = {hub:'hub_desc',scyra:'scyra_desc',svyatlitsa:'svt_desc',academi:'academi_desc',trade:'trade_desc',franchise:'franchise_desc',agents:'agents_desc'};
-
-function tr(key){ return (I18N[key]&&I18N[key][curLang]) || (I18N[key]&&I18N[key]['en']) || ''; }
-
 function applyLang(lang){
   curLang = lang;
   localStorage.setItem('labs67lang', lang);
   // Update static UI
   document.querySelector('.ho-sub').textContent = tr('hero_sub');
   document.getElementById('hint').textContent = tr('hint');
-  // Update lang buttons
-  document.getElementById('lang-current-label').textContent = LANG_LABELS[lang] || lang.toUpperCase();
-  document.querySelectorAll('.tb-lang-opt').forEach(b => b.classList.toggle('active', b.dataset.lang===lang));
   // Update html lang
   document.documentElement.lang = lang;
   // Re-render content panel if open
   if(selected) renderContent(selected);
 }
 
-function buildLangBar(){
-  const dd = document.getElementById('lang-dropdown');
-  dd.innerHTML = LANGS.map(l => `<button class="tb-lang-opt${l===curLang?' active':''}" data-lang="${l}" onclick="event.stopPropagation();applyLang('${l}');document.getElementById('lang-bar').classList.remove('open')">${LANG_LABELS[l]}</button>`).join('');
-  document.getElementById('lang-current-label').textContent = LANG_LABELS[curLang] || curLang.toUpperCase();
-  // Close dropdown on outside click
-  document.addEventListener('click', e => { if(!e.target.closest('.tb-langs')) document.getElementById('lang-bar').classList.remove('open'); });
-}
+/* Lang switcher built by labs67-i18n.js plugin */
+/* Hook: apply custom graph translations on lang change */
+window.onLangChange = function(lang) { applyLang(lang); };
 
 // Override renderContent to use i18n descriptions
 const origRenderContent = renderContent;
@@ -935,8 +795,7 @@ function renderContent(n){
   cp.parentElement.scrollTop = 0;
 }
 
-buildLangBar();
-applyLang(curLang);
+/* Initial lang applied by labs67-i18n.js on DOMContentLoaded */
 
 draw();
 </script>
