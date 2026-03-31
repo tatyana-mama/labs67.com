@@ -27,7 +27,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 .topbar{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;height:48px;
+  padding:0 28px;height:48px;
   background:rgba(10,10,14,0.92);backdrop-filter:blur(24px);
   border-bottom:1px solid var(--border);
 }
@@ -50,19 +50,18 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 .tb-right{display:flex;align-items:center;gap:10px}
 /* LANG DROPDOWN */
 .lang-switcher{position:relative}
-.lang-current{display:flex;align-items:center;gap:6px;padding:4px 10px;background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:9px;letter-spacing:0.04em;transition:all 0.2s}
-.lang-current:hover{color:var(--gold);border-color:var(--gold)}
-.lang-arrow{font-size:8px;transition:transform 0.2s}
-.lang-switcher.open .lang-arrow{transform:rotate(180deg)}
-.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:rgba(10,10,14,0.96);border:1px solid var(--border);min-width:140px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all 0.25s;z-index:200;max-height:300px;overflow-y:auto;backdrop-filter:blur(20px)}
+.lang-current{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;padding:4px 10px;border:1px solid var(--border);border-radius:3px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.lang-current:hover{color:var(--accent,var(--gold));border-color:var(--accent,var(--gold))}
+.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2,#111118);border:1px solid var(--border);border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,0.4);min-width:140px;max-height:300px;overflow-y:auto;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all 0.25s ease;z-index:200}
 .lang-switcher.open .lang-dropdown{opacity:1;pointer-events:auto;transform:translateY(0)}
-.lang-opt{display:block;width:100%;padding:6px 12px;background:none;border:none;color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:9px;text-align:left;transition:all 0.15s}
-.lang-opt:hover{color:var(--gold);background:rgba(184,134,11,0.08)}
-.lang-opt.active{color:var(--gold)}
+.lang-opt{display:block;width:100%;padding:8px 14px;border:none;background:none;font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:var(--muted);cursor:pointer;text-align:left;transition:all 0.15s}
+.lang-opt:hover{background:rgba(255,255,255,0.04);color:var(--accent,var(--gold))}
+.lang-opt.active{color:var(--accent,var(--gold));font-weight:500}
+.tb-ver{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:0.1em;opacity:0.5}
 .tb-status{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:var(--muted);display:flex;align-items:center;gap:6px}
 .tb-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-@media(max-width:768px){.tb-links{display:none}}
+@media(max-width:768px){.tb-links{display:none}.topbar{padding:0 12px}}
 
 /* LAYOUT */
 .page{padding:80px 40px 60px;max-width:1200px;margin:0 auto}
@@ -172,37 +171,22 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
     <a href="admin.html">Admin</a>
   </div>
   <div class="tb-right">
-    <div class="lang-switcher" onclick="this.classList.toggle('open')">
-      <button class="lang-current"><span>🇬🇧 EN</span> <span class="lang-arrow">▾</span></button>
-      <div class="lang-dropdown">
-        <button class="lang-opt" data-lang="be">🇧🇾 BY</button>
-        <button class="lang-opt active" data-lang="en">🇬🇧 EN</button>
-        <button class="lang-opt" data-lang="uk">🇺🇦 UK</button>
-        <button class="lang-opt" data-lang="ru">🇷🇺 RU</button>
-        <button class="lang-opt" data-lang="de">🇩🇪 DE</button>
-        <button class="lang-opt" data-lang="fr">🇫🇷 FR</button>
-        <button class="lang-opt" data-lang="es">🇪🇸 ES</button>
-        <button class="lang-opt" data-lang="it">🇮🇹 IT</button>
-        <button class="lang-opt" data-lang="pt">🇵🇹 PT</button>
-        <button class="lang-opt" data-lang="ja">🇯🇵 JA</button>
-        <button class="lang-opt" data-lang="ko">🇰🇷 KO</button>
-      </div>
-    </div>
-    <div class="tb-status"><div class="tb-dot"></div> LIVE MODEL</div>
+    <div class="lang-switcher"></div>
+    <span class="tb-ver">v2.0</span>
   </div>
 </div>
 
 <div class="page">
 
-  <div class="eyebrow">// Ecosystem Architecture</div>
+  <div class="eyebrow" data-i18n="model_eyebrow">// Ecosystem Architecture</div>
   <h1 class="page-title">LABS67 <em style="color:var(--gold);font-style:normal">Model</em></h1>
-  <p class="page-sub">Central structural model of the LABS67 ecosystem. Defines cross-site standards, element interchange, data flow, and the relationship between the graph hub and all sub-sites.</p>
+  <p class="page-sub" data-i18n="model_sub">Central structural model of the LABS67 ecosystem. Defines cross-site standards, element interchange, data flow, and the relationship between the graph hub and all sub-sites.</p>
 
   <!-- 01 HUB PRINCIPLE -->
   <section class="ms" id="hub">
-    <div class="ms-label">01 Hub Principle</div>
-    <div class="ms-title">labs67.com = Центральный хаб</div>
-    <div class="ms-desc">Граф-навигатор на labs67.com — единая точка входа. Каждая нода графа — мини-сайт оригинала. Контент-панель слева показывает сжатую версию суб-сайта.</div>
+    <div class="ms-label" data-i18n="ms01_label">01 Hub Principle</div>
+    <div class="ms-title" data-i18n="ms01_title">labs67.com = Центральный хаб</div>
+    <div class="ms-desc" data-i18n="ms01_desc">Граф-навигатор на labs67.com — единая точка входа. Каждая нода графа — мини-сайт оригинала. Контент-панель слева показывает сжатую версию суб-сайта.</div>
 
     <div class="spec">
       <h4>Architecture Rule</h4>
@@ -217,9 +201,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
   <!-- 02 SITE REGISTRY -->
   <section class="ms" id="registry">
-    <div class="ms-label">02 Site Registry</div>
-    <div class="ms-title">All Domains</div>
-    <div class="ms-desc">Complete registry of all LABS67 ecosystem sites with their status, theme, and role.</div>
+    <div class="ms-label" data-i18n="ms02_label">02 Site Registry</div>
+    <div class="ms-title" data-i18n="ms02_title">All Domains</div>
+    <div class="ms-desc" data-i18n="ms02_desc">Complete registry of all LABS67 ecosystem sites with their status, theme, and role.</div>
 
     <div class="flow-grid">
       <div class="flow-card">
@@ -316,9 +300,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
   <!-- 03 SHARED ELEMENTS -->
   <section class="ms" id="elements">
-    <div class="ms-label">03 Shared Elements</div>
-    <div class="ms-title">Cross-Site Element Standard</div>
-    <div class="ms-desc">Every LABS67 site MUST implement these shared elements. Elements are interchangeable across the ecosystem.</div>
+    <div class="ms-label" data-i18n="ms03_label">03 Shared Elements</div>
+    <div class="ms-title" data-i18n="ms03_title">Cross-Site Element Standard</div>
+    <div class="ms-desc" data-i18n="ms03_desc">Every LABS67 site MUST implement these shared elements. Elements are interchangeable across the ecosystem.</div>
 
     <div class="spec">
       <h4>Topbar (mandatory)</h4>
@@ -368,9 +352,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
   <!-- 04 ELEMENT INTERCHANGE MATRIX -->
   <section class="ms" id="matrix">
-    <div class="ms-label">04 Element Matrix</div>
-    <div class="ms-title">Cross-Site Compatibility</div>
-    <div class="ms-desc">Which shared elements are implemented on which site. Green = live, Yellow = planned, Red = missing.</div>
+    <div class="ms-label" data-i18n="ms04_label">04 Element Matrix</div>
+    <div class="ms-title" data-i18n="ms04_title">Cross-Site Compatibility</div>
+    <div class="ms-desc" data-i18n="ms04_desc">Which shared elements are implemented on which site. Green = live, Yellow = planned, Red = missing.</div>
 
     <div style="overflow-x:auto">
     <table class="matrix">
@@ -483,9 +467,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
   <!-- 05 THEME PALETTE -->
   <section class="ms" id="themes">
-    <div class="ms-label">05 Theme Palette Map</div>
-    <div class="ms-title">Per-Project Themes</div>
-    <div class="ms-desc">Each project node triggers a full theme switch. These are the canonical theme values.</div>
+    <div class="ms-label" data-i18n="ms05_label">05 Theme Palette Map</div>
+    <div class="ms-title" data-i18n="ms05_title">Per-Project Themes</div>
+    <div class="ms-desc" data-i18n="ms05_desc">Each project node triggers a full theme switch. These are the canonical theme values.</div>
 
     <div class="theme-grid">
       <div class="theme-card">
@@ -517,9 +501,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
   <!-- 06 DATA FLOW -->
   <section class="ms" id="dataflow">
-    <div class="ms-label">06 Data Flow</div>
-    <div class="ms-title">Information Architecture</div>
-    <div class="ms-desc">How data moves between labs67.com hub and sub-sites.</div>
+    <div class="ms-label" data-i18n="ms06_label">06 Data Flow</div>
+    <div class="ms-title" data-i18n="ms06_title">Information Architecture</div>
+    <div class="ms-desc" data-i18n="ms06_desc">How data moves between labs67.com hub and sub-sites.</div>
 
     <div class="spec">
       <h4>Hub → Sub-site</h4>
@@ -545,8 +529,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
   <!-- 07 FILE STRUCTURE -->
   <section class="ms" id="files">
-    <div class="ms-label">07 File Structure</div>
-    <div class="ms-title">Repository Map</div>
+    <div class="ms-label" data-i18n="ms07_label">07 File Structure</div>
+    <div class="ms-title" data-i18n="ms07_title">Repository Map</div>
 
     <div class="spec">
       <h4>labs67.com (hub repository)</h4>
@@ -573,9 +557,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
   <!-- 08 TEMPLATE -->
   <section class="ms" id="template">
-    <div class="ms-label">08 Page Template</div>
-    <div class="ms-title">Standard Page Skeleton</div>
-    <div class="ms-desc">Every new page in the LABS67 ecosystem MUST start from this skeleton.</div>
+    <div class="ms-label" data-i18n="ms08_label">08 Page Template</div>
+    <div class="ms-title" data-i18n="ms08_title">Standard Page Skeleton</div>
+    <div class="ms-desc" data-i18n="ms08_desc">Every new page in the LABS67 ecosystem MUST start from this skeleton.</div>
 
     <div style="font-family:var(--mono);font-size:11px;background:var(--bg2);color:var(--green);padding:24px;border-radius:12px;border:1px solid var(--border);line-height:2;overflow-x:auto">
 <span style="color:var(--muted)">&lt;!-- LABS67 Page Template v1.0 --&gt;</span><br>
@@ -614,9 +598,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 
 <div class="footer">
   <div style="color:var(--gold);font-size:14px;font-weight:700;margin-bottom:8px;font-family:var(--head)">LABS<span style="opacity:0.6">67</span></div>
-  Ecosystem Model v1.0 // 2026-03-25<br>
-  <div style="margin-top:8px">&copy; 2026 LABS67 Concern // Structural Reference</div>
+  <span data-i18n="footer_model">Ecosystem Model</span> v1.0 // 2026-03-25<br>
+  <div style="margin-top:8px">&copy; 2026 LABS67 Concern // <span data-i18n="footer_reference">Structural Reference</span></div>
 </div>
 
+<script src="labs67-i18n.js"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 ::selection{background:rgba(184,134,11,0.3)}
 
 /* COMMON TOPBAR */
-.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:48px;background:rgba(9,9,11,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:48px;background:rgba(9,9,11,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
 .tb-hex{width:28px;height:28px;background:linear-gradient(135deg,var(--gold),#D4A017);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:600;color:#fff}
 .tb-name{font-weight:800;font-size:14px;letter-spacing:0.15em}
@@ -33,16 +33,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 .tb-cta:hover{background:var(--gold);color:var(--bg)}
 /* LANG DROPDOWN */
 .lang-switcher{position:relative}
-.lang-current{display:flex;align-items:center;gap:6px;padding:4px 10px;background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.04em;transition:all 0.2s}
-.lang-current:hover{color:var(--gold);border-color:var(--gold)}
-.lang-arrow{font-size:8px;transition:transform 0.2s}
-.lang-switcher.open .lang-arrow{transform:rotate(180deg)}
-.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:rgba(9,9,11,0.96);border:1px solid var(--border);min-width:140px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all 0.25s;z-index:200;max-height:300px;overflow-y:auto;backdrop-filter:blur(20px)}
+.lang-current{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;padding:4px 10px;border:1px solid var(--border);border-radius:3px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.lang-current:hover{color:var(--accent,var(--gold));border-color:var(--accent,var(--gold))}
+.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2,#111118);border:1px solid var(--border);border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,0.4);min-width:140px;max-height:300px;overflow-y:auto;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all 0.25s ease;z-index:200}
 .lang-switcher.open .lang-dropdown{opacity:1;pointer-events:auto;transform:translateY(0)}
-.lang-opt{display:block;width:100%;padding:6px 12px;background:none;border:none;color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;text-align:left;transition:all 0.15s}
-.lang-opt:hover{color:var(--gold);background:rgba(184,134,11,0.08)}
-.lang-opt.active{color:var(--gold)}
-@media(max-width:768px){.topbar{padding:0 16px}.tb-links{display:none}}
+.lang-opt{display:block;width:100%;padding:8px 14px;border:none;background:none;font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:var(--muted);cursor:pointer;text-align:left;transition:all 0.15s}
+.lang-opt:hover{background:rgba(255,255,255,0.04);color:var(--accent,var(--gold))}
+.lang-opt.active{color:var(--accent,var(--gold));font-weight:500}
+@media(max-width:768px){.topbar{padding:0 12px}.tb-links{display:none}}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;padding:80px 32px;position:relative;overflow:hidden}
@@ -149,24 +147,8 @@ footer .fcopy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(25
     <a href="admin.html">Admin</a>
   </div>
   <div class="tb-right">
-    <div class="lang-switcher" onclick="this.classList.toggle('open')">
-      <button class="lang-current"><span>🇬🇧 EN</span> <span class="lang-arrow">▾</span></button>
-      <div class="lang-dropdown">
-        <button class="lang-opt" data-lang="be">🇧🇾 BY</button>
-        <button class="lang-opt active" data-lang="en">🇬🇧 EN</button>
-        <button class="lang-opt" data-lang="uk">🇺🇦 UK</button>
-        <button class="lang-opt" data-lang="ru">🇷🇺 RU</button>
-        <button class="lang-opt" data-lang="de">🇩🇪 DE</button>
-        <button class="lang-opt" data-lang="fr">🇫🇷 FR</button>
-        <button class="lang-opt" data-lang="es">🇪🇸 ES</button>
-        <button class="lang-opt" data-lang="it">🇮🇹 IT</button>
-        <button class="lang-opt" data-lang="pt">🇵🇹 PT</button>
-        <button class="lang-opt" data-lang="ja">🇯🇵 JA</button>
-        <button class="lang-opt" data-lang="ko">🇰🇷 KO</button>
-      </div>
-    </div>
-    <a href="#contact" class="tb-cta">HIRE ME</a>
-    <div class="tb-ver">v1.0 | 2026-03-25</div>
+    <div class="lang-switcher"></div>
+    <span class="tb-ver">v2.0</span>
   </div>
 </div>
 
@@ -408,5 +390,6 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
+<script src="labs67-i18n.js"></script>
 </body>
 </html>
