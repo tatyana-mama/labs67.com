@@ -9,7 +9,8 @@
 @media print{.slide{page-break-after:always;display:flex!important}.nav,.counter{display:none!important}}
 :root{--bg:#0a0a0a;--fg:#f0f0f0;--acc:#d4a44c;--acc2:#4a9e7d;--dim:#777;--card:#161616;--border:#252525}
 body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);height:100vh;overflow:hidden}
-.slide{display:none;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;max-height:100vh;padding:4vh 8vw;text-align:center;animation:fadeIn .35s;overflow-y:auto}
+.slide{display:none;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;max-height:100vh;padding:4vh 8vw;text-align:center;animation:fadeIn .35s;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.slide::-webkit-scrollbar{display:none}
 .slide.active{display:flex}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:.3em;letter-spacing:-.02em}
