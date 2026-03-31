@@ -60,36 +60,40 @@ ul li::before{content:'';position:absolute;left:0;top:.7rem;width:6px;height:6px
 .compare td{font-size:.9rem}
 .compare td:first-child{color:#999}
 @media(max-width:768px){
-  .slide{padding:4vh 5vw;justify-content:flex-start;padding-top:6vh;overflow-y:auto}
-  h1{font-size:1.7rem}
-  h2{font-size:1.2rem}
-  h3{font-size:.75rem;margin-bottom:.8em}
-  p,.desc{font-size:.95rem}
-  .grid{grid-template-columns:1fr!important;gap:1rem;margin-top:1rem}
-  .card{padding:1.1rem}
-  .card h4{font-size:.95rem}
-  .card p{font-size:.82rem}
-  table{font-size:.82rem}
-  td,th{padding:.4rem .5rem}
-  .big{font-size:2.8rem}
-  .row{gap:1.5rem;margin-top:1rem}
-  .stat .num{font-size:1.6rem}
-  .sub{font-size:.8rem}
-  .packs{gap:.5rem}
-  .pack{padding:.7rem 1rem;min-width:70px}
-  .pack .n{font-size:1.3rem}
-  .pack .p{font-size:.8rem}
-  .steps{flex-direction:column;gap:.5rem}
-  .step{border-right:none;border-bottom:1px solid var(--border);padding:.8rem;text-align:left;display:flex;align-items:center;gap:.8rem}
+  .slide{padding:5vh 6vw;justify-content:center;text-align:center;overflow-y:auto;padding-bottom:8vh}
+  .left{text-align:center;align-items:center}
+  .left table{text-align:left}
+  h1{font-size:1.6rem}
+  h2{font-size:1.15rem}
+  h3{font-size:.7rem;margin-bottom:.7em}
+  p,.desc{font-size:.9rem;text-align:center}
+  .grid{grid-template-columns:1fr!important;gap:.8rem;margin-top:1rem}
+  .card{padding:1rem;text-align:center}
+  .card h4{font-size:.9rem}
+  .card p{font-size:.8rem;text-align:center}
+  table{font-size:.78rem;margin-left:auto;margin-right:auto}
+  td,th{padding:.35rem .5rem}
+  .big{font-size:2.5rem}
+  .row{gap:1.2rem;margin-top:1rem;justify-content:center}
+  .stat .num{font-size:1.5rem}
+  .stat .sub,.sub{font-size:.75rem}
+  .packs{gap:.4rem;justify-content:center}
+  .pack{padding:.6rem .8rem;min-width:65px}
+  .pack .n{font-size:1.2rem}
+  .pack .l{font-size:.6rem}
+  .pack .p{font-size:.75rem}
+  .steps{flex-direction:column;gap:0}
+  .step{border-right:none;border-bottom:1px solid var(--border);padding:.7rem;text-align:center;display:block}
   .step:last-child{border-bottom:none}
-  .step .sn{font-size:1.3rem;min-width:2rem}
-  .step h4{font-size:.85rem;margin:0}
-  .step p{font-size:.75rem;margin:0}
-  .nav{bottom:1rem;right:1rem}
-  .nav button{width:38px;height:38px;font-size:1rem}
-  .counter{bottom:1.5rem;left:1rem;font-size:.7rem}
-  .compare td,.compare th{font-size:.72rem;padding:.3rem .4rem}
-  .left{padding:0}
+  .step .sn{font-size:1.2rem}
+  .step h4{font-size:.8rem;margin:.2rem 0}
+  .step p{font-size:.7rem;margin:0}
+  .nav{bottom:.8rem;right:.8rem}
+  .nav button{width:36px;height:36px;font-size:1rem}
+  .counter{bottom:1.2rem;left:.8rem;font-size:.65rem}
+  .compare td,.compare th{font-size:.68rem;padding:.25rem .35rem;text-align:center}
+  .compare td:first-child{text-align:left}
+  .status{font-size:.6rem!important}
 }
 @media(max-width:400px){
   .slide{padding:3vh 4vw;padding-top:5vh}
