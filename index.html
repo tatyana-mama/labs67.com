@@ -103,7 +103,7 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
   .cp-stat-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
   .ho-name { font-size: clamp(28px, 6vw, 48px); }
   .ho-sub { font-size: 8px; letter-spacing: 0.2em; }
-  #hint { font-size: 8px; bottom: 10px; padding: 5px 12px; }
+  #hint { font-size: 11px; bottom: 14px; padding: 7px 16px; letter-spacing: 0.08em; }
 }
 
 /* CONTENT PANEL — slides from right */
@@ -422,8 +422,8 @@ function resize() {
   cv.width = W * dpr; cv.height = H * dpr;
   cv.style.width = W + 'px'; cv.style.height = H + 'px';
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
-  // Fit graph to screen — scale based on smallest dimension
-  let fitZoom = Math.min(W, H) / 1200;
+  // Fit graph to screen — mobile gets bigger nodes
+  let fitZoom = W <= 768 ? Math.min(W, H) / 800 : Math.min(W, H) / 1200;
   zoom = fitZoom; targetZoom = fitZoom;
 }
 window.addEventListener('resize', resize);
@@ -469,15 +469,16 @@ function sim() {
     if(n.id === 'hub') return;
     let dx = n.x - hub.x, dy = n.y - hub.y;
     let d = Math.sqrt(dx*dx + dy*dy) || 1;
-    let target = 340;
+    let target = W <= 768 ? 240 : 340;
     let f = (d - target) * 0.005;
     n.vx -= (dx/d) * f;
     n.vy -= (dy/d) * f;
   });
   ns.forEach(n => { n.vx -= n.x*0.002; n.vy -= n.y*0.002; });
   hub.vx = -hub.x*0.15; hub.vy = -hub.y*0.15;
-  // Apply + boundary clamp (nodes stay within 560px radius)
-  const BOUND = 560;
+  // Apply + boundary clamp (mobile-aware)
+  const isMobile = W <= 768;
+  const BOUND = isMobile ? 320 : 560;
   ns.forEach(n => {
     n.vx *= 0.82; n.vy *= 0.82;
     n.x += n.vx; n.y += n.vy;
@@ -506,7 +507,7 @@ function draw() {
   camY += (targetCamY - camY) * 0.06;
   zoom += (targetZoom - zoom) * 0.06;
   // Clamp camera so graph doesn't fly off screen
-  const CAM_BOUND = 700;
+  const CAM_BOUND = W <= 768 ? 300 : 700;
   camX = Math.max(-CAM_BOUND, Math.min(CAM_BOUND, camX));
   camY = Math.max(-CAM_BOUND, Math.min(CAM_BOUND, camY));
   targetCamX = Math.max(-CAM_BOUND, Math.min(CAM_BOUND, targetCamX));
