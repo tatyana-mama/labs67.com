@@ -57,6 +57,46 @@ ul li{padding:.35rem 0;padding-left:1.2rem;position:relative;font-size:1rem;colo
 ul li::before{content:'';position:absolute;left:0;top:.7rem;width:6px;height:6px;border-radius:50%;background:var(--acc)}
 .compare td{font-size:.9rem}
 .compare td:first-child{color:#999}
+@media(max-width:768px){
+  .slide{padding:4vh 5vw;justify-content:flex-start;padding-top:6vh;overflow-y:auto}
+  h1{font-size:1.7rem}
+  h2{font-size:1.2rem}
+  h3{font-size:.75rem;margin-bottom:.8em}
+  p,.desc{font-size:.95rem}
+  .grid{grid-template-columns:1fr!important;gap:1rem;margin-top:1rem}
+  .card{padding:1.1rem}
+  .card h4{font-size:.95rem}
+  .card p{font-size:.82rem}
+  table{font-size:.82rem}
+  td,th{padding:.4rem .5rem}
+  .big{font-size:2.8rem}
+  .row{gap:1.5rem;margin-top:1rem}
+  .stat .num{font-size:1.6rem}
+  .sub{font-size:.8rem}
+  .packs{gap:.5rem}
+  .pack{padding:.7rem 1rem;min-width:70px}
+  .pack .n{font-size:1.3rem}
+  .pack .p{font-size:.8rem}
+  .steps{flex-direction:column;gap:.5rem}
+  .step{border-right:none;border-bottom:1px solid var(--border);padding:.8rem;text-align:left;display:flex;align-items:center;gap:.8rem}
+  .step:last-child{border-bottom:none}
+  .step .sn{font-size:1.3rem;min-width:2rem}
+  .step h4{font-size:.85rem;margin:0}
+  .step p{font-size:.75rem;margin:0}
+  .nav{bottom:1rem;right:1rem}
+  .nav button{width:38px;height:38px;font-size:1rem}
+  .counter{bottom:1.5rem;left:1rem;font-size:.7rem}
+  .compare td,.compare th{font-size:.72rem;padding:.3rem .4rem}
+  .left{padding:0}
+}
+@media(max-width:400px){
+  .slide{padding:3vh 4vw;padding-top:5vh}
+  h1{font-size:1.4rem}
+  .big{font-size:2.2rem}
+  .packs{gap:.3rem}
+  .pack{min-width:60px;padding:.5rem .7rem}
+  .pack .n{font-size:1.1rem}
+}
 </style>
 </head>
 <body>
@@ -241,6 +281,8 @@ ul li::before{content:'';position:absolute;left:0;top:.7rem;width:6px;height:6px
 const sl=document.querySelectorAll('.slide');let c=0;
 function go(d){sl[c].classList.remove('active');c=Math.max(0,Math.min(sl.length-1,c+d));sl[c].classList.add('active');document.querySelector('.counter').textContent=(c+1)+' / '+sl.length}
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')go(1);if(e.key==='ArrowLeft')go(-1)});
+let tx=0;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?go(1):go(-1)}},{passive:true});
 go(0);
 </script>
 </body>
