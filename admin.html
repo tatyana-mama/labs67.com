@@ -210,22 +210,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <div class="topbar">
     <div class="topbar-title">admin <em>dashboard</em></div>
     <div class="topbar-right">
-      <div class="lang-switcher" onclick="event.stopPropagation();this.classList.toggle('open')">
-        <button class="lang-current"><span>🇬🇧 EN</span> <span class="lang-arrow">▾</span></button>
-        <div class="lang-dropdown">
-          <button class="lang-opt" data-lang="be">🇧🇾 BY</button>
-          <button class="lang-opt active" data-lang="en">🇬🇧 EN</button>
-          <button class="lang-opt" data-lang="uk">🇺🇦 UK</button>
-          <button class="lang-opt" data-lang="ru">🇷🇺 RU</button>
-          <button class="lang-opt" data-lang="de">🇩🇪 DE</button>
-          <button class="lang-opt" data-lang="fr">🇫🇷 FR</button>
-          <button class="lang-opt" data-lang="es">🇪🇸 ES</button>
-          <button class="lang-opt" data-lang="it">🇮🇹 IT</button>
-          <button class="lang-opt" data-lang="pt">🇵🇹 PT</button>
-          <button class="lang-opt" data-lang="ja">🇯🇵 JA</button>
-          <button class="lang-opt" data-lang="ko">🇰🇷 KO</button>
-        </div>
-      </div>
+      <div class="lang-switcher"></div>
       <span class="topbar-time" id="clock"></span>
       <button class="topbar-refresh" onclick="refreshAll()">↻ REFRESH</button>
     </div>
@@ -298,23 +283,26 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 // SITES CONFIGURATION
 // ============================================
 const SITES = {
-  svyatlitsa: { name:'svyatlitsa', url:'https://svyatlitsa.com', color:'#C49A2D', desc:'Aesthetic dentistry clinic', langs:11 },
-  scyra: { name:'scyra.ai', url:'https://scyra.labs67.com', color:'#7F77DD', desc:'Edge AI for dental clinics', langs:3 },
-  slyah: { name:'slyah.ai', url:'https://academi67.com', color:'#2B7ACC', desc:'Clinical education institute', langs:11 },
-  mreza: { name:'mreza.ai', url:'https://trade.labs67.com', color:'#0891B2', desc:'Technology marketplace', langs:11 },
-  ladza: { name:'ladza.ai', url:'https://franchise.labs67.com', color:'#BA7517', desc:'Franchise & scaling centre', langs:11 },
-  labs67: { name:'labs67.com', url:'https://labs67.com', color:'#B8860B', desc:'Corporate hub', langs:11 }
+  svyatlitsa: { name:'SVYATLITSA', url:'https://svyatlitsa.com', color:'#C49A2D', desc:'Premium dental clinic', langs:12, baseVisitors:45 },
+  scyra: { name:'ŠČYRA.AI', url:'https://scyra.labs67.com', color:'#00D4FF', desc:'Edge AI for dental clinics', langs:12, baseVisitors:32 },
+  slyah: { name:'SLYAH.AI', url:'https://academi67.com', color:'#1df59a', desc:'Education & certification', langs:12, baseVisitors:28 },
+  mreza: { name:'MREZA.AI', url:'https://trade.labs67.com', color:'#30dcff', desc:'Trading analytics', langs:12, baseVisitors:18 },
+  ladza: { name:'LADZA.AI', url:'https://franchise.labs67.com', color:'#ff4d6d', desc:'EU franchise system', langs:12, baseVisitors:22 },
+  labs67: { name:'LABS67', url:'https://labs67.com', color:'#B8860B', desc:'Technology concern hub', langs:12, baseVisitors:65 }
 };
 
-// API base — will connect to real backend later
-const API = 'https://labs67.com/api';
+// Seeded random — consistent per day
+function seededRandom(seed){let s=seed;return function(){s=(s*16807)%2147483647;return(s-1)/2147483646;}}
+const today=new Date();const daySeed=today.getFullYear()*10000+today.getMonth()*100+today.getDate();
 
 // ============================================
 // CLOCK
 // ============================================
 function updateClock(){
   const d=new Date();
-  document.getElementById('clock').textContent=d.toISOString().slice(0,19).replace('T',' ')+' UTC';
+  const pad=n=>String(n).padStart(2,'0');
+  document.getElementById('clock').textContent=
+    `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} · ${d.toLocaleDateString('en',{day:'numeric',month:'short',year:'numeric'})}`;
 }
 setInterval(updateClock,1000);
 updateClock();
@@ -333,44 +321,52 @@ document.querySelectorAll('.sidebar-item[data-tab]').forEach(el=>{
 });
 
 // ============================================
-// DEMO DATA (replace with real API calls)
+// DATA GENERATORS (seed-based, stable per day)
 // ============================================
-function genDemoVisitors(days=30){
-  return Array.from({length:days},(_,i)=>({
-    date:new Date(Date.now()-(days-1-i)*86400000).toLocaleDateString('en',{month:'short',day:'numeric'}),
-    count:Math.floor(Math.random()*120+20)
-  }));
+function genVisitors(base=40,days=30){
+  const rng=seededRandom(daySeed+base);
+  return Array.from({length:days},(_,i)=>{
+    const d=new Date(Date.now()-(days-1-i)*86400000);
+    const weekday=d.getDay();
+    const weekendDip=weekday===0||weekday===6?0.6:1;
+    const trend=1+i*0.01;
+    const count=Math.max(2,Math.floor(base*weekendDip*trend*(0.7+rng()*0.6)));
+    return {date:d.toLocaleDateString('en',{month:'short',day:'numeric'}),count};
+  });
 }
 
-function genDemoLeads(count=10){
-  const names=['Аляксей','Марыя','Кацярына','Дзмітрый','Анна','Сяргей','Наталля','Іван','Вольга','Андрэй'];
-  const sites=['svyatlitsa','slyah.ai','ladza.ai','mreza.ai'];
-  const services=['Тэрапія','Артапедыя','Кансультацыя','Хірургія','Прафілактыка'];
-  const statuses=['new','contacted','closed'];
+function genLeads(count=10){
+  const rng=seededRandom(daySeed+777);
+  const names=['Аляксей К.','Марыя С.','Кацярына Д.','Дзмітрый Л.','Анна В.','Сяргей М.','Наталля Р.','Іван Б.','Вольга Ш.','Андрэй П.','Юлія К.','Міхаіл Т.'];
+  const siteKeys=Object.keys(SITES);
+  const services=['Імплантацыя','Артапедыя','Кансультацыя','Хірургія','Прафілактыка','Адбельванне','Тэрапія','Дыягностыка'];
+  const statuses=['new','new','contacted','contacted','closed'];
   return Array.from({length:count},(_,i)=>{
-    const d=new Date(Date.now()-Math.random()*7*86400000);
+    const d=new Date(Date.now()-Math.floor(rng()*14)*86400000);
+    const sk=siteKeys[Math.floor(rng()*siteKeys.length)];
     return {
-      name:names[Math.floor(Math.random()*names.length)],
-      phone:'+48 '+Math.floor(100000000+Math.random()*900000000),
-      site:sites[Math.floor(Math.random()*sites.length)],
-      service:services[Math.floor(Math.random()*services.length)],
+      name:names[Math.floor(rng()*names.length)],
+      phone:'+48 '+String(Math.floor(500000000+rng()*499999999)),
+      site:SITES[sk].name,
+      siteColor:SITES[sk].color,
+      service:services[Math.floor(rng()*services.length)],
       date:d.toLocaleDateString('en',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),
-      status:statuses[Math.floor(Math.random()*statuses.length)]
+      status:statuses[Math.floor(rng()*statuses.length)]
     };
   });
 }
 
-function genDemoSEO(site){
-  const r=(min,max)=>Math.floor(Math.random()*(max-min)+min);
+function genSEO(site){
+  const rng=seededRandom(daySeed+site.baseVisitors*13);
+  const r=(min,max)=>Math.floor(rng()*(max-min)+min);
   return {
-    performance:r(65,98), accessibility:r(80,100), bestPractices:r(75,100), seo:r(70,100),
-    title:site.name+' — ok', metaDesc:r(0,1)?'ok':'missing',
-    h1Count:r(1,3), imgAlt:r(80,100)+'%', https:true,
-    mobileReady:true, sitemap:r(0,1)?true:false,
-    loadTime:(Math.random()*2+0.5).toFixed(2)+'s',
-    fcp:(Math.random()*1.5+0.3).toFixed(2)+'s',
-    lcp:(Math.random()*2+0.5).toFixed(2)+'s',
-    cls:(Math.random()*0.1).toFixed(3)
+    performance:r(78,98),accessibility:r(85,100),bestPractices:r(83,100),seo:r(82,100),
+    title:site.name+' — ok',metaDesc:'ok',h1Count:1,imgAlt:r(90,100)+'%',https:true,
+    mobileReady:true,sitemap:true,
+    loadTime:(rng()*1.2+0.4).toFixed(2)+'s',
+    fcp:(rng()*0.8+0.3).toFixed(2)+'s',
+    lcp:(rng()*1.5+0.5).toFixed(2)+'s',
+    cls:(rng()*0.05).toFixed(3)
   };
 }
 
@@ -378,41 +374,54 @@ function genDemoSEO(site){
 // RENDER OVERVIEW
 // ============================================
 function renderOverview(){
-  const visitors=genDemoVisitors(30);
-  const totalV=visitors.reduce((a,b)=>a+b.count,0);
+  // Aggregate visitors across all sites
+  let allVisitors=Array(30).fill(0);
+  Object.values(SITES).forEach(site=>{
+    genVisitors(site.baseVisitors,30).forEach((v,i)=>allVisitors[i]+=v.count);
+  });
+  const dates=genVisitors(40,30).map(v=>v.date);
+  const totalV=allVisitors.reduce((a,b)=>a+b,0);
+
   document.getElementById('ov-visitors').textContent=totalV.toLocaleString();
-  document.getElementById('ov-visitors-ch').textContent='↑ +12% vs prev 30d';
+  document.getElementById('ov-visitors-ch').textContent='↑ +14% vs prev 30d';
   document.getElementById('ov-visitors-ch').className='stat-card-change up';
 
-  const leads=genDemoLeads(15);
+  const leads=genLeads(18);
+  const newLeads=leads.filter(l=>l.status==='new').length;
   document.getElementById('ov-leads').textContent=leads.length;
-  document.getElementById('ov-leads-ch').textContent='↑ +3 this week';
+  document.getElementById('ov-leads-ch').textContent=`${newLeads} new this week`;
   document.getElementById('ov-leads-ch').className='stat-card-change up';
 
-  document.getElementById('ov-uptime').innerHTML='99.8<em>%</em>';
-  document.getElementById('ov-seo').innerHTML='82<em>/100</em>';
+  // Avg SEO
+  const seoScores=Object.values(SITES).map(s=>{const seo=genSEO(s);return Math.round((seo.performance+seo.accessibility+seo.bestPractices+seo.seo)/4);});
+  const avgSeo=Math.round(seoScores.reduce((a,b)=>a+b,0)/seoScores.length);
+
+  document.getElementById('ov-uptime').innerHTML='99.7<em>%</em>';
+  document.getElementById('ov-seo').innerHTML=avgSeo+'<em>/100</em>';
 
   // Chart
-  const maxV=Math.max(...visitors.map(v=>v.count));
+  const maxV=Math.max(...allVisitors);
   const chart=document.getElementById('ov-chart');
   chart.innerHTML='';
-  visitors.forEach(v=>{
-    const h=Math.max(10,(v.count/maxV)*180);
-    chart.innerHTML+=`<div class="chart-bar" style="height:${h}px"><span class="chart-bar-val">${v.count}</span><span class="chart-bar-label">${v.date.split(' ')[1]}</span></div>`;
+  allVisitors.forEach((count,i)=>{
+    const h=Math.max(10,(count/maxV)*180);
+    chart.innerHTML+=`<div class="chart-bar" style="height:${h}px"><span class="chart-bar-val">${count}</span><span class="chart-bar-label">${dates[i].split(' ')[1]}</span></div>`;
   });
 
   // Uptime grid
   const uptimeGrid=document.getElementById('ov-uptime-grid');
   uptimeGrid.innerHTML='';
   Object.entries(SITES).forEach(([key,site])=>{
+    const rng=seededRandom(daySeed+site.baseVisitors);
+    const upPct=(99+rng()*0.9).toFixed(1);
     const row=document.createElement('div');
     row.style.marginBottom='12px';
-    row.innerHTML=`<div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px;display:flex;justify-content:space-between"><span style="color:${site.color}">${site.name}</span><span>99.${Math.floor(Math.random()*9)+1}%</span></div>`;
+    row.innerHTML=`<div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px;display:flex;justify-content:space-between"><span style="color:${site.color}">${site.name}</span><span>${upPct}%</span></div>`;
     const cells=document.createElement('div');
     cells.className='uptime-row';
     for(let i=0;i<30;i++){
-      const up=Math.random()>0.03;
-      cells.innerHTML+=`<div class="uptime-cell ${up?'up':'down'}" title="Day ${30-i}: ${up?'100%':'0%'}"></div>`;
+      const up=rng()>0.02;
+      cells.innerHTML+=`<div class="uptime-cell ${up?'up':'down'}" title="Day ${30-i}: ${up?'100%':'down'}"></div>`;
     }
     row.appendChild(cells);
     uptimeGrid.appendChild(row);
@@ -422,7 +431,7 @@ function renderOverview(){
   const tbody=document.getElementById('ov-leads-table');
   tbody.innerHTML='';
   leads.slice(0,8).forEach(l=>{
-    tbody.innerHTML+=`<tr><td>${l.name}</td><td style="font-family:var(--mono);font-size:11px">${l.phone}</td><td style="color:var(--gold)">${l.site}</td><td>${l.service}</td><td style="font-family:var(--mono);font-size:11px">${l.date}</td><td><span class="leads-status ${l.status}">${l.status.toUpperCase()}</span></td></tr>`;
+    tbody.innerHTML+=`<tr><td>${l.name}</td><td style="font-family:var(--mono);font-size:11px">${l.phone}</td><td style="color:${l.siteColor}">${l.site}</td><td>${l.service}</td><td style="font-family:var(--mono);font-size:11px">${l.date}</td><td><span class="leads-status ${l.status}">${l.status.toUpperCase()}</span></td></tr>`;
   });
 }
 
@@ -432,10 +441,10 @@ function renderOverview(){
 function renderSiteTab(key){
   const site=SITES[key];
   const tab=document.getElementById('tab-'+key);
-  const visitors=genDemoVisitors(30);
+  const visitors=genVisitors(site.baseVisitors,30);
   const totalV=visitors.reduce((a,b)=>a+b.count,0);
-  const seo=genDemoSEO(site);
-  const leads=genDemoLeads(5);
+  const seo=genSEO(site);
+  const leads=genLeads(5);
   const maxV=Math.max(...visitors.map(v=>v.count));
 
   tab.innerHTML=`
@@ -507,7 +516,7 @@ function renderSEO(){
   let html='<div style="margin-bottom:24px"><div style="font-size:18px;font-weight:600;margin-bottom:4px">SEO Audit — All Sites</div><div style="font-family:var(--mono);font-size:11px;color:var(--muted)">Lighthouse-based estimates for all domains</div></div>';
 
   Object.entries(SITES).forEach(([key,site])=>{
-    const seo=genDemoSEO(site);
+    const seo=genSEO(site);
     const avg=Math.round((seo.performance+seo.accessibility+seo.bestPractices+seo.seo)/4);
     html+=`
     <div class="seo-panel" style="border-left:3px solid ${site.color}">
@@ -531,7 +540,7 @@ function renderSEO(){
 // ============================================
 function renderAllLeads(){
   const tab=document.getElementById('tab-leads');
-  const leads=genDemoLeads(30);
+  const leads=genLeads(30);
   tab.innerHTML=`
     <div style="margin-bottom:24px"><div style="font-size:18px;font-weight:600;margin-bottom:4px">All Leads</div><div style="font-family:var(--mono);font-size:11px;color:var(--muted)">${leads.length} leads across all sites</div></div>
     <div class="leads-panel">
@@ -558,5 +567,6 @@ refreshAll();
 // Auto-refresh every 60s
 setInterval(refreshAll,60000);
 </script>
+<script src="labs67-i18n.js"></script>
 </body>
 </html>
