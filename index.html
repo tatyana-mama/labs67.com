@@ -595,14 +595,14 @@ function draw() {
     let pulseFreq = 1.2 + s * 2; // stronger = faster pulse
     let pulseAmp = 0.08 + s * 0.15;
     let baseAlpha = isS ? 0.35 : isH ? 0.25 : 0.06 + s * 0.08;
-    let alpha = baseAlpha + Math.sin(t * pulseFreq) * pulseAmp;
+    let alpha = Math.max(0, Math.min(1, baseAlpha + Math.sin(t * pulseFreq) * pulseAmp));
     let lineW = isS ? 2.5 : isH ? 2 : 0.6 + s * 1.2;
-    let pulseW = lineW + Math.sin(t * pulseFreq + 1) * (s * 0.8);
+    let pulseW = Math.max(0.3, lineW + Math.sin(t * pulseFreq + 1) * (s * 0.8));
 
     // Gradient along edge
     let edgeGr = c.createLinearGradient(x1,y1,x2,y2);
     let colA = na.color, colB = nb.color;
-    let hexA = Math.round(alpha * 255).toString(16).padStart(2,'0');
+    let hexA = Math.max(0,Math.round(alpha * 255)).toString(16).padStart(2,'0');
     edgeGr.addColorStop(0, colA + hexA);
     edgeGr.addColorStop(0.5, (isS ? colA : '#ffffff') + hexA);
     edgeGr.addColorStop(1, colB + hexA);
@@ -614,7 +614,7 @@ function draw() {
 
     // Glow layer for strong connections
     if(s >= 0.6 || isS) {
-      let glowA = Math.round((alpha * 0.3) * 255).toString(16).padStart(2,'0');
+      let glowA = Math.max(0,Math.round((alpha * 0.3) * 255)).toString(16).padStart(2,'0');
       c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2);
       c.strokeStyle = colA + glowA;
       c.lineWidth = pulseW * 3;
@@ -633,7 +633,7 @@ function draw() {
     let px = p.x1+(p.x2-p.x1)*p.t;
     let py = p.y1+(p.y2-p.y1)*p.t;
     c.beginPath(); c.arc(px,py,1.5,0,Math.PI*2);
-    c.fillStyle = p.col + Math.round((1-Math.abs(p.t-0.5)*2)*80).toString(16).padStart(2,'0');
+    c.fillStyle = p.col + Math.max(0,Math.round((1-Math.abs(p.t-0.5)*2)*80)).toString(16).padStart(2,'0');
     c.fill();
     return true;
   });
