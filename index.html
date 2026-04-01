@@ -220,14 +220,12 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
 .pulse-nav{position:fixed;top:50%;right:16px;transform:translateY(-50%);width:56px;z-index:90;display:flex;flex-direction:column;align-items:center;gap:0;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:28px;padding:16px 0;border:1px solid rgba(184,134,11,0.1)}
 .pulse-nav:hover{width:200px;border-radius:16px;border-color:rgba(184,134,11,0.25);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
 .pulse-nav:hover .pn-label{opacity:1;max-width:120px;margin-left:4px}
-.pulse-nav:hover .pn-ico{width:32px;height:32px}
 .pn-item{display:flex;align-items:center;gap:8px;width:100%;padding:10px 16px;text-decoration:none;transition:all 0.25s;border-radius:0;pointer-events:none;opacity:0.5}
 .pulse-nav:hover .pn-item{pointer-events:auto;opacity:1}
 .pn-item:hover{background:rgba(184,134,11,0.1)}
 .pn-item:hover .pn-label{color:var(--accent)}
-.pn-ico{width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all 0.3s;position:relative}
-.pn-ico svg{width:16px;height:16px}
-.pn-ico.active{box-shadow:0 0 12px currentColor,0 0 4px currentColor}
+.pn-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;transition:all 0.3s}
+.pn-dot.active{box-shadow:0 0 10px currentColor,0 0 4px currentColor}
 .pn-label{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.5);white-space:nowrap;overflow:hidden;max-width:0;opacity:0;transition:all 0.35s;font-weight:300;text-transform:uppercase}
 .pn-divider{width:24px;height:1px;background:rgba(255,255,255,0.06);margin:4px auto}
 .pn-pulse{width:2px;height:24px;background:linear-gradient(to bottom,transparent,var(--accent),transparent);margin:6px auto;animation:pulseLine 2.5s ease-in-out infinite;opacity:0.5}
@@ -278,29 +276,29 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
 <!-- PULSE NAVIGATOR -->
 <aside class="pulse-nav" id="pulseNav">
   <a class="pn-item" href="https://labs67.com">
-    <span class="pn-ico active" style="color:#B8860B"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="8,1 15,5 15,11 8,15 1,11 1,5"/><text x="8" y="10.5" text-anchor="middle" font-size="5.5" font-weight="700" fill="currentColor" stroke="none">L67</text></svg></span>
+    <span class="pn-dot active" style="background:#B8860B"></span>
     <span class="pn-label">labs67</span>
   </a>
   <a class="pn-item" href="https://svyatlitsa.com" target="_blank">
-    <span class="pn-ico" style="color:#C49A2D"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5,8 Q8,3 11,8 Q8,13 5,8Z"/></svg></span>
+    <span class="pn-dot" style="background:#C49A2D"></span>
     <span class="pn-label">svyatlitsa</span>
   </a>
   <div class="pn-divider"></div>
   <a class="pn-item" href="https://scyra.labs67.com" target="_blank">
-    <span class="pn-ico" style="color:#7F77DD"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><circle cx="8" cy="8" r="2" fill="currentColor"/><line x1="8" y1="1" x2="8" y2="3" stroke-linecap="round"/><line x1="8" y1="13" x2="8" y2="15" stroke-linecap="round"/><line x1="1" y1="8" x2="3" y2="8" stroke-linecap="round"/><line x1="13" y1="8" x2="15" y2="8" stroke-linecap="round"/></svg></span>
+    <span class="pn-dot" style="background:#7F77DD"></span>
     <span class="pn-label">scyra.ai</span>
   </a>
   <div class="pn-divider"></div>
   <a class="pn-item" href="https://academi67.com" target="_blank">
-    <span class="pn-ico" style="color:#2B7ACC"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8,2 L14,5 L8,8 L2,5 Z"/><path d="M2,5 V11 L8,14 L14,11 V5"/></svg></span>
+    <span class="pn-dot" style="background:#2B7ACC"></span>
     <span class="pn-label">slyah.ai</span>
   </a>
   <a class="pn-item" href="https://trade.labs67.com" target="_blank">
-    <span class="pn-ico" style="color:#0891B2"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2,12 5,7 8,9 11,4 14,6"/><line x1="11" y1="4" x2="14" y2="4"/><line x1="14" y1="4" x2="14" y2="7"/></svg></span>
+    <span class="pn-dot" style="background:#0891B2"></span>
     <span class="pn-label">mreza.ai</span>
   </a>
   <a class="pn-item" href="https://franchise.labs67.com" target="_blank">
-    <span class="pn-ico" style="color:#BA7517"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="2"/><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span>
+    <span class="pn-dot" style="background:#BA7517"></span>
     <span class="pn-label">ladza.ai</span>
   </a>
   <div class="pn-pulse"></div>
