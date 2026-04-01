@@ -498,7 +498,7 @@ function sim() {
     for (let j = i+1; j < ns.length; j++) {
       let dx = ns[j].x - ns[i].x, dy = ns[j].y - ns[i].y;
       let d = Math.sqrt(dx*dx + dy*dy) || 1;
-      let f = 22000 / (d * d);
+      let f = Math.min(22000 / (d * d), 200);
       ns[i].vx -= (dx/d)*f; ns[i].vy -= (dy/d)*f;
       ns[j].vx += (dx/d)*f; ns[j].vy += (dy/d)*f;
     }
@@ -537,6 +537,11 @@ function sim() {
       n.x *= BOUND/d; n.y *= BOUND/d;
       n.vx *= 0.3; n.vy *= 0.3;
     }
+    // Guard against NaN/Infinity
+    if(!isFinite(n.x)) n.x = 0;
+    if(!isFinite(n.y)) n.y = 0;
+    if(!isFinite(n.vx)) n.vx = 0;
+    if(!isFinite(n.vy)) n.vy = 0;
   });
 }
 
@@ -644,7 +649,7 @@ function draw() {
     if(isH || isS || n.id==='hub') {
       let gr = c.createRadialGradient(sx,sy,r*0.3,sx,sy,r*(isS?3:2));
       gr.addColorStop(0, n.color + (isS?'28':'18'));
-      gr.addColorStop(1, 'transparent');
+      gr.addColorStop(1, 'rgba(0,0,0,0)');
       c.beginPath(); c.arc(sx,sy,r*(isS?3:2),0,Math.PI*2); c.fillStyle=gr; c.fill();
     }
 
