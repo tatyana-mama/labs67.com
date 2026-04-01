@@ -328,8 +328,8 @@ const NODES = [
       <li><strong style="color:var(--cyan)">SCYRA.AI</strong> — Edge AI for dental clinics</li>
       <li><strong style="color:var(--white)">SVYATLITSA</strong> — Flagship premium clinic</li>
       <li><strong style="color:var(--purple)">SLYAH.AI</strong> — Education & certification</li>
-      <li><strong style="color:var(--purple)">MREZA.AI</strong> — Trading analytics</li>
-      <li><strong style="color:var(--purple)">LADZA.AI</strong> — EU franchise system</li>
+      <li><strong style="color:var(--purple)">SKARBY</strong> — Supply chain platform</li>
+      <li><strong style="color:var(--purple)">SVITA</strong> — EU franchise system</li>
     </ul></div>`
   },
   { id:'scyra', label:'SCYRA.AI', color:'#5ec4d4', r:58, cat:'product',
@@ -399,28 +399,28 @@ const NODES = [
       <li>Equipment maintenance — ceiling-down, KYNOSYS</li>
     </ul></div>`
   },
-  { id:'trade', label:'MREZA.AI', color:'#a48bfa', r:58, cat:'platform',
+  { id:'trade', label:'SKARBY', color:'#a48bfa', r:58, cat:'platform',
     site:'https://trade.labs67.com',
-    desc:'AI-powered trading analytics. Portfolio management, market analysis, automated strategies.',
-    tags:['trading','analytics','AI'],
-    stats:[{v:'24/7',l:'Monitoring'},{v:'AI',l:'Signals'},{v:'Multi',l:'Assets'}],
+    desc:'Supply chain platform for franchise clinics. Equipment, technologies, and supplies — all in one place.',
+    tags:['supply-chain','procurement','franchise'],
+    stats:[{v:'67+',l:'Suppliers'},{v:'EU',l:'Logistics'},{v:'24h',l:'Delivery'}],
     links:[
-      {icon:'&#128200;',text:'MREZA.AI',url:'https://trade.labs67.com',note:'trade.labs67.com'},
+      {icon:'&#128230;',text:'Skarby',url:'https://trade.labs67.com',note:'trade.labs67.com'},
     ],
     html:`<div class="cp-section"><h3>Features</h3><ul>
-      <li>Real-time market analysis</li>
-      <li>AI-generated trade signals</li>
-      <li>Portfolio optimization</li>
-      <li>Risk management automation</li>
+      <li>Equipment procurement for franchise clinics</li>
+      <li>Verified supplier network</li>
+      <li>Standardized supply packages</li>
+      <li>Logistics coordination across EU</li>
     </ul></div>`
   },
-  { id:'franchise', label:'LADZA.AI', color:'#a48bfa', r:58, cat:'platform',
+  { id:'franchise', label:'SVITA', color:'#a48bfa', r:58, cat:'platform',
     site:'https://franchise.labs67.com',
-    desc:'Franchise management system. Turnkey SVYATLITSA clinic deployment across EU markets.',
-    tags:['franchise','EU','scaling','turnkey'],
+    desc:'Business concept marketplace. Turnkey franchise deployment — from dental clinics to tech startups.',
+    tags:['franchise','EU','scaling','turnkey','marketplace'],
     stats:[{v:'305k',l:'PLN Package'},{v:'EU',l:'Markets'},{v:'18mo',l:'Break-even'}],
     links:[
-      {icon:'&#127758;',text:'LADZA.AI',url:'https://franchise.labs67.com',note:'franchise.labs67.com'},
+      {icon:'&#127758;',text:'SVITA',url:'https://franchise.labs67.com',note:'franchise.labs67.com'},
     ],
     html:`<div class="cp-section"><h3>What You Get</h3><ul>
       <li>Complete clinic blueprint + design package</li>
@@ -578,22 +578,47 @@ function draw() {
   c.fillStyle = canvasBG.dot;
   for(let x=ox;x<W;x+=gs) for(let y=oy;y<H;y+=gs) { c.beginPath(); c.arc(x,y,0.7,0,Math.PI*2); c.fill(); }
 
-  // Edges
+  // Edges — pulsating lines based on importance (s = strength 0-1)
   EDGES.forEach(([a,b,s]) => {
     let na=NODES.find(n=>n.id===a), nb=NODES.find(n=>n.id===b);
     if(!na||!nb) return;
     let [x1,y1]=w2s(na.x,na.y), [x2,y2]=w2s(nb.x,nb.y);
     let isH = hovered&&(hovered.id===a||hovered.id===b);
     let isS = selected&&(selected.id===a||selected.id===b);
-    let alpha = isS ? 0.3 : isH ? 0.2 : 0.1;
+
+    // Pulse alpha based on importance + time
+    let pulseFreq = 1.2 + s * 2; // stronger = faster pulse
+    let pulseAmp = 0.08 + s * 0.15;
+    let baseAlpha = isS ? 0.35 : isH ? 0.25 : 0.06 + s * 0.08;
+    let alpha = baseAlpha + Math.sin(t * pulseFreq) * pulseAmp;
+    let lineW = isS ? 2.5 : isH ? 2 : 0.6 + s * 1.2;
+    let pulseW = lineW + Math.sin(t * pulseFreq + 1) * (s * 0.8);
+
+    // Gradient along edge
+    let edgeGr = c.createLinearGradient(x1,y1,x2,y2);
+    let colA = na.color, colB = nb.color;
+    let hexA = Math.round(alpha * 255).toString(16).padStart(2,'0');
+    edgeGr.addColorStop(0, colA + hexA);
+    edgeGr.addColorStop(0.5, (isS ? colA : '#ffffff') + hexA);
+    edgeGr.addColorStop(1, colB + hexA);
 
     c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2);
-    c.strokeStyle = isS ? na.color+'55' : isH ? `rgba(201,169,110,${alpha})` : `rgba(255,255,255,${alpha})`;
-    c.lineWidth = isS ? 2 : isH ? 1.5 : 0.8;
+    c.strokeStyle = edgeGr;
+    c.lineWidth = pulseW;
     c.stroke();
 
-    // Particles on active edges
-    if(isS && Math.random()<0.02) spawnParticle(x1,y1,x2,y2,na.color);
+    // Glow layer for strong connections
+    if(s >= 0.6 || isS) {
+      let glowA = Math.round((alpha * 0.3) * 255).toString(16).padStart(2,'0');
+      c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2);
+      c.strokeStyle = colA + glowA;
+      c.lineWidth = pulseW * 3;
+      c.stroke();
+    }
+
+    // Particles — more for stronger connections
+    let spawnRate = isS ? 0.04 : s >= 0.8 ? 0.008 : s >= 0.5 ? 0.004 : 0;
+    if(Math.random() < spawnRate) spawnParticle(x1,y1,x2,y2,na.color);
   });
 
   // Update particles
@@ -608,59 +633,147 @@ function draw() {
     return true;
   });
 
+  // Shape helpers
+  function hexPath(cx, cy, r) {
+    c.beginPath();
+    for(let i=0;i<6;i++){let a=Math.PI/3*i-Math.PI/6;c.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);}
+    c.closePath();
+  }
+  function diamondPath(cx, cy, r) {
+    let rx = r * 1.1, ry = r * 1.25;
+    c.beginPath();
+    c.moveTo(cx, cy - ry);
+    c.quadraticCurveTo(cx + rx*0.4, cy - ry*0.4, cx + rx, cy);
+    c.quadraticCurveTo(cx + rx*0.4, cy + ry*0.4, cx, cy + ry);
+    c.quadraticCurveTo(cx - rx*0.4, cy + ry*0.4, cx - rx, cy);
+    c.quadraticCurveTo(cx - rx*0.4, cy - ry*0.4, cx, cy - ry);
+    c.closePath();
+  }
+  function roundedSquarePath(cx, cy, r) {
+    let s = r * 1.5, cr = r * 0.35;
+    let x = cx - s/2, y = cy - s/2;
+    c.beginPath();
+    c.moveTo(x+cr, y); c.lineTo(x+s-cr, y);
+    c.quadraticCurveTo(x+s, y, x+s, y+cr);
+    c.lineTo(x+s, y+s-cr);
+    c.quadraticCurveTo(x+s, y+s, x+s-cr, y+s);
+    c.lineTo(x+cr, y+s);
+    c.quadraticCurveTo(x, y+s, x, y+s-cr);
+    c.lineTo(x, y+cr);
+    c.quadraticCurveTo(x, y, x+cr, y);
+    c.closePath();
+  }
+  function capsulePath(cx, cy, r) {
+    let w = r * 1.8, h = r * 1.1, cr = h;
+    c.beginPath();
+    c.moveTo(cx - w/2 + cr, cy - h);
+    c.lineTo(cx + w/2 - cr, cy - h);
+    c.arc(cx + w/2 - cr, cy, h, -Math.PI/2, Math.PI/2);
+    c.lineTo(cx - w/2 + cr, cy + h);
+    c.arc(cx - w/2 + cr, cy, h, Math.PI/2, -Math.PI/2);
+    c.closePath();
+  }
+
+  // Shape map: hub=hexagon, product=diamond, clinic=roundedSquare, platform=capsule, service=circle
+  const SHAPE_MAP = {
+    concern: 'hex', product: 'diamond', clinic: 'roundedSquare', platform: 'capsule', service: 'circle'
+  };
+
   // Nodes
   NODES.forEach(n => {
     let [sx,sy] = w2s(n.x, n.y);
     let r = n.r * zoom;
     let isH = hovered && hovered.id === n.id;
     let isS = selected && selected.id === n.id;
+    let shape = SHAPE_MAP[n.cat] || 'circle';
+
+    function drawShape(cx, cy, radius) {
+      if(shape==='hex') hexPath(cx, cy, radius);
+      else if(shape==='diamond') diamondPath(cx, cy, radius * 0.85);
+      else if(shape==='roundedSquare') roundedSquarePath(cx, cy, radius * 0.7);
+      else if(shape==='capsule') capsulePath(cx, cy, radius * 0.55);
+      else { c.beginPath(); c.arc(cx, cy, radius, 0, Math.PI*2); }
+    }
 
     // Outer glow
     if(isH || isS || n.id==='hub') {
-      let gr = c.createRadialGradient(sx,sy,r*0.3,sx,sy,r*(isS?3:2));
+      let glowR = r * (isS ? 2.8 : 2);
+      let gr = c.createRadialGradient(sx,sy,r*0.3,sx,sy,glowR);
       gr.addColorStop(0, n.color + (isS?'28':'18'));
       gr.addColorStop(1, 'transparent');
-      c.beginPath(); c.arc(sx,sy,r*(isS?3:2),0,Math.PI*2); c.fillStyle=gr; c.fill();
+      c.beginPath(); c.arc(sx,sy,glowR,0,Math.PI*2); c.fillStyle=gr; c.fill();
     }
 
-    // Pulse ring (hub + selected)
+    // Pulse rings (hub + selected) — rotating for hex
     if(n.id==='hub' || isS) {
+      c.save();
+      c.translate(sx, sy);
+      c.rotate(t * 0.3);
+      c.translate(-sx, -sy);
       let pr = r + 6 + Math.sin(t*2.5)*3;
-      c.beginPath(); c.arc(sx,sy,pr,0,Math.PI*2);
-      c.strokeStyle = n.color + '30';
-      c.lineWidth = 1; c.stroke();
+      drawShape(sx, sy, pr);
+      c.strokeStyle = n.color + '30'; c.lineWidth = 1; c.stroke();
       if(isS) {
         let pr2 = r + 14 + Math.sin(t*1.8)*5;
-        c.beginPath(); c.arc(sx,sy,pr2,0,Math.PI*2);
+        drawShape(sx, sy, pr2);
         c.strokeStyle = n.color + '18'; c.stroke();
       }
+      c.restore();
     }
 
-    // Node body
-    c.beginPath(); c.arc(sx,sy,r,0,Math.PI*2);
-    let gr = c.createRadialGradient(sx-r*0.25,sy-r*0.25,0,sx,sy,r);
-    let baseAlpha = isS ? 'ff' : isH ? 'dd' : 'aa';
-    gr.addColorStop(0, n.color + baseAlpha);
-    gr.addColorStop(1, n.color + (isS?'99':isH?'77':'55'));
-    c.fillStyle = gr; c.fill();
+    // 3D depth shadow
+    c.save();
+    c.shadowColor = n.color + '33';
+    c.shadowBlur = isS ? 40 : isH ? 25 : 12;
+    c.shadowOffsetX = 0; c.shadowOffsetY = isS ? 6 : 3;
 
-    // Border
-    c.beginPath(); c.arc(sx,sy,r,0,Math.PI*2);
-    c.strokeStyle = n.color + (isS?'cc':isH?'99':'55');
-    c.lineWidth = isS ? 2 : 1; c.stroke();
+    // Node body — gradient for 3D volume
+    drawShape(sx, sy, r);
+    let gr = c.createRadialGradient(sx - r*0.3, sy - r*0.35, 0, sx + r*0.1, sy + r*0.15, r*1.2);
+    let lightAlpha = isS ? 'ff' : isH ? 'ee' : 'cc';
+    let darkAlpha = isS ? 'aa' : isH ? '88' : '55';
+    gr.addColorStop(0, '#ffffff' + (isS?'22':isH?'18':'10')); // highlight
+    gr.addColorStop(0.15, n.color + lightAlpha);
+    gr.addColorStop(0.7, n.color + darkAlpha);
+    gr.addColorStop(1, n.color + '33');
+    c.fillStyle = gr; c.fill();
+    c.restore();
+
+    // Inner highlight — top-left specular
+    drawShape(sx, sy, r);
+    let specGr = c.createRadialGradient(sx - r*0.35, sy - r*0.35, 0, sx, sy, r);
+    specGr.addColorStop(0, 'rgba(255,255,255,' + (isS?'0.18':'0.1') + ')');
+    specGr.addColorStop(0.5, 'rgba(255,255,255,0)');
+    specGr.addColorStop(1, 'rgba(0,0,0,0.08)');
+    c.fillStyle = specGr; c.fill();
+
+    // Border — subtle
+    drawShape(sx, sy, r);
+    c.strokeStyle = n.color + (isS?'bb':isH?'88':'44');
+    c.lineWidth = isS ? 1.5 : 0.8; c.stroke();
+
+    // Inner ring detail for hub
+    if(n.id==='hub') {
+      hexPath(sx, sy, r * 0.65);
+      c.strokeStyle = n.color + '25'; c.lineWidth = 0.5; c.stroke();
+    }
 
     // Label
     if(r > 6) {
-      let fs = Math.max(8, Math.min(20, r*0.45));
+      let fs = Math.max(8, Math.min(20, r*0.42));
       c.font = `700 ${fs}px Inter,sans-serif`;
       c.textAlign = 'center'; c.textBaseline = 'middle';
+      // Text shadow for readability
+      c.fillStyle = 'rgba(0,0,0,0.5)';
+      c.fillText(n.label, sx+0.5, sy+0.5);
       c.fillStyle = '#fff';
       c.fillText(n.label, sx, sy);
 
       if(r > 14) {
         c.font = `500 ${Math.max(6,fs*0.48)}px 'JetBrains Mono',monospace`;
-        c.fillStyle = 'rgba(255,255,255,0.45)';
-        c.fillText(n.cat.toUpperCase(), sx, sy + r + 8*zoom);
+        c.fillStyle = 'rgba(255,255,255,0.4)';
+        let catY = shape==='diamond' ? sy + r*1.3 + 6*zoom : sy + r + 8*zoom;
+        c.fillText(n.cat.toUpperCase(), sx, catY);
       }
     }
   });
