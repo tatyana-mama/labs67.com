@@ -772,7 +772,10 @@ const origRenderContent = renderContent;
 function renderContent(n){
   const dk = DESC_MAP[n.id];
   const localDesc = dk ? tr(dk) : n.desc;
+  const hk = HTML_MAP && HTML_MAP[n.id];
+  const localHtml = hk ? tr(hk) : '';
   const patched = Object.assign({}, n, {desc: localDesc});
+  if(localHtml) patched.html = localHtml;
   // call original logic inline
   let cp = document.getElementById('cp');
   let statsHTML = '';
