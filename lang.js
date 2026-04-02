@@ -1,9 +1,7 @@
-// ===== i18n — 11 LANGUAGES =====
-const LANGS = ['be','de','en','es','fr','it','ja','ko','pl','pt','ru','uk'];
-const LANG_LABELS = {be:'BY Беларуская',de:'DE Deutsch',en:'EN English',es:'ES Español',fr:'FR Français',it:'IT Italiano',ja:'JA 日本語',ko:'KO 한국어',pl:'PL Polski',pt:'PT Português',ru:'RU Русский',uk:'UK Українська'};
+// ===== i18n — 12 LANGUAGES (labs67-i18n.js v2.1) =====
 let curLang = localStorage.getItem('labs67lang') || 'be';
 
-const I18N = {
+window.I18N = {
   hero_sub: {
     be:'Тэхналагічны канцэрн · Клікні ноду',
     en:'Technology Concern · Click a node',
@@ -236,5 +234,5 @@ const I18N = {
 const DESC_MAP = {hub:'hub_desc',scyra:'scyra_desc',svyatlitsa:'svt_desc',academi:'academi_desc',trade:'trade_desc',franchise:'franchise_desc',agents:'agents_desc'};
 const HTML_MAP = {hub:'hub_html',scyra:'scyra_html',svyatlitsa:'svt_html',academi:'academi_html',trade:'trade_html',franchise:'franchise_html',agents:'agents_html'};
 
-function tr(key){ return (I18N[key]&&I18N[key][curLang]) || (I18N[key]&&I18N[key]['en']) || ''; }
+function tr(key){ var d=window.I18N; return (d[key]&&d[key][curLang]) || (d[key]&&d[key]['en']) || ''; }
 
