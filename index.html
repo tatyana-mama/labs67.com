@@ -216,24 +216,21 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
 }
 #hint.hidden { opacity: 0; pointer-events: none; }
 
-/* PULSE NAVIGATOR */
-.pulse-nav{position:fixed;top:50%;right:16px;transform:translateY(-50%);width:56px;z-index:90;display:flex;flex-direction:column;align-items:center;gap:0;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:28px;padding:16px 0;border:1px solid rgba(184,134,11,0.1)}
-.pulse-nav:hover{width:200px;border-radius:16px;border-color:rgba(184,134,11,0.25);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-.pulse-nav:hover .pn-label{opacity:1;max-width:120px;margin-left:4px}
-.pn-item{display:flex;align-items:center;gap:8px;width:100%;padding:10px 16px;text-decoration:none;transition:all 0.25s;border-radius:0;pointer-events:none;opacity:0.5}
-.pulse-nav:hover .pn-item{pointer-events:auto;opacity:1}
-.pn-item:hover{background:rgba(184,134,11,0.1)}
-.pn-item:hover .pn-label{color:var(--accent)}
-.pn-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;transition:all 0.3s}
-.pn-dot.active{box-shadow:0 0 10px currentColor,0 0 4px currentColor}
-.pn-label{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.5);white-space:nowrap;overflow:hidden;max-width:0;opacity:0;transition:all 0.35s;font-weight:300;text-transform:uppercase}
-.pn-divider{width:24px;height:1px;background:rgba(255,255,255,0.06);margin:4px auto}
-.pn-pulse{width:2px;height:24px;background:linear-gradient(to bottom,transparent,var(--accent),transparent);margin:6px auto;animation:pulseLine 2.5s ease-in-out infinite;opacity:0.5}
-@keyframes pulseLine{0%,100%{opacity:0.15}50%{opacity:0.6}}
-.pn-action{width:32px;height:32px;border:1px solid rgba(255,255,255,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,0.4);cursor:pointer;transition:all 0.25s;background:transparent;margin:4px auto 0}
-.pn-action:hover{border-color:var(--accent);color:var(--accent);background:rgba(184,134,11,0.1)}
-@media(max-width:960px){.pulse-nav{right:8px;width:44px}}
-@media(max-width:480px){.pulse-nav{display:none}}
+
+/* Side Panel */
+.side-panel{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;gap:0;transition:width .4s cubic-bezier(.16,1,.3,1);width:56px;overflow:hidden}
+.side-panel:hover{width:220px}
+.side-panel:hover .sp-link{padding:14px 20px}
+.side-panel:hover .sp-name{opacity:1;transform:translateX(0)}
+.sp-link{display:flex;align-items:center;gap:14px;padding:14px 20px;text-decoration:none;transition:all .3s;border-left:3px solid transparent;background:rgba(5,5,8,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.sp-link:hover{background:rgba(255,255,255,.06);border-left-color:var(--c)}
+.sp-link.active{border-left-color:var(--c);background:rgba(255,255,255,.04)}
+.sp-link:first-child{border-radius:16px 0 0 0}
+.sp-link:last-child{border-radius:0 0 0 16px}
+.sp-dot{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);flex-shrink:0;transition:transform .2s}
+.sp-link:hover .sp-dot{transform:scale(1.3)}
+.sp-name{font-family:'Space Grotesk','Inter',sans-serif;font-size:15px;font-weight:600;color:#ededf0;white-space:nowrap;opacity:0;transform:translateX(-8px);transition:all .3s cubic-bezier(.16,1,.3,1);letter-spacing:-.01em}
+@media(max-width:960px){.side-panel{display:none}}
 </style>
 </head>
 <body>
@@ -273,37 +270,7 @@ canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1
 <!-- CONTENT PANEL -->
 <div id="content"><div class="cp" id="cp"></div></div>
 
-<!-- PULSE NAVIGATOR -->
-<aside class="pulse-nav" id="pulseNav">
-  <a class="pn-item" href="https://labs67.com">
-    <span class="pn-dot active" style="background:#B8860B"></span>
-    <span class="pn-label">labs67</span>
-  </a>
-  <a class="pn-item" href="https://svyatlitsa.com" target="_blank">
-    <span class="pn-dot" style="background:#C49A2D"></span>
-    <span class="pn-label">svyatlitsa</span>
-  </a>
-  <div class="pn-divider"></div>
-  <a class="pn-item" href="https://scyra.labs67.com" target="_blank">
-    <span class="pn-dot" style="background:#7F77DD"></span>
-    <span class="pn-label">scyra.ai</span>
-  </a>
-  <div class="pn-divider"></div>
-  <a class="pn-item" href="https://academi67.com" target="_blank">
-    <span class="pn-dot" style="background:#2B7ACC"></span>
-    <span class="pn-label">slyah.ai</span>
-  </a>
-  <a class="pn-item" href="https://trade.labs67.com" target="_blank">
-    <span class="pn-dot" style="background:#0891B2"></span>
-    <span class="pn-label">mreza.ai</span>
-  </a>
-  <a class="pn-item" href="https://franchise.labs67.com" target="_blank">
-    <span class="pn-dot" style="background:#BA7517"></span>
-    <span class="pn-label">ladza.ai</span>
-  </a>
-  <div class="pn-pulse"></div>
-  <button class="pn-action" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Top">&#8593;</button>
-</aside>
+
 
 <!-- HINT -->
 <div id="hint">CLICK NODE TO EXPLORE &middot; SCROLL TO ZOOM &middot; DRAG TO PAN</div>
@@ -904,5 +871,14 @@ function renderContent(n){
 
 draw();
 </script>
+<!-- Side Panel -->
+<aside class="side-panel">
+  <a href="https://labs67.com" class="sp-link active" style="--c:#B8860B"><span class="sp-dot"></span><span class="sp-name">LABS67</span></a>
+  <a href="https://svyatlitsa.com" class="sp-link" style="--c:#CF101A"><span class="sp-dot"></span><span class="sp-name">Svyatlitsa</span></a>
+  <a href="https://scyra.labs67.com" class="sp-link" style="--c:#00D4FF"><span class="sp-dot"></span><span class="sp-name">ŠČYRA.AI</span></a>
+  <a href="https://academi67.com" class="sp-link" style="--c:#1df59a"><span class="sp-dot"></span><span class="sp-name">SLYAH.AI</span></a>
+  <a href="https://trade.labs67.com" class="sp-link" style="--c:#30dcff"><span class="sp-dot"></span><span class="sp-name">Skarby</span></a>
+  <a href="https://franchise.labs67.com" class="sp-link" style="--c:#ff4d6d"><span class="sp-dot"></span><span class="sp-name">SVITA</span></a>
+</aside>
 </body>
 </html>
