@@ -223,8 +223,31 @@
   };
   window.setPageLang = setLang;
 
+  /* ── Inject fallback CSS (only if not already styled) ── */
+  function injectCSS() {
+    if (document.getElementById('labs67-lang-css')) return;
+    var style = document.createElement('style');
+    style.id = 'labs67-lang-css';
+    style.textContent =
+      '.labs67-lang{position:relative;display:inline-block}' +
+      '.lang-current{display:flex;align-items:center;gap:6px;cursor:pointer;padding:5px 10px;border:1px solid rgba(128,128,128,.25);border-radius:6px;background:transparent;font-size:11px;letter-spacing:.04em;color:inherit;transition:all .2s;white-space:nowrap;font-family:inherit}' +
+      '.lang-current:hover{border-color:rgba(128,128,128,.5)}' +
+      '.lang-arrow{font-size:8px;transition:transform .2s}' +
+      '.labs67-lang.open .lang-arrow{transform:rotate(180deg)}' +
+      '.lang-dropdown{position:absolute;top:calc(100% + 4px);right:0;background:rgba(30,30,30,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:4px;min-width:180px;max-height:320px;overflow-y:auto;opacity:0;pointer-events:none;transform:translateY(-6px);transition:all .2s;z-index:9999;box-shadow:0 12px 40px rgba(0,0,0,.3)}' +
+      '.labs67-lang.open .lang-dropdown{opacity:1;pointer-events:auto;transform:translateY(0)}' +
+      '.lang-opt{display:block;width:100%;padding:7px 12px;border:none;background:none;color:rgba(255,255,255,.5);font-size:11px;font-family:inherit;text-align:left;border-radius:6px;cursor:pointer;transition:all .15s}' +
+      '.lang-opt:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.9)}' +
+      '.lang-opt.active{color:#c9a96e;font-weight:500}' +
+      '.lang-dropdown::-webkit-scrollbar{width:2px}' +
+      '.lang-dropdown::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}' +
+      '@media(max-width:768px){.lang-dropdown{min-width:60px;padding:2px}.lang-opt{padding:6px 10px;font-size:11px}}';
+    document.head.appendChild(style);
+  }
+
   /* ── Init ── */
   document.addEventListener('DOMContentLoaded', function () {
+    injectCSS();
     var switchers = document.querySelectorAll('.lang-switcher');
     for (var s = 0; s < switchers.length; s++) {
       buildSwitcher(switchers[s]);
