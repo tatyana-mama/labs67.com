@@ -30,23 +30,23 @@
   var LANGS = ['be','de','en','es','fr','it','ja','ko','pl','pt','ru','uk'];
 
   var LABELS = {
-    be: 'BE — Беларусь',
+    be: 'BY — Беларусь',
     de: 'DE — Deutschland',
-    en: 'EN — England',
+    en: 'GB — Great Britain',
     es: 'ES — España',
     fr: 'FR — France',
     it: 'IT — Italia',
-    ja: 'JA — 日本',
-    ko: 'KO — 한국',
+    ja: 'JP — 日本',
+    ko: 'KR — 한국',
     pl: 'PL — Polska',
     pt: 'PT — Portugal',
     ru: 'RU — Россия',
-    uk: 'UK — Україна'
+    uk: 'UA — Україна'
   };
 
   var SHORT = {
-    be:'BE', de:'DE', en:'EN', es:'ES', fr:'FR', it:'IT',
-    ja:'JA', ko:'KO', pl:'PL', pt:'PT', ru:'RU', uk:'UK'
+    be:'BY', de:'DE', en:'GB', es:'ES', fr:'FR', it:'IT',
+    ja:'JP', ko:'KR', pl:'PL', pt:'PT', ru:'RU', uk:'UA'
   };
 
   function isMobile() { return window.innerWidth <= 768; }
