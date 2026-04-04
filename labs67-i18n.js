@@ -30,19 +30,26 @@
   var LANGS = ['be','de','en','es','fr','it','ja','ko','pl','pt','ru','uk'];
 
   var LABELS = {
-    be: 'BY — Беларуская',
-    de: 'DE — Deutsch',
-    en: 'EN — English',
-    es: 'ES — Español',
-    fr: 'FR — Français',
-    it: 'IT — Italiano',
-    ja: 'JA — 日本語',
-    ko: 'KO — 한국어',
-    pl: 'PL — Polski',
-    pt: 'PT — Português',
-    ru: 'RU — Русский',
-    uk: 'UK — Українська'
+    be: 'BE — Беларусь',
+    de: 'DE — Deutschland',
+    en: 'EN — England',
+    es: 'ES — España',
+    fr: 'FR — France',
+    it: 'IT — Italia',
+    ja: 'JA — 日本',
+    ko: 'KO — 한국',
+    pl: 'PL — Polska',
+    pt: 'PT — Portugal',
+    ru: 'RU — Россия',
+    uk: 'UK — Україна'
   };
+
+  var SHORT = {
+    be:'BE', de:'DE', en:'EN', es:'ES', fr:'FR', it:'IT',
+    ja:'JA', ko:'KO', pl:'PL', pt:'PT', ru:'RU', uk:'UK'
+  };
+
+  function isMobile() { return window.innerWidth <= 768; }
 
   var STORAGE_KEY = 'labs67lang';
   var cur = localStorage.getItem(STORAGE_KEY) || 'be';
@@ -147,7 +154,7 @@
     var btn = document.createElement('button');
     btn.className = 'lang-current';
     btn.type = 'button';
-    btn.innerHTML = '<span>' + LABELS[cur] + '</span> <span class="lang-arrow">\u25BE</span>';
+    btn.innerHTML = '<span>' + (isMobile() ? SHORT[cur] : LABELS[cur]) + '</span> <span class="lang-arrow">\u25BE</span>';
     container.appendChild(btn);
 
     var dropdown = document.createElement('div');
@@ -158,7 +165,7 @@
       opt.type = 'button';
       opt.className = 'lang-opt' + (LANGS[i] === cur ? ' active' : '');
       opt.setAttribute('data-lang', LANGS[i]);
-      opt.textContent = LABELS[LANGS[i]];
+      opt.textContent = isMobile() ? SHORT[LANGS[i]] : LABELS[LANGS[i]];
       dropdown.appendChild(opt);
     }
 
@@ -190,14 +197,16 @@
     localStorage.setItem(STORAGE_KEY, lang);
     document.documentElement.setAttribute('lang', lang);
 
+    var mob = isMobile();
     var btns = document.querySelectorAll('.lang-current');
     for (var b = 0; b < btns.length; b++) {
-      btns[b].innerHTML = '<span>' + LABELS[lang] + '</span> <span class="lang-arrow">\u25BE</span>';
+      btns[b].innerHTML = '<span>' + (mob ? SHORT[lang] : LABELS[lang]) + '</span> <span class="lang-arrow">\u25BE</span>';
     }
 
     var opts = document.querySelectorAll('.lang-opt');
     for (var i = 0; i < opts.length; i++) {
       var dl = opts[i].getAttribute('data-lang');
+      opts[i].textContent = mob ? SHORT[dl] : LABELS[dl];
       if (dl === lang) opts[i].classList.add('active');
       else opts[i].classList.remove('active');
     }
@@ -213,32 +222,6 @@
     LABELS: LABELS
   };
   window.setPageLang = setLang;
-
-  /* ── Inject default CSS (overridable by site CSS) ── */
-  (function injectCSS() {
-    if (document.getElementById('labs67-i18n-css')) return;
-    var s = document.createElement('style');
-    s.id = 'labs67-i18n-css';
-    s.textContent = [
-      '.lang-switcher{position:relative;display:inline-flex;z-index:200}',
-      '.lang-current{display:flex;align-items:center;gap:6px;cursor:pointer;padding:6px 10px;border:1px solid rgba(128,128,128,.25);background:transparent;font-size:11px;letter-spacing:1.5px;color:inherit;opacity:.7;white-space:nowrap;border-radius:4px;transition:all .2s;font-family:inherit}',
-      '.lang-current:hover{opacity:1;border-color:currentColor}',
-      '.lang-arrow{font-size:8px;transition:transform .2s}',
-      '.lang-switcher.open .lang-arrow{transform:rotate(180deg)}',
-      '.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:#1a1a1a;border:1px solid rgba(255,255,255,.12);border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.3);min-width:180px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .25s;z-index:300;max-height:320px;overflow-y:auto;scrollbar-width:thin}',
-      '.lang-switcher.open .lang-dropdown{opacity:1;pointer-events:auto;transform:translateY(0)}',
-      '.lang-opt{display:block;width:100%;padding:9px 14px;cursor:pointer;font-size:12px;letter-spacing:.5px;color:rgba(255,255,255,.7);border:none;background:none;text-align:left;font-family:inherit;transition:all .15s}',
-      '.lang-opt:hover{background:rgba(255,255,255,.08);color:#fff}',
-      '.lang-opt.active{color:#fff;font-weight:600}',
-      '@media(prefers-color-scheme:light){',
-      '.lang-dropdown{background:#fff;border-color:rgba(0,0,0,.1);box-shadow:0 8px 32px rgba(0,0,0,.1)}',
-      '.lang-opt{color:rgba(0,0,0,.6)}',
-      '.lang-opt:hover{background:rgba(0,0,0,.05);color:#000}',
-      '.lang-opt.active{color:#000}',
-      '}'
-    ].join('\n');
-    document.head.appendChild(s);
-  })();
 
   /* ── Init ── */
   document.addEventListener('DOMContentLoaded', function () {
