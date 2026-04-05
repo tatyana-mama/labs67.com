@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LABS67 — Ecosystem Graph</title>
-<meta name="description" content="LABS67 ecosystem — interactive project graph. SVYATLITSA, SCYRA.AI, SLYAH.AI, MREZA.AI, LADZA.AI.">
+<meta name="description" content="LABS67 ecosystem — interactive project graph. SVYATLITSA, SCYRA.AI, SLYAH.AI, MREZA.AI, SVITA.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -157,7 +157,7 @@ const NODES = [
     url: 'https://scyra.labs67.com', tags: ['edge-ai', 'nvidia', 'dental'] },
   { id: 'svyatlitsa', label: 'SVYATLITSA', cat: 'product', color: '#00D4FF', r: 30,
     desc: 'Premium dental clinic. Ceiling-down system, smart glass, KYNOSYS storage, robot cleaning.',
-    url: 'https://svyatlitsa.com', tags: ['clinic', 'franchise', 'warsaw'],
+    url: 'https://svyatlitsa.com', tags: ['clinic', 'svita', 'warsaw'],
     sub: [
       { id: 'sv-bp', label: 'Business Plan', url: 'https://academi67.com/business-plan.html' },
       { id: 'sv-bb', label: 'Brandbook', url: 'https://academi67.com/brandbook.html' },
@@ -168,14 +168,14 @@ const NODES = [
 
   // PLATFORMS
   { id: 'academi', label: 'SLYAH.AI', cat: 'platform', color: '#A78BFA', r: 26,
-    desc: 'Education platform. Dental training standards, certification, franchise onboarding.',
+    desc: 'Education platform. Dental training standards, certification, concept onboarding.',
     url: 'https://academi67.com', tags: ['education', 'certification'] },
   { id: 'trade', label: 'MREZA.AI', cat: 'platform', color: '#A78BFA', r: 22,
     desc: 'AI-powered trading analytics and portfolio management.',
     url: 'https://trade.labs67.com', tags: ['trading', 'analytics'] },
-  { id: 'franchise', label: 'LADZA.AI', cat: 'platform', color: '#A78BFA', r: 24,
-    desc: 'Franchise management system. Turnkey clinic deployment across EU.',
-    url: 'https://svita.labs67.com', tags: ['franchise', 'EU', 'scaling'] },
+  { id: 'svita', label: 'SVITA', cat: 'platform', color: '#A78BFA', r: 24,
+    desc: 'Business concept constructor. From idea to launch.',
+    url: 'https://svita.labs67.com', tags: ['svita', 'EU', 'scaling'] },
 
   // SITES
   { id: 'dragona', label: 'DRAGONA', cat: 'site', color: '#22C55E', r: 20,
@@ -203,7 +203,7 @@ const EDGES = [
   ['labs67', 'svyatlitsa', 1.2],
   ['labs67', 'academi', 1],
   ['labs67', 'trade', 0.8],
-  ['labs67', 'franchise', 1],
+  ['labs67', 'svita', 1],
   ['labs67', 'dragona', 0.6],
   ['labs67', 'admin', 0.7],
   ['labs67', 'agents', 0.9],
@@ -211,9 +211,9 @@ const EDGES = [
   ['scyra', 'svyatlitsa', 1],
   ['scyra', 'dental-ai', 0.9],
   ['scyra', 'indiegogo', 0.8],
-  ['svyatlitsa', 'franchise', 0.9],
+  ['svyatlitsa', 'svita', 0.9],
   ['svyatlitsa', 'academi', 0.7],
-  ['franchise', 'academi', 0.6],
+  ['svita', 'academi', 0.6],
   ['agents', 'scyra', 0.5],
   ['dental-ai', 'svyatlitsa', 0.7],
 ];
