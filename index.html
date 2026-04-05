@@ -449,64 +449,30 @@ resize();
 // Initial positions — perfect hexagon
 const hub = NODES[0];
 hub.x = 0; hub.y = 0; hub.vx = 0; hub.vy = 0;
+hub.tx = 0; hub.ty = 0;
 const rest = NODES.slice(1);
 const hexR = 340; // hexagon radius
 rest.forEach((n, i) => {
   const a = (Math.PI * 2 / 6) * i - Math.PI / 2;
   n.x = Math.cos(a) * hexR;
   n.y = Math.sin(a) * hexR;
+  n.tx = n.x; n.ty = n.y; // target position
   n.vx = 0; n.vy = 0;
 });
 
 function sim() {
   const ns = NODES;
-  // Repulsion
-  for (let i = 0; i < ns.length; i++) {
-    for (let j = i+1; j < ns.length; j++) {
-      let dx = ns[j].x - ns[i].x, dy = ns[j].y - ns[i].y;
-      let d = Math.sqrt(dx*dx + dy*dy) || 1;
-      let f = Math.min(22000 / (d * d), 200);
-      ns[i].vx -= (dx/d)*f; ns[i].vy -= (dy/d)*f;
-      ns[j].vx += (dx/d)*f; ns[j].vy += (dy/d)*f;
-    }
-  }
-  // Attraction
-  EDGES.forEach(([a,b,s]) => {
-    let na = ns.find(n=>n.id===a), nb = ns.find(n=>n.id===b);
-    if(!na||!nb) return;
-    let dx = nb.x-na.x, dy = nb.y-na.y;
-    let d = Math.sqrt(dx*dx+dy*dy)||1;
-    let ideal = (na.r+nb.r)*2.4 + 120;
-    let f = (d-ideal)*0.004*s;
-    na.vx += (dx/d)*f; na.vy += (dy/d)*f;
-    nb.vx -= (dx/d)*f; nb.vy -= (dy/d)*f;
-  });
-  // Center pull + equalize distance from hub
+  // Strong spring to target hexagon positions + gentle breathing
+  const breath = Math.sin(t * 0.5) * 3;
   ns.forEach(n => {
-    if(n.id === 'hub') return;
-    let dx = n.x - hub.x, dy = n.y - hub.y;
-    let d = Math.sqrt(dx*dx + dy*dy) || 1;
-    let target = W <= 768 ? 240 : 340;
-    let f = (d - target) * 0.005;
-    n.vx -= (dx/d) * f;
-    n.vy -= (dy/d) * f;
-  });
-  ns.forEach(n => { n.vx -= n.x*0.002; n.vy -= n.y*0.002; });
-  hub.vx = -hub.x*0.15; hub.vy = -hub.y*0.15;
-  // Apply + boundary clamp (mobile-aware)
-  const isMobile = W <= 768;
-  const BOUND = isMobile ? 320 : 560;
-  ns.forEach(n => {
-    n.vx *= 0.82; n.vy *= 0.82;
+    const tx = n.tx + (n.tx ? breath * (n.tx / hexR) : 0);
+    const ty = n.ty + (n.ty ? breath * (n.ty / hexR) : 0);
+    n.vx += (tx - n.x) * 0.08;
+    n.vy += (ty - n.y) * 0.08;
+    n.vx *= 0.7; n.vy *= 0.7;
     n.x += n.vx; n.y += n.vy;
-    let d = Math.sqrt(n.x*n.x + n.y*n.y);
-    if(d > BOUND && n.id !== 'hub') {
-      n.x *= BOUND/d; n.y *= BOUND/d;
-      n.vx *= 0.3; n.vy *= 0.3;
-    }
-    // Guard against NaN/Infinity
-    if(!isFinite(n.x)) n.x = 0;
-    if(!isFinite(n.y)) n.y = 0;
+    if(!isFinite(n.x)) n.x = n.tx;
+    if(!isFinite(n.y)) n.y = n.ty;
     if(!isFinite(n.vx)) n.vx = 0;
     if(!isFinite(n.vy)) n.vy = 0;
   });
