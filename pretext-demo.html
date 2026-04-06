@@ -68,13 +68,15 @@ let time = 0;
 
 // Text content — LABS67 manifesto
 const TEXTS = [
-  { text: "We build the infrastructure for clinics of tomorrow. Edge AI. Smart spaces. Automated workflows. Everything connected.", font: '500 28px "Space Grotesk"', color: '#e8eaf0', lineH: 38 },
-  { text: "SCYRA.AI processes 14 camera feeds in real-time. Pattern recognition. Anomaly detection. Patient flow optimization. Zero cloud dependency.", font: '400 18px Inter', color: '#22d3ee', lineH: 28 },
-  { text: "Seven AI agents orchestrate the clinic: Administrator. Scheduler. Communicator. Vision. Documentation. Voice. Patient.", font: '400 16px Inter', color: '#a78bfa', lineH: 26 },
-  { text: "Jetson AGX Orin. 64GB unified memory. 2048 CUDA cores. 275 TOPS. All processing stays on-premise. Your data never leaves the building.", font: '300 15px Inter', color: '#22c55e', lineH: 24 },
-  { text: "SVITA transforms ideas into operating businesses. Concept builder. Financial modeling. Automated documentation. From sketch to launch.", font: '300 15px Inter', color: '#f472b6', lineH: 24 },
-  { text: "SLYAH.AI certifies every operator before launch. Standardized protocols. Equipment training. AI system onboarding. Quality guaranteed.", font: '300 14px Inter', color: '#94a3b8', lineH: 22 },
-  { text: "Warsaw. 2026. Seven treatment rooms. Ceiling-mounted equipment. AI-powered diagnostics. One administrator runs everything.", font: '300 13px "JetBrains Mono"', color: '#64748b', lineH: 20 },
+  { text: "We build the infrastructure for clinics of tomorrow. Edge AI. Smart spaces. Automated workflows. Everything connected.", font: '600 32px "Space Grotesk"', color: '#ff6b2b', lineH: 42 },
+  { text: "SCYRA.AI processes 14 camera feeds in real-time. Pattern recognition. Anomaly detection. Patient flow optimization. Zero cloud dependency.", font: '500 20px Inter', color: '#00e5ff', lineH: 30 },
+  { text: "Seven AI agents orchestrate the clinic: Administrator. Scheduler. Communicator. Vision. Documentation. Voice. Patient.", font: '400 18px Inter', color: '#b47aff', lineH: 28 },
+  { text: "Jetson AGX Orin. 64GB unified memory. 2048 CUDA cores. 275 TOPS. All processing stays on-premise. Your data never leaves the building.", font: '400 16px Inter', color: '#00e676', lineH: 26 },
+  { text: "SVITA transforms ideas into operating businesses. Concept builder. Financial modeling. Automated documentation. From sketch to launch.", font: '400 16px Inter', color: '#ff4da6', lineH: 26 },
+  { text: "SLYAH.AI certifies every operator before launch. Standardized protocols. Equipment training. AI system onboarding. Quality guaranteed.", font: '300 15px Inter', color: '#ffc107', lineH: 24 },
+  { text: "SKARBY supplies equipment, technologies and capabilities. Verified suppliers. EU logistics. One request instead of ten vendors.", font: '300 15px Inter', color: '#42a5f5', lineH: 24 },
+  { text: "SVYATLITSA — flagship premium clinic. Warsaw. Aesthetic dentistry. AI-powered diagnostics. Ceiling-down architecture.", font: '300 14px Inter', color: '#26c6da', lineH: 22 },
+  { text: "Warsaw. 2026. Seven treatment rooms. Ceiling-mounted equipment. One administrator runs everything. The future is already here.", font: '300 13px "JetBrains Mono"', color: '#e0e0e0', lineH: 20 },
 ];
 
 let prepared = [];
@@ -295,45 +297,68 @@ function drawOrbit() {
 }
 
 // Stars
-const stars = Array.from({length: 200}, () => ({
+const starColors = ['#ffffff','#ffe4b5','#b0d4ff','#ffd6e0','#d4ffd6','#e0d4ff','#fff3b0'];
+const stars = Array.from({length: 250}, () => ({
   x: Math.random(), y: Math.random(),
-  r: Math.random() * 1.2 + 0.3,
-  speed: Math.random() * 0.5 + 0.1
+  r: Math.random() * 1.5 + 0.3,
+  speed: Math.random() * 0.5 + 0.1,
+  color: starColors[Math.floor(Math.random() * starColors.length)]
 }));
 
 function drawStars() {
-  ctx.globalAlpha = 1;
   for (const s of stars) {
-    const twinkle = 0.3 + Math.sin(time * 0.02 * s.speed + s.x * 100) * 0.3;
+    const twinkle = 0.25 + Math.sin(time * 0.02 * s.speed + s.x * 100) * 0.35;
     ctx.globalAlpha = twinkle;
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = s.color;
     ctx.beginPath();
     ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
     ctx.fill();
   }
 }
 
-// Nebula
+// Nebula — multi-color
 function drawNebula() {
-  const grd = ctx.createRadialGradient(W * 0.3, H * 0.4, 0, W * 0.3, H * 0.4, W * 0.5);
-  grd.addColorStop(0, 'rgba(59,130,246,0.04)');
-  grd.addColorStop(1, 'transparent');
-  ctx.fillStyle = grd;
-  ctx.fillRect(0, 0, W, H);
-
-  const grd2 = ctx.createRadialGradient(W * 0.7, H * 0.6, 0, W * 0.7, H * 0.6, W * 0.4);
-  grd2.addColorStop(0, 'rgba(167,139,250,0.03)');
-  grd2.addColorStop(1, 'transparent');
-  ctx.fillStyle = grd2;
-  ctx.fillRect(0, 0, W, H);
+  const nebulae = [
+    { x: 0.2, y: 0.3, r: 0.45, c: 'rgba(255,107,43,0.05)' },   // orange
+    { x: 0.75, y: 0.25, r: 0.4, c: 'rgba(0,229,255,0.04)' },    // cyan
+    { x: 0.5, y: 0.7, r: 0.5, c: 'rgba(180,122,255,0.04)' },    // purple
+    { x: 0.85, y: 0.8, r: 0.35, c: 'rgba(0,230,118,0.03)' },    // green
+    { x: 0.15, y: 0.8, r: 0.3, c: 'rgba(255,77,166,0.03)' },    // pink
+    { x: 0.5, y: 0.15, r: 0.35, c: 'rgba(255,193,7,0.03)' },    // amber
+    { x: 0.65, y: 0.5, r: 0.3, c: 'rgba(66,165,245,0.04)' },    // blue
+  ];
+  for (const n of nebulae) {
+    const drift = Math.sin(time * 0.005 + n.x * 10) * 20;
+    const grd = ctx.createRadialGradient(
+      n.x * W + drift, n.y * H, 0,
+      n.x * W + drift, n.y * H, n.r * W
+    );
+    grd.addColorStop(0, n.c);
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, W, H);
+  }
 }
 
-// Mouse proximity indicator
+// Mouse proximity indicator — color shifts
 function drawCursor() {
   if (mx < 0) return;
-  const r = mode === 'flow' ? 120 : 60;
+  const r = mode === 'flow' ? 140 : 80;
+  // Find nearest text block color
+  let nearColor = '59,130,246';
+  if (prepared.length) {
+    const colorMap = {'#ff6b2b':'255,107,43','#00e5ff':'0,229,255','#b47aff':'180,122,255','#00e676':'0,230,118','#ff4da6':'255,77,166','#ffc107':'255,193,7','#42a5f5':'66,165,245','#26c6da':'38,198,218','#e0e0e0':'200,200,200'};
+    let minDist = Infinity;
+    let blockY = 100;
+    for (const t of prepared) {
+      const d = Math.abs(my - blockY);
+      if (d < minDist) { minDist = d; nearColor = colorMap[t.color] || nearColor; }
+      blockY += 80;
+    }
+  }
   const grd = ctx.createRadialGradient(mx, my, 0, mx, my, r);
-  grd.addColorStop(0, 'rgba(59,130,246,0.08)');
+  grd.addColorStop(0, `rgba(${nearColor},0.12)`);
+  grd.addColorStop(0.5, `rgba(${nearColor},0.04)`);
   grd.addColorStop(1, 'transparent');
   ctx.globalAlpha = 1;
   ctx.fillStyle = grd;
