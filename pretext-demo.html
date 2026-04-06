@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LABS67 — Pretext Canvas Typography</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#06080d;--tx:#e8eaf0;--dim:rgba(255,255,255,.35);--ac:#3b82f6;--gn:#22c55e;--pr:#a78bfa;--pk:#f472b6;--cy:#22d3ee}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',sans-serif}
+canvas{display:block;width:100%;height:100%;cursor:crosshair}
+
+/* Info overlay */
+.info{position:fixed;top:20px;left:24px;z-index:10;pointer-events:none}
+.info h1{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--tx);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.info p{font-size:10px;color:var(--dim);font-family:'JetBrains Mono',monospace;letter-spacing:.5px}
+
+/* Controls */
+.ctrl{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:10}
+.ctrl button{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:10px;padding:8px 16px;border-radius:20px;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.ctrl button:hover{background:rgba(59,130,246,.15);border-color:var(--ac);color:var(--tx)}
+.ctrl button.active{background:rgba(59,130,246,.2);border-color:var(--ac);color:var(--ac)}
+
+/* Side panel */
+.sp{position:fixed;top:50%;right:12px;transform:translateY(-50%);width:44px;display:flex;flex-direction:column;gap:6px;z-index:10}
+.sp a{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;text-decoration:none;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--dim);transition:all .25s;overflow:hidden;white-space:nowrap}
+.sp a:hover{width:180px;background:rgba(255,255,255,.08);color:var(--tx);gap:8px;padding:0 12px;justify-content:flex-start}
+.sp a .n{display:none;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.5px}
+.sp a:hover .n{display:inline}
+</style>
+</head>
+<body>
+
+<div class="info">
+  <h1>Pretext Canvas</h1>
+  <p>text layout without DOM &middot; move mouse to reflow</p>
+</div>
+
+<div class="ctrl">
+  <button class="active" data-mode="flow">FLOW</button>
+  <button data-mode="wave">WAVE</button>
+  <button data-mode="gravity">GRAVITY</button>
+  <button data-mode="orbit">ORBIT</button>
+</div>
+
+<!-- Side panel -->
+<div class="sp">
+  <a href="https://labs67.com" style="--c:#3b82f6"><span>L67</span><span class="n">LABS67</span></a>
+  <a href="https://svyatlitsa.com" style="--c:#22d3ee"><span>SVT</span><span class="n">SVYATLITSA</span></a>
+  <a href="https://scyra.labs67.com" style="--c:#22d3ee"><span>SCR</span><span class="n">SCYRA.AI</span></a>
+  <a href="https://svita.labs67.com" style="--c:#a78bfa"><span>SVI</span><span class="n">SVITA</span></a>
+  <a href="https://trade.labs67.com" style="--c:#22c55e"><span>SKR</span><span class="n">SKARBY</span></a>
+</div>
+
+<canvas id="c"></canvas>
+
+<script type="module">
+import {prepareWithSegments, layoutWithLines, layoutNextLine} from './pretext.js';
+
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H, dpr;
+let mx = -999, my = -999;
+let mode = 'flow';
+let time = 0;
+
+// Text content — LABS67 manifesto
+const TEXTS = [
+  { text: "We build the infrastructure for clinics of tomorrow. Edge AI. Smart spaces. Automated workflows. Everything connected.", font: '500 28px "Space Grotesk"', color: '#e8eaf0', lineH: 38 },
+  { text: "SCYRA.AI processes 14 camera feeds in real-time. Pattern recognition. Anomaly detection. Patient flow optimization. Zero cloud dependency.", font: '400 18px Inter', color: '#22d3ee', lineH: 28 },
+  { text: "Seven AI agents orchestrate the clinic: Administrator. Scheduler. Communicator. Vision. Documentation. Voice. Patient.", font: '400 16px Inter', color: '#a78bfa', lineH: 26 },
+  { text: "Jetson AGX Orin. 64GB unified memory. 2048 CUDA cores. 275 TOPS. All processing stays on-premise. Your data never leaves the building.", font: '300 15px Inter', color: '#22c55e', lineH: 24 },
+  { text: "SVITA transforms ideas into operating businesses. Concept builder. Financial modeling. Automated documentation. From sketch to launch.", font: '300 15px Inter', color: '#f472b6', lineH: 24 },
+  { text: "SLYAH.AI certifies every operator before launch. Standardized protocols. Equipment training. AI system onboarding. Quality guaranteed.", font: '300 14px Inter', color: '#94a3b8', lineH: 22 },
+  { text: "Warsaw. 2026. Seven treatment rooms. Ceiling-mounted equipment. AI-powered diagnostics. One administrator runs everything.", font: '300 13px "JetBrains Mono"', color: '#64748b', lineH: 20 },
+];
+
+let prepared = [];
+let lineCache = new Map();
+
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  lineCache.clear();
+}
+
+function prepareTexts() {
+  prepared = TEXTS.map(t => ({
+    ...t,
+    prep: prepareWithSegments(t.text, t.font)
+  }));
+}
+
+function getLines(idx, maxW) {
+  const key = `${idx}:${Math.round(maxW)}`;
+  if (lineCache.has(key)) return lineCache.get(key);
+  const t = prepared[idx];
+  if (!t || maxW < 40) return [];
+  const { lines } = layoutWithLines(t.prep, maxW, t.lineH);
+  lineCache.set(key, lines);
+  return lines;
+}
+
+// Mode: FLOW — text wraps around mouse cursor
+function drawFlow() {
+  const padding = 60;
+  const blockGap = 40;
+  let y = 100;
+  const obstacleR = 120;
+
+  for (let i = 0; i < prepared.length; i++) {
+    const t = prepared[i];
+    const baseW = Math.min(W - padding * 2, 700);
+    const startX = (W - baseW) / 2;
+
+    // Get lines at full width first
+    const fullLines = getLines(i, baseW);
+    if (!fullLines.length) continue;
+
+    for (let j = 0; j < fullLines.length; j++) {
+      const ly = y + j * t.lineH;
+      const lineCenterY = ly + t.lineH / 2;
+
+      // Check if mouse is near this line
+      const dy = lineCenterY - my;
+      const distY = Math.abs(dy);
+
+      let lx = startX;
+      let lineW = baseW;
+
+      if (distY < obstacleR) {
+        // Horizontal distance to carve
+        const carveW = Math.sqrt(obstacleR * obstacleR - dy * dy) * 2;
+        const carveL = mx - carveW / 2;
+        const carveR = mx + carveW / 2;
+
+        // If mouse is on the left side, push text right
+        if (mx < W / 2) {
+          const newL = Math.max(startX, carveR);
+          lineW = startX + baseW - newL;
+          lx = newL;
+        } else {
+          // Mouse on right, shrink from right
+          lineW = Math.min(baseW, carveL - startX);
+        }
+      }
+
+      // Re-layout this line with adjusted width
+      const adjLines = getLines(i, Math.max(60, lineW));
+      const line = adjLines[j] || fullLines[j];
+      if (!line) continue;
+
+      // Fade based on distance from center
+      const distFromCenter = Math.abs(ly - H / 2) / (H / 2);
+      const alpha = Math.max(0.15, 1 - distFromCenter * 0.7);
+
+      ctx.globalAlpha = alpha;
+      ctx.font = t.font;
+      ctx.fillStyle = t.color;
+      ctx.fillText(line.text, lx, ly);
+    }
+
+    y += fullLines.length * t.lineH + blockGap;
+  }
+}
+
+// Mode: WAVE — text undulates with sine wave
+function drawWave() {
+  const padding = 60;
+  const blockGap = 36;
+  let y = 80;
+  const baseW = Math.min(W - padding * 2, 700);
+
+  for (let i = 0; i < prepared.length; i++) {
+    const t = prepared[i];
+    const lines = getLines(i, baseW);
+    if (!lines.length) continue;
+
+    for (let j = 0; j < lines.length; j++) {
+      const ly = y + j * t.lineH;
+      const wave = Math.sin((ly * 0.008) + time * 0.02 + i * 0.5) * 80;
+      const wave2 = Math.cos((ly * 0.012) + time * 0.015) * 30;
+      const lx = (W - baseW) / 2 + wave + wave2;
+
+      // Per-character wave for extra flair
+      const chars = lines[j].text;
+      let cx = lx;
+      ctx.font = t.font;
+
+      for (let k = 0; k < chars.length; k++) {
+        const charWave = Math.sin(time * 0.03 + k * 0.15 + j * 0.3) * 3;
+        const alpha = 0.4 + Math.sin(time * 0.02 + k * 0.1) * 0.3;
+        ctx.globalAlpha = Math.max(0.15, alpha);
+        ctx.fillStyle = t.color;
+        ctx.fillText(chars[k], cx, ly + charWave);
+        cx += ctx.measureText(chars[k]).width;
+      }
+    }
+
+    y += lines.length * t.lineH + blockGap;
+  }
+}
+
+// Mode: GRAVITY — lines attract/repel from mouse
+function drawGravity() {
+  const padding = 60;
+  const blockGap = 36;
+  let y = 80;
+  const baseW = Math.min(W - padding * 2, 700);
+  const centerX = W / 2;
+
+  for (let i = 0; i < prepared.length; i++) {
+    const t = prepared[i];
+    const lines = getLines(i, baseW);
+    if (!lines.length) continue;
+
+    for (let j = 0; j < lines.length; j++) {
+      const ly = y + j * t.lineH;
+      const baseLx = (W - baseW) / 2;
+
+      // Vector from line center to mouse
+      const dx = mx - (baseLx + baseW / 2);
+      const dy = my - ly;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      const force = Math.min(200, 30000 / (dist + 50));
+
+      // Attract toward mouse
+      const offsetX = (dx / dist) * force * 0.3;
+      const offsetY = (dy / dist) * force * 0.15;
+
+      // Scale based on proximity
+      const scale = 1 + Math.max(0, (200 - dist) / 200) * 0.3;
+
+      ctx.save();
+      ctx.translate(baseLx + baseW / 2 + offsetX, ly + offsetY);
+      ctx.scale(scale, scale);
+      ctx.translate(-(baseLx + baseW / 2), -ly);
+
+      ctx.globalAlpha = Math.min(1, 0.3 + force / 100);
+      ctx.font = t.font;
+      ctx.fillStyle = t.color;
+      ctx.fillText(lines[j].text, baseLx, ly);
+      ctx.restore();
+    }
+
+    y += lines.length * t.lineH + blockGap;
+  }
+}
+
+// Mode: ORBIT — text circles around center
+function drawOrbit() {
+  const centerX = W / 2;
+  const centerY = H / 2;
+
+  for (let i = 0; i < prepared.length; i++) {
+    const t = prepared[i];
+    const radius = 100 + i * 55;
+    const lines = getLines(i, Math.min(400, radius * 1.2));
+    if (!lines.length) continue;
+
+    const angleOffset = time * (0.003 + i * 0.001) * (i % 2 ? 1 : -1);
+
+    for (let j = 0; j < lines.length; j++) {
+      const lineAngle = angleOffset + (j / lines.length) * Math.PI * 2;
+      const lx = centerX + Math.cos(lineAngle) * radius;
+      const ly = centerY + Math.sin(lineAngle) * radius;
+
+      // Mouse proximity glow
+      const dist = Math.sqrt((lx - mx) ** 2 + (ly - my) ** 2);
+      const glow = Math.max(0, 1 - dist / 200);
+
+      ctx.save();
+      ctx.translate(lx, ly);
+      ctx.rotate(lineAngle + Math.PI / 2);
+
+      ctx.globalAlpha = 0.3 + glow * 0.7;
+      ctx.font = t.font;
+      ctx.fillStyle = glow > 0.3 ? '#ffffff' : t.color;
+
+      if (glow > 0.3) {
+        ctx.shadowColor = t.color;
+        ctx.shadowBlur = 20 * glow;
+      }
+
+      ctx.fillText(lines[j].text, -lines[j].width / 2, 0);
+      ctx.restore();
+    }
+  }
+}
+
+// Stars
+const stars = Array.from({length: 200}, () => ({
+  x: Math.random(), y: Math.random(),
+  r: Math.random() * 1.2 + 0.3,
+  speed: Math.random() * 0.5 + 0.1
+}));
+
+function drawStars() {
+  ctx.globalAlpha = 1;
+  for (const s of stars) {
+    const twinkle = 0.3 + Math.sin(time * 0.02 * s.speed + s.x * 100) * 0.3;
+    ctx.globalAlpha = twinkle;
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Nebula
+function drawNebula() {
+  const grd = ctx.createRadialGradient(W * 0.3, H * 0.4, 0, W * 0.3, H * 0.4, W * 0.5);
+  grd.addColorStop(0, 'rgba(59,130,246,0.04)');
+  grd.addColorStop(1, 'transparent');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, W, H);
+
+  const grd2 = ctx.createRadialGradient(W * 0.7, H * 0.6, 0, W * 0.7, H * 0.6, W * 0.4);
+  grd2.addColorStop(0, 'rgba(167,139,250,0.03)');
+  grd2.addColorStop(1, 'transparent');
+  ctx.fillStyle = grd2;
+  ctx.fillRect(0, 0, W, H);
+}
+
+// Mouse proximity indicator
+function drawCursor() {
+  if (mx < 0) return;
+  const r = mode === 'flow' ? 120 : 60;
+  const grd = ctx.createRadialGradient(mx, my, 0, mx, my, r);
+  grd.addColorStop(0, 'rgba(59,130,246,0.08)');
+  grd.addColorStop(1, 'transparent');
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = grd;
+  ctx.fillRect(mx - r, my - r, r * 2, r * 2);
+}
+
+function draw() {
+  time++;
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  ctx.fillStyle = '#06080d';
+  ctx.fillRect(0, 0, W, H);
+
+  drawNebula();
+  drawStars();
+  drawCursor();
+
+  ctx.textBaseline = 'top';
+
+  switch (mode) {
+    case 'flow': drawFlow(); break;
+    case 'wave': drawWave(); break;
+    case 'gravity': drawGravity(); break;
+    case 'orbit': drawOrbit(); break;
+  }
+
+  ctx.globalAlpha = 1;
+  ctx.shadowBlur = 0;
+  requestAnimationFrame(draw);
+}
+
+// Events
+canvas.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; lineCache.clear(); });
+canvas.addEventListener('mouseleave', () => { mx = -999; my = -999; lineCache.clear(); });
+window.addEventListener('resize', resize);
+
+document.querySelectorAll('.ctrl button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.ctrl button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    mode = btn.dataset.mode;
+    lineCache.clear();
+  });
+});
+
+// Init
+document.fonts.ready.then(() => {
+  resize();
+  prepareTexts();
+  draw();
+});
+</script>
+</body>
+</html>
