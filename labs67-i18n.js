@@ -30,18 +30,8 @@
   var LANGS = ['be','de','en','es','fr','it','ja','ko','pl','pt','ru','uk'];
 
   var LABELS = {
-    be: 'BY — Беларускі',
-    de: 'DE — Нямецкі',
-    en: 'EN — Англійскі',
-    es: 'ES — Іспанскі',
-    fr: 'FR — Французскі',
-    it: 'IT — Італьянскі',
-    ja: 'JP — Японскі',
-    ko: 'KR — Карэйскі',
-    pl: 'PL — Польскі',
-    pt: 'PT — Партугальскі',
-    ru: 'RU — Рускі',
-    uk: 'UA — Украінскі'
+    be: 'BY', de: 'DE', en: 'EN', es: 'ES', fr: 'FR', it: 'IT',
+    ja: 'JP', ko: 'KR', pl: 'PL', pt: 'PT', ru: 'RU', uk: 'UA'
   };
 
   var SHORT = {

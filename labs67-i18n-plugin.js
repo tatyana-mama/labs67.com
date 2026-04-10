@@ -12,7 +12,7 @@
 'use strict';
 
 var LANGS = ['be','en','uk','ru','de','fr','es','it','pt','ja','ko'];
-var LABELS = {be:'BY Беларуская',en:'EN English',uk:'UK Українська',ru:'RU Русский',de:'DE Deutsch',fr:'FR Français',es:'ES Español',it:'IT Italiano',pt:'PT Português',ja:'JA 日本語',ko:'KO 한국어'};
+var LABELS = {be:'BY',en:'EN',uk:'UA',ru:'RU',de:'DE',fr:'FR',es:'ES',it:'IT',pt:'PT',ja:'JP',ko:'KR'};
 var cur = localStorage.getItem('labs67lang') || 'be';
 
 /* ── No flags — text only ── */
